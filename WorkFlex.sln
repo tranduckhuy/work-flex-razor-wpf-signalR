@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Web", "WorkFlex.Web\WorkFlex.Web.csproj", "{F395231D-F3F1-4F5D-B158-50C57ED700DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Domain", "WorkFlex.Domain\WorkFlex.Domain.csproj", "{2BCEE65B-50D0-403F-99E2-399E403EC18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Desktop", "WorkFlex.Desktop\WorkFlex.Desktop.csproj", "{6011C886-E81E-4698-A46A-DB69A7DF8218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Infrastructure", "WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj", "{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.SignalR", "WorkFlex.SignalR\WorkFlex.SignalR.csproj", "{68E7906A-144A-4B2E-8430-5CE7178587F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F395231D-F3F1-4F5D-B158-50C57ED700DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F395231D-F3F1-4F5D-B158-50C57ED700DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F395231D-F3F1-4F5D-B158-50C57ED700DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F395231D-F3F1-4F5D-B158-50C57ED700DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCEE65B-50D0-403F-99E2-399E403EC18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCEE65B-50D0-403F-99E2-399E403EC18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCEE65B-50D0-403F-99E2-399E403EC18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCEE65B-50D0-403F-99E2-399E403EC18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6011C886-E81E-4698-A46A-DB69A7DF8218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6011C886-E81E-4698-A46A-DB69A7DF8218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6011C886-E81E-4698-A46A-DB69A7DF8218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6011C886-E81E-4698-A46A-DB69A7DF8218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D59FB46-9FDB-48C2-B40E-D7C5B8C267A1}
+	EndGlobalSection
+EndGlobal
