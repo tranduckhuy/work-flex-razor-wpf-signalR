@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches:
+    - dev
+    - feature/*
+  pull_request:
+    branches:
+    - master
+    - dev
+    - feature/*
+
+jobs:
+  build:
+    name: Build with ${{ matrix.configuration }} on windows-latest
+    runs-on: windows-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration:
+        - Debug
+        - Release
+    
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+    
+    - name: Build source code
+      run: dotnet build WorkFlex.sln -c ${{ matrix.configuration }}
