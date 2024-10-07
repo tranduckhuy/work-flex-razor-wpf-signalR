@@ -16,4 +16,8 @@
     <ProjectReference Include="..\WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
