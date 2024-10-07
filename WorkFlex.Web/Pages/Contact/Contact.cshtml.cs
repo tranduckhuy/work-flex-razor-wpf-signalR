@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WorkFlex.Web.Pages.Contact
@@ -7,6 +6,7 @@ namespace WorkFlex.Web.Pages.Contact
     {
         public void OnGet()
         {
+            throw new NotImplementedException();
         }
     }
 }

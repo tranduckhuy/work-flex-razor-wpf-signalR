@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WorkFlex.Web.Pages.Home
@@ -14,7 +13,7 @@ namespace WorkFlex.Web.Pages.Home
 
         public void OnGet()
         {
-
+            _logger.LogInformation("Home page visited");
         }
     }
 }

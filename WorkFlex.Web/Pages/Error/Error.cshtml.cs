@@ -21,6 +21,7 @@ namespace WorkFlex.Web.Pages.Error
 
         public void OnGet()
         {
+            _logger.LogInformation("Error page requested.");
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
