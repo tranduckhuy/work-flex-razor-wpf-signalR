@@ -8,7 +8,7 @@ namespace WorkFlex.Desktop.BusinessObject
 {
 	public class UserSession
 	{
-		public static UserSession _instance = null;
+		private static UserSession _instance = null;
 		private static readonly object _lock = new object();
 		public UserObject CurrentUser { get; private set; } = null!;
 		public static UserSession Instance
