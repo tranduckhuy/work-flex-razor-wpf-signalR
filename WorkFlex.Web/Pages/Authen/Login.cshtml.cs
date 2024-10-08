@@ -19,46 +19,54 @@ namespace WorkFlex.Web.Pages.Authen
 
         public IActionResult OnGet()
         {
-            var username = HttpContext.Session.GetString("Username");
+            var username = HttpContext.Session.GetString(AppConstants.USERNAME);
             if (username == null) 
                 return Page();
-            return RedirectToPage("/Home/Index");
+            return RedirectToPage(AppConstants.PAGE_HOME);
             
         }
 
         public IActionResult OnPost(LoginVM loginVm)
         {
-            var usernameSession = HttpContext.Session.GetString("Username");
+            var usernameSession = HttpContext.Session.GetString(AppConstants.USERNAME);
 
             if (!string.IsNullOrEmpty(usernameSession) && usernameSession == loginVm.Username)
             {
-                return RedirectToPage("/Home/Index");
+                return RedirectToPage(AppConstants.PAGE_HOME);
             }
 
             if (usernameSession == null || usernameSession != loginVm.Username)
             {
-                var loginDto = _authenService.checkLogin(loginVm);
-                switch (loginDto!.Result)
+                try
                 {
-                    case AppConstants.LoginResult.Success:
-                        if (loginDto.User != null)
-                        {
-                            SetUserSession(loginDto.User);
-                            return RedirectToPage("/Home/Index");
-                        }
-                        break;
-                    case AppConstants.LoginResult.InvalidPassword:
-                        TempData["Message"] = AppConstants.MESSAGE_INVALID_PASSWORD;
-                        break;
-                    case AppConstants.LoginResult.UserNotFound:
-                        TempData["Message"] = AppConstants.MESSAGE_INVALID_USERNAME;
-                        break;
-                    case AppConstants.LoginResult.AccountLocked:
-                        TempData["Message"] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
-                        break;
-                    default:
-                        TempData["Message"] = AppConstants.MESSAGE_LOGIN_FAILED;
-                        break;
+                    var loginDto = _authenService.checkLogin(loginVm);
+                    switch (loginDto!.Result)
+                    {
+                        case AppConstants.LoginResult.Success:
+                            if (loginDto.User != null)
+                            {
+                                SetUserSession(loginDto.User);
+                                return RedirectToPage(AppConstants.PAGE_HOME);
+                            }
+                            break;
+                        case AppConstants.LoginResult.InvalidPassword:
+                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
+                            break;
+                        case AppConstants.LoginResult.UserNotFound:
+                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_USERNAME;
+                            break;
+                        case AppConstants.LoginResult.AccountLocked:
+                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
+                            break;
+                        default:
+                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                            break;
+                    }
+                } 
+                catch
+                {
+                    TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                    return Page();
                 }
             }
 
@@ -67,21 +75,21 @@ namespace WorkFlex.Web.Pages.Authen
 
         public IActionResult OnGetLogout()
         {
-            HttpContext.Session.Remove("Id");
-            HttpContext.Session.Remove("Username");
-            HttpContext.Session.Remove("Avatar");
-            HttpContext.Session.Remove("Role");
+            HttpContext.Session.Remove(AppConstants.ID);
+            HttpContext.Session.Remove(AppConstants.USERNAME);
+            HttpContext.Session.Remove(AppConstants.AVATAR);
+            HttpContext.Session.Remove(AppConstants.ROLE);
 
-            return RedirectToPage("/Home/Index");
+            return RedirectToPage(AppConstants.PAGE_HOME);
         }
 
-        private void SetUserSession(UserDTO user)
+        private void SetUserSession(UserDto user)
         {
-            HttpContext.Session.SetString("Id", user.Id.ToString());
-            HttpContext.Session.SetString("Username", user.Username);
-            HttpContext.Session.SetString("Avatar", user.Avatar);
+            HttpContext.Session.SetString(AppConstants.ID, user.Id.ToString());
+            HttpContext.Session.SetString(AppConstants.USERNAME, user.Username);
+            HttpContext.Session.SetString(AppConstants.AVATAR, user.Avatar);
             byte[] roleIdBytes = BitConverter.GetBytes(user.RoleId);
-            HttpContext.Session.Set("Role", roleIdBytes);
+            HttpContext.Session.Set(AppConstants.ROLE, roleIdBytes);
         }
     }
 }
