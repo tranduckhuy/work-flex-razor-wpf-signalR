@@ -11,7 +11,7 @@ namespace WorkFlex.Desktop
     /// </summary>
     public partial class App : Application
     {
-		private IServiceProvider _serviceProvider = null!;
+		private readonly IServiceProvider _serviceProvider;
 		public App()
 		{
 			ServiceCollection serviceCollection = new ServiceCollection();
