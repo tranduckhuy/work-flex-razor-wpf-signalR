@@ -21,11 +21,11 @@ namespace WorkFlex.Web.Pages.Authen
             return Page();
         }
 
-        public IActionResult OnPost(RegisterVM registerVM)
+        public IActionResult OnPost(RegisterVM registerVm)
         {
             try
             {
-                var registerResult = _authenService.addUser(registerVM);
+                var registerResult = _authenService.addUser(registerVm);
                 switch (registerResult)
                 {
                     case AppConstants.RegisterResult.Success:
