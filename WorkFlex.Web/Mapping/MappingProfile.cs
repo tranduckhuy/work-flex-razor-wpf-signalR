@@ -7,7 +7,7 @@ namespace WorkFlex.Web.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDTO>();
+            CreateMap<User, UserDto>();
         }
     }
 }

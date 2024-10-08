@@ -4,8 +4,12 @@ namespace WorkFlex.Web.Repository.Inteface
 {
     public interface IUserRepository
     {
-        User? GetUserByEmail(string email);
+        User? getUserByEmail(string email);
 
-        User? GetUserByUsername(string username);
+        User? getUserByUsername(string username);
+
+        bool isEmailExist(string email);
+
+        void addUser(User user);
     }
 }

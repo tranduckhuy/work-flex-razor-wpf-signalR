@@ -13,14 +13,25 @@ namespace WorkFlex.Web.Repository
             _appDbContext = appDbContext;
         }
 
-        public User? GetUserByEmail(string email)
+        public User? getUserByEmail(string email)
         {
             return _appDbContext.Users.SingleOrDefault(u => u.Email == email);
         }
 
-        public User? GetUserByUsername(string username)
+        public User? getUserByUsername(string username)
         {
             return _appDbContext.Users.SingleOrDefault(u => u.Username == username);
+        }
+
+        public bool isEmailExist(string email)
+        {
+            return _appDbContext.Users.Any(u => u.Email == email);
+        }
+
+        public void addUser(User user)
+        {
+            _appDbContext.Users.Add(user);
+            _appDbContext.SaveChanges();
         }
     }
 }

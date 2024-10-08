@@ -2,9 +2,10 @@
 
 namespace WorkFlex.Web.DTOs
 {
-    public class LoginDTO
+    public class LoginDto
     {
         public AppConstants.LoginResult Result { get; set; }
-        public UserDTO? User { get; set; }
+
+        public UserDto? User { get; set; }
     }
 }
