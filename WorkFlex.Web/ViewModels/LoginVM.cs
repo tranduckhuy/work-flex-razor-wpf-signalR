@@ -2,9 +2,9 @@
 {
     public class LoginVM
     {
-        public String Email { get; set; } = String.Empty;
+        public string Username { get; set; } = string.Empty;
 
-        public String Password { get; set; } = String.Empty;
+        public string Password { get; set; } = string.Empty;
 
         public bool Remember { get; set; }
     }
