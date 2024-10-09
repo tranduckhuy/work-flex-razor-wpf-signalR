@@ -1,0 +1,34 @@
+﻿@page
+@model WorkFlex.Web.Pages.TestLogin.IndexModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div>
+        <label asp-for="Input.Email"></label>
+        <input asp-for="Input.Email" />
+        <span asp-validation-for="Input.Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Input.Password"></label>
+        <input asp-for="Input.Password" type="password" />
+        <span asp-validation-for="Input.Password"></span>
+    </div>
+
+    <div>
+        <input asp-for="Input.RememberMe" type="checkbox" />
+        <label asp-for="Input.RememberMe">Remember me?</label>
+    </div>
+
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

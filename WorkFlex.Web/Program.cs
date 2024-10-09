@@ -9,9 +9,16 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
 
+builder.Services.AddAuthentication("AuthScheme")
+    .AddCookie("AuthScheme", options =>
+    {
+        options.LoginPath = "/TestLogin";
+    });
+
+builder.Services.AddDbContext<AppDbContext>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");

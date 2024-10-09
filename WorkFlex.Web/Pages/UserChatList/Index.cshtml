@@ -1,0 +1,33 @@
+@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model WorkFlex.Web.Pages.UserChatList.IndexModel
+@{
+    ViewData["Title"] = "List of users who have messaged";
+}
+
+<h2>List of users who have messaged</h2>
+
+<form method="post" asp-page="/TestLogin/Index" asp-page-handler="Logout">
+    <button type="submit">Logout</button>
+</form>
+
+@if (Model.UserChats != null && Model.UserChats.Count > 0)
+{
+   <div class="d-flex justify-content-center">
+        <ul>
+            @foreach (var otherUser in Model.UserChats)
+            {
+                <li>
+                    <img src="@otherUser.Avatar" alt="@otherUser.Username" style="width: 50px; height: 50px; border-radius: 50%;" />
+                    <a asp-page="/TestChat/Index" asp-route-otherUserId="@otherUser.Id"
+                       style="font-weight:600; color:black;">@otherUser.Username</a>
+                </li>
+            }
+        </ul>
+   </div>
+}
+else
+{
+    <p>There are no conversations yet.</p>
+}
