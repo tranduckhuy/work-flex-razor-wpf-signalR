@@ -11,7 +11,7 @@ namespace WorkFlex.Desktop.BusinessObject
 	public class MapperProfile : AutoMapper.Profile
 	{
 		public MapperProfile() {
-			CreateMap<User, UserObject>().ReverseMap();
+			CreateMap<User, UserDTO>().ReverseMap();
 		}
 	}
 }
