@@ -49,7 +49,7 @@ namespace WorkFlex.Desktop
 				{
 					if (user.RoleId == 2)
 					{
-						UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserObject>(user));
+						UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserDTO>(user));
 						var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
 						mainWindow.Show();
 						this.Hide();

@@ -10,7 +10,7 @@ namespace WorkFlex.Desktop.BusinessObject
 	{
 		private static UserSession _instance = null;
 		private static readonly object _lock = new object();
-		public UserObject CurrentUser { get; private set; } = null!;
+		public UserDTO CurrentUser { get; private set; } = null!;
 		public static UserSession Instance
 		{
 			get
@@ -22,11 +22,11 @@ namespace WorkFlex.Desktop.BusinessObject
 			}
 		}
 
-		public void SetUser(UserObject user)
+		public void SetUser(UserDTO user)
 		{
 			CurrentUser = user;
 		}
-		public UserObject GetUser()
+		public UserDTO GetUser()
 		{
 			return CurrentUser;
 		}
