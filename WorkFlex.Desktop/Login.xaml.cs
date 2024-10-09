@@ -47,7 +47,7 @@ namespace WorkFlex.Desktop
 				var user = await _userRepository.GetByEmailAndPasswordAsync(email, password);
 				if (user != null)
 				{
-					if (user.RoleId == 1 || user.RoleId == 2)
+					if (user.RoleId == 2)
 					{
 						UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserObject>(user));
 						var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
