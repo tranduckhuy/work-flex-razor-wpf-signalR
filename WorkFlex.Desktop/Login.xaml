@@ -5,59 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorkFlex.Desktop"
         mc:Ignorable="d"
-        Title="Login" Height="350" Width="500"
+        Title="Login" Height="390" Width="615"
         WindowStartupLocation="CenterScreen"
         Background="#FF1D1D1D" Closing="Window_Closing">
     <Grid>
         <!-- Centering the login form -->
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border Background="#FF2D2D2D" CornerRadius="10" Padding="20" Width="400">
-                <StackPanel>
-                    <TextBlock Text="Welcome to WorkFlex!" FontSize="26" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Background="#ffffff">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="10">
+                <Image Source="DataAccess/Assets/Image/signin-image.jpg" Width="auto" Height="auto" />
+            </StackPanel>
 
-                    <!-- Email Field -->
-                    <Grid Margin="0,0,0,10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBox x:Name="EmailTextBox" Padding="10" BorderBrush="#FF888888" BorderThickness="1" Background="#FF333333" Foreground="White" VerticalAlignment="Center" Grid.Row="0"/>
-                        <TextBlock Text="Email" Foreground="#FF888888" VerticalAlignment="Center" Margin="10,0,0,0" IsHitTestVisible="False" Grid.Row="1"/>
-                    </Grid>
+            <!-- Form đăng nhập -->
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
 
-                    <!-- Password Field -->
-                    <Grid Margin="0,0,0,20">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <PasswordBox x:Name="PasswordBox" Padding="10" BorderBrush="#FF888888" BorderThickness="1" Background="#FF333333" Foreground="White" VerticalAlignment="Center" Grid.Row="0"/>
-                        <TextBlock Text="Password" Foreground="#FF888888" VerticalAlignment="Center" Margin="10,0,0,0" IsHitTestVisible="False" Grid.Row="1"/>
-                    </Grid>
-
-                    <Button x:Name="LoginButton" Height="45" BorderBrush="Transparent" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="LoginButton_Click">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Rectangle x:Name="BackgroundRect" RadiusX="5" RadiusY="5" Fill="Green"/>
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Grid>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="BackgroundRect" Property="Fill" Value="#FF0056A0"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter TargetName="BackgroundRect" Property="Fill" Value="#FF003C70"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                        <Button.Content>
-                            <TextBlock Text="Login" Foreground="White"/>
-                        </Button.Content>
-                    </Button>
+                <StackPanel Orientation="Horizontal" Margin="10,10" HorizontalAlignment="Left">
+                    <Label Content="Sign in" FontSize="36" FontWeight="Bold" Foreground="#222222" FontFamily="Poppins" Padding="0" Margin="0" VerticalContentAlignment="Center"/>
                 </StackPanel>
-            </Border>
+                <!-- Email -->
+                <StackPanel Orientation="Horizontal" Margin="10,10">
+                    <Label Content="✉ Email" Width="80"/>
+                    <TextBox Name="EmailTextBox" Width="200" Height="30" />
+                </StackPanel>
+
+                <!-- Mật khẩu -->
+                <StackPanel Orientation="Horizontal" Margin="10,10">
+                    <Label Content="🔒 Password" Width="80"/>
+                    <PasswordBox Name="PasswordBox" Width="200" Height="30" />
+                </StackPanel>
+
+                <!-- Button đăng nhập -->
+                <Button x:Name="LoginButton" Content="Log in" Width="110" Height="35" HorizontalAlignment="Left" Margin="10,25,0,0" Click="LoginButton_Click" >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#6dabe4"/>
+                            <Setter Property="Foreground" Value="#ffffff"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="15,39"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}" 
+                                            CornerRadius="5">   
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </StackPanel>
+
+            <!-- Đăng nhập với mạng xã hội -->
+
         </Grid>
     </Grid>
 </Window>
