@@ -40,6 +40,9 @@
         public const string TEMP_DATA_MESSAGE_REGISTER_SUCCESS = "RegisterMessage";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";
+        public const string PAGE_ERROR = "/Error/Error";
         public const string PAGE_LOGIN = "/Authen/Login";
+        public const string PAGE_JOB_LIST = "/Job/JobList";
+        public const string PAGE_JOB_APPLY = "/Job/JobApply";
     }
 }
