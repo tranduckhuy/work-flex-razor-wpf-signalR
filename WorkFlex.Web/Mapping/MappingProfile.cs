@@ -8,6 +8,7 @@ namespace WorkFlex.Web.Mapping
         public MappingProfile()
         {
             CreateMap<User, UserDto>();
+            CreateMap<JobPost, JobListDto>();
         }
     }
 }

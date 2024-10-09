@@ -41,5 +41,10 @@
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";
         public const string PAGE_LOGIN = "/Authen/Login";
+
+        // Constants Repository
+        public const string ALL = "All";
+        public const string ANY = "Any";
+        public const string ANY_WHERE = "Anywhere";
     }
 }

@@ -12,7 +12,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
+builder.Services.AddScoped<IJobService, JobService>();
 
 builder.Services.AddSession(options =>
 {
