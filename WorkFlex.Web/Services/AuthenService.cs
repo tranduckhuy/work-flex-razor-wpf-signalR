@@ -46,7 +46,7 @@ namespace WorkFlex.Web.Services
                     if (user.IsLock)
                     {
                         loginDto.Result = LoginResult.AccountLocked;
-                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {loginDto.Result}", LoginResult.AccountLocked);
+                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.AccountLocked);
                         return loginDto;
                     }
 
@@ -58,12 +58,12 @@ namespace WorkFlex.Web.Services
                         _logger.LogDebug("[checkLogin]: Service - User's information after mapping: {userDto}", userDto);
                         loginDto.User = userDto;
                         loginDto.Result = LoginResult.Success;
-                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {loginDto.Result}", LoginResult.Success);
+                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.Success);
                     }
                     else
                     {
                         loginDto.Result = LoginResult.InvalidPassword;
-                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {loginDto.Result}", LoginResult.InvalidPassword);
+                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.InvalidPassword);
                     }
 
                     return loginDto;
@@ -71,7 +71,7 @@ namespace WorkFlex.Web.Services
                 else
                 {
                     loginDto.Result = LoginResult.UserNotFound;
-                    _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {loginDto.Result}", LoginResult.UserNotFound);
+                    _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.UserNotFound);
                     return loginDto;
                 }
             }

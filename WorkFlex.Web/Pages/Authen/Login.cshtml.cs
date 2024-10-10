@@ -51,26 +51,26 @@ namespace WorkFlex.Web.Pages.Authen
                             if (loginDto.User != null)
                             {
                                 SetUserSession(loginDto.User);
-                                _logger.LogDebug("[OnPost]: Controller - User's information after checking: {loginDto.User}", loginDto.User);
+                                _logger.LogDebug("[OnPost]: Controller - User's information after checking: {user}", loginDto.User);
                                 _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: Authentiaction Success!");
                                 return RedirectToPage(AppConstants.PAGE_HOME);
                             }
                             break;
                         case AppConstants.LoginResult.UserNotFound:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_USERNAME;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_INVALID_USERNAME);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_INVALID_USERNAME);
                             break;
                         case AppConstants.LoginResult.InvalidPassword:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_INVALID_PASSWORD);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_INVALID_PASSWORD);
                             break;
                         case AppConstants.LoginResult.AccountLocked:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_ACCOUNT_LOCKED);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_ACCOUNT_LOCKED);
                             break;
                         default:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_FAILED);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_FAILED);
                             break;
                     }
                 } 
