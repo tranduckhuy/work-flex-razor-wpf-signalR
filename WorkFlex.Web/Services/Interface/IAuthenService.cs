@@ -6,10 +6,10 @@ namespace WorkFlex.Web.Services.Interface
 {
     public interface IAuthenService
     {
-        LoginDto? checkLogin(LoginVM loginVm);
+        LoginDto? CheckLogin(LoginVM loginVm);
 
-        RegisterResult addUser(RegisterVM registerVm);
+        RegisterResult AddUser(RegisterVM registerVm);
 
-        bool isEmailExist(string email);
+        bool IsEmailExist(string email);
     }
 }
