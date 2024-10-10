@@ -28,7 +28,10 @@ namespace WorkFlex.Web.Repository
             // Filter by Job Location
             if (!string.IsNullOrEmpty(filters.JobLocation) && filters.JobLocation != AppConstants.ANY_WHERE)
             {
-                string normalizedJobLocation = filters.JobLocation.ToLower();
+                string normalizedJobLocation = filters.JobLocation.ToLower()
+                                    .Replace("thành phố", "")
+                                    .Replace("tỉnh", "")
+                                    .Trim();
                 query = query.Where(j => j.JobLocation.ToLower().Contains(normalizedJobLocation));
             }
 
@@ -42,85 +45,81 @@ namespace WorkFlex.Web.Repository
             // Filter by Posted Within
             if (!string.IsNullOrEmpty(filters.PostedWithin) && filters.PostedWithin != AppConstants.ANY)
             {
-                var postedWithinOptions = filters.PostedWithin.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                DateTime fromDate = DateTime.UtcNow;
+                DateTime fromDate = DateTime.UtcNow.Date;
                 bool hasFilter = false;
 
-                foreach (var postedWithin in postedWithinOptions)
+                switch (filters.PostedWithin.Trim())
                 {
-                    switch (postedWithin.Trim())
-                    {
-                        case "Today":
-                            fromDate = DateTime.UtcNow.AddDays(-1);
-                            hasFilter = true;
-                            break;
-                        case "Last 2 days":
-                            fromDate = DateTime.UtcNow.AddDays(-2);
-                            hasFilter = true;
-                            break;
-                        case "Last 3 days":
-                            fromDate = DateTime.UtcNow.AddDays(-3);
-                            hasFilter = true;
-                            break;
-                        case "Last 5 days":
-                            fromDate = DateTime.UtcNow.AddDays(-5);
-                            hasFilter = true;
-                            break;
-                        case "Last 10 days":
-                            fromDate = DateTime.UtcNow.AddDays(-10);
-                            hasFilter = true;
-                            break;
-                    }
+                    case "Today":
+                        fromDate = DateTime.UtcNow.Date;
+                        hasFilter = true;
+                        break;
+                    case "Last 2 days":
+                        fromDate = DateTime.UtcNow.Date.AddDays(-2);
+                        hasFilter = true;
+                        break;
+                    case "Last 3 days":
+                        fromDate = DateTime.UtcNow.Date.AddDays(-3);
+                        hasFilter = true;
+                        break;
+                    case "Last 5 days":
+                        fromDate = DateTime.UtcNow.Date.AddDays(-5);
+                        hasFilter = true;
+                        break;
+                    case "Last 10 days":
+                        fromDate = DateTime.UtcNow.Date.AddDays(-10);
+                        hasFilter = true;
+                        break;
                 }
 
                 if (hasFilter)
                 {
-                    query = query.Where(j => j.CreatedAt >= fromDate);
+                    query = query.Where(j => j.CreatedAt.Date >= fromDate);
                 }
-            }
-
-            if (filters.MinSalary.HasValue && filters.MaxSalary.HasValue)
-            {
-                query = query
-                    .Where(j => !string.IsNullOrEmpty(j.SalaryRange)); // Only filter for non-empty SalaryRange
-            }
-
-            // Sorting
-            if (!string.IsNullOrEmpty(filters.SortBy))
-            {
-                switch (filters.SortBy)
-                {
-                    case "SalaryLowToHigh":
-                        query = query.Where(j => !string.IsNullOrEmpty(j.SalaryRange) && j.SalaryRange.Contains('-'))
-                            .OrderBy(j => GetMinSalary(j.SalaryRange));
-                        break;
-
-                    case "SalaryHighToLow":
-                        query = query.Where(j => !string.IsNullOrEmpty(j.SalaryRange) && j.SalaryRange.Contains('-'))
-                            .OrderByDescending(j => GetMinSalary(j.SalaryRange));
-                        break;
-
-                    default:
-                        query = query.OrderByDescending(j => j.CreatedAt);
-                        break;
-                }
-            }
-            else
-            {
-                query = query.OrderByDescending(j => j.CreatedAt);
             }
 
             // Fetch the jobs with salary filtering applied
             var jobPosts = await query.ToListAsync();
 
-            // Now filter the job posts based on salary range in memory
+            // Filter based on salary range
             if (filters.MinSalary.HasValue && filters.MaxSalary.HasValue)
             {
                 jobPosts = jobPosts.Where(job =>
-                    job.SalaryRange.Contains('-') &&
-                    TryParseSalaryRange(job.SalaryRange, out decimal minSalary, out decimal maxSalary) &&
-                    ((minSalary == 0 && maxSalary == 0) || (minSalary >= filters.MinSalary.Value && maxSalary <= filters.MaxSalary.Value)))
-                .ToList();
+                        job.SalaryRange.Contains('-') &&
+                        TryParseSalaryRange(job.SalaryRange, out decimal minSalary, out decimal maxSalary) &&
+                        ((filters.MinSalary.Value == 0 && filters.MaxSalary.Value == 0) ||
+                        (minSalary >= filters.MinSalary.Value && maxSalary <= filters.MaxSalary.Value)))
+                    .ToList();
+            }
+
+            // Sorting
+            if (!string.IsNullOrEmpty(filters.SortBy) && filters.SortBy != AppConstants.NONE)
+            {
+                // Sort after filtering the jobs
+                switch (filters.SortBy)
+                {
+                    case "SalaryLowToHigh":
+                        jobPosts = jobPosts
+                            .Where(job => !string.IsNullOrEmpty(job.SalaryRange) && job.SalaryRange.Contains('-'))
+                            .OrderBy(job => GetMinSalary(job.SalaryRange))
+                            .ToList();
+                        break;
+
+                    case "SalaryHighToLow":
+                        jobPosts = jobPosts
+                            .Where(job => !string.IsNullOrEmpty(job.SalaryRange) && job.SalaryRange.Contains('-'))
+                            .OrderByDescending(job => GetMinSalary(job.SalaryRange))
+                            .ToList();
+                        break;
+
+                    default:
+                        jobPosts = jobPosts.OrderByDescending(job => job.CreatedAt).ToList();
+                        break;
+                }
+            }
+            else
+            {
+                jobPosts = jobPosts.OrderByDescending(job => job.CreatedAt).ToList();
             }
 
             // Get total count before pagination

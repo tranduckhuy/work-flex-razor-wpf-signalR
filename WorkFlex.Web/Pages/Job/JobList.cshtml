@@ -61,7 +61,7 @@
                                 </div>
                                 <label class="container" for="Filters.JobType.All">
                                     All
-                                    <input type="checkbox" name="Filters.JobType" id="Filters.JobType.All" value="All" onchange="submitFilters()" checked />
+                                    <input type="checkbox" name="Filters.JobType" id="Filters.JobType.All" value="All" onchange="submitFilters()" />
                                     <span class="checkmark"></span>
                                 </label>
                                 <input type="text" name="hiddenFilters.JobType" value="All" hidden />
@@ -70,9 +70,9 @@
                                     <label class="container" for="Filters.JobType.@jobType.TypeName">
                                         @jobType.TypeName
                                         <input type="checkbox" name="Filters.JobType" onchange="submitFilters()" id="Filters.JobType.@jobType.TypeName" />
+                                        <input type="text" name="hiddenFilters.JobType" value="@jobType.TypeName" hidden />
                                         <span class="checkmark"></span>
                                     </label>
-                                    <input type="text" asp-for="Filters.JobType" name="hiddenFilters.JobType" value="@jobType.TypeName" hidden />
                                 }
                             </div>
                             <!-- Select types End -->
@@ -88,10 +88,10 @@
                                 {
                                     <label class="container" for="@option">
                                         @option
-                                        <input type="checkbox" name="Filters.PostedWithin" onchange="submitFilters()" id="@option" />
+                                        <input type="radio" name="Filters.PostedWithin" onchange="submitFilters()" id="@option" />
+                                        <input type="text" name="hiddenFilters.PostedWithin" value="@option" hidden />
                                         <span class="checkmark"></span>
                                     </label>
-                                    <input type="text" asp-for="Filters.PostedWithin" name="hiddenFilters.PostedWithin" value="@option" hidden />
                                 }
                             </div>
                             <!-- Select posted date end -->
@@ -111,9 +111,9 @@
                                                 <p>Salary :</p>
                                             </div>
                                             <div class="price_value d-flex justify-content-center">
-                                                <input type="text" asp-for="Filters.MinSalary" name="Filters.MinSalary" class="js-input-from" id="amount" onchange="setFilterTimeout()" readonly />
+                                                <input type="text" asp-for="Filters.MinSalary" name="Filters.MinSalary" class="js-input-from" id="amount" oninput="setFilterTimeout()" readonly />
                                                 <span>to</span>
-                                                <input type="text" asp-for="Filters.MaxSalary" name="Filters.MaxSalary" class="js-input-to" id="amount" onchange="setFilterTimeout()" readonly />
+                                                <input type="text" asp-for="Filters.MaxSalary" name="Filters.MaxSalary" class="js-input-to" id="amount" oninput="setFilterTimeout()" readonly />
                                             </div>
                                         </div>
                                     </div>
@@ -133,14 +133,16 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="count-job mb-35">
-                                        <span>@Model.TotalCount Jobs found</span>
+                                        <div id="totalCount">
+                                            <span>@Model.TotalCount Jobs found</span>
+                                        </div>
                                         <!-- Select job items start -->
                                         <div class="select-job-items">
                                             <span>Sort by</span>
                                             <select name="Filters.SortBy" asp-for="Filters.SortBy" onchange="submitFilters()">
-                                                <option value="">None</option>
-                                                <option value="SalaryLowToHigh">Salary: Low to High</option>
-                                                <option value="SalaryHighToLow">Salary: High to Low</option>
+                                                <option value="None">None</option>
+                                                <option value="SalaryLowToHigh">Low</option>
+                                                <option value="SalaryHighToLow">High</option>
                                             </select>
                                         </div>
                                         <!-- Hidden Fields -->
@@ -223,20 +225,21 @@
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
-        // Create Object JobListVM
-        const tempObj = {
-            JobLocation: '',
-            JobType: [],
-            PostedWithin: [],
-            MinSalary: null,
-            MaxSalary: null,
-            SortBy: '',
-            PageNumber: 1,
-            PageSize: 7
-        };
         function submitFilters() {
             var form = $('#filterForm');
             form.find('input, select').prop('disabled', true); // Disable form elements during submission
+
+            // Create Object JobListVM
+            const jobListVm = {
+                JobLocation: '',
+                JobType: [],
+                PostedWithin: '',
+                MinSalary: null,
+                MaxSalary: null,
+                SortBy: '',
+                PageNumber: 1,
+                PageSize: 7
+            };
 
             // Loop through each input and select in the form
             form.find('input, select').each(function () {
@@ -245,69 +248,80 @@
 
                 // Check if it is a checkbox
                 if ($(this).is(':checkbox')) {
+                    // If checked, get the value from the hidden input next to it
                     if ($(this).is(':checked')) {
-                        // If checked, get the value from the hidden input next to it
                         value = $(this).closest('label').find('input[type="text"]').val();
+
+                        // Only add to JobType and PostedWithin if the checkbox is checked and the value is not already present
+                        if (value && name === 'Filters.JobType' && !jobListVm.JobType.includes(value)) {
+                            jobListVm.JobType.push(value);
                     } else {
-                        value = null; // If not checked, set value to null
+                        // If unchecked, remove the value from JobType and PostedWithin if it exists
+                        value = $(this).closest('label').find('input[type="text"]').val();
+                        if (name === 'Filters.JobType') {
+                            jobListVm.JobType = jobListVm.JobType.filter(item => item !== value);
+                        }
+                    }
+                // Check if it is a radio
+                } else if ($(this).is(':radio')) {
+                    // Get value for radio inputs (only if checked)
+                    if ($(this).is(':checked')) {
+                        value = $(this).closest('label').find('input[type="text"]').val();
+                        // Assign value directly for radio buttons
+                        jobListVm.PostedWithin = value;
                     }
                 } else {
-                    value = $(this).val();
+                    value = $(this).val(); // Get value for non-checkbox/non-radio inputs
                 }
 
-                // Assign value to jobListVM based on the name
+                // Assign value to jobListVm based on the name
                 switch (name) {
                     case 'Filters.JobLocation':
-                        tempObj.JobLocation = value; // Set JobLocation
-                        break;
-                    case 'Filters.JobType':
-                        // Only add to JobType if the checkbox is checked
-                        tempObj.JobType.push(value);
-                        break;
-                    case 'Filters.PostedWithin':
-                        // Only add to PostedWithin if the checkbox is checked
-                        tempObj.PostedWithin.push(value);
+                        jobListVm.JobLocation = value;
                         break;
                     case 'Filters.MinSalary':
-                        tempObj.MinSalary = value ? parseFloat(value) : null; // Convert to decimal
+                        jobListVm.MinSalary = value ? parseFloat(value) : null;
                         break;
                     case 'Filters.MaxSalary':
-                        tempObj.MaxSalary = value ? parseFloat(value) : null; // Convert to decimal
+                        jobListVm.MaxSalary = value ? parseFloat(value) : null;
                         break;
                     case 'Filters.SortBy':
-                        tempObj.SortBy = value; // Set SortBy
+                        jobListVm.SortBy = value;
                         break;
                     case 'pageNumber':
-                        tempObj.PageNumber = parseInt(value) || 1; // Convert to integer
+                        jobListVm.PageNumber = parseInt(value) || 1;
                         break;
                     default:
-                        // Handle other cases if needed
                         break;
                 }
             });
 
             // Create a new object for sending data
-            const jobListVm = {
-                JobLocation: tempObj.JobLocation,
-                JobType: tempObj.JobType.join(', '), // Convert JobType to a string only when sending
-                PostedWithin: tempObj.PostedWithin.join(', '), // Convert PostedWithin to a string only when sending
-                MinSalary: tempObj.MinSalary,
-                MaxSalary: tempObj.MaxSalary,
-                SortBy: tempObj.SortBy,
-                PageNumber: tempObj.PageNumber,
-                PageSize: tempObj.PageSize
+            const dataToSend = {
+                JobLocation: jobListVm.JobLocation,
+                JobType: jobListVm.JobType.join(', '), // Convert JobType to a string only when sending
+                PostedWithin: jobListVm.PostedWithin,
+                MinSalary: jobListVm.MinSalary,
+                MaxSalary: jobListVm.MaxSalary,
+                SortBy: jobListVm.SortBy,
+                PageNumber: jobListVm.PageNumber,
+                PageSize: jobListVm.PageSize
             };
 
             // AJAX call to submit the filters
             $.ajax({
                 url: form.attr('action'),
-                data: jobListVm, // Send the constructed data
+                data: dataToSend, // Send the constructed data
                 type: 'GET',
                 success: function (result) {
                     console.log("Fetch data job success!"); // Log success message
                     // Update the job list section with the new data
                     var newContent = $(result).find('#jobList').html();
                     $('#jobList').html(newContent);
+
+                    // Update total count section with new data
+                    var newTotal = $(result).find('#totalCount').html();
+                    $('#totalCount').html(newTotal);
 
                     // Update pagination
                     var newPagination = $(result).find('.pagination-area').html();
@@ -322,21 +336,19 @@
             });
         }
 
+        // Debounce function for avoid calling ajax frequently when changing salary slider
         let filterTimeout;
-        function setFilterTimeout() {
-            // Clear the previous timeout if it exists
+        function setFilterTimeout(from, to) {
             clearTimeout(filterTimeout);
-
-            // Set a new timeout for 2 seconds (2000 milliseconds)
             filterTimeout = setTimeout(function () {
-                submitFilters(); 
-            }, 2000); 
+                submitFilters(from, to);
+            }, 2000);
         }
 
-        function goToPage(pageNumber) {
-            $('input[name="pageNumber"]').val(pageNumber);
-            submitFilters();
-        }
+        // Listen filterChanged event from price_rangs.js
+        $(document).on('filterChanged', function (event, data) {
+            setFilterTimeout(data.from, data.to);
+        });
 
         // Call API provinces
         function renderData(array, selectId) {

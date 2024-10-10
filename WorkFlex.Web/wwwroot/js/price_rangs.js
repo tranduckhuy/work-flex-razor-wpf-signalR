@@ -2377,10 +2377,10 @@ var $range = $(".js-range-slider"),
     $inputFrom = $(".js-input-from"),
     $inputTo = $(".js-input-to"),
     instance,
-    min = 0,
+    min = 100,
     max = 10000,
-    from = 0,
-    to = 1000;
+    from = 100,
+    to = 500;
 
 $range.ionRangeSlider({
     type: "double",
@@ -2407,7 +2407,9 @@ function updateInputs (data) {
     to = data.to;
     
     $inputFrom.prop("value", from);
-    $inputTo.prop("value", to); 
+    $inputTo.prop("value", to);
+
+    $(document).trigger('filterChanged', { from: from, to: to });
 }
 
 $inputFrom.on("input", function () {

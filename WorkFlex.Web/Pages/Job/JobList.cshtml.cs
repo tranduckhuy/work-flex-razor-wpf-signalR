@@ -44,19 +44,19 @@ namespace WorkFlex.Web.Pages.Job
 
                 // Get jobs based on filters
                 (Jobs, TotalCount) = await _jobService.GetJobsAsync(filters);
-                _logger.LogInformation("[OnGetAsync]: Jobs retrieved: {Jobs}", Jobs);
+                _logger.LogDebug("[OnGetAsync]: Jobs retrieved: {Jobs}", Jobs);
 
                 TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
 
                 // Get filter options
                 JobTypes = await _jobService.GetJobTypesAsync();
-                _logger.LogInformation("[OnGetAsync]: PageModel - Job types: {JobTypes}", JobTypes);
+                _logger.LogDebug("[OnGetAsync]: PageModel - Job types: {JobTypes}", JobTypes);
 
                 _logger.LogInformation("[OnGetAsync]: PageModel - End getting job list data with data: Resp-data: {Jobs}, Total-count: {TotalCount}", Jobs, TotalCount);
                 return Page();
             } catch (Exception ex)
             {
-                _logger.LogError("[OnGetAsync]: PageModel - End getting job list data with error: {ex}", ex);
+                _logger.LogError("[OnGetAsync]: PageModel - End getting job list data with error: {ex}", ex.StackTrace);
                 return Content(ex.ToString());
             }
         }

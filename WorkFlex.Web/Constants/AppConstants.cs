@@ -45,6 +45,7 @@
         // Constants Repository
         public const string ALL = "All";
         public const string ANY = "Any";
+        public const string NONE = "None";
         public const string ANY_WHERE = "Anywhere";
     }
 }

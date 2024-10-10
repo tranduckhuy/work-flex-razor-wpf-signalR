@@ -10,7 +10,7 @@
 
         public decimal? MinSalary { get; set; } = 0;
 
-        public decimal? MaxSalary { get; set; } = 1000;
+        public decimal? MaxSalary { get; set; } = 0;
 
         public string SortBy { get; set; } = string.Empty;
 

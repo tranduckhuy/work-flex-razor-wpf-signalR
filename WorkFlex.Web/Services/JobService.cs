@@ -36,7 +36,7 @@ namespace WorkFlex.Web.Services
                         jobDto.JobLocation = jobLocationParts.LastOrDefault()!.Trim();
                     }
 
-                    var timeDifference = DateTime.UtcNow - jobDto.CreatedAt;
+                    var timeDifference = DateTime.UtcNow.Date - jobDto.CreatedAt.Date;
                     if (timeDifference.TotalDays > 5)
                     {
                         jobDto.DisplayCreatedAt = jobDto.CreatedAt.ToString("dd/MM/yyyy");
@@ -44,22 +44,14 @@ namespace WorkFlex.Web.Services
                     else
                     {
                         int daysAgo = (int)timeDifference.TotalDays;
-                        if (daysAgo > 0)
-                        {
-                            jobDto.DisplayCreatedAt = $"{daysAgo} Days Ago";
-                        }
-                        else
-                        {
-                            jobDto.DisplayCreatedAt = $"Today";
-                        }
-
+                        jobDto.DisplayCreatedAt = daysAgo > 0 ? $"{daysAgo} Days Ago" : "Today";
                     }
                 }
                 _logger.LogInformation("[GetJobsAsync]: Service - End getting job list data with data: List-data: {jobDtos}, Total-count: {totalCount}", jobDtos, totalCount);
                 return (jobDtos, totalCount);
             } catch (Exception ex)
             {
-                _logger.LogError("[GetJobsAsync]: Service - End getting job list data with error: {ex}", ex);
+                _logger.LogError("[GetJobsAsync]: Service - End getting job list data with error: {ex}", ex.StackTrace);
                 return ([], 0);
             }
         }
