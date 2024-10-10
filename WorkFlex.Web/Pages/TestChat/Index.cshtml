@@ -5,13 +5,13 @@
     ViewData["Title"] = "Chat";
 }
 
-<h2>Chat Room</h2>
+<h2 class="text-center">Chat With @Model.OtherUser.Username</h2>
 
 <div class="chatContainer">
     <div class="messagesList" id="messagesList">
         @foreach (var message in Model.Messages)
         {
-            <div class="message @(message.UserId == Model.UserId ? "my-message" : "other-message")">
+            <div class="message @(message.UserId == Model.CurrentUser.Id.ToString().ToUpper() ? "my-message" : "other-message")">
                 <strong>@message.UserName</strong>: @message.Reply <em>(@message.Time)</em>
             </div>
         }
@@ -29,8 +29,8 @@
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
     <script type="text/javascript">
-        const userId = '@Model.UserId';
-        const otherUserId = '@Model.OtherUserId';
+        const userId = '@Model.CurrentUser.Id';
+        const otherUserId = '@Model.OtherUser.Id';
         const conversationId = '@Model.ConversationId';
 
         const connection = new signalR.HubConnectionBuilder()
@@ -44,7 +44,7 @@
         connection.on("ReceiveMessage", function (userId, userName, message, time) {
             const msg = document.createElement("div");
             const messageTime = new Date(time).toLocaleString();
-            msg.className = 'message ' + (userId === '@Model.UserId' ? 'my-message ' : 'other-message');
+            msg.className = 'message ' + (userId === '@Model.CurrentUser.Id.ToString().ToUpper()' ? 'my-message ' : 'other-message');
             msg.innerHTML = `<strong>${userName}</strong>: ${message} <em>(${messageTime})</em>`;
             document.getElementById("messagesList").appendChild(msg);
 
@@ -52,7 +52,7 @@
         });
 
         function sendMessage() {
-            const message = document.getElementById("messageInput").value;
+            const message = document.getElementById("messageInput").value; 
             if (message.trim() === "") return;
             connection.invoke("SendMessage", userId, message, otherUserId, conversationId).then(() => {
                 document.getElementById("messageInput").value = "";

@@ -20,7 +20,7 @@ namespace WorkFlex.Web.Services
             _mapper = mapper;
         }
 
-        public async Task<ConversationDto> GetConversation(string userId, Guid otherUserId)
+        public async Task<(ConversationDto, UserViewModel)> GetConversation(string userId, Guid otherUserId)
         {
             if (otherUserId == Guid.Empty)
             {
@@ -30,7 +30,12 @@ namespace WorkFlex.Web.Services
             var otherUser = await _context.Users.FindAsync(otherUserId) 
                 ?? throw new ArgumentNullException(nameof(otherUserId), "User not found");
             
-            
+            var othersName = new UserViewModel
+            {
+                Id = otherUserId,
+                Username = otherUser.FirstName + " " + otherUser.LastName
+            };
+
             var conversation = await _context.Conversations
                 .FirstOrDefaultAsync(c => (c.UserOne == new Guid(userId) && c.UserTwo == otherUserId) ||
                                            (c.UserOne == otherUserId && c.UserTwo == new Guid(userId)));
@@ -49,7 +54,7 @@ namespace WorkFlex.Web.Services
                 await _context.SaveChangesAsync();
             }
 
-            return _mapper.Map<ConversationDto>(conversation);
+            return (_mapper.Map<ConversationDto>(conversation), othersName);
         }
 
         public async Task<List<ConversationReplyViewModel>> GetMessagesForConversation(Guid conversationId)

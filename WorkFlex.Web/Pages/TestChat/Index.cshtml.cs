@@ -18,9 +18,8 @@ namespace WorkFlex.Web.Pages.TestChat
         }
 
         public List<ConversationReplyViewModel> Messages { get; set; } = [];
-        public string UserId { get; set; } = string.Empty;
-        public string Username { get; set; } = string.Empty;
-        public string OtherUserId { get; set; } = string.Empty;
+        public UserViewModel CurrentUser { get; set; } = null!;
+        public UserViewModel OtherUser { get; set; } = null!;
         public string ConversationId { get; set; } = string.Empty;
 
         public async Task<IActionResult> OnGet(Guid otherUserId)
@@ -34,12 +33,23 @@ namespace WorkFlex.Web.Pages.TestChat
                     return RedirectToPage(AppConstants.PAGE_LOGIN);
                 }
 
-                var conversation = await _conversationService.GetConversation(currentUserId, otherUserId);
+                var result = await _conversationService.GetConversation(currentUserId, otherUserId);
 
-                UserId = currentUserId.ToUpper();
-                OtherUserId = otherUserId.ToString();
-                ConversationId = conversation.Id.ToString();
-                Messages = await _conversationService.GetMessagesForConversation(conversation.Id);
+                CurrentUser = new UserViewModel
+                {
+                    Id = new Guid(currentUserId),
+                    Username = HttpContext.Session.GetString(AppConstants.USERNAME) ?? string.Empty,
+                    Avatar = HttpContext.Session.GetString(AppConstants.AVATAR) ?? string.Empty
+                };
+
+                OtherUser = new UserViewModel
+                {
+                    Id = otherUserId,
+                    Username = result.Item2.Username
+                };
+
+                ConversationId = result.Item1.Id.ToString();
+                Messages = await _conversationService.GetMessagesForConversation(result.Item1.Id);
 
                 return Page();
             } catch (Exception ex)
