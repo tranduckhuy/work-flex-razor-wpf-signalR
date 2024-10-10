@@ -13,6 +13,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
+builder.Services.AddScoped<IConversationService, ConversationService>();
 
 builder.Services.AddAuthentication("AuthScheme")
     .AddCookie("AuthScheme", options =>

@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using WorkFlex.Infrastructure.Data;
+using WorkFlex.Web.Constants;
+using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.TestUserList
 {
@@ -19,30 +20,25 @@ namespace WorkFlex.Web.Pages.TestUserList
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
 
-            if (userId == null)
+            if (string.IsNullOrEmpty(currentUserId))
             {
-                return RedirectToPage("/Error/Error");
+                return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 
             Users = await _context.Users
-                .Where(u => u.Id != new Guid(userId))
+                .Where(u => u.Id != new Guid(currentUserId))
                 .Select(u => new UserViewModel
                 {
                     Username = u.Username,
-                    UserId = u.Id.ToString(),
-                    Avatar = u.Avatar
+                    Id = u.Id,
+                    Avatar = string.IsNullOrEmpty(u.Avatar)
+                            ? AppConstants.DEFAULT_AVATAR
+                            : u.Avatar
                 }).ToListAsync();
 
             return Page();
         }
-    }
-
-    public class UserViewModel
-    {
-        public string Username { get; set; } = string.Empty;
-        public string UserId { get; set; } = string.Empty;
-        public string? Avatar { get; set; } = string.Empty;
     }
 }

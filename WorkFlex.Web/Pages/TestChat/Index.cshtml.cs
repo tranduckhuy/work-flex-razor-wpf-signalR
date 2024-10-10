@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using WorkFlex.Domain.Entities;
-using WorkFlex.Infrastructure.Data;
+using WorkFlex.Web.Constants;
+using WorkFlex.Web.Services.Interface;
+using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.TestChat
 {
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext _context;
+        private readonly IConversationService _conversationService;
+        private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(AppDbContext context)
+        public IndexModel(IConversationService conversationService, ILogger<IndexModel> logger)
         {
-            _context = context;
+            _conversationService = conversationService;
+            _logger = logger;
         }
 
         public List<ConversationReplyViewModel> Messages { get; set; } = [];
@@ -24,80 +25,28 @@ namespace WorkFlex.Web.Pages.TestChat
 
         public async Task<IActionResult> OnGet(Guid otherUserId)
         {
-            var currentUserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (!HttpContext.User.Identity!.IsAuthenticated || string.IsNullOrEmpty(currentUserId))
+            try
             {
-                return RedirectToPage("/TestLogin/Index");
-            }
+                var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
 
-            if (otherUserId == Guid.Empty)
-            {
-                return RedirectToPage("/Error/Error");
-            }
-
-            var otherUser = await _context.Users.FindAsync(otherUserId);
-
-            if (otherUser == null)
-            {
-                return RedirectToPage("/Error/Error");
-            }
-
-            var conversation = await GetConversation(currentUserId, otherUserId);
-
-            UserId = currentUserId.ToUpper();
-            OtherUserId = otherUserId.ToString();
-            ConversationId = conversation.Id.ToString();
-            Messages = await GetMessagesForConversation(conversation.Id);
-
-            return Page();
-        }
-
-        private async Task<Conversation> GetConversation(string userId, Guid otherUserId)
-        {
-            var conversation = await _context.Conversations
-                .FirstOrDefaultAsync(c => (c.UserOne == new Guid(userId) && c.UserTwo == otherUserId) ||
-                                           (c.UserOne == otherUserId && c.UserTwo == new Guid(userId)));
-
-            // Create a new conversation if one does not exist
-            if (conversation == null)
-            {
-                conversation = new Conversation
+                if (string.IsNullOrEmpty(currentUserId))
                 {
-                    Id = Guid.NewGuid(),
-                    UserOne = new Guid(userId),
-                    UserTwo = otherUserId
-                };
+                    return RedirectToPage(AppConstants.PAGE_LOGIN);
+                }
 
-                _context.Conversations.Add(conversation);
-                await _context.SaveChangesAsync();
+                var conversation = await _conversationService.GetConversation(currentUserId, otherUserId);
+
+                UserId = currentUserId.ToUpper();
+                OtherUserId = otherUserId.ToString();
+                ConversationId = conversation.Id.ToString();
+                Messages = await _conversationService.GetMessagesForConversation(conversation.Id);
+
+                return Page();
+            } catch (Exception ex)
+            {
+                _logger.LogError("Error getting conversation: {ex}", ex);
+                return RedirectToPage("/Error/Error");
             }
-
-            return conversation;
         }
-
-        private async Task<List<ConversationReplyViewModel>> GetMessagesForConversation(Guid conversationId)
-        {
-            var messages = await (from r in _context.ConversationReplies
-                                  where r.ConversationId == conversationId
-                                  join u in _context.Users on r.UserId equals u.Id
-                                  select new ConversationReplyViewModel
-                                  {
-                                      UserId = u.Id.ToString(),
-                                      UserName = u.Username,
-                                      Reply = r.Reply,
-                                      Time = TimeZoneInfo.ConvertTimeFromUtc(r.Time, TimeZoneInfo.Local)
-                                  }).ToListAsync();
-
-            return messages.OrderBy(m => m.Time).ToList();
-        }
-    }
-
-    public class ConversationReplyViewModel
-    {
-        public string UserId { get; set; } = string.Empty;
-        public string UserName { get; set; } = string.Empty;
-        public string Reply { get; set; } = string.Empty;
-        public DateTime Time { get; set; }
     }
 }
