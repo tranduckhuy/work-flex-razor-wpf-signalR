@@ -20,6 +20,8 @@
             Error
         }
 
+        public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+
         // Constants for authentication
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
         public const string MESSAGE_INVALID_PASSWORD = "Incorrect Password.";
