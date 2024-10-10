@@ -9,27 +9,31 @@ namespace WorkFlex.Web.Pages.Authen
 {
     public class LoginModel : PageModel
     {
-        public LoginVM LoginVM { get; set; } = null!;
+        private readonly ILogger<LoginModel> _logger;
         private readonly IAuthenService _authenService;
 
-        public LoginModel(IAuthenService authenService)
+        public LoginModel(ILogger<LoginModel> logger, IAuthenService authenService)
         {
+            _logger = logger;
             _authenService = authenService;
         }
+
+        public LoginVM LoginVM { get; set; } = null!;
 
         public IActionResult OnGet()
         {
             var username = HttpContext.Session.GetString(AppConstants.USERNAME);
-            if (username == null) 
+            if (username == null)
                 return Page();
             return RedirectToPage(AppConstants.PAGE_HOME);
-            
         }
 
         public IActionResult OnPost(LoginVM loginVm)
         {
-            var usernameSession = HttpContext.Session.GetString(AppConstants.USERNAME);
+            _logger.LogInformation("[OnPost]: Controller - Start doing authentication for user");
 
+            var usernameSession = HttpContext.Session.GetString(AppConstants.USERNAME);
+            _logger.LogDebug("[OnPost]: Controller - User's old session: {usernameSession}", usernameSession);
             if (!string.IsNullOrEmpty(usernameSession) && usernameSession == loginVm.Username)
             {
                 return RedirectToPage(AppConstants.PAGE_HOME);
@@ -39,33 +43,41 @@ namespace WorkFlex.Web.Pages.Authen
             {
                 try
                 {
-                    var loginDto = _authenService.checkLogin(loginVm);
+                    var loginDto = _authenService.CheckLogin(loginVm);
+                    _logger.LogDebug("[OnPost]: Controller - Authentication information after checking: {loginDto}", loginDto);
                     switch (loginDto!.Result)
                     {
                         case AppConstants.LoginResult.Success:
                             if (loginDto.User != null)
                             {
                                 SetUserSession(loginDto.User);
+                                _logger.LogDebug("[OnPost]: Controller - User's information after checking: {loginDto.User}", loginDto.User);
+                                _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: Authentiaction Success!");
                                 return RedirectToPage(AppConstants.PAGE_HOME);
                             }
                             break;
-                        case AppConstants.LoginResult.InvalidPassword:
-                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
-                            break;
                         case AppConstants.LoginResult.UserNotFound:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_USERNAME;
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_INVALID_USERNAME);
+                            break;
+                        case AppConstants.LoginResult.InvalidPassword:
+                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_INVALID_PASSWORD);
                             break;
                         case AppConstants.LoginResult.AccountLocked:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_ACCOUNT_LOCKED);
                             break;
                         default:
                             TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {}", AppConstants.MESSAGE_FAILED);
                             break;
                     }
                 } 
-                catch
+                catch (Exception ex) 
                 {
                     TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                    _logger.LogError("[OnPost]: Controller - End doing authentication for user with error: {ex}", ex.StackTrace);
                     return Page();
                 }
             }
