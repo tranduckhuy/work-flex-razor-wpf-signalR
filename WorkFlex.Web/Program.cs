@@ -12,7 +12,18 @@ builder.Services.AddRazorPages();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
+builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IConversationService, ConversationService>();
+
+builder.Services.AddAuthentication("AuthScheme")
+    .AddCookie("AuthScheme", options =>
+    {
+        options.LoginPath = "/TestLogin";
+    });
+
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddSession(options =>
 {
@@ -23,7 +34,6 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");

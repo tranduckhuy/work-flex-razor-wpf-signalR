@@ -1,4 +1,4 @@
-﻿namespace WorkFlex.Web.Constants
+namespace WorkFlex.Web.Constants
 {
     public class AppConstants
     {
@@ -19,6 +19,8 @@
             NotMatchPassword,
             Error
         }
+
+        public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
         // Constants for authentication
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
@@ -44,5 +46,11 @@
         public const string PAGE_LOGIN = "/Authen/Login";
         public const string PAGE_JOB_LIST = "/Job/JobList";
         public const string PAGE_JOB_APPLY = "/Job/JobApply";
+
+        // Constants Repository
+        public const string ALL = "All";
+        public const string ANY = "Any";
+        public const string NONE = "None";
+        public const string ANY_WHERE = "Anywhere";
     }
 }

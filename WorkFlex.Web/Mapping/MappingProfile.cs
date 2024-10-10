@@ -1,4 +1,4 @@
-﻿using WorkFlex.Domain.Entities;
+using WorkFlex.Domain.Entities;
 using WorkFlex.Web.DTOs;
 
 namespace WorkFlex.Web.Mapping
@@ -7,7 +7,9 @@ namespace WorkFlex.Web.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Conversation, ConversationDto>().ReverseMap();
+            CreateMap<JobPost, JobListDto>();
         }
     }
 }
