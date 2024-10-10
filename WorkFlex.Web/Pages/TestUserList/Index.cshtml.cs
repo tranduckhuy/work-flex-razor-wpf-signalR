@@ -24,6 +24,7 @@ namespace WorkFlex.Web.Pages.TestUserList
 
             if (string.IsNullOrEmpty(currentUserId))
             {
+                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                 return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 

@@ -30,6 +30,7 @@ namespace WorkFlex.Web.Pages.TestChat
 
                 if (string.IsNullOrEmpty(currentUserId))
                 {
+                    TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                     return RedirectToPage(AppConstants.PAGE_LOGIN);
                 }
 
@@ -55,7 +56,7 @@ namespace WorkFlex.Web.Pages.TestChat
             } catch (Exception ex)
             {
                 _logger.LogError("Error getting conversation: {ex}", ex);
-                return RedirectToPage("/Error/Error");
+                return RedirectToPage(AppConstants.PAGE_ERROR);
             }
         }
     }
