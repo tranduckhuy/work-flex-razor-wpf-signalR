@@ -23,6 +23,7 @@ namespace WorkFlex.Web.Pages.UserChatList
 
             if (string.IsNullOrEmpty(currentUserId))
             {
+                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                 return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 

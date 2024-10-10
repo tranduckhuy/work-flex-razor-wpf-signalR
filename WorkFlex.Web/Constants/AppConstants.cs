@@ -1,4 +1,4 @@
-﻿namespace WorkFlex.Web.Constants
+namespace WorkFlex.Web.Constants
 {
     public class AppConstants
     {
@@ -40,14 +40,19 @@
         // 2. Temp data
         public const string TEMP_DATA_MESSAGE = "Message";
         public const string TEMP_DATA_MESSAGE_REGISTER_SUCCESS = "RegisterMessage";
+        public const string MESSAGE_LOGIN_REQUIRED = "You need to login to access this page.";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";
+        public const string PAGE_ERROR = "/Error/Error";
         public const string PAGE_LOGIN = "/Authen/Login";
+        public const string PAGE_JOB_LIST = "/Job/JobList";
+        public const string PAGE_JOB_APPLY = "/Job/JobApply";
 
         // Constants Repository
         public const string ALL = "All";
         public const string ANY = "Any";
         public const string NONE = "None";
         public const string ANY_WHERE = "Anywhere";
+
     }
 }
