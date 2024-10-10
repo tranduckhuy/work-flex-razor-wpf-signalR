@@ -27,7 +27,10 @@
 
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"
+            integrity="sha384-mU1xC5yC2LldSW74Rj1Ax8wPiLw/28V5eh51uKJMlBbRVsOtUYd4xyzNsgIAJARB"
+            crossorigin="anonymous">
+    </script>
     <script type="text/javascript">
         const userId = '@Model.CurrentUser.Id';
         const otherUserId = '@Model.OtherUser.Id';
@@ -52,7 +55,7 @@
         });
 
         function sendMessage() {
-            const message = document.getElementById("messageInput").value; 
+            const message = document.getElementById("messageInput").value;
             if (message.trim() === "") return;
             connection.invoke("SendMessage", userId, message, otherUserId, conversationId).then(() => {
                 document.getElementById("messageInput").value = "";
