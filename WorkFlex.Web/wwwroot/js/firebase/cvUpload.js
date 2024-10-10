@@ -60,7 +60,6 @@ function uploadFile(callback) {
     }, () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             $('#file-url').val(downloadURL);
-            alert('File uploaded successfully');
             if (callback) callback();
         });
     });

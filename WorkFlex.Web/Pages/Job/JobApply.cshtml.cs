@@ -76,7 +76,7 @@ namespace WorkFlex.Web.Pages.Job
                 return Page();
             } catch (Exception ex)
             {
-                _logger.LogError("Error occurred during applying job. Error: {ex}", ex.Message);
+                _logger.LogError(ex, "Error occurred during applying job.");
                 return RedirectToPage(AppConstants.PAGE_ERROR);
             }
         }
