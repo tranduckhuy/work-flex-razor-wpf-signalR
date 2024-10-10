@@ -101,42 +101,42 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4031),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5073),
                             IndustryName = "Software Development",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4035),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5076),
                             IndustryName = "Artificial Intelligence",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4036),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5077),
                             IndustryName = "Healthcare",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4037),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5078),
                             IndustryName = "Finance",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4037),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5079),
                             IndustryName = "Transportation",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4038),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5079),
                             IndustryName = "Agriculture",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -176,12 +176,12 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("20097e66-9210-4b04-8365-3b1cb9006866"),
-                            ApplicationDate = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4099),
+                            Id = new Guid("70931478-9791-4619-8540-8317b59b6373"),
+                            ApplicationDate = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5152),
                             CvFile = "path/to/cv.pdf",
-                            JobPostId = new Guid("ea258eb5-e60a-4b85-ae2b-3d7824d9bcf2"),
+                            JobPostId = new Guid("80f10e5c-a613-4b33-875d-2eda7f964acd"),
                             Status = 2,
-                            UserId = new Guid("eccac318-06b0-4bf2-b3a7-17d7b53e39b1")
+                            UserId = new Guid("1339d0eb-eea5-4e56-a9f2-fa1cd1e7018e")
                         });
                 });
 
@@ -244,48 +244,48 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ea258eb5-e60a-4b85-ae2b-3d7824d9bcf2"),
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4061),
-                            ExpiredAt = new DateTime(2024, 11, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4063),
+                            Id = new Guid("80f10e5c-a613-4b33-875d-2eda7f964acd"),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5102),
+                            ExpiredAt = new DateTime(2024, 11, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5107),
                             IndustryId = 1,
                             JobDescription = "Looking for a skilled software engineer. Must have experience with C# and .NET Core. Angular experience is a plus.",
                             JobLocation = "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4062),
-                            SalaryRange = "",
+                            ModifiedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5105),
+                            SalaryRange = "1000 - 6000",
                             Status = 0,
                             Title = "Software Engineer",
-                            UserId = new Guid("a09be84a-eca4-4f44-89f0-5e37677a2171")
+                            UserId = new Guid("371e371a-5065-4761-9a86-9727246ac6f9")
                         },
                         new
                         {
-                            Id = new Guid("0412e9a9-06e5-408e-9813-e28578c64017"),
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4074),
-                            ExpiredAt = new DateTime(2024, 11, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4075),
+                            Id = new Guid("30a859af-229d-49ea-8560-c727fdf61263"),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5125),
+                            ExpiredAt = new DateTime(2024, 11, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5125),
                             IndustryId = 2,
                             JobDescription = "Looking for a data scientist to join our AI team. Must have experience with Python, TensorFlow, and Keras.",
                             JobLocation = " 239 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4074),
-                            SalaryRange = "",
+                            ModifiedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5125),
+                            SalaryRange = "100 - 1000",
                             Status = 0,
                             Title = "AI Engineer",
-                            UserId = new Guid("a09be84a-eca4-4f44-89f0-5e37677a2171")
+                            UserId = new Guid("371e371a-5065-4761-9a86-9727246ac6f9")
                         },
                         new
                         {
-                            Id = new Guid("3ef7cabf-9d07-45c0-b094-3277308c44b9"),
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4077),
-                            ExpiredAt = new DateTime(2024, 11, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4078),
+                            Id = new Guid("8c10334e-6f21-450e-a591-73e7ef14e2d4"),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5128),
+                            ExpiredAt = new DateTime(2024, 11, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5129),
                             IndustryId = 3,
                             JobDescription = "We are looking for a nurse to join our team. Must have a nursing degree and at least 2 years of experience.",
                             JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4078),
-                            SalaryRange = "",
+                            ModifiedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5129),
+                            SalaryRange = "100 - 500",
                             Status = 0,
                             Title = "Nurse",
-                            UserId = new Guid("a09be84a-eca4-4f44-89f0-5e37677a2171")
+                            UserId = new Guid("371e371a-5065-4761-9a86-9727246ac6f9")
                         });
                 });
 
@@ -316,21 +316,21 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4010),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5050),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Full Time"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4013),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5054),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Part Time"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(4014),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5055),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Internship"
                         });
@@ -370,30 +370,30 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0cfaadcb-1eec-4284-a16d-c1a4dd40052e"),
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(3985),
+                            Id = new Guid("444d10c5-aff7-4dcd-8a06-036957dae3d4"),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5004),
                             Headline = "Admin Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("e36ecb98-c8d0-43db-ba6d-71efed6a5de2")
+                            UserId = new Guid("fd21841d-db1a-43f3-adfe-152a0516c4c2")
                         },
                         new
                         {
-                            Id = new Guid("946724f7-b12f-4391-ac2d-f9bcbfac8dc6"),
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(3990),
+                            Id = new Guid("9b376bda-c6c7-444d-9dc1-f40570281d36"),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5010),
                             Headline = "Recruiter Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("a09be84a-eca4-4f44-89f0-5e37677a2171")
+                            UserId = new Guid("371e371a-5065-4761-9a86-9727246ac6f9")
                         },
                         new
                         {
-                            Id = new Guid("09d7d5d9-135f-4f0b-b871-f935772e1dba"),
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(3991),
+                            Id = new Guid("c3a2d08b-6227-4dde-83af-291613d1fa5d"),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(5028),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("eccac318-06b0-4bf2-b3a7-17d7b53e39b1")
+                            UserId = new Guid("1339d0eb-eea5-4e56-a9f2-fa1cd1e7018e")
                         });
                 });
 
@@ -502,9 +502,9 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e36ecb98-c8d0-43db-ba6d-71efed6a5de2"),
+                            Id = new Guid("fd21841d-db1a-43f3-adfe-152a0516c4c2"),
                             Avatar = "",
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(3946),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(4957),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             FirstName = "Admin",
@@ -520,9 +520,9 @@ namespace WorkFlex.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a09be84a-eca4-4f44-89f0-5e37677a2171"),
+                            Id = new Guid("371e371a-5065-4761-9a86-9727246ac6f9"),
                             Avatar = "",
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(3959),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(4971),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "recruiter@example.com",
                             FirstName = "Recruiter",
@@ -538,9 +538,9 @@ namespace WorkFlex.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eccac318-06b0-4bf2-b3a7-17d7b53e39b1"),
+                            Id = new Guid("1339d0eb-eea5-4e56-a9f2-fa1cd1e7018e"),
                             Avatar = "",
-                            CreatedAt = new DateTime(2024, 10, 9, 1, 36, 43, 666, DateTimeKind.Utc).AddTicks(3961),
+                            CreatedAt = new DateTime(2024, 10, 10, 3, 2, 1, 669, DateTimeKind.Utc).AddTicks(4974),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jobseeker@example.com",
                             FirstName = "Job",
