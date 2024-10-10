@@ -25,7 +25,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = adminId,
                     Username = "admin",
-                    Password = "admin@@",
+                    Password = "$2a$12$Qj8ov7RydnsbdkZfYAToaumQQIYDCeWcPyUTMeIW4sdhBoFujJHfm",
                     FirstName = "Admin",
                     LastName = "User",
                     Email = "admin@example.com",
@@ -37,7 +37,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = recruiterId,
                     Username = "recruiter",
-                    Password = "recruiter@",
+                    Password = "$2a$12$RbvswLANBzRWrHEvwHJajem0x0uEv10NHZ7rFfdRG1Dn4oSulmavm",
                     FirstName = "Recruiter",
                     LastName = "User",
                     Email = "recruiter@example.com",
@@ -49,7 +49,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = jobSeekerId,
                     Username = "jobseeker",
-                    Password = "jobseeker@@",
+                    Password = "$2a$12$L90P0yqjOYUyP8iuS5YkCe669W9DQnIRqqkzGVw24cJwVTVBhmc3i",
                     FirstName = "Job",
                     LastName = "Seeker",
                     Email = "jobseeker@example.com",
