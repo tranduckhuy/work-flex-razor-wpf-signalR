@@ -1,10 +1,10 @@
-﻿/* global firebase */
+/* global firebase */
 const firebaseConfig = {
     apiKey: "{firebase_apiKey}",
     authDomain: "{firebase_authDomain}",
     projectId: "{firebase_projectId}",
     storageBucket: "{firebase_storageBucket}",
-    messagingSenderId: "{firebase_messagingSenderId}",
+    messagingSenderId: "905377519184",
     appId: "{firebase_appId}",
     measurementId: "{firebase_measurementId}"
 };
@@ -25,6 +25,17 @@ function updateUploadMessage() {
         $fileName.hide();
     }
 }
+function submitForm() {
+    $('.progress-container').show();
+    $('.progress-bar').css('width', '0%');
+
+    uploadFile(function () {
+        $('.progress-bar').css('width', '100%');
+        setTimeout(() => {
+            document.querySelector('form').submit();
+        }, 500);
+    });
+}
 
 function uploadFile(callback) {
     const $fileInput = $('#file-upload');
@@ -38,14 +49,20 @@ function uploadFile(callback) {
     const filename = generateUniqueFilename(file.name);
     const fileRef = storageRef.child('cv/' + filename);
 
-    fileRef.put(file).then((snapshot) => {
-        let downloadURL = snapshot.downloadURL;
-        $('#file-url').val(downloadURL);
-        alert('File uploaded successfully');
-        if (callback) callback();
-    }).catch((error) => {
+    const uploadTask = fileRef.put(file);
+
+    uploadTask.on('state_changed', (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        $('.progress-bar').css('width', progress + '%');
+    }, (error) => {
         console.error('Error uploading file', error);
         alert('Error uploading file');
+    }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            $('#file-url').val(downloadURL);
+            alert('File uploaded successfully');
+            if (callback) callback();
+        });
     });
 }
 
@@ -53,10 +70,4 @@ function generateUniqueFilename(filename) {
     const timestamp = Date.now();
     const hash = Math.random().toString(36).substring(7);
     return `${hash}_${timestamp}_${filename}`;
-}
-
-function submitForm() {
-    uploadFile(function () {
-        document.querySelector('form').submit();
-    });
 }

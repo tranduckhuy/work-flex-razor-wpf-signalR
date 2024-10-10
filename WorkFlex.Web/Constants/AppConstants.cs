@@ -40,6 +40,7 @@ namespace WorkFlex.Web.Constants
         // 2. Temp data
         public const string TEMP_DATA_MESSAGE = "Message";
         public const string TEMP_DATA_MESSAGE_REGISTER_SUCCESS = "RegisterMessage";
+        public const string MESSAGE_LOGIN_REQUIRED = "You need to login to access this page.";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";
         public const string PAGE_ERROR = "/Error/Error";
@@ -52,5 +53,6 @@ namespace WorkFlex.Web.Constants
         public const string ANY = "Any";
         public const string NONE = "None";
         public const string ANY_WHERE = "Anywhere";
+
     }
 }

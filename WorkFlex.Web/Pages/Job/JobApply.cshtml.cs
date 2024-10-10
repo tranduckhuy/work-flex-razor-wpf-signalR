@@ -25,6 +25,13 @@ namespace WorkFlex.Web.Pages.Job
 
         public async Task<IActionResult> OnGetAsync(Guid jobPostId)
         {
+            var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
+            if (currentUserId == null)
+            {
+                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
+                return RedirectToPage(AppConstants.PAGE_LOGIN);
+            }
+
             var jobPost = await _context.JobPosts.FindAsync(jobPostId);
 
             if (jobPost == null)
@@ -42,6 +49,7 @@ namespace WorkFlex.Web.Pages.Job
             var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
             if (currentUserId == null)
             {
+                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                 return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 
