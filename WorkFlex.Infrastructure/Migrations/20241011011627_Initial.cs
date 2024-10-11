@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WorkFlex.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Create : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -235,12 +235,12 @@ namespace WorkFlex.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "IndustryName", "ModifiedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4771), "Software Development", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4775), "Artificial Intelligence", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4775), "Healthcare", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4776), "Finance", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4777), "Transportation", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4778), "Agriculture", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(216), "Software Development", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(219), "Artificial Intelligence", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(220), "Healthcare", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(221), "Finance", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(222), "Transportation", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(223), "Agriculture", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -248,9 +248,9 @@ namespace WorkFlex.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "ModifiedAt", "TypeName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4751), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Full Time" },
-                    { 2, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4754), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Part Time" },
-                    { 3, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4754), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Internship" }
+                    { 1, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(194), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Full Time" },
+                    { 2, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(197), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Part Time" },
+                    { 3, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(197), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Internship" }
                 });
 
             migrationBuilder.InsertData(
@@ -268,9 +268,9 @@ namespace WorkFlex.Infrastructure.Migrations
                 columns: new[] { "Id", "Avatar", "CreatedAt", "DateOfBirth", "Email", "FirstName", "IsActive", "IsLock", "LastName", "Location", "ModifiedAt", "Password", "Phone", "RoleId", "Username" },
                 values: new object[,]
                 {
-                    { new Guid("7b56c415-8ef1-4326-a447-7f218f2d9ae7"), "", new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4691), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@example.com", "Admin", true, false, "User", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$12$Qj8ov7RydnsbdkZfYAToaumQQIYDCeWcPyUTMeIW4sdhBoFujJHfm", "", 1, "admin" },
-                    { new Guid("aa27053b-cb93-4431-bef2-93f82b64199d"), "", new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4695), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "recruiter@example.com", "Recruiter", true, false, "User", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$12$RbvswLANBzRWrHEvwHJajem0x0uEv10NHZ7rFfdRG1Dn4oSulmavm", "", 2, "recruiter" },
-                    { new Guid("baa7eb19-3d45-4883-aac1-496f25b39455"), "", new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4697), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "jobseeker@example.com", "Job", true, false, "Seeker", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$12$L90P0yqjOYUyP8iuS5YkCe669W9DQnIRqqkzGVw24cJwVTVBhmc3i", "", 3, "jobseeker" }
+                    { new Guid("1cfa88e1-9415-469b-bc37-ce589b5eb4c4"), "", new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(127), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "recruiter@example.com", "Recruiter", true, false, "User", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$12$RbvswLANBzRWrHEvwHJajem0x0uEv10NHZ7rFfdRG1Dn4oSulmavm", "", 2, "recruiter" },
+                    { new Guid("28594fc6-c412-4f6b-9167-01424fed979e"), "", new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(123), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@example.com", "Admin", true, false, "User", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$12$Qj8ov7RydnsbdkZfYAToaumQQIYDCeWcPyUTMeIW4sdhBoFujJHfm", "", 1, "admin" },
+                    { new Guid("fa522b5d-245a-4306-94b5-4819a7219bf7"), "", new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(129), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "jobseeker@example.com", "Job", true, false, "Seeker", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$12$L90P0yqjOYUyP8iuS5YkCe669W9DQnIRqqkzGVw24cJwVTVBhmc3i", "", 3, "jobseeker" }
                 });
 
             migrationBuilder.InsertData(
@@ -278,9 +278,9 @@ namespace WorkFlex.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "ExpiredAt", "IndustryId", "JobDescription", "JobLocation", "JobTypeId", "ModifiedAt", "SalaryRange", "Status", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("6a1d9360-e72e-4f4d-97ab-c4fdbeb3ddc1"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4799), new DateTime(2024, 11, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4801), 1, "Looking for a skilled software engineer. Must have experience with C# and .NET Core. Angular experience is a plus.", "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh", 1, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4800), "1000 - 6000", 0, "Software Engineer", new Guid("aa27053b-cb93-4431-bef2-93f82b64199d") },
-                    { new Guid("e5ee4f2d-f5a0-4cd2-b231-f0d473ee5874"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4816), new DateTime(2024, 11, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4817), 3, "We are looking for a nurse to join our team. Must have a nursing degree and at least 2 years of experience.", "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội", 1, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4816), "100 - 500", 0, "Nurse", new Guid("aa27053b-cb93-4431-bef2-93f82b64199d") },
-                    { new Guid("ea009692-7cad-45d9-8078-fb94b3e689ed"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4813), new DateTime(2024, 11, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4814), 2, "Looking for a data scientist to join our AI team. Must have experience with Python, TensorFlow, and Keras.", " 239 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội", 1, new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4813), "100 - 1000", 0, "AI Engineer", new Guid("aa27053b-cb93-4431-bef2-93f82b64199d") }
+                    { new Guid("085dde54-45f3-49e1-bc4a-df85c75ea528"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(267), new DateTime(2024, 11, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(268), 3, "We are looking for a nurse to join our team. Must have a nursing degree and at least 2 years of experience.", "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội", 1, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(267), "100 - 500", 0, "Nurse", new Guid("1cfa88e1-9415-469b-bc37-ce589b5eb4c4") },
+                    { new Guid("6f377b74-f303-410b-ade0-c1639d73e650"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(246), new DateTime(2024, 11, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(248), 1, "Looking for a skilled software engineer. Must have experience with C# and .NET Core. Angular experience is a plus.", "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh", 1, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(247), "1000 - 6000", 0, "Software Engineer", new Guid("1cfa88e1-9415-469b-bc37-ce589b5eb4c4") },
+                    { new Guid("cd2fbad2-a11e-429e-89f0-7a63bb18e605"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(264), new DateTime(2024, 11, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(264), 2, "Looking for a data scientist to join our AI team. Must have experience with Python, TensorFlow, and Keras.", " 239 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội", 1, new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(264), "100 - 1000", 0, "AI Engineer", new Guid("1cfa88e1-9415-469b-bc37-ce589b5eb4c4") }
                 });
 
             migrationBuilder.InsertData(
@@ -288,15 +288,15 @@ namespace WorkFlex.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Headline", "ModifiedAt", "Summary", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("1939f58c-8160-4a67-ad2a-9f78072f2d89"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4725), "Recruiter Profile", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("aa27053b-cb93-4431-bef2-93f82b64199d") },
-                    { new Guid("6b165743-fff0-4906-a553-182b72ebdb75"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4720), "Admin Profile", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("7b56c415-8ef1-4326-a447-7f218f2d9ae7") },
-                    { new Guid("787c4c4f-3eb8-48c8-b333-9a6ffa2b63a1"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4733), "Job Seeker Profile", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("baa7eb19-3d45-4883-aac1-496f25b39455") }
+                    { new Guid("0363ed6b-a985-4449-81ed-4d5564bff5d4"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(151), "Admin Profile", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("28594fc6-c412-4f6b-9167-01424fed979e") },
+                    { new Guid("6eabada4-bcea-4ea4-918d-bd802f14f62e"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(173), "Job Seeker Profile", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("fa522b5d-245a-4306-94b5-4819a7219bf7") },
+                    { new Guid("ee76ee57-6a70-4ab2-a2d8-6cc14b75e9a9"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(171), "Recruiter Profile", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("1cfa88e1-9415-469b-bc37-ce589b5eb4c4") }
                 });
 
             migrationBuilder.InsertData(
                 table: "JobApplications",
                 columns: new[] { "Id", "ApplicationDate", "CvFile", "Description", "JobPostId", "Status", "UserId" },
-                values: new object[] { new Guid("f27c8e6a-dea5-448b-8dff-0fbb9ef1e9f9"), new DateTime(2024, 10, 10, 13, 48, 20, 519, DateTimeKind.Utc).AddTicks(4836), "path/to/cv.pdf", "", new Guid("6a1d9360-e72e-4f4d-97ab-c4fdbeb3ddc1"), 2, new Guid("baa7eb19-3d45-4883-aac1-496f25b39455") });
+                values: new object[] { new Guid("7d3eab29-471e-4c5c-845c-664383766076"), new DateTime(2024, 10, 11, 1, 16, 27, 96, DateTimeKind.Utc).AddTicks(290), "path/to/cv.pdf", "", new Guid("6f377b74-f303-410b-ade0-c1639d73e650"), 2, new Guid("fa522b5d-245a-4306-94b5-4819a7219bf7") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConversationReplies_ConversationId",

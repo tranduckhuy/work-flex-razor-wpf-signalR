@@ -2408,8 +2408,6 @@ function updateInputs (data) {
     
     $inputFrom.prop("value", from);
     $inputTo.prop("value", to);
-
-    $(document).trigger('filterChanged', { from: from, to: to });
 }
 
 $inputFrom.on("input", function () {
