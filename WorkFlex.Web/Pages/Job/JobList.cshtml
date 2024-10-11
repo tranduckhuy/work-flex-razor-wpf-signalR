@@ -223,9 +223,7 @@
 </div>
 <!--Pagination End  -->
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" 
-            integrity="sha384-2ea09851452cba9dc34009b16315a1ea9ab58cb2c94108ff99cbb45aef6786d9fde287c20dbdfbab045dcc6e69ae5de6"
-            crossorigin="anonymous"></script>
+    <script src="~/js/axios.min.js"></script>
     <script>
         function submitFilters() {
             var form = $('#filterForm');
@@ -254,17 +252,18 @@
                     if ($(this).is(':checked')) {
                         value = $(this).closest('label').find('input[type="text"]').val();
 
-                        // Only add to JobType and PostedWithin if the checkbox is checked and the value is not already present
+                        // Only add to JobType if the checkbox is checked and the value is not already present
                         if (value && name === 'Filters.JobType' && !jobListVm.JobType.includes(value)) {
                             jobListVm.JobType.push(value);
+                        }
                     } else {
-                        // If unchecked, remove the value from JobType and PostedWithin if it exists
+                        // If unchecked, remove the value from JobType if it exists
                         value = $(this).closest('label').find('input[type="text"]').val();
                         if (name === 'Filters.JobType') {
                             jobListVm.JobType = jobListVm.JobType.filter(item => item !== value);
                         }
                     }
-                // Check if it is a radio
+                    // Check if it is a radio
                 } else if ($(this).is(':radio')) {
                     // Get value for radio inputs (only if checked)
                     if ($(this).is(':checked')) {
@@ -346,11 +345,6 @@
                 submitFilters(from, to);
             }, 2000);
         }
-
-        // Listen filterChanged event from price_rangs.js
-        $(document).on('filterChanged', function (event, data) {
-            setFilterTimeout(data.from, data.to);
-        });
 
         // Call API provinces
         function renderData(array, selectId) {

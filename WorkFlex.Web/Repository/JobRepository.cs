@@ -23,6 +23,7 @@ namespace WorkFlex.Web.Repository
                 .Include(j => j.JobType)
                 .Include(i => i.Industry)
                 .Include(u => u.User)
+                .Include(ja => ja.JobApplications)
                 .AsQueryable();
 
             // Filter by Job Location
