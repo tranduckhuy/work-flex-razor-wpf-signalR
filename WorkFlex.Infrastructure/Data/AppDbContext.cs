@@ -28,7 +28,7 @@ namespace WorkFlex.Infrastructure.Data
                                 .AddJsonFile("appsettings.json", true, true);
                 IConfigurationRoot configuration = builder.Build();
                 string connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidDataException("Connection string is not found");
-                optionsBuilder.UseSqlite(connectionString);
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 
@@ -42,22 +42,26 @@ namespace WorkFlex.Infrastructure.Data
             modelBuilder.Entity<User>()
                 .HasMany(u => u.JobPosts)
                 .WithOne(jp => jp.User)
-                .HasForeignKey(jp => jp.UserId);
+                .HasForeignKey(jp => jp.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.ConversationReplies)
                 .WithOne(cr => cr.User)
-                .HasForeignKey(cr => cr.UserId);
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.ConversationsAsUserOne)
                 .WithOne(c => c.UserOneNavigation)
-                .HasForeignKey(c => c.UserOne);
+                .HasForeignKey(c => c.UserOne)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.ConversationsAsUserTwo)
                 .WithOne(c => c.UserTwoNavigation)
-                .HasForeignKey(c => c.UserTwo);
+                .HasForeignKey(c => c.UserTwo)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Role>()
                 .HasMany(r => r.Users)
@@ -77,7 +81,8 @@ namespace WorkFlex.Infrastructure.Data
             modelBuilder.Entity<JobPost>()
                 .HasMany(jp => jp.JobApplications)
                 .WithOne(a => a.JobPost)
-                .HasForeignKey(a => a.JobPostId);
+                .HasForeignKey(a => a.JobPostId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             // Seed Data
             modelBuilder.Seed();

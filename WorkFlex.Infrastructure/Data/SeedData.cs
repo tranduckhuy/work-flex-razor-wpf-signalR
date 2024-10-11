@@ -25,7 +25,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = adminId,
                     Username = "admin",
-                    Password = "admin@@",
+                    Password = "$2a$12$Qj8ov7RydnsbdkZfYAToaumQQIYDCeWcPyUTMeIW4sdhBoFujJHfm",
                     FirstName = "Admin",
                     LastName = "User",
                     Email = "admin@example.com",
@@ -37,7 +37,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = recruiterId,
                     Username = "recruiter",
-                    Password = "recruiter@",
+                    Password = "$2a$12$RbvswLANBzRWrHEvwHJajem0x0uEv10NHZ7rFfdRG1Dn4oSulmavm",
                     FirstName = "Recruiter",
                     LastName = "User",
                     Email = "recruiter@example.com",
@@ -49,7 +49,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = jobSeekerId,
                     Username = "jobseeker",
-                    Password = "jobseeker@@",
+                    Password = "$2a$12$L90P0yqjOYUyP8iuS5YkCe669W9DQnIRqqkzGVw24cJwVTVBhmc3i",
                     FirstName = "Job",
                     LastName = "Seeker",
                     Email = "jobseeker@example.com",
@@ -90,6 +90,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = jobPostId,
                     Title = "Software Engineer",
+                    SalaryRange = "1000 - 6000",
                     JobDescription = "Looking for a skilled software engineer. Must have experience with C# and .NET Core. Angular experience is a plus.",
                     JobLocation = "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh",
                     UserId = recruiterId,
@@ -104,6 +105,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = Guid.NewGuid(),
                     Title = "AI Engineer",
+                    SalaryRange = "100 - 1000",
                     JobDescription = "Looking for a data scientist to join our AI team. Must have experience with Python, TensorFlow, and Keras.",
                     JobLocation = " 239 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội",
                     UserId = recruiterId,
@@ -118,6 +120,7 @@ namespace WorkFlex.Infrastructure.Data
                 {
                     Id = Guid.NewGuid(),
                     Title = "Nurse",
+                    SalaryRange = "100 - 500",
                     JobDescription = "We are looking for a nurse to join our team. Must have a nursing degree and at least 2 years of experience.",
                     JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
                     UserId = recruiterId,
