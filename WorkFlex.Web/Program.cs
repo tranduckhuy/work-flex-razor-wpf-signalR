@@ -1,9 +1,13 @@
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Web.Mapping;
 using WorkFlex.Web.Repository;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.Services;
 using WorkFlex.Web.Services.Interface;
+using WorkFlex.Web.Untils.Helper.Interface;
+using WorkFlex.Web.Untils.Helper;
+using WorkFlex.Web.Untils.Mail;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,10 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddTransient<SendMailUtil>();
+builder.Services.AddScoped<IEmailHelper, EmailHelper>();
+
 
 builder.Services.AddAuthentication("AuthScheme")
     .AddCookie("AuthScheme", options =>
@@ -31,6 +39,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+
 
 var app = builder.Build();
 

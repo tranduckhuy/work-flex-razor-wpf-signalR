@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Web.DTOs;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.Services.Interface;
 using WorkFlex.Web.ViewModels;
 using static WorkFlex.Web.Constants.AppConstants;
@@ -145,6 +145,16 @@ namespace WorkFlex.Web.Services
         private static bool IsEmailFormat(string input)
         {
             return input.Contains("@") && input.Contains(".");
+        }
+
+        public bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext)
+        {
+            return _userRepository.SendResetPasswordEmail(userEmail, session, httpContext);
+        }
+
+        public bool ChangePassword(string newPassword, ISession session)
+        {
+            return _userRepository.ResetPassword(newPassword, session);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace WorkFlex.Web.ViewModels
 {
-    public class JobListVM
+    public class JobPostVM
     {
         public string JobLocation { get; set; } = string.Empty;
 

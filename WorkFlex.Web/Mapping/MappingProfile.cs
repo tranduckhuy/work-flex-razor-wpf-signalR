@@ -9,7 +9,7 @@ namespace WorkFlex.Web.Mapping
         {
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Conversation, ConversationDto>().ReverseMap();
-            CreateMap<JobPost, JobListDto>();
+            CreateMap<JobPost, JobPostDto>().ReverseMap();
         }
     }
 }

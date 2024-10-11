@@ -18,9 +18,9 @@ namespace WorkFlex.Web.Pages.Job
             _jobService = jobService;
         }
 
-        public IEnumerable<JobListDto> Jobs { get; set; } = new List<JobListDto>();
+        public IEnumerable<JobPostDto> Jobs { get; set; } = new List<JobPostDto>();
 
-        public JobListVM Filters { get; set; } = null!;
+        public JobPostVM Filters { get; set; } = null!;
 
         public int TotalCount { get; set; }
 
@@ -34,7 +34,7 @@ namespace WorkFlex.Web.Pages.Job
 
         public IEnumerable<JobType> JobTypes { get; set; } = new List<JobType>();
 
-        public async Task<IActionResult> OnGetAsync(JobListVM filters)
+        public async Task<IActionResult> OnGetAsync(JobPostVM filters)
         {
             _logger.LogInformation("[OnGetAsync]: PageModel - Start getting job list data with request data: Req-data: {filters}", filters);
             try

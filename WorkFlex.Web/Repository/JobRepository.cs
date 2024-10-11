@@ -2,7 +2,7 @@
 using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Web.Constants;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Repository
@@ -17,7 +17,7 @@ namespace WorkFlex.Web.Repository
             _appDbContext = appDbContext;
         }
 
-        public async Task<(IEnumerable<JobPost> Jobs, int TotalCount)> GetJobsAsync(JobListVM filters)
+        public async Task<(IEnumerable<JobPost> Jobs, int TotalCount)> GetJobsAsync(JobPostVM filters)
         {
             var query = _appDbContext.JobPosts
                 .Include(j => j.JobType)
@@ -138,6 +138,18 @@ namespace WorkFlex.Web.Repository
         public async Task<IEnumerable<JobType>> GetJobTypesAsync()
         {
             return await _appDbContext.JobTypes.ToListAsync();
+        }
+
+        public async Task<JobPost> GetJobByIdAsync(Guid id)
+        {
+            var jobPost = await _appDbContext.JobPosts
+                .Include(j => j.JobType)
+                .Include(i => i.Industry)
+                .Include(u => u.User)
+                .Include(ja => ja.JobApplications)
+                .FirstOrDefaultAsync(j => j.Id == id);
+
+            return jobPost!;
         }
 
         private static bool TryParseSalaryRange(string salaryRange, out decimal minSalary, out decimal maxSalary)

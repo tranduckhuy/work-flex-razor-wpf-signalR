@@ -1,6 +1,6 @@
 ﻿using WorkFlex.Domain.Entities;
 
-namespace WorkFlex.Web.Repository.Inteface
+namespace WorkFlex.Web.Repository.Interface
 {
     public interface IUserRepository
     {
@@ -11,5 +11,9 @@ namespace WorkFlex.Web.Repository.Inteface
         bool IsEmailExist(string email);
 
         void AddUser(User user);
+
+        bool SendResetPasswordEmail(string userEmail, ISession session, HttpContext httpContext);
+
+        bool ResetPassword(string newPassword, ISession session);
     }
 }
