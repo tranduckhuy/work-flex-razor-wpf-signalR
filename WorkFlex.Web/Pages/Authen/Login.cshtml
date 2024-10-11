@@ -2,8 +2,8 @@
 @model WorkFlex.Web.Pages.Authen.LoginModel
 @{
     Layout = "";
-    var message = TempData["Message"] as string;
-    var registerMessage = TempData["RegisterMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+    var failedMessage = TempData["FailedMessage"] as string;
 }
 
 <!DOCTYPE html>
@@ -35,16 +35,16 @@
 
                     <div class="signin-form">
                         <h2 class="form-title">Sign in</h2>
-                        @if (!string.IsNullOrEmpty(message))
-                        {
-                            <div class="alert alert-danger" role="alert">
-                                @message
-                            </div>
-                        }
-                        @if (!string.IsNullOrEmpty(registerMessage))
+                        @if (!string.IsNullOrEmpty(successMessage))
                         {
                             <div class="alert alert-success" role="alert">
-                                @registerMessage
+                                @successMessage
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(failedMessage))
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @failedMessage
                             </div>
                         }
                         <form method="POST" class="register-form" id="login-form">

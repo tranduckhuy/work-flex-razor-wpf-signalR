@@ -48,10 +48,10 @@
                 <div class="single-job-items mb-50">
                     <div class="job-items">
                         <div class="company-img company-img-details">
-                            <a href="#"><img src="@Model.JobPost.User.Avatar" alt=""></a>
+                            <a href="#!"><img src="@Model.JobPost.User.Avatar" alt="User's Avatar"></a>
                         </div>
                         <div class="job-tittle">
-                            <a href="#">
+                            <a href="#!">
                                 <h4>@Model.JobPost.Title</h4>
                             </a>
                             <ul class="job-details-list">
@@ -83,9 +83,9 @@
                         <h4>Job Overview</h4>
                     </div>
                     <ul>
-                        <li>Posted date: <span>@Model.JobPost.CreatedAt.ToString("dd/MM/yyyy")</span></li>
-                        <li>Status: <span>@Model.JobPost.Status</span></li>
-                        <li>Vacancy: <span>02</span></li>
+                        <li>Posted date: <span>@Model.JobPost.DisplayCreatedAt</span></li>
+                        <li>Location: <span>@Model.JobPost.DisplayBriefLocation</span></li>
+                        <li>Applicants: <span>@Model.JobPost.JobApplications.Count</span></li>
                         <li>Job nature: <span>@Model.JobPost.JobType.TypeName</span></li>
                         <li>Salary: <span>@Model.JobPost.SalaryRange</span></li>
                         <li>Application date: <span>@Model.JobPost.ExpiredAt.ToString("dd/MM/yyyy")</span></li>

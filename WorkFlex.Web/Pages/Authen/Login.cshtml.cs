@@ -57,26 +57,26 @@ namespace WorkFlex.Web.Pages.Authen
                             }
                             break;
                         case AppConstants.LoginResult.UserNotFound:
-                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_USERNAME;
+                            TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_USERNAME;
                             _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_INVALID_USERNAME);
                             break;
                         case AppConstants.LoginResult.InvalidPassword:
-                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
+                            TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
                             _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_INVALID_PASSWORD);
                             break;
                         case AppConstants.LoginResult.AccountLocked:
-                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
+                            TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
                             _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_ACCOUNT_LOCKED);
                             break;
                         default:
-                            TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                            TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
                             _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_FAILED);
                             break;
                     }
                 } 
                 catch (Exception ex) 
                 {
-                    TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                    TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
                     _logger.LogError("[OnPost]: Controller - End doing authentication for user with error: {ex}", ex.StackTrace);
                     return Page();
                 }

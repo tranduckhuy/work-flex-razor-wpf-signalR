@@ -10,6 +10,6 @@ namespace WorkFlex.Web.Services.Interface
 
         Task<IEnumerable<JobType>> GetJobTypesAsync();
 
-        Task<JobPostDto> GetJobByIdAsync(Guid id);
+        Task<JobPostDto?> GetJobByIdAsync(Guid id);
     }
 }

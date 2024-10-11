@@ -2,7 +2,8 @@
 @model WorkFlex.Web.Pages.Authen.RegisterModel
 @{
     Layout = "";
-    var message = TempData["Message"] as string;
+    var failedMessage = TempData["FailedMessage"] as string;
+
 }
 
 <!DOCTYPE html>
@@ -29,10 +30,10 @@
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        @if (!string.IsNullOrEmpty(message))
+                        @if (!string.IsNullOrEmpty(failedMessage))
                         {
                             <div class="alert alert-danger" role="alert">
-                                @message
+                                @failedMessage
                             </div>
                         }
                         <form method="POST" class="register-form" id="register-form">

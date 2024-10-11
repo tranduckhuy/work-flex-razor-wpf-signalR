@@ -15,6 +15,8 @@ namespace WorkFlex.Web.DTOs
 
         public string JobLocation { get; set; } = string.Empty;
 
+        public string DisplayBriefLocation { get; set; } = String.Empty;
+
         public string DisplayCreatedAt { get; set; } = String.Empty;
 
         public DateTime CreatedAt { get; set; }

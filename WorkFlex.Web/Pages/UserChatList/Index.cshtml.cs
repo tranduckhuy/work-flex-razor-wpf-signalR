@@ -23,11 +23,11 @@ namespace WorkFlex.Web.Pages.UserChatList
 
             if (string.IsNullOrEmpty(currentUserId))
             {
-                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                 return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 
-           UserChats = await _conversationService.GetUserChats(currentUserId);
+            UserChats = await _conversationService.GetUserChats(currentUserId);
 
             return Page();
         }

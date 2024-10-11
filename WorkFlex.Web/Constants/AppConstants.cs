@@ -38,7 +38,8 @@ namespace WorkFlex.Web.Constants
         public const string AVATAR = "Avatar";
         public const string ROLE = "Role";
         // 2. Temp data
-        public const string TEMP_DATA_MESSAGE = "Message";
+        public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
+        public const string TEMP_DATA_SUCCESS_MESSAGE = "SuccessMessage";
         public const string TEMP_DATA_MESSAGE_REGISTER_SUCCESS = "RegisterMessage";
         public const string MESSAGE_LOGIN_REQUIRED = "You need to login to access this page.";
         // 3. Pages name (Pages URL)

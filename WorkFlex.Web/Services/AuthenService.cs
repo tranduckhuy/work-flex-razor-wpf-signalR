@@ -146,5 +146,15 @@ namespace WorkFlex.Web.Services
         {
             return input.Contains("@") && input.Contains(".");
         }
+
+        public bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext)
+        {
+            return _userRepository.SendResetPasswordEmail(userEmail, session, httpContext);
+        }
+
+        public bool ChangePassword(string newPassword, ISession session)
+        {
+            return _userRepository.ResetPassword(newPassword, session);
+        }
     }
 }

@@ -30,22 +30,8 @@ namespace WorkFlex.Web.Services
 
                 foreach (var jobDto in jobDtos)
                 {
-                    if (!string.IsNullOrEmpty(jobDto.JobLocation))
-                    {
-                        var jobLocationParts = jobDto.JobLocation.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                        jobDto.JobLocation = jobLocationParts.LastOrDefault()!.Trim();
-                    }
-
-                    var timeDifference = DateTime.UtcNow.Date - jobDto.CreatedAt.Date;
-                    if (timeDifference.TotalDays > 5)
-                    {
-                        jobDto.DisplayCreatedAt = jobDto.CreatedAt.ToString("dd/MM/yyyy");
-                    }
-                    else
-                    {
-                        int daysAgo = (int)timeDifference.TotalDays;
-                        jobDto.DisplayCreatedAt = daysAgo > 0 ? $"{daysAgo} Days Ago" : "Today";
-                    }
+                    jobDto.DisplayBriefLocation = FormatJobLocation(jobDto.JobLocation);
+                    jobDto.DisplayCreatedAt = FormatDisplayCreatedAt(jobDto.CreatedAt);
                 }
                 _logger.LogInformation("[GetJobsAsync]: Service - End getting job list data with data: List-data: {jobDtos}, Total-count: {totalCount}", jobDtos, totalCount);
                 return (jobDtos, totalCount);
@@ -61,10 +47,43 @@ namespace WorkFlex.Web.Services
             return await _jobRepository.GetJobTypesAsync();
         }
 
-        public async Task<JobPostDto> GetJobByIdAsync(Guid id)
+        public async Task<JobPostDto?> GetJobByIdAsync(Guid id)
         {
             var jobPost = await _jobRepository.GetJobByIdAsync(id);
-            return _mapper.Map<JobPostDto>(jobPost);
+            if (jobPost != null)
+            {
+                var jobDto = _mapper.Map<JobPostDto>(jobPost);
+
+                jobDto.DisplayBriefLocation = FormatJobLocation(jobDto.JobLocation);
+                jobDto.DisplayCreatedAt = FormatDisplayCreatedAt(jobDto.CreatedAt);
+
+                return jobDto;
+            }
+            return null;
+        }
+
+        private string FormatJobLocation(string jobLocation)
+        {
+            if (string.IsNullOrEmpty(jobLocation))
+                return jobLocation;
+
+            var jobLocationParts = jobLocation.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            return jobLocationParts.LastOrDefault()?.Trim() ?? string.Empty;
+        }
+
+        private string FormatDisplayCreatedAt(DateTime createdAt)
+        {
+            var timeDifference = DateTime.UtcNow.Date - createdAt.Date;
+
+            if (timeDifference.TotalDays > 5)
+            {
+                return createdAt.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                int daysAgo = (int)timeDifference.TotalDays;
+                return daysAgo > 0 ? $"{daysAgo} Days Ago" : "Today";
+            }
         }
     }
 }

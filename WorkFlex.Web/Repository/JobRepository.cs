@@ -140,6 +140,18 @@ namespace WorkFlex.Web.Repository
             return await _appDbContext.JobTypes.ToListAsync();
         }
 
+        public async Task<JobPost> GetJobByIdAsync(Guid id)
+        {
+            var jobPost = await _appDbContext.JobPosts
+                .Include(j => j.JobType)
+                .Include(i => i.Industry)
+                .Include(u => u.User)
+                .Include(ja => ja.JobApplications)
+                .FirstOrDefaultAsync(j => j.Id == id);
+
+            return jobPost!;
+        }
+
         private static bool TryParseSalaryRange(string salaryRange, out decimal minSalary, out decimal maxSalary)
         {
             minSalary = 0;
@@ -163,15 +175,6 @@ namespace WorkFlex.Web.Repository
                 return minSalary;
             }
             return decimal.MaxValue;
-        }
-
-        public async Task<JobPost?> GetJobByIdAsync(Guid id) // New method
-        {
-            return await _appDbContext.JobPosts
-                .Include(j => j.JobType)
-                .Include(i => i.Industry)
-                .Include(u => u.User)
-                .FirstOrDefaultAsync(j => j.Id == id);
         }
     }
 }
