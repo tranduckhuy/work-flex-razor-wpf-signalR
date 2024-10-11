@@ -3,7 +3,7 @@ using WorkFlex.Domain.Entities;
 
 namespace WorkFlex.Web.DTOs
 {
-    public class JobListDto
+    public class JobPostDto
     {
         public Guid Id { get; set; }
 
@@ -14,6 +14,8 @@ namespace WorkFlex.Web.DTOs
         public string JobDescription { get; set; } = string.Empty;
 
         public string JobLocation { get; set; } = string.Empty;
+
+        public string DisplayBriefLocation { get; set; } = String.Empty;
 
         public string DisplayCreatedAt { get; set; } = String.Empty;
 

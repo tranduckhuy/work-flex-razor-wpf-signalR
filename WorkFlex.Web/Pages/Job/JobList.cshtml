@@ -156,7 +156,8 @@
                             <div id="jobList">
                                 @foreach (var job in Model.Jobs)
                                 {
-                                    <div class="single-job-items mb-30">
+                                    <div class="single-job-items mb-30" style="cursor:pointer;" 
+                                        onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
                                         <div class="job-items">
                                             <div class="company-img">
                                                 <a href="#"><img src="@job.User.Avatar" alt="Recruiter's Avatar'"></a>
@@ -167,7 +168,7 @@
                                                 </a>
                                                 <ul>
                                                     <li>@job.Industry.IndustryName</li>
-                                                    <li><i class="fas fa-map-marker-alt"></i>@job.JobLocation</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>@job.DisplayBriefLocation</li>
                                                     <li>@job.SalaryRange</li>
                                                 </ul>
                                             </div>
@@ -377,5 +378,9 @@
                 submitFilters();
             });
         });
+
+        function goToJobDetail(jobId) {
+            window.location.href = `/Job/JobDetail/${jobId}`;
+        }
     </script>
 }

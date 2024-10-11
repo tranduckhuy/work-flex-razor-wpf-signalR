@@ -28,7 +28,7 @@ namespace WorkFlex.Web.Pages.Job
             var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
             if (currentUserId == null)
             {
-                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                 return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 
@@ -49,7 +49,7 @@ namespace WorkFlex.Web.Pages.Job
             var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
             if (currentUserId == null)
             {
-                TempData[AppConstants.TEMP_DATA_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_LOGIN_REQUIRED;
                 return RedirectToPage(AppConstants.PAGE_LOGIN);
             }
 
