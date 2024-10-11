@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Web.DTOs;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.Services.Interface;
 using WorkFlex.Web.ViewModels;
 
@@ -20,13 +20,13 @@ namespace WorkFlex.Web.Services
             _jobRepository = jobRepository;
         }
 
-        public async Task<(IEnumerable<JobListDto> JobDtos, int TotalCount)> GetJobsAsync(JobListVM filters)
+        public async Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobPostVM filters)
         {
             _logger.LogInformation("[GetJobsAsync]: Service - Start getting job list data");
             try
             {
                 var (jobs, totalCount) = await _jobRepository.GetJobsAsync(filters);
-                var jobDtos = _mapper.Map<IEnumerable<JobListDto>>(jobs);
+                var jobDtos = _mapper.Map<IEnumerable<JobPostDto>>(jobs);
 
                 foreach (var jobDto in jobDtos)
                 {
@@ -59,6 +59,12 @@ namespace WorkFlex.Web.Services
         public async Task<IEnumerable<JobType>> GetJobTypesAsync()
         {
             return await _jobRepository.GetJobTypesAsync();
+        }
+
+        public async Task<JobPostDto> GetJobByIdAsync(Guid id)
+        {
+            var jobPost = await _jobRepository.GetJobByIdAsync(id);
+            return _mapper.Map<JobPostDto>(jobPost);
         }
     }
 }

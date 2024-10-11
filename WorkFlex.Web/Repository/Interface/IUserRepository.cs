@@ -1,6 +1,6 @@
 ﻿using WorkFlex.Domain.Entities;
 
-namespace WorkFlex.Web.Repository.Inteface
+namespace WorkFlex.Web.Repository.Interface
 {
     public interface IUserRepository
     {

@@ -6,8 +6,10 @@ namespace WorkFlex.Web.Services.Interface
 {
     public interface IJobService
     {
-        Task<(IEnumerable<JobListDto> JobDtos, int TotalCount)> GetJobsAsync(JobListVM filters);
+        Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobPostVM filters);
 
         Task<IEnumerable<JobType>> GetJobTypesAsync();
+
+        Task<JobPostDto> GetJobByIdAsync(Guid id);
     }
 }

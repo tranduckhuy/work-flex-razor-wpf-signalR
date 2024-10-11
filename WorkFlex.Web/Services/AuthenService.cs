@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Web.DTOs;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.Services.Interface;
 using WorkFlex.Web.ViewModels;
 using static WorkFlex.Web.Constants.AppConstants;

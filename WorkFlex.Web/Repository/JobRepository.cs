@@ -2,7 +2,7 @@
 using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Web.Constants;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Repository
@@ -17,7 +17,7 @@ namespace WorkFlex.Web.Repository
             _appDbContext = appDbContext;
         }
 
-        public async Task<(IEnumerable<JobPost> Jobs, int TotalCount)> GetJobsAsync(JobListVM filters)
+        public async Task<(IEnumerable<JobPost> Jobs, int TotalCount)> GetJobsAsync(JobPostVM filters)
         {
             var query = _appDbContext.JobPosts
                 .Include(j => j.JobType)
@@ -163,6 +163,15 @@ namespace WorkFlex.Web.Repository
                 return minSalary;
             }
             return decimal.MaxValue;
+        }
+
+        public async Task<JobPost?> GetJobByIdAsync(Guid id) // New method
+        {
+            return await _appDbContext.JobPosts
+                .Include(j => j.JobType)
+                .Include(i => i.Industry)
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(j => j.Id == id);
         }
     }
 }

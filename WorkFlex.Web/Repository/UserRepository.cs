@@ -1,6 +1,6 @@
 ﻿using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
-using WorkFlex.Web.Repository.Inteface;
+using WorkFlex.Web.Repository.Interface;
 
 namespace WorkFlex.Web.Repository
 {
