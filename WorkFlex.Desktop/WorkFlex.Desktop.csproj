@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DataAccess\Assets\placeholder.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="DataAccess\Assets\placeholder.jpg" />
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,18 @@ namespace WorkFlex.Web.Pages.Authen
             _authenService = authenService;
         }
 
+        public IActionResult OnGet()
+        {
+            var token = HttpContext.Session.GetString("ResetToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "Access denied. Please request a password reset email.";
+                return RedirectToPage("Forgot"); 
+            }
+
+            return Page(); 
+        }
+
         public IActionResult OnPost(string newPassword, string confirmPassword)
         {
             if (newPassword != confirmPassword)

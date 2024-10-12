@@ -173,8 +173,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="items-link items-link2 f-right">
-                                            <a href="job_details.html">@job.JobType.TypeName</a>
+                                        <div class="items-link items-link2 f-right" onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
+                                            <a href="#">@job.JobType.TypeName</a>
                                             <span>@job.DisplayCreatedAt</span>
                                         </div>
                                     </div>

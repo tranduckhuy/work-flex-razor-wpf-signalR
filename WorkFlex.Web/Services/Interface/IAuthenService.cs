@@ -18,5 +18,6 @@ namespace WorkFlex.Web.Services.Interface
 
         bool ActivateAccount(string email, string token, ISession session);
 
-	}
+        bool IsAccountLocked(string email);
+    }
 }
