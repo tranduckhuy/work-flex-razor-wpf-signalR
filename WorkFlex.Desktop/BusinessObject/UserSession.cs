@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkFlex.Desktop.BusinessObject.DTO;
 
 namespace WorkFlex.Desktop.BusinessObject
 {
-	public class UserSession
+    public class UserSession
 	{
-		private static UserSession _instance = null;
+		private static UserSession _instance = null!;
 		private static readonly object _lock = new object();
 		public UserDTO CurrentUser { get; private set; } = null!;
 		public static UserSession Instance
@@ -32,7 +33,7 @@ namespace WorkFlex.Desktop.BusinessObject
 		}
 		public void Reset()
 		{
-			CurrentUser = null!;
+			this.CurrentUser = null;
 		}
 	}
 }

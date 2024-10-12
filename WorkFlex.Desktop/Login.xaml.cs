@@ -13,14 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkFlex.Desktop.BusinessObject;
+using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.DataAccess.Repositories;
 
 namespace WorkFlex.Desktop
 {
-	/// <summary>
-	/// Interaction logic for Login.xaml
-	/// </summary>
-	public partial class Login : Window
+    /// <summary>
+    /// Interaction logic for Login.xaml
+    /// </summary>
+    public partial class Login : Window
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly IServiceProvider _serviceProvider;
@@ -44,15 +45,22 @@ namespace WorkFlex.Desktop
 			{
 				string email = EmailTextBox.Text;
 				string password = PasswordBox.Password;
-				var user = await _userRepository.GetByEmailAndPasswordAsync(email, password);
+				var user = await _userRepository.GetByEmailAsync(email);
 				if (user != null)
 				{
-					if (user.RoleId == 2)
+					if (user.RoleId == 2 && !user.IsLock)
 					{
-						UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserDTO>(user));
-						var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
-						mainWindow.Show();
-						this.Hide();
+						if (BCrypt.Net.BCrypt.Verify(password, user.Password))
+						{
+							UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserDTO>(user));
+							var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
+							mainWindow.Show();
+							this.Hide();
+						}
+						else
+						{
+							MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+						}
 					}
 					else
 					{
@@ -61,7 +69,7 @@ namespace WorkFlex.Desktop
 				}
 				else
 				{
-					MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show("Login Error: ", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
 			catch (Exception ex)
