@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.SignalR;
+    using Microsoft.AspNetCore.SignalR;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
 
@@ -30,7 +30,7 @@ namespace WorkFlex.SignalR.Hubs
             var user = await _context.Users.FindAsync(userId);
 
             await Clients.Groups(conversationId.ToString())
-                .SendAsync("ReceiveMessage", userId.ToString().ToUpper(), user?.Username, message, reply.Time);
+                .SendAsync("ReceiveMessage", userId.ToString().ToUpper(), user?.Username, message, user?.Avatar);
         }
 
         public async Task JoinConversation(string conversationId)

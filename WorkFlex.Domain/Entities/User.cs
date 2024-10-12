@@ -8,8 +8,8 @@ namespace WorkFlex.Domain.Entities
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required, StringLength(40)]
-        public string Username { get; set; } = string.Empty;
+        [StringLength(40)]
+        public string? Username { get; set; } = string.Empty;
 
         [Required, StringLength(255)]
         public string Password { get; set; } = string.Empty;

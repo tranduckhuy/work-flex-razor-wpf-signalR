@@ -4,7 +4,7 @@ using WorkFlex.Web.Constants;
 using WorkFlex.Web.Services.Interface;
 using WorkFlex.Web.ViewModels;
 
-namespace WorkFlex.Web.Pages.TestChat
+namespace WorkFlex.Web.Pages.Chat
 {
     public class IndexModel : PageModel
     {
@@ -18,6 +18,7 @@ namespace WorkFlex.Web.Pages.TestChat
         }
 
         public List<ConversationReplyViewModel> Messages { get; set; } = [];
+        public List<UserViewModel> Users { get; set; } = [];
         public UserViewModel CurrentUser { get; set; } = null!;
         public UserViewModel OtherUser { get; set; } = null!;
         public string ConversationId { get; set; } = string.Empty;
@@ -34,20 +35,33 @@ namespace WorkFlex.Web.Pages.TestChat
                     return RedirectToPage(AppConstants.PAGE_LOGIN);
                 }
 
-                var result = await _conversationService.GetConversation(currentUserId, otherUserId);
+                if (otherUserId == Guid.Empty)
+                {
+                    otherUserId = new Guid(currentUserId);
+                }
+
+                var result = await _conversationService.GetConversation(currentUserId, otherUserId).ConfigureAwait(false);
+
+                var currentUserAvatar = HttpContext.Session.GetString(AppConstants.AVATAR);
 
                 CurrentUser = new UserViewModel
                 {
                     Id = new Guid(currentUserId),
                     Username = HttpContext.Session.GetString(AppConstants.USERNAME) ?? string.Empty,
-                    Avatar = HttpContext.Session.GetString(AppConstants.AVATAR) ?? string.Empty
+                    Avatar = string.IsNullOrEmpty(currentUserAvatar) ? AppConstants.DEFAULT_AVATAR : currentUserAvatar
                 };
 
                 OtherUser = new UserViewModel
                 {
                     Id = otherUserId,
-                    Username = result.Item2.Username
+                    Username = result.Item2.Username,
+                    Avatar = result.Item2.Avatar
                 };
+
+                var userChats = await _conversationService.GetUserChats(currentUserId).ConfigureAwait(false);
+
+                Users.Add(CurrentUser);
+                Users.AddRange(userChats);
 
                 ConversationId = result.Item1.Id.ToString();
                 Messages = await _conversationService.GetMessagesForConversation(result.Item1.Id);

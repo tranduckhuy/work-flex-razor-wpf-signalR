@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain;
+using static System.Net.WebRequestMethods;
 
 namespace WorkFlex.Infrastructure.Data
 {
@@ -19,6 +20,7 @@ namespace WorkFlex.Infrastructure.Data
             var adminId = Guid.NewGuid();
             var recruiterId = Guid.NewGuid();
             var jobSeekerId = Guid.NewGuid();
+            var defaultAvatar = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -30,6 +32,7 @@ namespace WorkFlex.Infrastructure.Data
                     LastName = "User",
                     Email = "admin@example.com",
                     RoleId = 1,
+                    Avatar = defaultAvatar,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 },
@@ -42,6 +45,7 @@ namespace WorkFlex.Infrastructure.Data
                     LastName = "User",
                     Email = "recruiter@example.com",
                     RoleId = 2,
+                    Avatar = defaultAvatar,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 },
@@ -54,6 +58,7 @@ namespace WorkFlex.Infrastructure.Data
                     LastName = "Seeker",
                     Email = "jobseeker@example.com",
                     RoleId = 3,
+                    Avatar = defaultAvatar,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 }

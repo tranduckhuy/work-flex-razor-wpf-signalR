@@ -22,18 +22,16 @@ namespace WorkFlex.Web.Services
 
         public async Task<(ConversationDto, UserViewModel)> GetConversation(string userId, Guid otherUserId)
         {
-            if (otherUserId == Guid.Empty)
-            {
-                throw new ArgumentNullException(nameof(otherUserId), "User not found");
-            }
-
             var otherUser = await _context.Users.FindAsync(otherUserId) 
                 ?? throw new ArgumentNullException(nameof(otherUserId), "User not found");
             
-            var othersName = new UserViewModel
+            var othersAccount = new UserViewModel
             {
                 Id = otherUserId,
-                Username = otherUser.FirstName + " " + otherUser.LastName
+                Username = otherUser.FirstName + " " + otherUser.LastName,
+                Avatar = string.IsNullOrEmpty(otherUser.Avatar)
+                         ? AppConstants.DEFAULT_AVATAR
+                         : otherUser.Avatar
             };
 
             var conversation = await _context.Conversations
@@ -54,7 +52,7 @@ namespace WorkFlex.Web.Services
                 await _context.SaveChangesAsync();
             }
 
-            return (_mapper.Map<ConversationDto>(conversation), othersName);
+            return (_mapper.Map<ConversationDto>(conversation), othersAccount);
         }
 
         public async Task<List<ConversationReplyViewModel>> GetMessagesForConversation(Guid conversationId)
@@ -65,8 +63,11 @@ namespace WorkFlex.Web.Services
                                   select new ConversationReplyViewModel
                                   {
                                       UserId = u.Id.ToString(),
-                                      UserName = u.Username,
+                                      UserName = u.FirstName + " " + u.LastName,
                                       Reply = r.Reply,
+                                      Avatar = string.IsNullOrEmpty(u.Avatar)
+                                              ? AppConstants.DEFAULT_AVATAR
+                                              : u.Avatar,
                                       Time = TimeZoneInfo.ConvertTimeFromUtc(r.Time, TimeZoneInfo.Local)
                                   }).ToListAsync();
 
@@ -84,12 +85,15 @@ namespace WorkFlex.Web.Services
 
             var userIds = conversations.Distinct().ToList();
 
+            userIds.Remove(new Guid(currentUserId));
+
             var users = await _context.Users
                 .Where(u => userIds.Contains(u.Id))
                 .Select(u => new
                 {
                     u.Id,
-                    u.Username,
+                    u.FirstName,
+                    u.LastName,
                     Avatar = string.IsNullOrEmpty(u.Avatar)
                             ? AppConstants.DEFAULT_AVATAR
                             : u.Avatar
@@ -99,7 +103,7 @@ namespace WorkFlex.Web.Services
             return users.Select(u => new UserViewModel
             {
                 Id = u.Id,
-                Username = u.Username,
+                Username = u.FirstName + " " + u.LastName,
                 Avatar = u.Avatar
             }).ToList();
         }
