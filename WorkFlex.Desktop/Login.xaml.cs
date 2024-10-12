@@ -1,17 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.DataAccess.Repositories;
@@ -53,9 +42,9 @@ namespace WorkFlex.Desktop
 						if (BCrypt.Net.BCrypt.Verify(password, user.Password))
 						{
 							UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserDTO>(user));
-							var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
-							mainWindow.Show();
-							this.Hide();
+                            var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
+                            mainWindow.Show();
+                            this.Hide();
 						}
 						else
 						{
