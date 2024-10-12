@@ -1,0 +1,164 @@
+@page
+@model WorkFlex.Web.Pages.TestChat.IndexModel
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2 class="text-center">Chat With @Model.OtherUser.Username</h2>
+
+<div class="chatContainer">
+    <div class="messagesList" id="messagesList">
+        @foreach (var message in Model.Messages)
+        {
+            <div class="message @(message.UserId == Model.CurrentUser.Id.ToString().ToUpper() ? "my-message" : "other-message")">
+                <strong>@message.UserName</strong>: @message.Reply <em>(@message.Time)</em>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="inputContainer my-2">
+    <div class="chatboxContainer">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"
+            integrity="sha384-mU1xC5yC2LldSW74Rj1Ax8wPiLw/28V5eh51uKJMlBbRVsOtUYd4xyzNsgIAJARB"
+            crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        const userId = '@Model.CurrentUser.Id';
+        const otherUserId = '@Model.OtherUser.Id';
+        const conversationId = '@Model.ConversationId';
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7178/chathub")
+            .build();
+
+        connection.start().then(function () {
+            connection.invoke("JoinConversation", conversationId);
+        });
+
+        connection.on("ReceiveMessage", function (userId, userName, message, time) {
+            const msg = document.createElement("div");
+            const messageTime = new Date(time).toLocaleString();
+            msg.className = 'message ' + (userId === '@Model.CurrentUser.Id.ToString().ToUpper()' ? 'my-message ' : 'other-message');
+            msg.innerHTML = `<strong>${userName}</strong>: ${message} <em>(${messageTime})</em>`;
+            document.getElementById("messagesList").appendChild(msg);
+
+            scrollToBottom();
+        });
+
+        function sendMessage() {
+            const message = document.getElementById("messageInput").value;
+            if (message.trim() === "") return;
+            connection.invoke("SendMessage", userId, message, otherUserId, conversationId).then(() => {
+                document.getElementById("messageInput").value = "";
+            }).catch((err) => {
+                return console.log(err.toString());
+            });
+        }
+
+        document.getElementById("sendBtn").addEventListener("click", function (event) {
+            sendMessage();
+            event.preventDefault();
+        });
+
+        document.getElementById("messageInput").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+                event.preventDefault();
+            }
+        });
+
+        function scrollToBottom() {
+            const messagesList = document.getElementById("messagesList");
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
+
+        window.onload = scrollToBottom;
+    </script>
+}
+
+<style>
+    .chatContainer {
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        height: 600px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        display: flex;
+    }
+
+    .messagesList {
+        flex-direction: column;
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+    .message {
+        padding: 8px;
+        border-radius: 5px;
+        max-width: 75%;
+        word-wrap: break-word;
+    }
+
+    .my-message {
+        align-self: flex-end;
+        background-color: #0084ff;
+        color: white;
+        text-align: right;
+        margin-left: auto;
+    }
+
+    .other-message {
+        align-self: flex-start;
+        background-color: #f0f0f0;
+        color: black;
+        text-align: left;
+        margin-right: auto;
+    }
+
+    .inputContainer {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .chatboxContainer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    #messageInput {
+        flex: 1;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-right: 5px;
+    }
+
+    #sendBtn {
+        padding: 10px 15px;
+        border-radius: 4px;
+        border: none;
+        background-color: #0084ff;
+        color: white;
+        cursor: pointer;
+    }
+
+        #sendBtn:hover {
+            background-color: #0073e6;
+        }
+</style>
+
