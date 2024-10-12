@@ -13,5 +13,7 @@ namespace WorkFlex.Web.Repository.Interface
         void AddUser(User user);
 
         void UpdateUser(User user);
+
+        bool IsAccountLocked(string email);
     }
 }

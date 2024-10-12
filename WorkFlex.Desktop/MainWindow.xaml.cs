@@ -22,13 +22,10 @@ namespace WorkFlex.Desktop
             _jobPostService = jobPostService;
             InitializeComponent();
         }
-        
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadJobs();
-
         }
 
         private void LoadJobs()

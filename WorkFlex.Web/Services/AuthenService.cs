@@ -267,5 +267,11 @@ namespace WorkFlex.Web.Services
         {
             return input.Contains("@") && input.Contains(".");
         }
+
+        public bool IsAccountLocked(string email)
+        {
+            return _userRepository.IsAccountLocked(email);
+        }
+
     }
 }
