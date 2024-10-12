@@ -29,12 +29,12 @@ namespace WorkFlex.Web.Pages.Authen
             _logger.LogInformation("[OnPost]: Controller - Start add a new user");
             try
             {
-                var registerResult = _authenService.AddUser(registerVm);
+                var registerResult = _authenService.AddUser(registerVm, HttpContext.Session, HttpContext);
                 _logger.LogDebug("[OnPost]: Controller - Register result: {registerResult}", registerResult);
                 switch (registerResult)
                 {
                     case AppConstants.RegisterResult.Success:
-                        TempData[AppConstants.TEMP_DATA_MESSAGE_REGISTER_SUCCESS] = AppConstants.MESSAGE_REGISTER_SUCCESS;
+                        TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_REGISTER_SUCCESS;
                         return RedirectToPage(AppConstants.PAGE_LOGIN);
                     case AppConstants.RegisterResult.EmailExist:
                         TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_EMAIL_EXIST;

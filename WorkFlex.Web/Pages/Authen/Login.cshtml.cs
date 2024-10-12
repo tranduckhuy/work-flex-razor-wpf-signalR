@@ -95,7 +95,36 @@ namespace WorkFlex.Web.Pages.Authen
             return RedirectToPage(AppConstants.PAGE_HOME);
         }
 
-        private void SetUserSession(UserDto user)
+		public IActionResult OnGetActivate(string email, string token)
+		{
+			_logger.LogInformation("[OnGetActivate]: Controller - Start activating account for user {email}", email);
+
+			try
+			{
+				// Call the ActivateAccount method from service
+				bool isActivated = _authenService.ActivateAccount(email, token, HttpContext.Session);
+
+				if (!isActivated)
+				{
+					TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_ACTIVATION_LINK;
+					_logger.LogWarning("[OnGetActivate]: Controller - Activation failed, invalid token or user not found for {email}", email);
+					return Page();
+				}
+
+				TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_ACIVATE_ACCOUNT_SUCCESS;
+				_logger.LogInformation("[OnGetActivate]: Controller - Account activated for user {email}", email);
+			}
+			catch (Exception ex)
+			{
+				TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "An error occurred during activation.";
+				_logger.LogError("[OnGetActivate]: Controller - Error activating account for user {email}. Error: {ex}", email, ex.StackTrace);
+				return Page();
+			}
+
+			return Page();
+		}
+
+		private void SetUserSession(UserDto user)
         {
             HttpContext.Session.SetString(AppConstants.ID, user.Id.ToString());
             HttpContext.Session.SetString(AppConstants.USERNAME, user.Username);

@@ -6,10 +6,12 @@ namespace WorkFlex.Web.Untils.Mail
 {
     public class SendMailUtil
     {
+        private readonly ILogger<SendMailUtil> _logger;
         private MailSettings MailSettings { get; set; }
 
-        public SendMailUtil(IOptions<MailSettings> mailSettings)
+        public SendMailUtil(ILogger<SendMailUtil> logger, IOptions<MailSettings> mailSettings)
         {
+            _logger = logger;
             MailSettings = mailSettings.Value;
         }
 
@@ -36,7 +38,7 @@ namespace WorkFlex.Web.Untils.Mail
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                _logger.LogError("Error occured while sending mail: {e}", e);
                 return "Error " + e.Message;
             }
 
