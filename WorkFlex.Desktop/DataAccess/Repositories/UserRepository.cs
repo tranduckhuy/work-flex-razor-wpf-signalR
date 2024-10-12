@@ -10,9 +10,9 @@ namespace WorkFlex.Desktop.DataAccess.Repositories
 {
 	public class UserRepository : IUserRepository
 	{
-		public async Task<User?> GetByEmailAndPasswordAsync(string email, string password)
+		public async Task<User?> GetByEmailAsync(string email)
 		{
-			return await UserDAO.Instance.GetByEmailAndPasswordAsync(email, password); 
+			return await UserDAO.Instance.GetByEmailAsync(email);
 		}
 	}
 }

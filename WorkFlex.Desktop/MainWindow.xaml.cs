@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 using System.Windows.Controls;
+using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.BusinessObject.Service.Interface;
 using WorkFlex.Desktop.DataAccess.Repositories;
@@ -11,10 +13,12 @@ namespace WorkFlex.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IJobPostService _jobPostService;
+		private readonly IServiceProvider _serviceProvider;
+		private readonly IJobPostService _jobPostService;
 
-        public MainWindow(IJobRepository jobRepository, IJobPostService jobPostService)
+		public MainWindow(IServiceProvider serviceProvider, IJobPostService jobPostService)
         {
+            _serviceProvider = serviceProvider;
             _jobPostService = jobPostService;
             InitializeComponent();
         }
@@ -95,5 +99,29 @@ namespace WorkFlex.Desktop
         {
 
         }
-    }
+
+		private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				if (result == MessageBoxResult.Yes)
+				{
+					var login = _serviceProvider.GetRequiredService<Login>();
+					login.Clear();
+					login.Show();
+					UserSession.Instance.Reset();
+					Hide();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Logout Error: ", "Logout Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
+	}
 }
