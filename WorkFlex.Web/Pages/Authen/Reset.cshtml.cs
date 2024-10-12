@@ -18,7 +18,7 @@ namespace WorkFlex.Web.Pages.Authen
         {
             if (newPassword != confirmPassword)
             {
-                TempData["Message"] = "Passwords do not match.";
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "Passwords do not match!";
                 return RedirectToPage("Reset");
             }
 

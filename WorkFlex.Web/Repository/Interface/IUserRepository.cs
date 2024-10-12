@@ -12,8 +12,6 @@ namespace WorkFlex.Web.Repository.Interface
 
         void AddUser(User user);
 
-        bool SendResetPasswordEmail(string userEmail, ISession session, HttpContext httpContext);
-
-        bool ResetPassword(string newPassword, ISession session);
+        void UpdateUser(User user);
     }
 }

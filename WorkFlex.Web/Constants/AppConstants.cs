@@ -23,13 +23,17 @@ namespace WorkFlex.Web.Constants
         public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
         // Constants for authentication
+        // 1. Success message
+        public const string MESSAGE_REGISTER_SUCCESS = "We have sent an activation email to your account. Please check your inbox.";
+        public const string MESSAGE_ACIVATE_ACCOUNT_SUCCESS = "Account activated successfully. You can now log in.";
+        // 2. Failed message
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
         public const string MESSAGE_INVALID_PASSWORD = "Incorrect Password.";
         public const string MESSAGE_ACCOUNT_LOCKED = "Account Locked.";
-        public const string MESSAGE_REGISTER_SUCCESS = "Register successfully.";
         public const string MESSAGE_EMAIL_EXIST = "Email is already exist.";
         public const string MESSAGE_NOT_MATCH_PASSWORD = "Password and Repeat Password not match.";
-        public const string MESSAGE_FAILED = "Error occurred during execution. Please try again later.";
+        public const string MESSAGE_INVALID_ACTIVATION_LINK = "Invalid activation link.";
+		public const string MESSAGE_FAILED = "Error occurred during execution. Please try again later.";
 
         // Session & Temp data & Pages name constants
         // 1. Session
@@ -40,7 +44,6 @@ namespace WorkFlex.Web.Constants
         // 2. Temp data
         public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
         public const string TEMP_DATA_SUCCESS_MESSAGE = "SuccessMessage";
-        public const string TEMP_DATA_MESSAGE_REGISTER_SUCCESS = "RegisterMessage";
         public const string MESSAGE_LOGIN_REQUIRED = "You need to login to access this page.";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";

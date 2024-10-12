@@ -6,27 +6,31 @@ namespace WorkFlex.Web.Untils.Mail
 {
     public class SendMailUtil
     {
+        private readonly ILogger<SendMailUtil> _logger;
         private MailSettings MailSettings { get; set; }
 
-        public SendMailUtil(IOptions<MailSettings> mailSettings)
+        public SendMailUtil(ILogger<SendMailUtil> logger, IOptions<MailSettings> mailSettings)
         {
+            _logger = logger;
             MailSettings = mailSettings.Value;
         }
 
         public async Task<string> SendMail(MailContent mailContent)
         {
-            var email = new MimeMessage();
+			_logger.LogInformation("[SendMail]: Mail - Start send mail with content: {mailContent}", mailContent);
+			var email = new MimeMessage();
             email.Sender = new MailboxAddress(MailSettings.DisplayName, MailSettings.Email);
             email.From.Add(new MailboxAddress(MailSettings.DisplayName, MailSettings.Email));
             email.To.Add(new MailboxAddress(mailContent.To, mailContent.To));
             email.Subject = mailContent.Subject;
 
-            var builder = new BodyBuilder();
+			var builder = new BodyBuilder();
             builder.HtmlBody = mailContent.Body;
 
             email.Body = builder.ToMessageBody();
+			_logger.LogDebug("[SendMail]: Mail - Email Information: {email}", email);
 
-            using var smtp = new MailKit.Net.Smtp.SmtpClient();
+			using var smtp = new MailKit.Net.Smtp.SmtpClient();
 
             try
             {
@@ -36,12 +40,13 @@ namespace WorkFlex.Web.Untils.Mail
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                _logger.LogError("Error occured while sending mail: {e}", e);
                 return "Error " + e.Message;
             }
+            await smtp.DisconnectAsync(true);
 
-            smtp.Disconnect(true);
-            return "SEND SUCCESSFULLY";
+			_logger.LogInformation("[SendMail]: Mail - End send mail with status: Send Successfully");
+			return "SEND SUCCESSFULLY";
         }
     }
     public class MailContent

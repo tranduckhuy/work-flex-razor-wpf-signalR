@@ -3,5 +3,7 @@
     public interface IEmailHelper
     {
         string RenderBodyResetPassword(string resetLink);
-    }
+
+        string RenderBodyActiveAccount(string activationLink);
+	}
 }
