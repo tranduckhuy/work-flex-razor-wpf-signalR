@@ -15,6 +15,7 @@ namespace WorkFlex.Infrastructure.Data
         public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<ConversationReply> ConversationReplies { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Industry> Industries { get; set; }
         public virtual DbSet<JobPost> JobPosts { get; set; }
         public virtual DbSet<JobType> JobTypes { get; set; }
         public virtual DbSet<JobApplication> JobApplications { get; set; }

@@ -95,7 +95,7 @@ namespace WorkFlex.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Industry");
+                    b.ToTable("Industries");
 
                     b.HasData(
                         new
