@@ -9,6 +9,6 @@ namespace WorkFlex.Desktop.DataAccess.Repositories
 {
 	public interface IUserRepository
 	{
-		Task<User?> GetByEmailAndPasswordAsync(string email, string password);
+		Task<User?> GetByEmailAsync(string email);
 	}
 }

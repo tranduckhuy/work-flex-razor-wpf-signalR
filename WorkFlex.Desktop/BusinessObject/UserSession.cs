@@ -33,7 +33,7 @@ namespace WorkFlex.Desktop.BusinessObject
 		}
 		public void Reset()
 		{
-			CurrentUser = null!;
+			this.CurrentUser = null;
 		}
 	}
 }
