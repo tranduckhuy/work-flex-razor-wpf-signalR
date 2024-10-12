@@ -13,14 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkFlex.Desktop.BusinessObject;
+using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.DataAccess.Repositories;
 
 namespace WorkFlex.Desktop
 {
-	/// <summary>
-	/// Interaction logic for Login.xaml
-	/// </summary>
-	public partial class Login : Window
+    /// <summary>
+    /// Interaction logic for Login.xaml
+    /// </summary>
+    public partial class Login : Window
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly IServiceProvider _serviceProvider;
@@ -49,7 +50,7 @@ namespace WorkFlex.Desktop
 				{
 					if (user.RoleId == 2)
 					{
-						UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserObject>(user));
+						UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserDTO>(user));
 						var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
 						mainWindow.Show();
 						this.Hide();

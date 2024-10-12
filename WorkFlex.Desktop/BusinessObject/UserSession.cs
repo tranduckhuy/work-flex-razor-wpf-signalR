@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkFlex.Desktop.BusinessObject.DTO;
 
 namespace WorkFlex.Desktop.BusinessObject
 {
-	public class UserSession
+    public class UserSession
 	{
-		private static UserSession _instance = null;
+		private static UserSession _instance = null!;
 		private static readonly object _lock = new object();
-		public UserObject CurrentUser { get; private set; } = null!;
+		public UserDTO CurrentUser { get; private set; } = null!;
 		public static UserSession Instance
 		{
 			get
@@ -22,11 +23,11 @@ namespace WorkFlex.Desktop.BusinessObject
 			}
 		}
 
-		public void SetUser(UserObject user)
+		public void SetUser(UserDTO user)
 		{
 			CurrentUser = user;
 		}
-		public UserObject GetUser()
+		public UserDTO GetUser()
 		{
 			return CurrentUser;
 		}
