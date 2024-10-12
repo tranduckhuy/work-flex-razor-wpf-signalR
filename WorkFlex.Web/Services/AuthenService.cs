@@ -95,14 +95,14 @@ namespace WorkFlex.Web.Services
             return _userRepository.IsEmailExist(email);
         }
 
-        public RegisterResult AddUser(RegisterVM registerVM, ISession session, HttpContext httpContext)
+        public RegisterResult AddUser(RegisterVM registerVm, ISession session, HttpContext httpContext)
         {
             _logger.LogInformation("[addUser]: Service - Start add a new user");
             RegisterResult result;
             try
             {
                 // Check Email that exist in DB or not
-                var existingUser = _userRepository.GetUserByEmail(registerVM.Email);
+                var existingUser = _userRepository.GetUserByEmail(registerVm.Email);
                 if (existingUser != null)
                 {
                     result = RegisterResult.EmailExist;
@@ -111,7 +111,7 @@ namespace WorkFlex.Web.Services
                 }
 
                 // Check Password and RePassword must be matching
-                if (registerVM.Password != registerVM.RePassword)
+                if (registerVm.Password != registerVm.RePassword)
                 {
                     result = RegisterResult.NotMatchPassword;
                     _logger.LogInformation("[addUser]: Service - End add a new user with result: {result}", result);
@@ -121,11 +121,11 @@ namespace WorkFlex.Web.Services
                 // if all condition is valid then create a new User
                 var user = new User
                 {
-                    Username = registerVM.Email,
-                    FirstName = registerVM.FirstName,
-                    LastName = registerVM.LastName,
-                    Email = registerVM.Email,
-                    Password = BCrypt.Net.BCrypt.HashPassword(registerVM.Password),
+                    Username = registerVm.Email,
+                    FirstName = registerVm.FirstName,
+                    LastName = registerVm.LastName,
+                    Email = registerVm.Email,
+                    Password = BCrypt.Net.BCrypt.HashPassword(registerVm.Password),
                     IsActive = true,
                     IsLock = true,
                     RoleId = 3,
