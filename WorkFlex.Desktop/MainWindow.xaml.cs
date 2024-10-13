@@ -13,7 +13,7 @@ namespace WorkFlex.Desktop
     {
         private readonly IJobPostService _jobPostService;
 
-        public MainWindow(IJobRepository jobRepository, IJobPostService jobPostService)
+        public MainWindow(IJobPostService jobPostService)
         {
             _jobPostService = jobPostService;
             InitializeComponent();
