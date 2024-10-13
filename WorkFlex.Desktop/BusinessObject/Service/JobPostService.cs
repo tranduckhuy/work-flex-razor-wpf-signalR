@@ -15,8 +15,6 @@ namespace WorkFlex.Desktop.BusinessObject.Service
             _jobRepository = jobRepository;
         }
 
-
-
         public void AddJobPost(JobPostDTO jobPostDto)
         {
             var jobPost = new JobPost
@@ -66,14 +64,14 @@ namespace WorkFlex.Desktop.BusinessObject.Service
             if (jobPost != null)
             {
                 var jobDto = AppMapper.Mapper.Map<JobPostDTO>(jobPost);
-                jobDto.DisplayBriefLocation = FormatJobLocation(jobDto.JobLocation);
-                jobDto.DisplayCreatedAt = FormatDisplayCreatedAt(jobDto.CreatedAt);
+                jobDto.DisplayBriefLocation = DesktopFormatJobLocation(jobDto.JobLocation);
+                jobDto.DisplayCreatedAt = DesktopFormatDisplayCreatedAt(jobDto.CreatedAt);
                 return jobDto; 
             }
             return null;
         }
 
-        private string FormatJobLocation(string jobLocation)
+        private string DesktopFormatJobLocation(string jobLocation)
         {
             if (string.IsNullOrEmpty(jobLocation))
                 return jobLocation;
@@ -82,7 +80,7 @@ namespace WorkFlex.Desktop.BusinessObject.Service
             return jobLocationParts.LastOrDefault()?.Trim() ?? string.Empty;
         }
 
-        private string FormatDisplayCreatedAt(DateTime createdAt)
+        private string DesktopFormatDisplayCreatedAt(DateTime createdAt)
         {
             var timeDifference = DateTime.UtcNow.Date - createdAt.Date;
 
