@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WorkFlex.Domain.Entities;
+﻿using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Web.Repository.Interface;
-using WorkFlex.Web.Untils.Helper.Interface;
-using WorkFlex.Web.Untils.Mail;
 
 namespace WorkFlex.Web.Repository
 {

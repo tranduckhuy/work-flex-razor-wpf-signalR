@@ -177,7 +177,7 @@ namespace WorkFlex.Web.Services
 			}
 
 			var resetToken = Guid.NewGuid().ToString();
-			var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(5);
+			var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(2);
 
 			// Save the token and expiry time in the session
 			session.SetString("ResetToken", resetToken);
@@ -185,7 +185,7 @@ namespace WorkFlex.Web.Services
 			session.SetString("ResetTokenUserEmail", userEmail);
 
 			// Construct the reset link for the email
-			var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset?token={resetToken}";
+			var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset/{resetToken}";
 			var mailContent = new MailContent
 			{
 				To = userEmail,

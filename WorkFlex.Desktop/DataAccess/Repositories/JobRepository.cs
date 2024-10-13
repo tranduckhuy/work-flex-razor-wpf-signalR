@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkFlex.Desktop.DataAccess.DAO;
+﻿using Microsoft.EntityFrameworkCore;
+using WorkFlex.Desktop.DataAccess.Repositories.Interface;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
 
@@ -45,6 +41,17 @@ namespace WorkFlex.Desktop.DataAccess.Repositories
         public IEnumerable<Industry> GetAllIndustries()
         {
             return _context.Industries.ToList();
+        }
+
+        public JobPost? GetJobById(Guid id) 
+        {
+            var jobPost = _context.JobPosts
+                .Include(j => j.JobType)
+                .Include(u => u.User) 
+                .Include(ja => ja.JobApplications) 
+                .FirstOrDefault(j => j.Id == id); 
+
+            return jobPost;
         }
     }
 }

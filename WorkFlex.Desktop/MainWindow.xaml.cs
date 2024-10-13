@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.BusinessObject.Service.Interface;
-using WorkFlex.Desktop.DataAccess.Repositories;
 
 namespace WorkFlex.Desktop
 {
@@ -120,5 +119,25 @@ namespace WorkFlex.Desktop
 		{
 			Application.Current.Shutdown();
 		}
-	}
+
+        private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (listView.SelectedItem is JobPostDTO selectedJob)
+            {
+                if (selectedJob.Id != Guid.Empty)
+                {
+                    var jobDetailWindow = new JobDetail(selectedJob.Id, _jobPostService);
+                    jobDetailWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Job ID is null or empty.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+    }
 }

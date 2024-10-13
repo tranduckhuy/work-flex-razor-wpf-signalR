@@ -105,7 +105,7 @@
                         </Grid.ColumnDefinitions>
                         <ListView MaxHeight="400" x:Name="listView" ScrollViewer.VerticalScrollBarVisibility="Visible"
                                     ScrollViewer.CanContentScroll="False" Width="auto" Grid.Column="0"
-                                    SizeChanged="ListView_SizeChanged" Grid.ColumnSpan="2">
+                                    SizeChanged="ListView_SizeChanged" Grid.ColumnSpan="2" MouseDoubleClick="ListView_MouseDoubleClick">
                             <ListView.View>
                                 <GridView>
                                     <!--<GridViewColumn Header="Job Id" Width="50" DisplayMemberBinding="{Binding Path=Id}"/>-->

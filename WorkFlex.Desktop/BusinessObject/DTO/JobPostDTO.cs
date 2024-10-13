@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WorkFlex.Domain;
+﻿using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 
 namespace WorkFlex.Desktop.BusinessObject.DTO
@@ -22,6 +17,10 @@ namespace WorkFlex.Desktop.BusinessObject.DTO
 
         public string JobLocation { get; set; } = string.Empty;
 
+        public string DisplayBriefLocation { get; set; } = String.Empty;
+
+        public string DisplayCreatedAt { get; set; } = String.Empty;
+
         public int JobTypeId { get; set; }
 
         public Guid UserId { get; set; }
@@ -37,5 +36,8 @@ namespace WorkFlex.Desktop.BusinessObject.DTO
         public JobType JobType { get; set; } = null!;
 
         public Industry Industry { get; set; } = null!;
+
+        public virtual ICollection<JobApplication> JobApplications { get; set; } = [];
+
     }
 }
