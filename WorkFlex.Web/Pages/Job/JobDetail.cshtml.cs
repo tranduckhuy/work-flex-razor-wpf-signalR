@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WorkFlex.Web.DTOs;
 using WorkFlex.Web.Services.Interface;
+using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.Job
 {
@@ -16,16 +17,23 @@ namespace WorkFlex.Web.Pages.Job
 
         public JobPostDto JobPost { get; set; } = null!;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid id, JobPostVM filters)
         {
-            var result = await _jobService.GetJobByIdAsync(id);
-            if (result == null)
+            try
             {
-                return NotFound();
-            }
+                var result = await _jobService.GetJobByIdAsync(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
 
-            JobPost = result;
-            return Page();
+                JobPost = result;
+
+                return Page();
+            } catch (Exception ex)
+            {
+                return Content(ex.ToString());
+            }
         }
     }
 }

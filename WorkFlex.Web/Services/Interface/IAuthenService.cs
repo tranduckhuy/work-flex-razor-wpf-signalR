@@ -6,10 +6,6 @@ namespace WorkFlex.Web.Services.Interface
 {
     public interface IAuthenService
     {
-        LoginDto? CheckLogin(LoginVM loginVm);
-
-        RegisterResult AddUser(RegisterVM registerVm, ISession session, HttpContext httpContext);
-
         bool IsEmailExist(string email);
 
         bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext);
