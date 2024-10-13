@@ -8,7 +8,7 @@ namespace WorkFlex.Domain.Entities
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required, StringLength(40)]
+        [StringLength(40)]
         public string Username { get; set; } = string.Empty;
 
         [Required, StringLength(255)]
@@ -21,7 +21,7 @@ namespace WorkFlex.Domain.Entities
         public string LastName { get; set; } = string.Empty;
 
         [StringLength(255)]
-        public string? Avatar { get; set; } = string.Empty;
+        public string Avatar { get; set; } = string.Empty;
 
         [StringLength(15)]
         public string? Phone { get; set; } = string.Empty;
