@@ -7,22 +7,30 @@ using WorkFlex.Web.Services.Interface;
 using WorkFlex.Web.Untils.Helper.Interface;
 using WorkFlex.Web.Untils.Helper;
 using WorkFlex.Web.Untils.Mail;
+using WorkFlex.Web.Utils.Helper.Interface;
+using WorkFlex.Web.Utils.Helper;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 builder.Services.AddDbContext<AppDbContext>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
+builder.Services.AddScoped<IEmailHelper, EmailHelper>();
+builder.Services.AddScoped<IJobFilterHelper, JobFilterHelper>();
+
+
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<SendMailUtil>();
-builder.Services.AddScoped<IEmailHelper, EmailHelper>();
 
 
 builder.Services.AddAuthentication("AuthScheme")
