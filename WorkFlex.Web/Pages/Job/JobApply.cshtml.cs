@@ -25,6 +25,7 @@ namespace WorkFlex.Web.Pages.Job
 
         public async Task<IActionResult> OnGetAsync(Guid jobPostId)
         {
+
             var currentUserId = HttpContext.Session.GetString(AppConstants.ID);
             if (currentUserId == null)
             {

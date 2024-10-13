@@ -127,7 +127,7 @@ namespace WorkFlex.Web.Pages.Authen
 		private void SetUserSession(UserDto user)
         {
             HttpContext.Session.SetString(AppConstants.ID, user.Id.ToString());
-            HttpContext.Session.SetString(AppConstants.USERNAME, user.Username);
+            HttpContext.Session.SetString(AppConstants.USERNAME, user.FirstName + " " + user.LastName);
             HttpContext.Session.SetString(AppConstants.AVATAR, user.Avatar);
             byte[] roleIdBytes = BitConverter.GetBytes(user.RoleId);
             HttpContext.Session.Set(AppConstants.ROLE, roleIdBytes);

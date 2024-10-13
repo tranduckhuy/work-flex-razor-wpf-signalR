@@ -32,7 +32,7 @@ namespace WorkFlex.Web.Pages.TestUserList
                 .Where(u => u.Id != new Guid(currentUserId))
                 .Select(u => new UserViewModel
                 {
-                    Username = u.Username,
+                    Name = u.FirstName + " " + u.LastName,
                     Id = u.Id,
                     Avatar = string.IsNullOrEmpty(u.Avatar)
                             ? AppConstants.DEFAULT_AVATAR

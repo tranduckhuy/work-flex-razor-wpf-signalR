@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Web.DTOs;
 using WorkFlex.Web.Repository.Interface;
@@ -127,6 +126,7 @@ namespace WorkFlex.Web.Services
                     Email = registerVm.Email,
                     Password = BCrypt.Net.BCrypt.HashPassword(registerVm.Password),
                     IsActive = true,
+                    Avatar = DEFAULT_AVATAR,
                     IsLock = true,
                     RoleId = 3,
                     CreatedAt = DateTime.UtcNow

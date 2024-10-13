@@ -110,7 +110,7 @@ namespace WorkFlex.Desktop
 					Hide();
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				MessageBox.Show("Logout Error: ", "Logout Failed", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
