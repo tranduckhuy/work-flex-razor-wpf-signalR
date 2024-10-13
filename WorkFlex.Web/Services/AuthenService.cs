@@ -54,7 +54,7 @@ namespace WorkFlex.Web.Services
             session.SetString("ResetTokenUserEmail", userEmail);
 
             // Construct the reset link for the email
-            var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset?token={resetToken}";
+            var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset/{resetToken}";
             var mailContent = new MailContent
             {
                 To = userEmail,

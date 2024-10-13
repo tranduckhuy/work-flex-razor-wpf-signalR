@@ -18,6 +18,6 @@ namespace WorkFlex.Web.Services.Interface
 
         LoginDto? CheckLogin(LoginVM loginVm);
 
-        RegisterResult AddUser(RegisterVM registerVm, ISession session, HttpContext httpContext)
+        RegisterResult AddUser(RegisterVM registerVm, ISession session, HttpContext httpContext);
     }
 }
