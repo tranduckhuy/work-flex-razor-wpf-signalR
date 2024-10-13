@@ -32,6 +32,11 @@ namespace WorkFlex.Web.Services
             return _userRepository.IsEmailExist(email);
         }
 
+        public bool IsAccountLocked(string email)
+        {
+            return _userRepository.IsAccountLocked(email);
+        }
+
         public bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext)
         {
             var user = _userRepository.GetUserByEmail(userEmail);
@@ -64,14 +69,10 @@ namespace WorkFlex.Web.Services
 
         public bool ChangePassword(string newPassword, ISession session)
         {
-            var sessionToken = session.GetString("ResetToken");
-            var sessionExpiryTime = session.GetString("ResetTokenExpiryTime");
             var userEmailFromSession = session.GetString("ResetTokenUserEmail");
 
-            // Check if the token or expiry time is invalid or expired
-            if (string.IsNullOrEmpty(sessionToken) ||
-                string.IsNullOrEmpty(sessionExpiryTime) ||
-                DateTime.Parse(sessionExpiryTime) <= DateTime.UtcNow ||
+            // Validate session
+            if (!IsTokenValid(session, "ResetToken", "ResetTokenExpiryTime") ||
                 string.IsNullOrEmpty(userEmailFromSession))
             {
                 return false; // Token is invalid or has expired
@@ -97,19 +98,20 @@ namespace WorkFlex.Web.Services
 
         public bool ActivateAccount(string email, string token, ISession session)
         {
-            var sessionToken = session.GetString("ActivateToken");
-            var sessionExpiryTime = session.GetString("ActivateTokenExpiryTime");
-
-            // Check if the token or expiry time is invalid or expired
-            if (string.IsNullOrEmpty(sessionToken) ||
-                string.IsNullOrEmpty(sessionExpiryTime) ||
-                DateTime.Parse(sessionExpiryTime) <= DateTime.UtcNow ||
-                sessionToken != token)
+            // Validate session
+            if (!IsTokenValid(session, "ActivateToken", "ActivateTokenExpiryTime"))
             {
                 return false; // Token is invalid or has expired
             }
 
+            var sessionToken = session.GetString("ActivateToken");
+
             // Check if user exists and if the token matches
+            if (sessionToken != token)
+            {
+                return false; // Token mismatch
+            }
+
             var user = _userRepository.GetUserByEmail(email);
             if (user == null)
             {
@@ -263,109 +265,20 @@ namespace WorkFlex.Web.Services
             }
 		}
 
-		public bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext)
-		{
-			var user = _userRepository.GetUserByEmail(userEmail);
-			if (user == null)
-			{
-				return false; // User not found
-			}
-
-			var resetToken = Guid.NewGuid().ToString();
-			var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(2);
-
-			// Save the token and expiry time in the session
-			session.SetString("ResetToken", resetToken);
-			session.SetString("ResetTokenExpiryTime", resetTokenExpiryTime.ToString());
-			session.SetString("ResetTokenUserEmail", userEmail);
-
-			// Construct the reset link for the email
-			var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset/{resetToken}";
-			var mailContent = new MailContent
-			{
-				To = userEmail,
-				Subject = "Reset Password",
-				Body = _emailHelper.RenderBodyResetPassword(resetLink)
-			};
-
-			_ = _sendMailUtil.SendMail(mailContent); // Send the email asynchronously
-
-			return true; // Email successfully sent
-		}
-
-		public bool ChangePassword(string newPassword, ISession session)
-		{
-			var sessionToken = session.GetString("ResetToken");
-			var sessionExpiryTime = session.GetString("ResetTokenExpiryTime");
-			var userEmailFromSession = session.GetString("ResetTokenUserEmail");
-
-			// Check if the token or expiry time is invalid or expired
-			if (string.IsNullOrEmpty(sessionToken) ||
-				string.IsNullOrEmpty(sessionExpiryTime) ||
-				DateTime.Parse(sessionExpiryTime) <= DateTime.UtcNow ||
-				string.IsNullOrEmpty(userEmailFromSession))
-			{
-				return false; // Token is invalid or has expired
-			}
-
-			var user = _userRepository.GetUserByEmail(userEmailFromSession);
-			if (user == null)
-			{
-				return false; // User not found
-			}
-
-			// Hash the new password and update the user
-			user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
-			_userRepository.UpdateUser(user); // Save changes
-
-			// Remove token and other session details
-			session.Remove("ResetToken");
-			session.Remove("ResetTokenExpiryTime");
-			session.Remove("ResetTokenUserEmail");
-
-			return true; // Password successfully reset
-		}
-
-		public bool ActivateAccount(string email, string token, ISession session)
-		{
-			var sessionToken = session.GetString("ActivateToken");
-			var sessionExpiryTime = session.GetString("ActivateTokenExpiryTime");
-
-			// Check if the token or expiry time is invalid or expired
-			if (string.IsNullOrEmpty(sessionToken) ||
-				string.IsNullOrEmpty(sessionExpiryTime) ||
-				DateTime.Parse(sessionExpiryTime) <= DateTime.UtcNow ||
-				sessionToken != token)
-			{
-				return false; // Token is invalid or has expired
-			}
-
-			// Check if user exists and if the token matches
-			var user = _userRepository.GetUserByEmail(email);
-			if (user == null)
-			{
-				return false; // User not found
-			}
-
-			// Unlock the account
-			user.IsLock = false;
-			_userRepository.UpdateUser(user);
-
-			// Remove token and other session details
-			session.Remove("ActivateToken");
-			session.Remove("ActivateTokenExpiryTime");
-
-			return true; // Activation successful
-		}
-
-		private static bool IsEmailFormat(string input)
+        private static bool IsEmailFormat(string input)
         {
             return input.Contains("@") && input.Contains(".");
         }
 
-        public bool IsAccountLocked(string email)
+        private bool IsTokenValid(ISession session, string tokenKey, string expiryTimeKey)
         {
-            return _userRepository.IsAccountLocked(email);
+            var sessionToken = session.GetString(tokenKey);
+            var sessionExpiryTime = session.GetString(expiryTimeKey);
+
+            // Check if the token or expiry time is invalid or expired
+            return !string.IsNullOrEmpty(sessionToken) &&
+                   !string.IsNullOrEmpty(sessionExpiryTime) &&
+                   DateTime.Parse(sessionExpiryTime) > DateTime.UtcNow;
         }
 
     }
