@@ -14,9 +14,6 @@ namespace WorkFlex.Web.Services.Interface
 
         bool ActivateAccount(string email, string token, ISession session);
 
-        LoginDto? CheckLogin(LoginVM loginVm);
-
-        RegisterResult AddUser(RegisterVM registerVm, ISession session, HttpContext httpContext);
-
-	}
+        bool IsAccountLocked(string email);
+    }
 }

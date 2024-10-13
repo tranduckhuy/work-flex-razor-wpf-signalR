@@ -32,7 +32,6 @@ builder.Services.AddScoped<IJobFilterHelper, JobFilterHelper>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<SendMailUtil>();
 
-
 builder.Services.AddAuthentication("AuthScheme")
     .AddCookie("AuthScheme", options =>
     {

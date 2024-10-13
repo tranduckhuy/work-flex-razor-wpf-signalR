@@ -23,11 +23,17 @@ namespace WorkFlex.Web.Pages.Authen
             }
 
             var result = _authenService.SendPasswordResetEmail(email, HttpContext.Session, HttpContext);
+            if (_authenService.IsAccountLocked(email))
+            {
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
+                return RedirectToPage("Forgot");
+            }
             if (result)
             {
                 TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = "A reset password request has been sent to your email.";
                 return RedirectToPage("Login");
-            } else
+            }
+            else
             {
                 TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "Failed to send email. Please try again.";
                 return RedirectToPage("Forgot");
