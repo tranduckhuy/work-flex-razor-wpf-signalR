@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -151,8 +152,9 @@ namespace WorkFlex.Desktop
             string minPart = parts.Length > 0 ? parts[0].Trim() : "";
             string maxPart = parts.Length > 1 ? parts[1].Trim() : "";
 
-            minPart = Regex.Replace(minPart, @"^0+", "");
-            maxPart = Regex.Replace(maxPart, @"^0+", "");
+            TimeSpan timeout = TimeSpan.FromMilliseconds(100);
+            minPart = Regex.Replace(minPart, @"^0+", "", RegexOptions.None, timeout);
+            maxPart = Regex.Replace(maxPart, @"^0+", "", RegexOptions.None, timeout);
 
             textBox.Text = $"{minPart} - {maxPart}";
 
