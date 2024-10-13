@@ -14,5 +14,8 @@ namespace WorkFlex.Desktop.BusinessObject.Service.Interface
         IEnumerable<JobType> GetAllJobTypes();
 
         IEnumerable<Industry> GetAllIndustries();
+
+        JobPostDTO? GetJobById(Guid id);
+
     }
 }

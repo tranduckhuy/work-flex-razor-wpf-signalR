@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WorkFlex.Web.Pages.Dashboard
+namespace WorkFlex.Web.Pages.Message
 {
-    public class DashboardModel : PageModel
+    public class MessageModel : PageModel
     {
         public void OnGet()
         {

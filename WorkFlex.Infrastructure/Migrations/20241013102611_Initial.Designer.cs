@@ -259,11 +259,11 @@ namespace WorkFlex.Infrastructure.Migrations
                             JobDescription = "Looking for a skilled software engineer. Must have experience with C# and .NET Core. Angular experience is a plus.",
                             JobLocation = "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 13, 2, 33, 21, 792, DateTimeKind.Utc).AddTicks(4656),
+                            ModifiedAt = new DateTime(2024, 10, 13, 10, 26, 11, 490, DateTimeKind.Utc).AddTicks(8175),
                             SalaryRange = "1000 - 6000",
                             Status = 0,
                             Title = "Software Engineer",
-                            UserId = new Guid("1e8ef2ba-9856-40d4-a092-c4d7feacc586")
+                            UserId = new Guid("4a2dc61d-0120-4e2c-a576-21fc57e26a13")
                         },
                         new
                         {
@@ -274,26 +274,25 @@ namespace WorkFlex.Infrastructure.Migrations
                             JobDescription = "Looking for a data scientist to join our AI team. Must have experience with Python, TensorFlow, and Keras.",
                             JobLocation = " 239 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 13, 2, 33, 21, 792, DateTimeKind.Utc).AddTicks(4672),
+                            ModifiedAt = new DateTime(2024, 10, 13, 10, 26, 11, 490, DateTimeKind.Utc).AddTicks(8193),
                             SalaryRange = "100 - 1000",
                             Status = 0,
                             Title = "AI Engineer",
-                            UserId = new Guid("1e8ef2ba-9856-40d4-a092-c4d7feacc586")
+                            UserId = new Guid("4a2dc61d-0120-4e2c-a576-21fc57e26a13")
                         },
                         new
                         {
                             Id = new Guid("fdfa0abc-39ac-4532-b97b-d22006db0548"),
                             CreatedAt = new DateTime(2024, 10, 13, 2, 33, 21, 792, DateTimeKind.Utc).AddTicks(4675),
-                            ExpiredAt = new DateTime(2024, 11, 13, 2, 33, 21, 792, DateTimeKind.Utc).AddTicks(4676),
                             IndustryId = 3,
                             JobDescription = "We are looking for a nurse to join our team. Must have a nursing degree and at least 2 years of experience.",
                             JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 13, 2, 33, 21, 792, DateTimeKind.Utc).AddTicks(4675),
+                            ModifiedAt = new DateTime(2024, 10, 13, 10, 26, 11, 490, DateTimeKind.Utc).AddTicks(8197),
                             SalaryRange = "100 - 500",
                             Status = 0,
                             Title = "Nurse",
-                            UserId = new Guid("1e8ef2ba-9856-40d4-a092-c4d7feacc586")
+                            UserId = new Guid("4a2dc61d-0120-4e2c-a576-21fc57e26a13")
                         });
                 });
 

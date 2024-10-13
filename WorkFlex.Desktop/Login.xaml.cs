@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.DataAccess.Repositories;
+using WorkFlex.Desktop.DataAccess.Repositories.Interface;
 
 namespace WorkFlex.Desktop
 {

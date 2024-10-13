@@ -11,7 +11,6 @@ namespace WorkFlex.Desktop.BusinessObject
             CreateMap<Industry, IndustryDTO>().ReverseMap();
             CreateMap<JobPost, JobPostDTO>().ReverseMap();
             CreateMap<JobType, JobTypeDTO>().ReverseMap();
-
         }
-	}
+    }
 }

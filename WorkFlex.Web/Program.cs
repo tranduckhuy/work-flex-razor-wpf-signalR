@@ -20,10 +20,10 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IAuthenService, AuthenService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
-builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
-builder.Services.AddTransient<SendMailUtil>();
 builder.Services.AddScoped<IEmailHelper, EmailHelper>();
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddTransient<SendMailUtil>();
 
 builder.Services.AddAuthentication("AuthScheme")
     .AddCookie("AuthScheme", options =>
