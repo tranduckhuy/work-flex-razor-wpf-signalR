@@ -47,14 +47,14 @@ namespace WorkFlex.Web.Pages.Chat
                 CurrentUser = new UserViewModel
                 {
                     Id = new Guid(currentUserId),
-                    Username = HttpContext.Session.GetString(AppConstants.USERNAME) ?? string.Empty,
+                    Name = AppConstants.YOU,
                     Avatar = string.IsNullOrEmpty(currentUserAvatar) ? AppConstants.DEFAULT_AVATAR : currentUserAvatar
                 };
 
                 OtherUser = new UserViewModel
                 {
                     Id = otherUserId,
-                    Username = result.Item2.Username,
+                    Name = result.Item2.Name,
                     Avatar = result.Item2.Avatar
                 };
 

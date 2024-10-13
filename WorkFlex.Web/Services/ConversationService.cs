@@ -28,10 +28,8 @@ namespace WorkFlex.Web.Services
             var othersAccount = new UserViewModel
             {
                 Id = otherUserId,
-                Username = otherUser.FirstName + " " + otherUser.LastName,
-                Avatar = string.IsNullOrEmpty(otherUser.Avatar)
-                         ? AppConstants.DEFAULT_AVATAR
-                         : otherUser.Avatar
+                Name = userId == otherUserId.ToString() ? AppConstants.YOU : otherUser.FirstName + " " + otherUser.LastName,
+                Avatar = otherUser.Avatar
             };
 
             var conversation = await _context.Conversations
@@ -63,11 +61,9 @@ namespace WorkFlex.Web.Services
                                   select new ConversationReplyViewModel
                                   {
                                       UserId = u.Id.ToString(),
-                                      UserName = u.FirstName + " " + u.LastName,
+                                      Name = u.FirstName + " " + u.LastName,
                                       Reply = r.Reply,
-                                      Avatar = string.IsNullOrEmpty(u.Avatar)
-                                              ? AppConstants.DEFAULT_AVATAR
-                                              : u.Avatar,
+                                      Avatar = u.Avatar,
                                       Time = TimeZoneInfo.ConvertTimeFromUtc(r.Time, TimeZoneInfo.Local)
                                   }).ToListAsync();
 
@@ -88,22 +84,12 @@ namespace WorkFlex.Web.Services
             userIds.Remove(new Guid(currentUserId));
 
             var users = await _context.Users
-                .Where(u => userIds.Contains(u.Id))
-                .Select(u => new
-                {
-                    u.Id,
-                    u.FirstName,
-                    u.LastName,
-                    Avatar = string.IsNullOrEmpty(u.Avatar)
-                            ? AppConstants.DEFAULT_AVATAR
-                            : u.Avatar
-                })
-                .ToListAsync();
+                .Where(u => userIds.Contains(u.Id)).ToListAsync();
 
             return users.Select(u => new UserViewModel
             {
                 Id = u.Id,
-                Username = u.FirstName + " " + u.LastName,
+                Name = u.FirstName + " " + u.LastName,
                 Avatar = u.Avatar
             }).ToList();
         }
