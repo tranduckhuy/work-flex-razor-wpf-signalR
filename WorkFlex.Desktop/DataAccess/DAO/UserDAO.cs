@@ -22,10 +22,10 @@ namespace WorkFlex.Desktop.DataAccess.DAO
         public UserDAO()
         {
         }
-		public async Task<User?> GetByEmailAndPasswordAsync(string email, string password)
+		public async Task<User?> GetByEmailAsync(string email)
 		{
 			using var _context = new AppDbContext();
-			return await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == password);
+			return await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
 		}
 
 	}

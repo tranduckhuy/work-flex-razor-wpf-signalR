@@ -7,6 +7,7 @@ using System.Windows;
 using WorkFlex.Desktop.BusinessObject.Service;
 using WorkFlex.Desktop.BusinessObject.Service.Interface;
 using WorkFlex.Desktop.DataAccess.Repositories;
+using WorkFlex.Desktop.DataAccess.Repositories.Interface;
 using WorkFlex.Infrastructure.Data;
 
 namespace WorkFlex.Desktop

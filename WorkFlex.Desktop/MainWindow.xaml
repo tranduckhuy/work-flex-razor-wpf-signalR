@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WorkFlex.Desktop"
         mc:Ignorable="d"
         Title="WindowAdminManager" Height="650" Width="1200"
-        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <DockPanel>
             <!-- Header -->
@@ -25,8 +25,8 @@
                                 Height="30" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Center" 
-                                Margin="0 0 10 0"
-                                Foreground="Black"/>
+                                Margin="0 0 10 0" Click="ButtonLogOut_Click"/>
+                        <!--Click="Button_Logout"/>-->
                     </DockPanel>
                 </Border>
             </Grid>
@@ -131,8 +131,29 @@
                             </ListView>
                         </Grid>
                     </StackPanel>
-                </Grid>
-            </Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="327*"/>
+                            <ColumnDefinition Width="673*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListView MaxHeight="400" x:Name="listView" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                    ScrollViewer.CanContentScroll="False" Width="auto" Grid.Column="0"
+                                    SizeChanged="ListView_SizeChanged" Grid.ColumnSpan="2" MouseDoubleClick="ListView_MouseDoubleClick">
+                            <ListView.View>
+                                <GridView>
+                                    <!--<GridViewColumn Header="Job Id" Width="50" DisplayMemberBinding="{Binding Path=Id}"/>-->
+                                    <GridViewColumn Header="Job Title" Width="150" DisplayMemberBinding="{Binding Path=Title}"/>
+                                    <GridViewColumn Header="Salary Range" Width="150" DisplayMemberBinding="{Binding Path=SalaryRange}"/>
+                                    <GridViewColumn Header="Job Location" Width="150" DisplayMemberBinding="{Binding Path=JobLocation}"/>
+                                    <GridViewColumn Header="Job Description" Width="200" DisplayMemberBinding="{Binding Path=JobDescription}"/>
+                                    <GridViewColumn Header="Created At" Width="150" DisplayMemberBinding="{Binding Path=CreatedAt, StringFormat=dd/MM/yyyy}"/>
+                                    <GridViewColumn Header="Expired At" Width="150" DisplayMemberBinding="{Binding Path=ExpiredAt, StringFormat=dd/MM/yyyy}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </StackPanel>
+            </Grid>
         </DockPanel>
     </Grid>
 </Window>

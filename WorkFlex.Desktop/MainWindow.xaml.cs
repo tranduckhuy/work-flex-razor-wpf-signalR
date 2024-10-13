@@ -1,8 +1,9 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 using System.Windows.Controls;
+using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.BusinessObject.Service.Interface;
-using WorkFlex.Desktop.DataAccess.Repositories;
 
 namespace WorkFlex.Desktop
 {
@@ -11,20 +12,19 @@ namespace WorkFlex.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IJobPostService _jobPostService;
+		private readonly IServiceProvider _serviceProvider;
+		private readonly IJobPostService _jobPostService;
 
-        public MainWindow(IJobPostService jobPostService)
+		public MainWindow(IServiceProvider serviceProvider, IJobPostService jobPostService)
         {
+            _serviceProvider = serviceProvider;
             _jobPostService = jobPostService;
             InitializeComponent();
         }
-        
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadJobs();
-
         }
 
         private void LoadJobs()
@@ -94,6 +94,50 @@ namespace WorkFlex.Desktop
         private void Button_Search(object sender, RoutedEventArgs e)
         {
 
+        }
+
+		private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				if (result == MessageBoxResult.Yes)
+				{
+					var login = _serviceProvider.GetRequiredService<Login>();
+					login.Clear();
+					login.Show();
+					UserSession.Instance.Reset();
+					Hide();
+				}
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Logout Error: ", "Logout Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
+
+        private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (listView.SelectedItem is JobPostDTO selectedJob)
+            {
+                if (selectedJob.Id != Guid.Empty)
+                {
+                    var jobDetailWindow = new JobDetail(selectedJob.Id, _jobPostService);
+                    jobDetailWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Job ID is null or empty.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

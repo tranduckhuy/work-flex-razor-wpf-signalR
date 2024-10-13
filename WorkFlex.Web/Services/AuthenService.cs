@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Web.DTOs;
 using WorkFlex.Web.Repository.Interface;
@@ -127,6 +126,7 @@ namespace WorkFlex.Web.Services
                     Email = registerVm.Email,
                     Password = BCrypt.Net.BCrypt.HashPassword(registerVm.Password),
                     IsActive = true,
+                    Avatar = DEFAULT_AVATAR,
                     IsLock = true,
                     RoleId = 3,
                     CreatedAt = DateTime.UtcNow
@@ -177,7 +177,7 @@ namespace WorkFlex.Web.Services
 			}
 
 			var resetToken = Guid.NewGuid().ToString();
-			var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(5);
+			var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(2);
 
 			// Save the token and expiry time in the session
 			session.SetString("ResetToken", resetToken);
@@ -185,7 +185,7 @@ namespace WorkFlex.Web.Services
 			session.SetString("ResetTokenUserEmail", userEmail);
 
 			// Construct the reset link for the email
-			var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset?token={resetToken}";
+			var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset/{resetToken}";
 			var mailContent = new MailContent
 			{
 				To = userEmail,
@@ -267,5 +267,11 @@ namespace WorkFlex.Web.Services
         {
             return input.Contains("@") && input.Contains(".");
         }
+
+        public bool IsAccountLocked(string email)
+        {
+            return _userRepository.IsAccountLocked(email);
+        }
+
     }
 }
