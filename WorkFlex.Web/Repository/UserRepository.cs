@@ -1,4 +1,5 @@
-﻿using WorkFlex.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Web.Repository.Interface;
 using WorkFlex.Web.Untils.Helper.Interface;
@@ -41,5 +42,17 @@ namespace WorkFlex.Web.Repository
 			_appDbContext.Update(user);
 			_appDbContext.SaveChanges();
 		}
+
+        public bool IsAccountLocked(string email)
+        {
+            var user = _appDbContext.Users.SingleOrDefault(u => u.Email == email);
+
+            if (user == null)
+            {
+                return false; 
+            }
+
+            return user.IsLock; 
+        }
     }
 }
