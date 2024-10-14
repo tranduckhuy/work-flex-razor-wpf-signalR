@@ -91,6 +91,7 @@
                     </ul>
                     <div class="apply-btn2">
                         <a asp-page="/Job/JobApply" asp-route-jobPostId="@Model.JobPost.Id" class="btn">Apply Now</a>
+                        <a asp-page="/Chat/Index" asp-route-otherUserId="@Model.JobPost.User.Id" class="ml-2 btn head-btn2" style="padding: 26px 44px;">Chat</a>
                     </div>
                 </div>
             </div>
