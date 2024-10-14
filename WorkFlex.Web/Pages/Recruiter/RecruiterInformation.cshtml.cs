@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WorkFlex.Web.Pages.Dashboard
+namespace WorkFlex.Web.Pages.Recruiter
 {
-    public class DashboardModel : PageModel
+    public class RecruiterInformationModel : PageModel
     {
         public IActionResult OnGet()
         {

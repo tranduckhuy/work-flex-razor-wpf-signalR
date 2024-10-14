@@ -42,7 +42,9 @@ namespace WorkFlex.Web.Constants
         // 1. Session
         public const string ID = "Id";
         public const string USERNAME = "Username";
+        public const string NAME = "Name";
         public const string AVATAR = "Avatar";
+        public const string LOCATION= "Location";
         public const string ROLE = "Role";
         // 2. Temp data
         public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
@@ -54,6 +56,7 @@ namespace WorkFlex.Web.Constants
         public const string PAGE_LOGIN = "/Authen/Login";
         public const string PAGE_JOB_LIST = "/Job/JobList";
         public const string PAGE_JOB_APPLY = "/Job/JobApply";
+        public const string PAGE_DASHBOARD = "/Dashboard/Dashboard";
 
         // Constants Repository
         public const string ALL = "All";

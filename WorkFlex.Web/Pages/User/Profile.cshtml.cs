@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WorkFlex.Web.Pages.Dashboard
+namespace WorkFlex.Web.Pages.User
 {
-    public class DashboardModel : PageModel
+    public class ProfileModel : PageModel
     {
         public IActionResult OnGet()
         {
