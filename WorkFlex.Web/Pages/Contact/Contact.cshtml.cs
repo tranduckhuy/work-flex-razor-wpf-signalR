@@ -1,12 +1,13 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WorkFlex.Web.Pages.Contact
 {
     public class ContactModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            throw new NotImplementedException();
+            return Page();
         }
     }
 }

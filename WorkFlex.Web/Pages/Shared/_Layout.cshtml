@@ -61,8 +61,12 @@
                                         <ul id="navigation">
                                             <li><a href="~/">Home</a></li>
                                             <li><a asp-page="/Job/JobList">Find a Jobs </a></li>
-                                            <li><a href="~/">About</a></li>
-                                            <li><a href="~/">Contact</a></li>
+                                            <li><a href="/About/About">About</a></li>
+                                            <li><a href="/Contact/Contact">Contact</a></li>
+                                            @if (isLoggedIn)
+                                            {
+                                                <li><a href="~/">Recruiter account</a></li>
+                                            }
                                         </ul>
                                     </nav>
                                 </div>
@@ -78,7 +82,7 @@
                                 {
                                     <!-- Header actions and avatar -->
                                     <div class="header-action">
-                                        <a href="~/" class="header__msg-btn">
+                                        <a href="/Chat/Index" class="header__msg-btn">
                                             <i class="fas fa-comments"></i>
                                         </a>
                                         <div class="header__avt-block">
