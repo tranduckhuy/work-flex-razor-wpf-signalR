@@ -1,5 +1,7 @@
-﻿using WorkFlex.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Data;
+using WorkFlex.Web.DTOs;
 using WorkFlex.Web.Repository.Inteface;
 
 namespace WorkFlex.Web.Repository
@@ -32,6 +34,27 @@ namespace WorkFlex.Web.Repository
         {
             _appDbContext.Users.Add(user);
             _appDbContext.SaveChanges();
+        }
+
+        //Get All Users
+        public async Task<IEnumerable<UserDTO>> GetAllUsersAsync()
+        {
+            return await _appDbContext.Users
+                .Select(u => new UserDTO
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Avatar = u.Avatar,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Phone = u.Phone,
+                    Email = u.Email,
+                    Location = u.Location,
+                    DateOfBirth = u.DateOfBirth,
+                    RoleId = u.RoleId,
+                    IsLock = u.IsLock
+                })
+                .ToListAsync();
         }
     }
 }

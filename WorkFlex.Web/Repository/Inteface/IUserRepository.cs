@@ -1,4 +1,5 @@
 ﻿using WorkFlex.Domain.Entities;
+using WorkFlex.Web.DTOs;
 
 namespace WorkFlex.Web.Repository.Inteface
 {
@@ -11,5 +12,7 @@ namespace WorkFlex.Web.Repository.Inteface
         bool isEmailExist(string email);
 
         void addUser(User user);
+
+        Task<IEnumerable<UserDTO>> GetAllUsersAsync();
     }
 }
