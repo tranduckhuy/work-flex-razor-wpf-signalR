@@ -6,6 +6,9 @@ namespace WorkFlex.Web.Untils.Helper
     {
         public string ExtractCityProvince(string fullAddress)
         {
+            if (string.IsNullOrEmpty(fullAddress) || fullAddress == null)
+                return "";
+
             string[] addressParts = fullAddress.Split(',');
 
             int maxIndex = Math.Min(5, addressParts.Length - 1);

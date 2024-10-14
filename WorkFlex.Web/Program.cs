@@ -9,36 +9,51 @@ using WorkFlex.Web.Untils.Helper;
 using WorkFlex.Web.Untils.Mail;
 using WorkFlex.Web.Utils.Helper.Interface;
 using WorkFlex.Web.Utils.Helper;
+using WorkFlex.Web.AuthenticationFilter;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+	options.Conventions.AddFolderApplicationModelConvention("/Dashboard", model =>
+	{
+		model.Filters.Add(new Filter());
+	});
 
+	options.Conventions.AddFolderApplicationModelConvention("/User", model =>
+    {
+        model.Filters.Add(new Filter());
+    });
+
+	options.Conventions.AddFolderApplicationModelConvention("/Recruiter", model =>
+	{
+		model.Filters.Add(new Filter());
+	});
+});
+
+// Mapper Register
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+// DBContext Register
 builder.Services.AddDbContext<AppDbContext>();
 
+// Repositories Register
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
+// Services Register
 builder.Services.AddScoped<IAuthenService, AuthenService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
+// Helpers Register
 builder.Services.AddScoped<IEmailHelper, EmailHelper>();
 builder.Services.AddScoped<IJobFilterHelper, JobFilterHelper>();
+builder.Services.AddScoped<IAddressHelper, AddressHelper>();
 
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<SendMailUtil>();
-
-builder.Services.AddAuthentication("AuthScheme")
-    .AddCookie("AuthScheme", options =>
-    {
-        options.LoginPath = "/TestLogin";
-    });
-
-builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddSession(options =>
 {

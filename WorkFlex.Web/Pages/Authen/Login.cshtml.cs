@@ -4,6 +4,7 @@ using WorkFlex.Web.ViewModels;
 using WorkFlex.Web.Services.Interface;
 using WorkFlex.Web.DTOs;
 using WorkFlex.Web.Constants;
+using WorkFlex.Web.Untils.Helper.Interface;
 
 namespace WorkFlex.Web.Pages.Authen
 {
@@ -11,11 +12,13 @@ namespace WorkFlex.Web.Pages.Authen
     {
         private readonly ILogger<LoginModel> _logger;
         private readonly IAuthenService _authenService;
+        private readonly IAddressHelper _addressHelper;
 
-        public LoginModel(ILogger<LoginModel> logger, IAuthenService authenService)
+        public LoginModel(ILogger<LoginModel> logger, IAuthenService authenService, IAddressHelper addressHelper)
         {
             _logger = logger;
             _authenService = authenService;
+            _addressHelper = addressHelper;
         }
 
         public LoginVM LoginVM { get; set; } = null!;
@@ -53,6 +56,8 @@ namespace WorkFlex.Web.Pages.Authen
                                 SetUserSession(loginDto.User);
                                 _logger.LogDebug("[OnPost]: Controller - User's information after checking: {user}", loginDto.User);
                                 _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: Authentiaction Success!");
+                                if (loginDto.User.RoleId == 1)
+                                    return RedirectToPage(AppConstants.PAGE_DASHBOARD);
                                 return RedirectToPage(AppConstants.PAGE_HOME);
                             }
                             break;
@@ -76,6 +81,8 @@ namespace WorkFlex.Web.Pages.Authen
                 } 
                 catch (Exception ex) 
                 {
+                    // Remove all session if got error while logging
+                    OnGetLogout();
                     TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
                     _logger.LogError("[OnPost]: Controller - End doing authentication for user with error: {ex}", ex.StackTrace);
                     return Page();
@@ -89,7 +96,9 @@ namespace WorkFlex.Web.Pages.Authen
         {
             HttpContext.Session.Remove(AppConstants.ID);
             HttpContext.Session.Remove(AppConstants.USERNAME);
+            HttpContext.Session.Remove(AppConstants.NAME);
             HttpContext.Session.Remove(AppConstants.AVATAR);
+            HttpContext.Session.Remove(AppConstants.LOCATION);
             HttpContext.Session.Remove(AppConstants.ROLE);
 
             return RedirectToPage(AppConstants.PAGE_HOME);
@@ -127,8 +136,10 @@ namespace WorkFlex.Web.Pages.Authen
 		private void SetUserSession(UserDto user)
         {
             HttpContext.Session.SetString(AppConstants.ID, user.Id.ToString());
-            HttpContext.Session.SetString(AppConstants.USERNAME, user.FirstName + " " + user.LastName);
+            HttpContext.Session.SetString(AppConstants.USERNAME, user.Username);
+            HttpContext.Session.SetString(AppConstants.NAME, user.FirstName + " " + user.LastName);
             HttpContext.Session.SetString(AppConstants.AVATAR, user.Avatar);
+            HttpContext.Session.SetString(AppConstants.LOCATION, _addressHelper.ExtractCityProvince(user.Location));
             byte[] roleIdBytes = BitConverter.GetBytes(user.RoleId);
             HttpContext.Session.Set(AppConstants.ROLE, roleIdBytes);
         }
