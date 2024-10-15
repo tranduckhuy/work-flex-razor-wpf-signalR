@@ -1,7 +1,4 @@
-﻿using WorkFlex.Web.DTOs;
-using WorkFlex.Web.ViewModels;
-using static WorkFlex.Web.Constants.AppConstants;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using WorkFlex.Services.DTOs;
 using static WorkFlex.Infrastructure.Constants.AppConstants;
 
