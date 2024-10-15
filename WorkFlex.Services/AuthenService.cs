@@ -19,7 +19,14 @@ namespace WorkFlex.Services.Services
 		private readonly IEmailHelper _emailHelper;
 		private readonly SendMailUtil _sendMailUtil;
 
-		public AuthenService(ILogger<AuthenService> logger, IUserRepository userRepository, IEmailHelper emailHelper, SendMailUtil sendMailUtil)
+        private const string RESET_TOKEN = "ResetToken";
+        private const string RESET_TOKEN_EXPIRY_TIME = "ResetTokenExpiryTime";
+        private const string RESET_TOKEN_USER_EMAIL = "ResetTokenUserEmail";
+
+        private const string ACTIVATE_TOKEN = "ActivateToken";
+        private const string ACTIVATE_TOKEN_EXPIRY_TIME = "ActivateTokenExpiryTime";
+
+		public AuthenService(IMapper mapper, ILogger<AuthenService> logger, IUserRepository userRepository, IEmailHelper emailHelper, SendMailUtil sendMailUtil)
         {
             _logger = logger;
             _userRepository = userRepository;
@@ -37,96 +44,75 @@ namespace WorkFlex.Services.Services
             return _userRepository.IsAccountLocked(email);
         }
 
-        public bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext)
+        public bool SendMailResetEmail(string userEmail, ISession session, HttpContext httpContext)
         {
-            var user = _userRepository.GetUserByEmail(userEmail);
-            if (user == null)
+            try
             {
-                return false; // User not found
+				var user = _userRepository.GetUserByEmail(userEmail);
+				if (user == null)
+				{
+					return false; // User not found
+				}
+
+				var resetToken = Guid.NewGuid().ToString();
+				var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(5);
+
+				// Save the token and expiry time in the session
+				session.SetString(RESET_TOKEN, resetToken);
+				session.SetString(RESET_TOKEN_EXPIRY_TIME, resetTokenExpiryTime.ToString());
+				session.SetString(RESET_TOKEN_USER_EMAIL, userEmail);
+
+				// Construct the reset link for the email
+				var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset/{resetToken}";
+				var mailContent = new MailContent
+				{
+					To = userEmail,
+					Subject = "Reset Password",
+					Body = _emailHelper.RenderBodyResetPassword(resetLink)
+				};
+
+				_ = _sendMailUtil.SendMail(mailContent); // Send the email asynchronously
+
+				return true; // Email successfully sent
+			} catch
+            {
+                return false;
             }
-
-            var resetToken = Guid.NewGuid().ToString();
-            var resetTokenExpiryTime = DateTime.UtcNow.AddMinutes(5);
-
-            // Save the token and expiry time in the session
-            session.SetString("ResetToken", resetToken);
-            session.SetString("ResetTokenExpiryTime", resetTokenExpiryTime.ToString());
-            session.SetString("ResetTokenUserEmail", userEmail);
-
-            // Construct the reset link for the email
-            var resetLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Reset/{resetToken}";
-            var mailContent = new MailContent
-            {
-                To = userEmail,
-                Subject = "Reset Password",
-                Body = _emailHelper.RenderBodyResetPassword(resetLink)
-            };
-
-            _ = _sendMailUtil.SendMail(mailContent); // Send the email asynchronously
-
-            return true; // Email successfully sent
         }
 
         public bool ChangePassword(string newPassword, ISession session)
         {
-            var userEmailFromSession = session.GetString("ResetTokenUserEmail");
-
-            // Validate session
-            if (!IsTokenValid(session, "ResetToken", "ResetTokenExpiryTime") ||
-                string.IsNullOrEmpty(userEmailFromSession))
+            try
             {
-                return false; // Token is invalid or has expired
-            }
+				var sessionToken = session.GetString(RESET_TOKEN);
+				var sessionTokenExpiryTime = session.GetString(RESET_TOKEN_EXPIRY_TIME);
+				var sessionUserEmail = session.GetString(RESET_TOKEN_USER_EMAIL);
+				var user = _userRepository.GetUserByEmail(sessionUserEmail!);
 
-            var user = _userRepository.GetUserByEmail(userEmailFromSession);
-            if (user == null)
+				// Validate session: check token existence, expiry time, and user email
+				if (string.IsNullOrEmpty(sessionToken) || 
+                    string.IsNullOrEmpty(sessionTokenExpiryTime) || 
+                    string.IsNullOrEmpty(sessionUserEmail) ||
+                    user == null ||
+					DateTime.Parse(sessionTokenExpiryTime!) > DateTime.UtcNow)
+				{
+					return false; // Token is invalid, expired, user email is empty or user is not found
+				}
+
+				// Hash the new password and update the user
+				user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+				_userRepository.UpdateUser(user); // Save changes
+
+				// Remove token and other session details
+				session.Remove(RESET_TOKEN);
+				session.Remove(RESET_TOKEN_EXPIRY_TIME);
+				session.Remove(RESET_TOKEN_USER_EMAIL);
+
+				return true; // Password successfully reset
+			} catch
             {
-                return false; // User not found
+                return false;
             }
-
-            // Hash the new password and update the user
-            user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
-            _userRepository.UpdateUser(user); // Save changes
-
-            // Remove token and other session details
-            session.Remove("ResetToken");
-            session.Remove("ResetTokenExpiryTime");
-            session.Remove("ResetTokenUserEmail");
-
-            return true; // Password successfully reset
-        }
-
-        public bool ActivateAccount(string email, string token, ISession session)
-        {
-            // Validate session
-            if (!IsTokenValid(session, "ActivateToken", "ActivateTokenExpiryTime"))
-            {
-                return false; // Token is invalid or has expired
-            }
-
-            var sessionToken = session.GetString("ActivateToken");
-
-            // Check if user exists and if the token matches
-            if (sessionToken != token)
-            {
-                return false; // Token mismatch
-            }
-
-            var user = _userRepository.GetUserByEmail(email);
-            if (user == null)
-            {
-                return false; // User not found
-            }
-
-            // Unlock the account
-            user.IsLock = false;
-            _userRepository.UpdateUser(user);
-
-            // Remove token and other session details
-            session.Remove("ActivateToken");
-            session.Remove("ActivateTokenExpiryTime");
-
-            return true; // Activation successful
         }
 
         public LoginResDto? CheckLogin(LoginReqDto loginReqDto)
@@ -154,9 +140,16 @@ namespace WorkFlex.Services.Services
                     if (user.IsLock)
                     {
                         loginDto.Result = LoginResult.AccountLocked;
-                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.AccountLocked);
+                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: User's account is locked.");
                         return loginDto;
                     }
+
+                    if (!user.IsActive)
+                    {
+						loginDto.Result = LoginResult.AccountInactive;
+						_logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: User's account is not active.");
+						return loginDto;
+					}
 
                     // Check password user input that true or not
                     bool isValidPassword = BCrypt.Net.BCrypt.Verify(loginReqDto.Password, user.Password);
@@ -166,12 +159,12 @@ namespace WorkFlex.Services.Services
                         _logger.LogDebug("[checkLogin]: Service - User's information after mapping: {userDto}", userDto);
                         loginDto.User = userDto;
                         loginDto.Result = LoginResult.Success;
-                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.Success);
+                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: Login successfully.");
                     }
                     else
                     {
                         loginDto.Result = LoginResult.InvalidPassword;
-                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.InvalidPassword);
+                        _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: Incorrect password.");
                     }
 
                     return loginDto;
@@ -179,7 +172,7 @@ namespace WorkFlex.Services.Services
                 else
                 {
                     loginDto.Result = LoginResult.UserNotFound;
-                    _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: {result}", LoginResult.UserNotFound);
+                    _logger.LogInformation("[checkLogin]: Service - End checking user's authenticate information with result: User not found.");
                     return loginDto;
                 }
             }
@@ -202,7 +195,7 @@ namespace WorkFlex.Services.Services
                 if (existingUser != null)
                 {
                     result = RegisterResult.EmailExist;
-                    _logger.LogInformation("[addUser]: Service - End add a new user with result: {result}", result);
+                    _logger.LogInformation("[addUser]: Service - End add a new user with result: Email exist.");
                     return result;
                 }
 
@@ -210,7 +203,7 @@ namespace WorkFlex.Services.Services
                 if (registerDto.Password != registerDto.RePassword)
                 {
                     result = RegisterResult.NotMatchPassword;
-                    _logger.LogInformation("[addUser]: Service - End add a new user with result: {result}", result);
+                    _logger.LogInformation("[addUser]: Service - End add a new user with result: New password and re-peat password not match.");
                     return result;
                 }
 
@@ -222,9 +215,9 @@ namespace WorkFlex.Services.Services
                     LastName = registerDto.LastName,
                     Email = registerDto.Email,
                     Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-                    IsActive = true,
                     Avatar = DEFAULT_AVATAR,
-                    IsLock = true,
+                    IsActive = false,
+                    IsLock = false,
                     RoleId = 3,
                     CreatedAt = DateTime.UtcNow
                 };
@@ -233,28 +226,12 @@ namespace WorkFlex.Services.Services
                 // Save user to DB
                 _userRepository.AddUser(user);
 
-                // Generate token and token's expire time
-				var activateToken = Guid.NewGuid().ToString();
-				var activateTokenExpiryTime = DateTime.UtcNow.AddMinutes(5);
-
-				// Save the token and expiry time in the session
-				session.SetString("ActivateToken", activateToken);
-				session.SetString("ActivateTokenExpiryTime", activateTokenExpiryTime.ToString());
-
-				// Construct the activation link for the email
-				var activationLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Login?handler=Activate&email={user.Email}&token={activateToken}";
-				var mailContent = new MailContent
-				{
-					To = user.Email,
-					Subject = "Activate Account",
-					Body = _emailHelper.RenderBodyActiveAccount(activationLink)
-				};
-
-				_ = _sendMailUtil.SendMail(mailContent); // Send the email asynchronously
+                // Send activation link to user
+				SendMailActivate(user.Email, session, httpContext);
 
 				// Return success result
 				result = RegisterResult.Success;
-                _logger.LogInformation("[addUser]: Service - End add a new user with result: {result}", result);
+                _logger.LogInformation("[addUser]: Service - End add a new user with result: Register successfully.");
                 return result;
             }
             catch (Exception ex) 
@@ -265,21 +242,72 @@ namespace WorkFlex.Services.Services
             }
 		}
 
-        private static bool IsEmailFormat(string input)
+		public ActivateResult ActivateAccount(string email, string token, ISession session, HttpContext httpContext)
+		{
+            ActivateResult result;
+			try
+            {
+				// Validate session
+				var sessionToken = session.GetString(ACTIVATE_TOKEN);
+                var sessionTokenExpiryTime = session.GetString(ACTIVATE_TOKEN_EXPIRY_TIME);
+				var user = _userRepository.GetUserByEmail(email);
+				if (string.IsNullOrEmpty(sessionToken) || string.IsNullOrEmpty(sessionTokenExpiryTime) || sessionToken != token || user == null)
+				{
+                    result = ActivateResult.InvalidToken;
+					return result; // Token is invalid
+				}
+
+                if (DateTime.Parse(sessionTokenExpiryTime) <= DateTime.UtcNow && !user.IsActive)
+                {
+                    // Send a new activation link if token is expired
+                    SendMailActivate(user.Email, session, httpContext);
+
+					result = ActivateResult.TokenExpired;
+                    return result;
+				}
+
+				// Unlock the account
+				user.IsActive = true;
+				_userRepository.UpdateUser(user);
+
+				// Remove token and other session details
+				session.Remove(ACTIVATE_TOKEN);
+				session.Remove(ACTIVATE_TOKEN_EXPIRY_TIME);
+
+                result = ActivateResult.Success;
+				return result; // Activation successful
+			} catch
+            {
+                result = ActivateResult.Error;
+                return result;
+            }
+		}
+
+		private void SendMailActivate(string email, ISession session, HttpContext httpContext)
+		{
+			// Generate token and token's expire time
+			var activateToken = Guid.NewGuid().ToString();
+			var activateTokenExpiryTime = DateTime.UtcNow.AddMinutes(5);
+
+			// Save the token and expiry time in the session
+			session.SetString(ACTIVATE_TOKEN, activateToken);
+			session.SetString(ACTIVATE_TOKEN_EXPIRY_TIME, activateTokenExpiryTime.ToString());
+
+			// Construct the activation link for the email
+			var activationLink = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Authen/Login?handler=Activate&email={email}&token={activateToken}";
+			var mailContent = new MailContent
+			{
+				To = email,
+				Subject = "Activate Account",
+				Body = _emailHelper.RenderBodyActiveAccount(activationLink)
+			};
+
+			_ = _sendMailUtil.SendMail(mailContent); // Send the email asynchronously
+		}
+
+		private static bool IsEmailFormat(string input)
         {
-            return input.Contains("@") && input.Contains(".");
+            return input.Contains('@') && input.Contains('.');
         }
-
-        private bool IsTokenValid(ISession session, string tokenKey, string expiryTimeKey)
-        {
-            var sessionToken = session.GetString(tokenKey);
-            var sessionExpiryTime = session.GetString(expiryTimeKey);
-
-            // Check if the token or expiry time is invalid or expired
-            return !string.IsNullOrEmpty(sessionToken) &&
-                   !string.IsNullOrEmpty(sessionExpiryTime) &&
-                   DateTime.Parse(sessionExpiryTime) > DateTime.UtcNow;
-        }
-
-    }
+	}
 }

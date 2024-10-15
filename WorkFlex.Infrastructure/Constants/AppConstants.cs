@@ -9,7 +9,8 @@ namespace WorkFlex.Infrastructure.Constants
             UserNotFound,
             InvalidPassword,
             AccountLocked,
-            Error
+            AccountInactive,
+			Error
         }
 
         public enum RegisterResult
@@ -18,10 +19,18 @@ namespace WorkFlex.Infrastructure.Constants
             EmailExist,
             NotMatchPassword,
             Error
-        }
+		}
 
-        // Constants for default values
-        public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+		public enum ActivateResult
+		{
+			Success,
+			InvalidToken,
+            TokenExpired,
+			Error
+		}
+
+		// Constants for default values
+		public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
         public const string UNDEFINE = "Undefine";
         public const string YOU = "Yourself";
 
@@ -32,10 +41,12 @@ namespace WorkFlex.Infrastructure.Constants
         // 2. Failed message
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
         public const string MESSAGE_INVALID_PASSWORD = "Incorrect Password.";
-        public const string MESSAGE_ACCOUNT_LOCKED = "Account Locked.";
-        public const string MESSAGE_EMAIL_EXIST = "Email is already exist.";
-        public const string MESSAGE_NOT_MATCH_PASSWORD = "Password and Repeat Password not match.";
+        public const string MESSAGE_ACCOUNT_LOCKED = "Account Locked. Please contact with adminstrator for more information.";
+        public const string MESSAGE_ACCOUNT_INACTIVE = "Account Inactive. Please active your account by link in your email.";
+		public const string MESSAGE_EMAIL_EXIST = "Email is already exist.";
+        public const string MESSAGE_NOT_MATCH_PASSWORD = "Password and Repeat Password are not match.";
         public const string MESSAGE_INVALID_ACTIVATION_LINK = "Invalid activation link.";
+        public const string MESSAGE_ACTIVATE_TOKEN_EXPIRED = "Your request has expired. A new activate link has been sent to your email.";
 		public const string MESSAGE_FAILED = "Error occurred during execution. Please try again later.";
 
         // Session & Temp data & Pages name constants
