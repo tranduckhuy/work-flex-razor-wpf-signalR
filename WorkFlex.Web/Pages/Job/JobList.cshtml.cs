@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WorkFlex.Domain.Entities;
-using WorkFlex.Web.DTOs;
-using WorkFlex.Web.ViewModels;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Domain.Filters;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
+using WorkFlex.Web.Mapping;
 using WorkFlex.Web.Utils.Helper;
 using WorkFlex.Web.Utils.Helper.Interface;
+using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.Job
 {
@@ -77,7 +79,7 @@ namespace WorkFlex.Web.Pages.Job
                 CurrentPage = filters.PageNumber > 1 ? filters.PageNumber : 1;
 
                 // Get jobs based on filters
-                (Jobs, TotalCount) = await _jobService.GetJobsAsync(filters);
+                (Jobs, TotalCount) = await _jobService.GetJobsAsync(AppMapper.Mapper.Map<JobFilter>(filters));
                 _logger.LogDebug("[OnGetAsync]: Jobs retrieved: {Jobs}", Jobs);
 
                 TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);

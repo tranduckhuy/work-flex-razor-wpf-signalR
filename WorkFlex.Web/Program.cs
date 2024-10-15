@@ -1,15 +1,18 @@
+using WorkFlex.Domain.Repositories;
 using WorkFlex.Infrastructure.Data;
-using WorkFlex.Web.Mapping;
-using WorkFlex.Web.Repository;
-using WorkFlex.Web.Repository.Interface;
-using WorkFlex.Web.Services;
-using WorkFlex.Web.Services.Interface;
-using WorkFlex.Web.Untils.Helper.Interface;
-using WorkFlex.Web.Untils.Helper;
-using WorkFlex.Web.Untils.Mail;
-using WorkFlex.Web.Utils.Helper.Interface;
-using WorkFlex.Web.Utils.Helper;
+using WorkFlex.Infrastructure.Repositories;
+using WorkFlex.Infrastructure.Utils.Helper;
+using WorkFlex.Infrastructure.Utils.Helper.Interface;
+using WorkFlex.Infrastructure.Utils.Mail;
+using WorkFlex.Services;
+using WorkFlex.Services.Interface;
+using WorkFlex.Services.Services;
 using WorkFlex.Web.AuthenticationFilter;
+using WorkFlex.Web.Mapping;
+using WorkFlex.Web.Untils.Helper;
+using WorkFlex.Web.Untils.Helper.Interface;
+using WorkFlex.Web.Utils.Helper;
+using WorkFlex.Web.Utils.Helper.Interface;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,15 +45,16 @@ builder.Services.AddDbContext<AppDbContext>();
 // Repositories Register
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
-// Services Register
-builder.Services.AddScoped<IAuthenService, AuthenService>();
-builder.Services.AddScoped<IJobService, JobService>();
-builder.Services.AddScoped<IConversationService, ConversationService>();
+
 // Helpers Register
 builder.Services.AddScoped<IEmailHelper, EmailHelper>();
 builder.Services.AddScoped<IJobFilterHelper, JobFilterHelper>();
 builder.Services.AddScoped<IAddressHelper, AddressHelper>();
 
+// Services Register
+builder.Services.AddScoped<IAuthenService, AuthenService>();
+builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IConversationService, ConversationService>();
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddTransient<SendMailUtil>();

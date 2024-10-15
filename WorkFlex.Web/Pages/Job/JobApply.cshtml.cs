@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
+using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Infrastructure.Data;
-using WorkFlex.Web.Constants;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.Job

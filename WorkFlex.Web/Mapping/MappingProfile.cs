@@ -1,5 +1,6 @@
-using WorkFlex.Domain.Entities;
-using WorkFlex.Web.DTOs;
+using WorkFlex.Domain.Filters;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Mapping
 {
@@ -7,9 +8,11 @@ namespace WorkFlex.Web.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<Conversation, ConversationDto>().ReverseMap();
-            CreateMap<JobPost, JobPostDto>().ReverseMap();
+            CreateMap<LoginReqVM, LoginReqDto>().ReverseMap();
+            CreateMap<RegisterVM, RegisterDto>().ReverseMap();
+            CreateMap<UserMessageVM, UserMessageDto>().ReverseMap();
+            CreateMap<JobPostVM, JobFilter>().ReverseMap();
+            CreateMap<ConversationReplyViewModel, ConversationReplyDto>().ReverseMap();
         }
     }
 }

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.Constants;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Web.Pages.Authen
 {

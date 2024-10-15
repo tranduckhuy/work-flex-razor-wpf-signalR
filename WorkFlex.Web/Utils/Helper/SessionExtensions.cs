@@ -19,7 +19,7 @@ namespace WorkFlex.Web.Utils.Helper
 
             if (string.IsNullOrEmpty(jsonString))
             {
-                return default(T)!; // Return default value if the session doesn't contain the key
+                return default!; // Return default value if the session doesn't contain the key
             }
 
             // Deserialize the JSON string back into the object

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -9,9 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="MailKit" Version="4.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="MimeKit" Version="4.8.0" />
@@ -20,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj" />
+    <ProjectReference Include="..\WorkFlex.Services\WorkFlex.Services.csproj" />
   </ItemGroup>
 
 </Project>

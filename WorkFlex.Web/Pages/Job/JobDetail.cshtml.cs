@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.DTOs;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.Job
