@@ -53,7 +53,7 @@ namespace WorkFlex.Web.Pages.Authen
             }
             else
             {
-                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "The password change deadline for this time has expired, please send another email!";
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "The password change deadline for this time has expired. Please make another change password request.";
                 return RedirectToPage("Reset");
             }
         }

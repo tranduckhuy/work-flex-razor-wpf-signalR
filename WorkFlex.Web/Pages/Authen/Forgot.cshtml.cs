@@ -22,7 +22,7 @@ namespace WorkFlex.Web.Pages.Authen
                 return Page();
             }
 
-            var result = _authenService.SendPasswordResetEmail(email, HttpContext.Session, HttpContext);
+            var result = _authenService.SendMailResetEmail(email, HttpContext.Session, HttpContext);
             if (_authenService.IsAccountLocked(email))
             {
                 TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
