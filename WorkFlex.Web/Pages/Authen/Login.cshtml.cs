@@ -63,19 +63,23 @@ namespace WorkFlex.Web.Pages.Authen
                             break;
                         case AppConstants.LoginResult.UserNotFound:
                             TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_USERNAME;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_INVALID_USERNAME);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with message: {message}", AppConstants.MESSAGE_INVALID_USERNAME);
                             break;
                         case AppConstants.LoginResult.InvalidPassword:
                             TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_PASSWORD;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_INVALID_PASSWORD);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with message: {message}", AppConstants.MESSAGE_INVALID_PASSWORD);
                             break;
                         case AppConstants.LoginResult.AccountLocked:
                             TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_ACCOUNT_LOCKED);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with message: {message}", AppConstants.MESSAGE_ACCOUNT_LOCKED);
                             break;
-                        default:
+						case AppConstants.LoginResult.AccountInactive:
+							TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_INACTIVE;
+							_logger.LogInformation("[OnPost]: Controller - End doing authentication for user with message: {message}", AppConstants.MESSAGE_ACCOUNT_INACTIVE);
+							break;
+						default:
                             TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
-                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with status: {message}", AppConstants.MESSAGE_FAILED);
+                            _logger.LogInformation("[OnPost]: Controller - End doing authentication for user with message: {message}", AppConstants.MESSAGE_FAILED);
                             break;
                     }
                 } 
@@ -111,26 +115,37 @@ namespace WorkFlex.Web.Pages.Authen
 			try
 			{
 				// Call the ActivateAccount method from service
-				bool isActivated = _authenService.ActivateAccount(email, token, HttpContext.Session);
-
-				if (!isActivated)
-				{
-					TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_ACTIVATION_LINK;
-					_logger.LogWarning("[OnGetActivate]: Controller - Activation failed, invalid token or user not found for {email}", email);
-					return Page();
+				AppConstants.ActivateResult activateResult = _authenService.ActivateAccount(email, token, HttpContext.Session, HttpContext);
+                switch (activateResult) 
+                { 
+                    case AppConstants.ActivateResult.Success:
+                        TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_ACIVATE_ACCOUNT_SUCCESS;
+						_logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_ACIVATE_ACCOUNT_SUCCESS);
+						return Page();
+                    case AppConstants.ActivateResult.InvalidToken:
+						TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_INVALID_ACTIVATION_LINK;
+						_logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_INVALID_ACTIVATION_LINK);
+						return Page();
+                    case AppConstants.ActivateResult.TokenExpired:
+						TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACTIVATE_TOKEN_EXPIRED;
+						_logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_ACTIVATE_TOKEN_EXPIRED);
+						return Page();
+                    case AppConstants.ActivateResult.Error:
+                        TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
+						_logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_FAILED);
+						return Page();
+                    default:
+						TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                        _logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_FAILED);
+						return Page();
 				}
-
-				TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_ACIVATE_ACCOUNT_SUCCESS;
-				_logger.LogInformation("[OnGetActivate]: Controller - Account activated for user {email}", email);
 			}
 			catch (Exception ex)
 			{
-				TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = "An error occurred during activation.";
-				_logger.LogError("[OnGetActivate]: Controller - Error activating account for user {email}. Error: {ex}", email, ex.StackTrace);
+				TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
+				_logger.LogError("[OnGetActivate]: Controller - Error activating account for user {email} with error: {ex}", email, ex.StackTrace);
 				return Page();
 			}
-
-			return Page();
 		}
 
 		private void SetUserSession(UserDto user)

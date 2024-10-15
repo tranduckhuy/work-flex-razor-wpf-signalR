@@ -8,16 +8,16 @@ namespace WorkFlex.Web.Services.Interface
     {
         bool IsEmailExist(string email);
 
-        bool SendPasswordResetEmail(string userEmail, ISession session, HttpContext httpContext);
+        bool SendMailResetEmail(string userEmail, ISession session, HttpContext httpContext);
 
         bool ChangePassword(string newPassword, ISession session);
-
-        bool ActivateAccount(string email, string token, ISession session);
 
         bool IsAccountLocked(string email);
 
         LoginDto? CheckLogin(LoginVM loginVm);
 
         RegisterResult AddUser(RegisterVM registerVm, ISession session, HttpContext httpContext);
-    }
+
+		ActivateResult ActivateAccount(string email, string token, ISession session, HttpContext httpContext);
+	}
 }
