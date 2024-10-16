@@ -49,7 +49,7 @@ namespace WorkFlex.Desktop
 						}
 						else
 						{
-							MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+							MessageBox.Show("Invalid password.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
 						}
 					}
 					else
@@ -59,12 +59,12 @@ namespace WorkFlex.Desktop
 				}
 				else
 				{
-					MessageBox.Show("Login Error: ", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show("Invalid email.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("Login Error: " + ex.Message);
+				MessageBox.Show("Login Error: ", ex.Message);
 			}
 		}
 		private void Window_KeyDown(object sender, KeyEventArgs e)
