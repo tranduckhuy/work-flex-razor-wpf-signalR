@@ -1,25 +1,83 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WorkFlex.Desktop.BusinessObject;
-using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.BusinessObject.Service.Interface;
+using WorkFlex.Domain.Entities;
+using WorkFlex.Domain.Filters;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    public class RelayCommand : ICommand
+    {
+        readonly Action<object> _execute;
+        readonly Predicate<object> _canExecute;
+
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public bool CanExecute(object? parameter)
+        {
+            return _canExecute == null ? true : _canExecute(parameter!);
+        }
+
+        public void Execute(object? parameter) { _execute(parameter!); }
+    }
+
     public partial class MainWindow : Window
     {
 		private readonly IServiceProvider _serviceProvider;
-		private readonly IJobPostService _jobPostService;
+		private readonly IJobService _jobService;
 
-		public MainWindow(IServiceProvider serviceProvider, IJobPostService jobPostService)
+		private IEnumerable<JobPostDto> Jobs { get; set; } = new List<JobPostDto>();
+
+		private int TotalCount { get; set; }
+
+        private int _currentPage = 1;
+        private int _pageSize = 20;
+
+        public event PropertyChangedEventHandler PropertyChanged = null!;
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            _serviceProvider = serviceProvider;
-            _jobPostService = jobPostService;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public int CurrentPage
+        {
+            get => _currentPage;
+            set { _currentPage = value; OnPropertyChanged(nameof(CurrentPage)); LoadJobs(); }
+        }
+
+        public ICommand NextPageCommand { get; }
+
+        public ICommand PreviousPageCommand { get; }
+
+		public MainWindow(IServiceProvider serviceProvider, IJobService jobService)
+        {
             InitializeComponent();
+			_jobService = jobService;
+            _serviceProvider = serviceProvider;
+
+            NextPageCommand = new RelayCommand(_ => CurrentPage++, _ => CurrentPage < ((double)TotalCount / _pageSize));
+            PreviousPageCommand = new RelayCommand(_ => CurrentPage--, _ => CurrentPage > 1);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -27,12 +85,36 @@ namespace WorkFlex.Desktop
             LoadJobs();
         }
 
-        private void LoadJobs()
+        private async void LoadJobs()
         {
             try
             {
-                var jobs = _jobPostService.GetAllJobPosts();
-                listView.ItemsSource = jobs;
+                // Filter Job Type
+                var jobTypesData = await _jobService.GetJobTypesAsync();
+                var jobTypes = jobTypesData.Select(jt => jt.TypeName).ToList();
+                cbType.ItemsSource = jobTypes;
+
+                // Filter Posted Within
+                cbPostedWithin.ItemsSource = new List<string> { "Any", "Today", "Last 2 days", "Last 3 days", "Last 5 days", "Last 10 days" };
+
+                // Filter Sort By
+                cbSortBy.ItemsSource = new List<string> { "None", "SalaryLowToHigh", "SalaryHighToLow" };
+
+                // Create filter for searching
+                JobFilter filter = new JobFilter
+                {
+                    JobLocation = !string.IsNullOrEmpty(tbLocation.Text) ? tbLocation.Text : string.Empty,
+                    JobType = !string.IsNullOrEmpty(cbType.SelectedValuePath) ? cbType.SelectedValuePath : string.Empty,
+                    PostedWithin = !string.IsNullOrEmpty(cbPostedWithin.SelectedValuePath) ? cbPostedWithin.SelectedValuePath : string.Empty,
+                    MinSalary = !string.IsNullOrEmpty(tbMinSalary.Text) ? decimal.Parse(tbMinSalary.Text) : 0,
+                    MaxSalary = !string.IsNullOrEmpty(tbMaxSalary.Text) ? decimal.Parse(tbMaxSalary.Text) : 0,
+                    SortBy = !string.IsNullOrEmpty(cbSortBy.SelectedValuePath) ? cbSortBy.SelectedValuePath : string.Empty,
+                    PageNumber = CurrentPage,
+                    PageSize = _pageSize,
+                };
+
+                (Jobs, TotalCount) = await _jobService.GetJobsAsync(filter);
+                listView.ItemsSource = Jobs;
             }
             catch (Exception ex)
             {
@@ -73,30 +155,32 @@ namespace WorkFlex.Desktop
         private void Button_Clear(object sender, RoutedEventArgs e)
         {
 
-            tbId.Clear();
-            tbTitle.Clear();
             tbLocation.Clear();
+            tbMinSalary.Clear();
+            tbMaxSalary.Clear();
 
-            //listView.ItemsSource = jobs;
+            cbType.SelectedIndex = -1;
+            cbPostedWithin.SelectedIndex = -1;
+            cbSortBy.SelectedIndex = -1;
         }
 
         private void Button_Insert(object sender, RoutedEventArgs e)
         {
-            WindowJobCreate windowJobCreate = new WindowJobCreate(this,  _jobPostService);
+            WindowJobCreate windowJobCreate = new WindowJobCreate(this,  _jobService);
             windowJobCreate.ShowDialog();
         }
 
         public void RefreshJobList()
         {
-            listView.ItemsSource = _jobPostService.GetAllJobPosts();
+            LoadJobs();
         }
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
-
+            LoadJobs();
         }
-
-		private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
+		
+        private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
@@ -114,19 +198,15 @@ namespace WorkFlex.Desktop
 			{
 				MessageBox.Show("Logout Error: ", "Logout Failed", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-		}
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			Application.Current.Shutdown();
-		}
+        }
 
-        private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (listView.SelectedItem is JobPostDTO selectedJob)
+            if (listView.SelectedItem is JobPostDto selectedJob)
             {
                 if (selectedJob.Id != Guid.Empty)
                 {
-                    var jobDetailWindow = new JobDetail(selectedJob.Id, _jobPostService);
+                    var jobDetailWindow = new JobDetail(selectedJob.Id, _jobService);
                     jobDetailWindow.ShowDialog();
                 }
                 else
@@ -139,5 +219,10 @@ namespace WorkFlex.Desktop
                 MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
     }
 }

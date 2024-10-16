@@ -44,9 +44,11 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_ACCOUNT_LOCKED = "Account Locked. Please contact with adminstrator for more information.";
         public const string MESSAGE_ACCOUNT_INACTIVE = "Account Inactive. Please active your account by link in your email.";
 		public const string MESSAGE_EMAIL_EXIST = "Email is already exist.";
+        public const string MESSAGE_LOGIN_FAILED = "Login Failed!";
         public const string MESSAGE_NOT_MATCH_PASSWORD = "Password and Repeat Password are not match.";
         public const string MESSAGE_INVALID_ACTIVATION_LINK = "Invalid activation link.";
         public const string MESSAGE_ACTIVATE_TOKEN_EXPIRED = "Your request has expired. A new activate link has been sent to your email.";
+        public const string MESSAGE_UNAUTHORIZED = "You do not have permission to access this feature. Please contact the administrator if you need assistance.";
 		public const string MESSAGE_FAILED = "Error occurred during execution. Please try again later.";
 
         // Session & Temp data & Pages name constants

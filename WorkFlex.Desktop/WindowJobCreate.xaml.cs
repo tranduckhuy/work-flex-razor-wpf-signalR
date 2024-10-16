@@ -1,10 +1,9 @@
 ﻿using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.BusinessObject.Service.Interface;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Desktop
 {
@@ -14,30 +13,30 @@ namespace WorkFlex.Desktop
     public partial class WindowJobCreate : Window
     {
         private readonly MainWindow _mainWindow;
-        private readonly IJobPostService _jobPostService;
+        private readonly IJobService _jobService;
 
-        public WindowJobCreate(MainWindow mainWindow, IJobPostService jobPostService)
+        public WindowJobCreate(MainWindow mainWindow, IJobService jobService)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _jobPostService = jobPostService;
+            _jobService = jobService;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             txtBoxSalaryRange.Text = " - "; 
 
-            comboBoxJobType.ItemsSource = _jobPostService.GetAllJobTypes();
+            comboBoxJobType.ItemsSource = await _jobService.GetJobTypesAsync();
             comboBoxJobType.DisplayMemberPath = "TypeName";
             comboBoxJobType.SelectedValuePath = "Id";
 
-            comboBoxIndustry.ItemsSource = _jobPostService.GetAllIndustries();
+            comboBoxIndustry.ItemsSource = await _jobService.GetIndustriesAsync();
             comboBoxIndustry.DisplayMemberPath = "IndustryName";
             comboBoxIndustry.SelectedValuePath = "Id";
 
             if (!string.IsNullOrEmpty(txtBoxIdJob.Text))
             {
-                var jobPostDto = _jobPostService.GetJobPostById(txtBoxIdJob.ToString());
+                var jobPostDto = await _jobService.GetJobByIdAsync(Guid.Parse(txtBoxIdJob.ToString()));
                 if (jobPostDto == null)
                 {
                     MessageBox.Show("Not Found Job Post!", "Not Found Error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -57,7 +56,7 @@ namespace WorkFlex.Desktop
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -85,7 +84,7 @@ namespace WorkFlex.Desktop
                         return;
                     }
 
-                    JobPostDTO jobPostDTO = new JobPostDTO
+                    JobPostDto jobPostDto = new JobPostDto
                     {
                         Title = txtBoxTitleJob.Text,
                         SalaryRange = $"{minSalary} - {maxSalary}", 
@@ -96,9 +95,9 @@ namespace WorkFlex.Desktop
                         IndustryId = (int)comboBoxIndustry.SelectedValue,
                     };
 
-                    _jobPostService.AddJobPost(jobPostDTO);
+                    await _jobService.AddJobPostAsync(jobPostDto);
                     _mainWindow.RefreshJobList();
-                    this.Close();
+                    Close();
                 }
                 else
                 {

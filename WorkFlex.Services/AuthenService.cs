@@ -10,7 +10,7 @@ using WorkFlex.Services.Interface;
 using WorkFlex.Services.Mapping;
 using static WorkFlex.Infrastructure.Constants.AppConstants;
 
-namespace WorkFlex.Services.Services
+namespace WorkFlex.Services
 {
     public class AuthenService : IAuthenService
     {
@@ -26,7 +26,7 @@ namespace WorkFlex.Services.Services
         private const string ACTIVATE_TOKEN = "ActivateToken";
         private const string ACTIVATE_TOKEN_EXPIRY_TIME = "ActivateTokenExpiryTime";
 
-		public AuthenService(IMapper mapper, ILogger<AuthenService> logger, IUserRepository userRepository, IEmailHelper emailHelper, SendMailUtil sendMailUtil)
+		public AuthenService(ILogger<AuthenService> logger, IUserRepository userRepository, IEmailHelper emailHelper, SendMailUtil sendMailUtil)
         {
             _logger = logger;
             _userRepository = userRepository;
@@ -34,21 +34,21 @@ namespace WorkFlex.Services.Services
             _sendMailUtil = sendMailUtil;
         }
 
-        public bool IsEmailExist(string email)
+        public async Task<bool> IsEmailExistAsync(string email)
         {
-            return _userRepository.IsEmailExist(email);
+            return await _userRepository.IsEmailExistAsync(email);
         }
 
-        public bool IsAccountLocked(string email)
+        public async Task<bool> IsAccountLockedAsync(string email)
         {
-            return _userRepository.IsAccountLocked(email);
+            return await _userRepository.IsAccountLockedAsync(email);
         }
 
-        public bool SendMailResetEmail(string userEmail, ISession session, HttpContext httpContext)
+        public async Task<bool> SendMailResetEmailAsync(string userEmail, ISession session, HttpContext httpContext)
         {
             try
             {
-				var user = _userRepository.GetUserByEmail(userEmail);
+				var user = await _userRepository.GetUserByEmailAsync(userEmail);
 				if (user == null)
 				{
 					return false; // User not found
@@ -80,28 +80,28 @@ namespace WorkFlex.Services.Services
             }
         }
 
-        public bool ChangePassword(string newPassword, ISession session)
+        public async Task<bool> ChangePasswordAsync(string newPassword, ISession session)
         {
             try
             {
 				var sessionToken = session.GetString(RESET_TOKEN);
 				var sessionTokenExpiryTime = session.GetString(RESET_TOKEN_EXPIRY_TIME);
 				var sessionUserEmail = session.GetString(RESET_TOKEN_USER_EMAIL);
-				var user = _userRepository.GetUserByEmail(sessionUserEmail!);
+				var user = await _userRepository.GetUserByEmailAsync(sessionUserEmail!);
 
 				// Validate session: check token existence, expiry time, and user email
 				if (string.IsNullOrEmpty(sessionToken) || 
                     string.IsNullOrEmpty(sessionTokenExpiryTime) || 
                     string.IsNullOrEmpty(sessionUserEmail) ||
                     user == null ||
-					DateTime.Parse(sessionTokenExpiryTime!) > DateTime.UtcNow)
+					DateTime.Parse(sessionTokenExpiryTime!) <= DateTime.UtcNow)
 				{
 					return false; // Token is invalid, expired, user email is empty or user is not found
 				}
 
 				// Hash the new password and update the user
 				user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
-				_userRepository.UpdateUser(user); // Save changes
+				await _userRepository.UpdateUserAsync(user); // Save changes
 
 				// Remove token and other session details
 				session.Remove(RESET_TOKEN);
@@ -115,7 +115,7 @@ namespace WorkFlex.Services.Services
             }
         }
 
-        public LoginResDto? CheckLogin(LoginReqDto loginReqDto)
+        public async Task<LoginResDto?> CheckLoginAsync(LoginReqDto loginReqDto)
         {
             _logger.LogInformation("[checkLogin]: Service - Start checking user's authenticate information");
             var loginDto = new LoginResDto();
@@ -125,12 +125,12 @@ namespace WorkFlex.Services.Services
                 // If user using email for log in then check email
                 if (IsEmailFormat(loginReqDto.Username))
                 {
-                    user = _userRepository.GetUserByEmail(loginReqDto.Username);
+                    user = await _userRepository.GetUserByEmailAsync(loginReqDto.Username);
                 }
                 // If user using username for log in then check username
                 else
                 {
-                    user = _userRepository.GetUserByUsername(loginReqDto.Username);
+                    user = await _userRepository.GetUserByUsernameAsync(loginReqDto.Username);
                 }
 
                 if (user != null)
@@ -184,14 +184,14 @@ namespace WorkFlex.Services.Services
             }
         }
 
-        public RegisterResult AddUser(RegisterDto registerDto, ISession session, HttpContext httpContext)
+        public async Task<RegisterResult> AddUserAsync(RegisterDto registerDto, ISession session, HttpContext httpContext)
         {
             _logger.LogInformation("[addUser]: Service - Start add a new user");
             RegisterResult result;
             try
             {
                 // Check Email that exist in DB or not
-                var existingUser = _userRepository.GetUserByEmail(registerDto.Email);
+                var existingUser = await _userRepository.GetUserByEmailAsync(registerDto.Email);
                 if (existingUser != null)
                 {
                     result = RegisterResult.EmailExist;
@@ -224,7 +224,7 @@ namespace WorkFlex.Services.Services
                 _logger.LogDebug("[addUser]: Service - User's information: {user}", user);
 
                 // Save user to DB
-                _userRepository.AddUser(user);
+                await _userRepository.AddUserAsync(user);
 
                 // Send activation link to user
 				SendMailActivate(user.Email, session, httpContext);
@@ -242,7 +242,7 @@ namespace WorkFlex.Services.Services
             }
 		}
 
-		public ActivateResult ActivateAccount(string email, string token, ISession session, HttpContext httpContext)
+		public async Task<ActivateResult> ActivateAccountAsync(string email, string token, ISession session, HttpContext httpContext)
 		{
             ActivateResult result;
 			try
@@ -250,7 +250,7 @@ namespace WorkFlex.Services.Services
 				// Validate session
 				var sessionToken = session.GetString(ACTIVATE_TOKEN);
                 var sessionTokenExpiryTime = session.GetString(ACTIVATE_TOKEN_EXPIRY_TIME);
-				var user = _userRepository.GetUserByEmail(email);
+				var user = await _userRepository.GetUserByEmailAsync(email);
 				if (string.IsNullOrEmpty(sessionToken) || string.IsNullOrEmpty(sessionTokenExpiryTime) || sessionToken != token || user == null)
 				{
                     result = ActivateResult.InvalidToken;
@@ -268,7 +268,7 @@ namespace WorkFlex.Services.Services
 
 				// Unlock the account
 				user.IsActive = true;
-				_userRepository.UpdateUser(user);
+				await _userRepository.UpdateUserAsync(user);
 
 				// Remove token and other session details
 				session.Remove(ACTIVATE_TOKEN);

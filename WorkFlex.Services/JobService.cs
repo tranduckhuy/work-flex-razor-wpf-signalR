@@ -20,6 +20,24 @@ namespace WorkFlex.Services
             _jobRepository = jobRepository;
         }
 
+
+        public async Task AddJobPostAsync(JobPostDto jobPostDto)
+        {
+            var jobPost = new JobPost
+            {
+                Title = jobPostDto.Title,
+                SalaryRange = jobPostDto.SalaryRange,
+                JobDescription = jobPostDto.JobDescription,
+                JobLocation = jobPostDto.JobLocation,
+                JobTypeId = jobPostDto.JobTypeId,
+                IndustryId = jobPostDto.IndustryId,
+                UserId = jobPostDto.UserId,
+                Status = jobPostDto.Status
+            };
+
+            await _jobRepository.AddJobPost(jobPost);
+        }
+
         public async Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobFilter filters)
         {
             _logger.LogInformation("[GetJobsAsync]: Service - Start getting job list data");
@@ -45,6 +63,11 @@ namespace WorkFlex.Services
         public async Task<IEnumerable<JobType>> GetJobTypesAsync()
         {
             return await _jobRepository.GetJobTypesAsync();
+        }
+
+        public async Task<IEnumerable<Industry>> GetIndustriesAsync()
+        {
+            return await _jobRepository.GetIndustriesAsync();
         }
 
         public async Task<JobPostDto?> GetJobByIdAsync(Guid id)

@@ -140,6 +140,11 @@ namespace WorkFlex.Infrastructure.Repositories
             return await _appDbContext.JobTypes.ToListAsync();
         }
 
+        public async Task<IEnumerable<Industry>> GetIndustriesAsync()
+        {
+            return await _appDbContext.Industries.ToListAsync();
+        }
+
         public async Task<JobPost> GetJobByIdAsync(Guid id)
         {
             var jobPost = await _appDbContext.JobPosts
@@ -150,6 +155,12 @@ namespace WorkFlex.Infrastructure.Repositories
                 .FirstOrDefaultAsync(j => j.Id == id);
 
             return jobPost!;
+        }
+
+        public async Task AddJobPost(JobPost jobPost)
+        {
+            await _appDbContext.JobPosts.AddAsync(jobPost);
+            await _appDbContext.SaveChangesAsync();
         }
 
         private static bool TryParseSalaryRange(string salaryRange, out decimal minSalary, out decimal maxSalary)

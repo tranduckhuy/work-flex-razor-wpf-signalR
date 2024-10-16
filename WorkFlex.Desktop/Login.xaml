@@ -5,40 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorkFlex.Desktop"
         mc:Ignorable="d"
-        Title="Login" Height="390" Width="615"
+        Title="Login" Height="390" Width="650"
         WindowStartupLocation="CenterScreen"
         Background="#FF1D1D1D" Closing="Window_Closing">
     <Grid>
         <!-- Centering the login form -->
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Background="#ffffff">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Background="#ffffff" Width="651">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="106*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="121*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="10">
-                <Image Source="DataAccess/Assets/Image/signin-image.jpg" Width="auto" Height="auto" />
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="34,10,0,10" Grid.ColumnSpan="2">
+                <Image Source="DataAccess/Assets/Image/signin-image.jpg" Width="295" Height="351" />
             </StackPanel>
 
             <!-- Form đăng nhập -->
-            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="20,0,10,0" Grid.Column="1">
 
                 <StackPanel Orientation="Horizontal" Margin="10,10" HorizontalAlignment="Left">
                     <Label Content="Sign in" FontSize="36" FontWeight="Bold" Foreground="#222222" FontFamily="Poppins" Padding="0" Margin="0" VerticalContentAlignment="Center"/>
                 </StackPanel>
-                <!-- Email -->
+                <!-- Username -->
                 <StackPanel Orientation="Horizontal" Margin="10,10">
-                    <Label Content="✉ Email" Width="80"/>
-                    <TextBox Name="EmailTextBox" Width="200" Height="30" />
+                    <Label Content="👨‍💼 Username" Width="95"/>
+                    <TextBox x:Name="tbUsername" Width="212" Height="30" />
                 </StackPanel>
 
                 <!-- Mật khẩu -->
                 <StackPanel Orientation="Horizontal" Margin="10,10">
-                    <Label Content="🔒 Password" Width="80"/>
-                    <PasswordBox Name="PasswordBox" Width="200" Height="30" />
+                    <Label Content="🔒 Password" Width="95"/>
+                    <PasswordBox Name="pwdBox" Width="212" Height="30" />
                 </StackPanel>
 
                 <!-- Button đăng nhập -->
-                <Button x:Name="LoginButton" Content="Log in" Width="110" Height="35" HorizontalAlignment="Left" Margin="10,25,0,0" Click="LoginButton_Click" >
+                <Button x:Name="LoginButton" Content="Log in" Width="110" Height="35" HorizontalAlignment="Left" Margin="10,25,0,0" Click="LoginButton_Click" IsDefault="True">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#6dabe4"/>
@@ -52,7 +53,7 @@
                                         <Border Background="{TemplateBinding Background}" 
                                             BorderBrush="{TemplateBinding BorderBrush}" 
                                             BorderThickness="{TemplateBinding BorderThickness}" 
-                                            CornerRadius="5">   
+                                            CornerRadius="5">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -67,5 +68,6 @@
             <!-- Đăng nhập với mạng xã hội -->
 
         </Grid>
+        <ComboBox HorizontalAlignment="Left" Margin="778,142,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

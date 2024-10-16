@@ -165,7 +165,7 @@
                                          onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
                                         <div class="job-items">
                                             <div class="company-img">
-                                                <a href="#"><img src="@job.User.Avatar" alt="Recruiter's Avatar'"></a>
+                                                <a href="#"><img src="@job.User.Avatar" alt="Recr   uiter's Avatar'"></a>
                                             </div>
                                             <div class="job-tittle job-tittle2">
                                                 <a href="#">
@@ -386,7 +386,12 @@
 
         function goToJobDetail(jobId) {
             window.location.href = `/Job/JobDetail/${jobId}`;
-        }   
+        }
+
+        function goToPage(pageNumber) {
+            $('input[name="pageNumber"]').val(pageNumber);
+            submitFilters();
+        }
 
         $(document).ready(function () {
             // Call API for province's name

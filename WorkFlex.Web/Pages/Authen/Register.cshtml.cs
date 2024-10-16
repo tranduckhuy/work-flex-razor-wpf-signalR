@@ -26,13 +26,13 @@ namespace WorkFlex.Web.Pages.Authen
             return Page();
         }
 
-        public IActionResult OnPost(RegisterVM registerVm)
+        public async Task<IActionResult> OnPost(RegisterVM registerVm)
         {
             _logger.LogInformation("[OnPost]: Controller - Start add a new user");
             try
             {
                 var registerDto = AppMapper.Mapper.Map<RegisterDto>(registerVm);
-                var registerResult = _authenService.AddUser(registerDto, HttpContext.Session, HttpContext);
+                var registerResult = await _authenService.AddUserAsync(registerDto, HttpContext.Session, HttpContext);
                 _logger.LogDebug("[OnPost]: Controller - Register result: {registerResult}", registerResult);
                 switch (registerResult)
                 {

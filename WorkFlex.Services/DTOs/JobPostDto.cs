@@ -19,6 +19,12 @@ namespace WorkFlex.Services.DTOs
 
         public string DisplayCreatedAt { get; set; } = string.Empty;
 
+        public int JobTypeId { get; set; }
+
+        public int IndustryId { get; set; }
+
+        public Guid UserId { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime ExpiredAt { get; set; }

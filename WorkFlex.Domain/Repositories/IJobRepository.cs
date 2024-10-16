@@ -9,6 +9,10 @@ namespace WorkFlex.Domain.Repositories
 
         Task<IEnumerable<JobType>> GetJobTypesAsync();
 
+        Task<IEnumerable<Industry>> GetIndustriesAsync();
+
         Task<JobPost> GetJobByIdAsync(Guid id);
+
+        Task AddJobPost(JobPost jobPost);
     }
 }
