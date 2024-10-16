@@ -6,18 +6,18 @@ namespace WorkFlex.Services.Interface
 {
     public interface IAuthenService
     {
-        bool IsEmailExist(string email);
+        Task<bool> IsEmailExistAsync(string email);
 
-        bool SendMailResetEmail(string userEmail, ISession session, HttpContext httpContext);
+        Task<bool> SendMailResetEmailAsync(string userEmail, ISession session, HttpContext httpContext);
 
-        bool ChangePassword(string newPassword, ISession session);
+        Task<bool> ChangePasswordAsync(string newPassword, ISession session);
 
-        bool IsAccountLocked(string email);
+        Task<bool> IsAccountLockedAsync(string email);
 
-        LoginResDto? CheckLogin(LoginReqDto loginReqDto);
+        Task<LoginResDto?> CheckLoginAsync(LoginReqDto loginReqDto);
 
-        RegisterResult AddUser(RegisterDto registerDto, ISession session, HttpContext httpContext);
+        Task<RegisterResult> AddUserAsync(RegisterDto registerDto, ISession session, HttpContext httpContext);
 
-		ActivateResult ActivateAccount(string email, string token, ISession session, HttpContext httpContext);
-	}
+        Task<ActivateResult> ActivateAccountAsync(string email, string token, ISession session, HttpContext httpContext);
+    }
 }

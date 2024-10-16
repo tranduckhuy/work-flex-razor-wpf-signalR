@@ -52,9 +52,9 @@
                                                             password has been generated for you. To reset your password, click the
                                                             following link and follow the instructions.
                                                         </p>
-                                                        <a href='{resetLink}'
-                                                            style='background:#87CEFA;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;'>Reset
-                                                            Password
+                                                        <a href='{resetLink}' target='_blank' rel='noopener'
+                                                            style='background:#87CEFA;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;'>
+                                                            Reset Password
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -129,7 +129,7 @@
                                                         <p style='color:#455056; font-size:15px;line-height:24px; margin:0 0 25px;'>
                                                             Once your account is activated, you can log in and start using our services.
                                                         </p>
-                                                        <a href='{activationLink}'
+                                                        <a href='{activationLink}' target='_blank' rel='noopener'
                                                             style='background:#87CEFA;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;'>
                                                             Activate Account
                                                         </a>

@@ -4,16 +4,16 @@ namespace WorkFlex.Domain.Repositories
 {
     public interface IUserRepository
     {
-        User? GetUserByEmail(string email);
+        Task<User?> GetUserByEmailAsync(string email);
 
-        User? GetUserByUsername(string username);
+        Task<User?> GetUserByUsernameAsync(string username);
 
-        bool IsEmailExist(string email);
+        Task<bool> IsEmailExistAsync(string email);
 
-        void AddUser(User user);
+        Task<bool> IsAccountLockedAsync(string email);
 
-        void UpdateUser(User user);
+        Task AddUserAsync(User user);
 
-        bool IsAccountLocked(string email);
+        Task UpdateUserAsync(User user);
     }
 }

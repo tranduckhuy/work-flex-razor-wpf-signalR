@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WorkFlex- @ViewData["Title"]</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/authen-css.css">
+</head>
+<body oncontextmenu='return false' class='snippet-body'>
+    @RenderBody()
+
+    <script src="~/js/vendor/jquery/jquery.min.js"></script>
+    <script src="~/js/validator.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
