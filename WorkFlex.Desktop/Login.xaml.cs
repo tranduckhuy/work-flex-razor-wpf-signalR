@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Desktop.BusinessObject.DTO;
 using WorkFlex.Desktop.DataAccess.Repositories.Interface;
@@ -64,6 +65,13 @@ namespace WorkFlex.Desktop
 			catch (Exception ex)
 			{
 				MessageBox.Show("Login Error: " + ex.Message);
+			}
+		}
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				LoginButton_Click(sender, e);
 			}
 		}
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
