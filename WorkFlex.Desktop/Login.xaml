@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="Login" Height="390" Width="615"
         WindowStartupLocation="CenterScreen"
-        Background="#FF1D1D1D" Closing="Window_Closing">
+        Background="#FF1D1D1D" 
+        Closing="Window_Closing"
+        KeyDown="Window_KeyDown">
     <Grid>
         <!-- Centering the login form -->
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center"  Background="#ffffff">

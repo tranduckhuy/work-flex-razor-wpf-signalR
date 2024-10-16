@@ -77,6 +77,13 @@ namespace WorkFlex.Desktop
 				MessageBox.Show("Login Error: " + ex.Message);
 			}
 		}
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				LoginButton_Click(sender, e);
+			}
+		}
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			Application.Current.Shutdown();
