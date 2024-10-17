@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Filters;
 using WorkFlex.Domain.Repositories;
@@ -25,6 +26,9 @@ namespace WorkFlex.Infrastructure.Repositories
                 .Include(u => u.User)
                 .Include(ja => ja.JobApplications)
                 .AsQueryable();
+
+            // Filter by Status (Status == Status.Active)
+            query = query.Where(j => j.Status == Status.Active);
 
             // Filter by Job Location
             if (!string.IsNullOrEmpty(filters.JobLocation) && filters.JobLocation != AppConstants.ANY_WHERE)
