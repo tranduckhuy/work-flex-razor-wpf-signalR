@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WorkFlex.Domain.Entities;
 using WorkFlex.Domain;
-using static System.Net.WebRequestMethods;
+using WorkFlex.Domain.Entities;
 
 namespace WorkFlex.Infrastructure.Data
 {

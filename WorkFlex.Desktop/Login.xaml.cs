@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using System.Windows.Controls;
+using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Desktop.BusinessObject;
-using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.DataAccess.Repositories.Interface;
+using WorkFlex.Services.Interface;
+using WorkFlex.Services.DTOs;
 
 namespace WorkFlex.Desktop
 {
@@ -12,60 +12,88 @@ namespace WorkFlex.Desktop
     /// </summary>
     public partial class Login : Window
 	{
-		private readonly IUserRepository _userRepository;
+		private readonly IAuthenService _authenService;
 		private readonly IServiceProvider _serviceProvider;
-		public Login(IUserRepository userRepository, IServiceProvider serviceProvider)
+
+
+		public Login(IAuthenService authenService, IServiceProvider serviceProvider)
 		{
 			InitializeComponent();
-			_userRepository = userRepository;
+			_authenService = authenService;
 			_serviceProvider = serviceProvider;
 		}
 
 		public void Clear()
 		{
-			EmailTextBox.Text = "";
-			PasswordBox.Password = "";
-			UserSession.Instance.Reset();
+			tbUsername.Text = "";
+			pwdBox.Password = "";
 		}
 
 		private async void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
-			try
+            var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new InvalidOperationException("MainWindow service not found");
+            string username = tbUsername.Text;
+			string password = pwdBox.Password;
+			var userSession = UserSession.Instance.GetUser();
+			if (userSession != null)
 			{
-				string email = EmailTextBox.Text;
-				string password = PasswordBox.Password;
-				var user = await _userRepository.GetByEmailAsync(email);
-				if (user != null)
-				{
-					if (user.RoleId == 2 && !user.IsLock)
-					{
-						if (BCrypt.Net.BCrypt.Verify(password, user.Password))
-						{
-							UserSession.Instance.SetUser(AppMapper.Mapper.Map<UserDTO>(user));
-                            var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
-                            mainWindow.Show();
-                            this.Hide();
-						}
-						else
-						{
-							MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-						}
-					}
-					else
-					{
-						MessageBox.Show("Your account does not have access to the system.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-					}
-				}
-				else
-				{
-					MessageBox.Show("Login Error: ", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-				}
+				Hide();
+				mainWindow.Show();
 			}
-			catch (Exception ex)
+
+			if (userSession == null || userSession.Username != username)
 			{
-				MessageBox.Show("Login Error: " + ex.Message);
+				try
+				{
+					LoginReqDto req = new LoginReqDto
+					{
+						Username = username,
+						Password = password
+					};
+
+					var loginResDto = await _authenService.CheckLoginAsync(req);
+					switch (loginResDto!.Result)
+					{
+						case AppConstants.LoginResult.Success:
+							if (loginResDto.User != null)
+							{
+								UserSession.Instance.SetUser(loginResDto.User);
+								if (loginResDto.User.RoleId != 2)
+								{
+									MessageBox.Show(AppConstants.MESSAGE_UNAUTHORIZED, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+									return;
+								}
+								Hide();
+								Clear();
+								mainWindow.Show();
+							}
+							break;
+						case AppConstants.LoginResult.UserNotFound:
+							MessageBox.Show(AppConstants.MESSAGE_INVALID_USERNAME, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+							break;
+						case AppConstants.LoginResult.InvalidPassword:
+							MessageBox.Show(AppConstants.MESSAGE_INVALID_PASSWORD, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+							break;
+						case AppConstants.LoginResult.AccountLocked:
+							MessageBox.Show(AppConstants.MESSAGE_ACCOUNT_LOCKED, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+							break;
+						case AppConstants.LoginResult.AccountInactive:
+							MessageBox.Show(AppConstants.MESSAGE_ACCOUNT_INACTIVE, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+							break;
+						default:
+							MessageBox.Show(AppConstants.MESSAGE_FAILED, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+							break;
+					}
+				}
+				catch
+				{
+					Clear();
+					UserSession.Instance.Reset();
+					MessageBox.Show(AppConstants.MESSAGE_FAILED, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+				}
 			}
 		}
+			
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			Application.Current.Shutdown();

@@ -1,91 +1,73 @@
 ﻿@page
 @model WorkFlex.Web.Pages.Authen.RegisterModel
 @{
-    Layout = "";
+    Layout = "_LayoutAuthen";
+    ViewData["Title"] = "Sign up";
     var failedMessage = TempData["FailedMessage"] as string;
 
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up - WorkFlex</title>
-
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
-
-    <!-- Main css -->
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/authen-css.css">
-</head>
-<body>
-
-    <div class="main">
-        <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
-                        @if (!string.IsNullOrEmpty(failedMessage))
-                        {
-                            <div class="alert alert-danger" role="alert">
-                                @failedMessage
-                            </div>
-                        }
-                        <form method="POST" class="register-form" id="register-form">
-                            <div class="form-group">
-                                <label for="fname" asp-for="RegisterVM.FirstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" asp-for="RegisterVM.FirstName" name="RegisterVM.FirstName" id="fname" placeholder="Your First Name" rules="required" autocomplete="off" />
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="lname" asp-for="RegisterVM.LastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" asp-for="RegisterVM.LastName" name="RegisterVM.LastName" id="lname" placeholder="Your Last Name" rules="required" autocomplete="off" />
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" asp-for="RegisterVM.Email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" asp-for="RegisterVM.Email" name="RegisterVM.Email" id="email" placeholder="Your Email" rules="required|email" autocomplete="off" />
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="pass" asp-for="RegisterVM.Password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" asp-for="RegisterVM.Password" name="RegisterVM.Password" id="pass" placeholder="Your Password" rules="required|min:8|max:16|number|lower|upper|special" />
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="repass" asp-for="RegisterVM.RePassword"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" asp-for="RegisterVM.RePassword" name="RegisterVM.RePassword" id="repass" placeholder="Repeat your password" rules="required|match:pass" />
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term">
-                                    <span><span></span></span>
-                                    I agree all statements in <a href="#" class="term-service">Terms of service</a>
-                                </label>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit register-form-submit" value="Register" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="signup-image">
-                        <figure><img src="~/img/authen/signup-image.jpg" alt="sing up image"></figure>
-                        <a asp-page="Login" class="signup-image-link">I am already member</a>
-                    </div>
+<div class="main">
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    @if (!string.IsNullOrEmpty(failedMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @failedMessage
+                        </div>
+                    }
+                    <form method="POST" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="fname" asp-for="RegisterVM.FirstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" asp-for="RegisterVM.FirstName" name="RegisterVM.FirstName" id="fname" placeholder="Your First Name" rules="required" autocomplete="off" />
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname" asp-for="RegisterVM.LastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" asp-for="RegisterVM.LastName" name="RegisterVM.LastName" id="lname" placeholder="Your Last Name" rules="required" autocomplete="off" />
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" asp-for="RegisterVM.Email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" asp-for="RegisterVM.Email" name="RegisterVM.Email" id="email" placeholder="Your Email" rules="required|email" autocomplete="off" />
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass" asp-for="RegisterVM.Password"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" asp-for="RegisterVM.Password" name="RegisterVM.Password" id="pass" placeholder="Your Password" rules="required|min:8|max:16|number|lower|upper|special" />
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="repass" asp-for="RegisterVM.RePassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" asp-for="RegisterVM.RePassword" name="RegisterVM.RePassword" id="repass" placeholder="Repeat your password" rules="required|match:pass" />
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term">
+                                <span><span></span></span>
+                                I agree all statements in <a href="#" class="term-service">Terms of service</a>
+                            </label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit register-form-submit" value="Register" />
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="~/img/authen/signup-image.jpg" alt="sing up image"></figure>
+                    <a asp-page="Login" class="signup-image-link">I am already member</a>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 
-    <!-- JS -->
-    <script src="~/js/vendor/jquery/jquery.min.js"></script>
-    <script src="~/js/validator.js"></script>
+@section Scripts {
     <script>
         Validator("#register-form");
     </script>
@@ -99,5 +81,5 @@
             }
         });
     </script>
-</body>
-</html>
+}
+    

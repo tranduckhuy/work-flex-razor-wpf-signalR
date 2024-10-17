@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.ViewModels;
-using WorkFlex.Web.Services.Interface;
-using WorkFlex.Web.DTOs;
-using WorkFlex.Web.Constants;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
+using WorkFlex.Web.Mapping;
 using WorkFlex.Web.Untils.Helper.Interface;
+using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.Authen
 {
@@ -21,7 +22,7 @@ namespace WorkFlex.Web.Pages.Authen
             _addressHelper = addressHelper;
         }
 
-        public LoginVM LoginVM { get; set; } = null!;
+        public LoginReqVM LoginVM { get; set; } = null!;
 
         public IActionResult OnGet()
         {
@@ -31,7 +32,7 @@ namespace WorkFlex.Web.Pages.Authen
             return RedirectToPage(AppConstants.PAGE_HOME);
         }
 
-        public IActionResult OnPost(LoginVM loginVm)
+        public async Task<IActionResult> OnPost(LoginReqVM loginVm)
         {
             _logger.LogInformation("[OnPost]: Controller - Start doing authentication for user");
 
@@ -46,7 +47,7 @@ namespace WorkFlex.Web.Pages.Authen
             {
                 try
                 {
-                    var loginDto = _authenService.CheckLogin(loginVm);
+                    var loginDto = await _authenService.CheckLoginAsync(AppMapper.Mapper.Map<LoginReqDto>(loginVm));
                     _logger.LogDebug("[OnPost]: Controller - Authentication information after checking: {loginDto}", loginDto);
                     switch (loginDto!.Result)
                     {
@@ -108,14 +109,14 @@ namespace WorkFlex.Web.Pages.Authen
             return RedirectToPage(AppConstants.PAGE_HOME);
         }
 
-		public IActionResult OnGetActivate(string email, string token)
+		public async Task<IActionResult> OnGetActivate(string email, string token)
 		{
 			_logger.LogInformation("[OnGetActivate]: Controller - Start activating account for user {email}", email);
 
 			try
 			{
 				// Call the ActivateAccount method from service
-				AppConstants.ActivateResult activateResult = _authenService.ActivateAccount(email, token, HttpContext.Session, HttpContext);
+				AppConstants.ActivateResult activateResult = await _authenService.ActivateAccountAsync(email, token, HttpContext.Session, HttpContext);
                 switch (activateResult) 
                 { 
                     case AppConstants.ActivateResult.Success:

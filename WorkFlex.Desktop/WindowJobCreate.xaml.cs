@@ -1,10 +1,11 @@
 ﻿using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.BusinessObject.Service.Interface;
+using WorkFlex.Desktop.BusinessObject;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Desktop
 {
@@ -14,30 +15,31 @@ namespace WorkFlex.Desktop
     public partial class WindowJobCreate : Window
     {
         private readonly MainWindow _mainWindow;
-        private readonly IJobPostService _jobPostService;
+        private readonly IJobService _jobService;
 
-        public WindowJobCreate(MainWindow mainWindow, IJobPostService jobPostService)
+        public WindowJobCreate(MainWindow mainWindow, IJobService jobService)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _jobPostService = jobPostService;
+            _jobService = jobService;
+
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             txtBoxSalaryRange.Text = " - "; 
 
-            comboBoxJobType.ItemsSource = _jobPostService.GetAllJobTypes();
+            comboBoxJobType.ItemsSource = await _jobService.GetJobTypesAsync();
             comboBoxJobType.DisplayMemberPath = "TypeName";
             comboBoxJobType.SelectedValuePath = "Id";
 
-            comboBoxIndustry.ItemsSource = _jobPostService.GetAllIndustries();
+            comboBoxIndustry.ItemsSource = await _jobService.GetIndustriesAsync();
             comboBoxIndustry.DisplayMemberPath = "IndustryName";
             comboBoxIndustry.SelectedValuePath = "Id";
 
             if (!string.IsNullOrEmpty(txtBoxIdJob.Text))
             {
-                var jobPostDto = _jobPostService.GetJobPostById(txtBoxIdJob.ToString());
+                var jobPostDto = await _jobService.GetJobByIdAsync(Guid.Parse(txtBoxIdJob.ToString()));
                 if (jobPostDto == null)
                 {
                     MessageBox.Show("Not Found Job Post!", "Not Found Error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -57,7 +59,7 @@ namespace WorkFlex.Desktop
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -78,27 +80,34 @@ namespace WorkFlex.Desktop
                     int.TryParse(parts[0].Trim().Replace(" ", ""), out int minSalary) &&
                     int.TryParse(parts[1].Trim().Replace(" ", ""), out int maxSalary))
                 {
-
                     if (minSalary < 100 || maxSalary > 10000 || minSalary > maxSalary)
                     {
                         MessageBox.Show("Please enter a valid value from 100 to 10000 and Min cannot be greater than Max.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
 
-                    JobPostDTO jobPostDTO = new JobPostDTO
+                    JobPostDto jobPostDto = new JobPostDto
                     {
                         Title = txtBoxTitleJob.Text,
-                        SalaryRange = $"{minSalary} - {maxSalary}", 
+                        SalaryRange = $"{minSalary} - {maxSalary}",
                         JobDescription = txtBoxDescriptionJob.Text,
                         JobLocation = txtBoxLocation.Text,
                         Status = (int)Domain.Status.Active,
                         JobTypeId = (int)comboBoxJobType.SelectedValue,
                         IndustryId = (int)comboBoxIndustry.SelectedValue,
+                        UserId = UserSession.Instance.GetUser().Id
                     };
 
-                    _jobPostService.AddJobPost(jobPostDTO);
-                    _mainWindow.RefreshJobList();
-                    this.Close();
+                    if (await _jobService.AddJobPostAsync(jobPostDto))
+                    {
+                        MessageBox.Show(AppConstants.MESSAGE_ADD_JOB_SUCCESS, "Post Job", MessageBoxButton.OK, MessageBoxImage.Information);
+                        _mainWindow.RefreshJobList();
+                        Close();
+                    } else
+                    {
+                        MessageBox.Show(AppConstants.MESSAGE_ADD_JOB_FAILED, "Post Job", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
                 }
                 else
                 {
@@ -110,8 +119,6 @@ namespace WorkFlex.Desktop
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
-
 
         private void txtBoxSalaryRange_KeyDown(object sender, KeyEventArgs e)
         {
@@ -136,56 +143,12 @@ namespace WorkFlex.Desktop
             }
         }
 
-        private void txtBoxSalaryRange_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox == null) return;
-
-            if (string.IsNullOrEmpty(textBox.Text)) return;
-
-            string input = textBox.Text.Replace(" ", "").Replace("-", "");
-
-            if (input.Length > 8) return;
-
-            string[] parts = textBox.Text.Split('-');
-
-            string minPart = parts.Length > 0 ? parts[0].Trim() : "";
-            string maxPart = parts.Length > 1 ? parts[1].Trim() : "";
-
-            TimeSpan timeout = TimeSpan.FromMilliseconds(100);
-            minPart = Regex.Replace(minPart, @"^0+", "", RegexOptions.None, timeout);
-            maxPart = Regex.Replace(maxPart, @"^0+", "", RegexOptions.None, timeout);
-
-            textBox.Text = $"{minPart} - {maxPart}";
-
-            if (minPart.Length > 0)
-            {
-                textBox.SelectionStart = minPart.Length + 3; 
-            }
-            else
-            {
-                textBox.SelectionStart = 0;
-            }
-        }
-
-
         private void txtBoxSalaryRange_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
             if (textBox == null) return;
 
-            string newText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
-
-            string[] parts = newText.Split('-');
-            string minPart = parts.Length > 0 ? parts[0].Trim() : "";
-            string maxPart = parts.Length > 1 ? parts[1].Trim() : "";
-
-            if (minPart.Length + maxPart.Length >= 10)
-            {
-                e.Handled = true;
-            }
-
-            e.Handled = !Regex.IsMatch(e.Text, @"^[0-9]+$");
+            e.Handled = !Regex.IsMatch(e.Text, @"^[0-9-]+$");
         }
 
         private void txtBoxSalaryRange_Loaded(object sender, RoutedEventArgs e)

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.Constants;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.Interface;
+using WorkFlex.Web.Mapping;
 using WorkFlex.Web.ViewModels;
+
 
 namespace WorkFlex.Web.Pages.Chat
 {
@@ -18,9 +20,9 @@ namespace WorkFlex.Web.Pages.Chat
         }
 
         public List<ConversationReplyViewModel> Messages { get; set; } = [];
-        public List<UserViewModel> Users { get; set; } = [];
-        public UserViewModel CurrentUser { get; set; } = null!;
-        public UserViewModel OtherUser { get; set; } = null!;
+        public List<UserMessageVM> Users { get; set; } = [];
+        public UserMessageVM CurrentUser { get; set; } = null!;
+        public UserMessageVM OtherUser { get; set; } = null!;
         public string ConversationId { get; set; } = string.Empty;
 
         public async Task<IActionResult> OnGet(Guid otherUserId)
@@ -44,27 +46,29 @@ namespace WorkFlex.Web.Pages.Chat
 
                 var currentUserAvatar = HttpContext.Session.GetString(AppConstants.AVATAR);
 
-                CurrentUser = new UserViewModel
+                CurrentUser = new UserMessageVM
                 {
                     Id = new Guid(currentUserId),
                     Name = AppConstants.YOU,
                     Avatar = string.IsNullOrEmpty(currentUserAvatar) ? AppConstants.DEFAULT_AVATAR : currentUserAvatar
                 };
 
-                OtherUser = new UserViewModel
+                OtherUser = new UserMessageVM
                 {
                     Id = otherUserId,
                     Name = result.Item2.Name,
                     Avatar = result.Item2.Avatar
                 };
 
-                var userChats = await _conversationService.GetUserChats(currentUserId).ConfigureAwait(false);
+                var userChatsDto = await _conversationService.GetUserChats(currentUserId).ConfigureAwait(false);
+                var userChats = AppMapper.Mapper.Map<List<UserMessageVM>>(userChatsDto);
 
                 Users.Add(CurrentUser);
                 Users.AddRange(userChats);
 
                 ConversationId = result.Item1.Id.ToString();
-                Messages = await _conversationService.GetMessagesForConversation(result.Item1.Id);
+                var messagesDto = await _conversationService.GetMessagesForConversation(result.Item1.Id);
+                Messages = AppMapper.Mapper.Map<List<ConversationReplyViewModel>>(messagesDto);
 
                 return Page();
             } catch (Exception ex)

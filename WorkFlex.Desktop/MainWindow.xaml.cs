@@ -1,25 +1,83 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WorkFlex.Desktop.BusinessObject;
-using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.BusinessObject.Service.Interface;
+using WorkFlex.Domain.Filters;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    public class RelayCommand : ICommand
+    {
+        readonly Action<object> _execute;
+        readonly Predicate<object> _canExecute;
+
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public bool CanExecute(object? parameter)
+        {
+            return _canExecute == null || _canExecute(parameter!);
+        }
+
+        public void Execute(object? parameter) { _execute(parameter!); }
+    }
+
     public partial class MainWindow : Window
     {
 		private readonly IServiceProvider _serviceProvider;
-		private readonly IJobPostService _jobPostService;
+		private readonly IJobService _jobService;
 
-		public MainWindow(IServiceProvider serviceProvider, IJobPostService jobPostService)
+		private IEnumerable<JobPostDto> Jobs { get; set; } = new List<JobPostDto>();
+
+		private int TotalCount { get; set; }
+
+        private int _currentPage = 1;
+        private readonly int _pageSize = 20;
+
+        public event PropertyChangedEventHandler PropertyChanged = null!;
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            _serviceProvider = serviceProvider;
-            _jobPostService = jobPostService;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public int CurrentPage
+        {
+            get => _currentPage;
+            set { _currentPage = value; OnPropertyChanged(nameof(CurrentPage)); LoadJobs(); }
+        }
+
+        public ICommand NextPageCommand { get; }
+
+        public ICommand PreviousPageCommand { get; }
+
+		public MainWindow(IServiceProvider serviceProvider, IJobService jobService)
+        {
             InitializeComponent();
+			_jobService = jobService;
+            _serviceProvider = serviceProvider;
+
+            NextPageCommand = new RelayCommand(_ => CurrentPage++, _ => CurrentPage < ((double)TotalCount / _pageSize));
+            PreviousPageCommand = new RelayCommand(_ => CurrentPage--, _ => CurrentPage > 1);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -27,76 +85,95 @@ namespace WorkFlex.Desktop
             LoadJobs();
         }
 
-        private void LoadJobs()
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
-            try
-            {
-                var jobs = _jobPostService.GetAllJobPosts();
-                listView.ItemsSource = jobs;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading jobs: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            Application.Current.Shutdown();
         }
 
-        private void ListView_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Button_Search(object sender, RoutedEventArgs e)
         {
-            ListView? listView = sender as ListView;
-            GridView? gridView = listView != null ? listView.View as GridView : null;
-
-            if (listView != null && gridView != null)
-            {
-                double width = listView.ActualWidth - SystemParameters.VerticalScrollBarWidth;
-
-                if (width > 0)
-                {
-                    //double column1 = 0.05; // Job Id
-                    double column1 = 0.15; // Job Title
-                    double column2 = 0.15; // Salary Range
-                    double column3 = 0.15; // Job Location
-                    double column4 = 0.25; // Job Description
-                    double column5 = 0.15; // Created At
-                    double column6 = 0.15; // Expired At
-
-                    gridView.Columns[0].Width = width * column1;
-                    gridView.Columns[1].Width = width * column2;
-                    gridView.Columns[2].Width = width * column3;
-                    gridView.Columns[3].Width = width * column4;
-                    gridView.Columns[4].Width = width * column5;
-                    gridView.Columns[5].Width = width * column6;
-                    //gridView.Columns[6].Width = width * column7;
-                }
-            }
+            LoadJobs();
         }
 
         private void Button_Clear(object sender, RoutedEventArgs e)
         {
 
-            tbId.Clear();
-            tbTitle.Clear();
             tbLocation.Clear();
+            tbMinSalary.Clear();
+            tbMaxSalary.Clear();
 
-            //listView.ItemsSource = jobs;
+            cbType.SelectedIndex = -1;
+            cbPostedWithin.SelectedIndex = -1;
+            cbSortBy.SelectedIndex = -1;
+        }
+
+        private void Button_Reload(object sender, RoutedEventArgs e)
+        {
+            LoadJobs();
         }
 
         private void Button_Insert(object sender, RoutedEventArgs e)
         {
-            WindowJobCreate windowJobCreate = new WindowJobCreate(this,  _jobPostService);
+            WindowJobCreate windowJobCreate = new WindowJobCreate(this,  _jobService);
             windowJobCreate.ShowDialog();
         }
 
-        public void RefreshJobList()
+        private async void Button_Edit(object sender, RoutedEventArgs e)
         {
-            listView.ItemsSource = _jobPostService.GetAllJobPosts();
+            if (listView.SelectedItem is JobPostDto selectedJob)
+            {
+                var windowJobEdit = new WindowJobEdit(this, _jobService);
+                var job = await _jobService.GetJobByIdAsync(selectedJob.Id);
+                if (job != null)
+                {
+                    windowJobEdit.JobPostDto = selectedJob;
+                    windowJobEdit.ShowDialog(); 
+                } else
+                {
+                    MessageBox.Show(AppConstants.MESSAGE_JOB_NOT_FOUND, "Update Job", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
-        private void Button_Search(object sender, RoutedEventArgs e)
+        private async void Button_Delete(object sender, RoutedEventArgs e)
         {
-
+            if (listView.SelectedItem is JobPostDto selectedJob)
+            {
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the job '{selectedJob.Title}'?", "Delete Job", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var job = await _jobService.GetJobByIdAsync(selectedJob.Id);
+                    if (job != null)
+                    {
+                        if (await _jobService.DeleteJobPostAsync(selectedJob.Id))
+                        {
+                            MessageBox.Show(AppConstants.MESSAGE_DELETE_JOB_SUCCESSFULLY, "Delete Job", MessageBoxButton.OK, MessageBoxImage.Information);
+                            RefreshJobList();
+                        } 
+                        else
+                        {
+                            MessageBox.Show(AppConstants.MESSAGE_DELETE_JOB_FAILED, "Delete Job", MessageBoxButton.OK, MessageBoxImage.Error);
+                            RefreshJobList();
+                        }
+                    } 
+                    else
+                    {
+                        MessageBox.Show(AppConstants.MESSAGE_JOB_NOT_FOUND, "Delete Job", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
-
-		private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
+		
+        private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
@@ -114,19 +191,44 @@ namespace WorkFlex.Desktop
 			{
 				MessageBox.Show("Logout Error: ", "Logout Failed", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-		}
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			Application.Current.Shutdown();
-		}
+        }
 
-        private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ListView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (listView.SelectedItem is JobPostDTO selectedJob)
+            ListView? listView = sender as ListView;
+            GridView? gridView = listView != null ? listView.View as GridView : null;
+
+            if (listView != null && gridView != null)
+            {
+                double width = listView.ActualWidth - SystemParameters.VerticalScrollBarWidth;
+
+                if (width > 0)
+                {
+                    double column1 = 0.15; // Job Title
+                    double column2 = 0.15; // Salary Range
+                    double column3 = 0.15; // Job Location
+                    double column4 = 0.25; // Job Description
+                    double column5 = 0.15; // Created At
+                    double column6 = 0.15; // Expired At
+
+                    gridView.Columns[0].Width = width * column1;
+                    gridView.Columns[1].Width = width * column2;
+                    gridView.Columns[2].Width = width * column3;
+                    gridView.Columns[3].Width = width * column4;
+                    gridView.Columns[4].Width = width * column5;
+                    gridView.Columns[5].Width = width * column6;
+
+                }
+            }
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listView.SelectedItem is JobPostDto selectedJob)
             {
                 if (selectedJob.Id != Guid.Empty)
                 {
-                    var jobDetailWindow = new JobDetail(selectedJob.Id, _jobPostService);
+                    var jobDetailWindow = new JobDetail(selectedJob.Id, _jobService);
                     jobDetailWindow.ShowDialog();
                 }
                 else
@@ -138,6 +240,54 @@ namespace WorkFlex.Desktop
             {
                 MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnEdit.IsEnabled = listView.SelectedItem != null;
+            btnDelete.IsEnabled = listView.SelectedItem != null;
+        }
+
+        private async void LoadJobs()
+        {
+            try
+            {
+                // Filter Job Type
+                var jobTypesData = await _jobService.GetJobTypesAsync();
+                var jobTypes = jobTypesData.Select(jt => jt.TypeName).ToList();
+                cbType.ItemsSource = jobTypes;
+
+                // Filter Posted Within
+                cbPostedWithin.ItemsSource = new List<string> { "Any", "Today", "Last 2 days", "Last 3 days", "Last 5 days", "Last 10 days" };
+
+                // Filter Sort By
+                cbSortBy.ItemsSource = new List<string> { "None", "SalaryLowToHigh", "SalaryHighToLow" };
+
+                // Create filter for searching
+                JobFilter filter = new JobFilter
+                {
+                    JobLocation = !string.IsNullOrEmpty(tbLocation.Text) ? tbLocation.Text : string.Empty,
+                    JobType = !string.IsNullOrEmpty((string)cbType.SelectedValue) ? (string)cbType.SelectedValue : string.Empty,
+                    PostedWithin = !string.IsNullOrEmpty((string)cbPostedWithin.SelectedValue) ? (string)cbPostedWithin.SelectedValue : string.Empty,
+                    MinSalary = !string.IsNullOrEmpty(tbMinSalary.Text) ? decimal.Parse(tbMinSalary.Text) : 0,
+                    MaxSalary = !string.IsNullOrEmpty(tbMaxSalary.Text) ? decimal.Parse(tbMaxSalary.Text) : 0,
+                    SortBy = !string.IsNullOrEmpty((string)cbSortBy.SelectedValue) ? (string)cbSortBy.SelectedValue : string.Empty,
+                    PageNumber = CurrentPage,
+                    PageSize = _pageSize,
+                };
+
+                (Jobs, TotalCount) = await _jobService.GetJobsAsync(filter);
+                listView.ItemsSource = Jobs;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading jobs: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void RefreshJobList()
+        {
+            LoadJobs();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using WorkFlex.Desktop.BusinessObject.DTO;
+﻿using WorkFlex.Services.DTOs;
 
 namespace WorkFlex.Desktop.BusinessObject
 {
@@ -6,7 +6,7 @@ namespace WorkFlex.Desktop.BusinessObject
 	{
 		private static UserSession _instance = null!;
 		private static readonly object _lock = new object();
-		public UserDTO CurrentUser { get; private set; } = null!;
+		public UserDto CurrentUser { get; private set; } = null!;
 		public static UserSession Instance
 		{
 			get
@@ -18,14 +18,16 @@ namespace WorkFlex.Desktop.BusinessObject
 			}
 		}
 
-		public void SetUser(UserDTO user)
+		public void SetUser(UserDto user)
 		{
 			CurrentUser = user;
 		}
-		public UserDTO GetUser()
+
+		public UserDto GetUser()
 		{
 			return CurrentUser;
 		}
+
 		public void Reset()
 		{
 			CurrentUser = null!;

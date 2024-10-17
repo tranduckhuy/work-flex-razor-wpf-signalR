@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Infrastructure.Data;
-using WorkFlex.Web.Constants;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.TestUserList
@@ -16,7 +16,7 @@ namespace WorkFlex.Web.Pages.TestUserList
             _context = context;
         }
 
-        public IList<UserViewModel> Users { get; set; } = [];
+        public IList<UserMessageVM> Users { get; set; } = [];
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -30,7 +30,7 @@ namespace WorkFlex.Web.Pages.TestUserList
 
             Users = await _context.Users
                 .Where(u => u.Id != new Guid(currentUserId))
-                .Select(u => new UserViewModel
+                .Select(u => new UserMessageVM
                 {
                     Name = u.FirstName + " " + u.LastName,
                     Id = u.Id,

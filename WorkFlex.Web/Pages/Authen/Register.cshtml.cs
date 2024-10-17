@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.Constants;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
+using WorkFlex.Web.Mapping;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.Authen
@@ -24,12 +26,13 @@ namespace WorkFlex.Web.Pages.Authen
             return Page();
         }
 
-        public IActionResult OnPost(RegisterVM registerVm)
+        public async Task<IActionResult> OnPost(RegisterVM registerVm)
         {
             _logger.LogInformation("[OnPost]: Controller - Start add a new user");
             try
             {
-                var registerResult = _authenService.AddUser(registerVm, HttpContext.Session, HttpContext);
+                var registerDto = AppMapper.Mapper.Map<RegisterDto>(registerVm);
+                var registerResult = await _authenService.AddUserAsync(registerDto, HttpContext.Session, HttpContext);
                 _logger.LogDebug("[OnPost]: Controller - Register result: {registerResult}", registerResult);
                 switch (registerResult)
                 {

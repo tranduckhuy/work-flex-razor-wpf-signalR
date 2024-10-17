@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.Constants;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Web.Pages.Authen
 {
@@ -37,7 +37,7 @@ namespace WorkFlex.Web.Pages.Authen
             return Page();
         }
 
-        public IActionResult OnPost(string newPassword, string confirmPassword)
+        public async Task<IActionResult> OnPost(string newPassword, string confirmPassword)
         {
             if (newPassword != confirmPassword)
             {
@@ -45,7 +45,7 @@ namespace WorkFlex.Web.Pages.Authen
                 return RedirectToPage("Reset"); 
             }
 
-            var result = _authenService.ChangePassword(newPassword, HttpContext.Session);
+            var result = await _authenService.ChangePasswordAsync(newPassword, HttpContext.Session);
             if (result)
             {
                 TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = "Password reset successfully. You can now log in.";

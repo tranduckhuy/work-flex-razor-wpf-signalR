@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WorkFlex.Web.Constants;
-using WorkFlex.Web.Services.Interface;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Web.Pages.Authen
 {
@@ -14,7 +14,7 @@ namespace WorkFlex.Web.Pages.Authen
             _authenService = authenService;
         }
 
-        public IActionResult OnPost(string email)
+        public async Task<IActionResult> OnPost(string email)
         {
             if (string.IsNullOrEmpty(email))
             {
@@ -22,8 +22,8 @@ namespace WorkFlex.Web.Pages.Authen
                 return Page();
             }
 
-            var result = _authenService.SendMailResetEmail(email, HttpContext.Session, HttpContext);
-            if (_authenService.IsAccountLocked(email))
+            var result = await _authenService.SendMailResetEmailAsync(email, HttpContext.Session, HttpContext);
+            if (await _authenService.IsAccountLockedAsync(email))
             {
                 TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACCOUNT_LOCKED;
                 return RedirectToPage("Forgot");

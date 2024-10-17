@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using WorkFlex.Web.Constants;
+using WorkFlex.Infrastructure.Constants;
 
 namespace WorkFlex.Web.AuthenticationFilter
 {

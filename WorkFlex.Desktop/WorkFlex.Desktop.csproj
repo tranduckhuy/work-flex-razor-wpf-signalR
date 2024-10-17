@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj" />
+    <ProjectReference Include="..\WorkFlex.Services\WorkFlex.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,12 +46,12 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="DataAccess\appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
