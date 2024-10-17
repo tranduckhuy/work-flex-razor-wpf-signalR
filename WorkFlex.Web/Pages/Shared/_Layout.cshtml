@@ -1,6 +1,9 @@
 ﻿@{
     var isLoggedIn = !string.IsNullOrEmpty(ViewContext.HttpContext.Session.GetString("Username"));
+    var userId = ViewContext.HttpContext.Session.GetString("Id");
     var avatar = ViewContext.HttpContext.Session.GetString("Avatar");
+    byte[]? roleIdBytes = ViewContext.HttpContext.Session.Get("Role");
+    var roleId = roleIdBytes != null ? BitConverter.ToInt32(roleIdBytes, 0) : 0;
 }
 
 <!DOCTYPE html>
@@ -89,7 +92,7 @@
                                             <img src="@avatar" alt="User's Avatar" class="header__avt" />
                                             <i class="fas fa-chevron-down header__avt-icon" style="font-size:14px;"></i>
                                             <ul class="submenu">
-                                                <li><a href="~/">Profile</a></li>
+                                                <li><a asp-page="/User/Profile" asp-route-userId="@userId">Profile</a></li>
                                                 <li><a href="~/">Settings</a></li>
                                                 <li><a href="@Url.Page("/Authen/Login", "Logout")">Log out</a></li>
                                             </ul>

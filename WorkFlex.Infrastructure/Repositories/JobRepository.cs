@@ -157,7 +157,7 @@ namespace WorkFlex.Infrastructure.Repositories
             return jobPost!;
         }
 
-        public async Task AddJobPost(JobPost jobPost)
+        public async Task AddJobPostAsync(JobPost jobPost)
         {
             await _appDbContext.JobPosts.AddAsync(jobPost);
             await _appDbContext.SaveChangesAsync();
