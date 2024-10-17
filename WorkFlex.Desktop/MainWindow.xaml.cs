@@ -51,7 +51,7 @@ namespace WorkFlex.Desktop
 		private int TotalCount { get; set; }
 
         private int _currentPage = 1;
-        private int _pageSize = 20;
+        private readonly int _pageSize = 20;
 
         public event PropertyChangedEventHandler PropertyChanged = null!;
 
