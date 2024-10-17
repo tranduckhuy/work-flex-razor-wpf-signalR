@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WorkFlex.Desktop.BusinessObject;
 using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
 
@@ -87,12 +88,13 @@ namespace WorkFlex.Desktop
                     JobPostDto jobPostDto = new JobPostDto
                     {
                         Title = txtBoxTitleJob.Text,
-                        SalaryRange = $"{minSalary} - {maxSalary}", 
+                        SalaryRange = $"{minSalary} - {maxSalary}",
                         JobDescription = txtBoxDescriptionJob.Text,
                         JobLocation = txtBoxLocation.Text,
                         Status = (int)Domain.Status.Active,
                         JobTypeId = (int)comboBoxJobType.SelectedValue,
                         IndustryId = (int)comboBoxIndustry.SelectedValue,
+                        UserId = UserSession.Instance.GetUser().Id
                     };
 
                     await _jobService.AddJobPostAsync(jobPostDto);
@@ -109,8 +111,6 @@ namespace WorkFlex.Desktop
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
-
 
         private void txtBoxSalaryRange_KeyDown(object sender, KeyEventArgs e)
         {

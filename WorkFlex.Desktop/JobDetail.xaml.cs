@@ -22,11 +22,6 @@ namespace WorkFlex.Desktop
             LoadJobDetails();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private async void LoadJobDetails()
         {
             try

@@ -129,7 +129,7 @@
                                                                                     </li>
                                                                                     <li class="sherah-dflex">
                                                                                         <h4 class="sherah-profile-info__title">Date of Birth :</h4>
-                                                                                        <p class="sherah-profile-info__text">@user.DateOfBirth.ToShortDateString()</p>
+                                                                                        <p class="sherah-profile-info__text">@((user.DateOfBirth != DateTime.MinValue) ? user.DateOfBirth.ToShortDateString() : "")</p>
                                                                                     </li>
                                                                                     <li class="sherah-dflex">
                                                                                         <h4 class="sherah-profile-info__title">Address :</h4>

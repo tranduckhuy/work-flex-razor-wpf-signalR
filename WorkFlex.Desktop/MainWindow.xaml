@@ -104,7 +104,7 @@
                                 <Button Name="btnClear" Width="80" Margin="10 0 10 0" Height="30" Padding="5 4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Clear" Background="white" Foreground="Black">
                                     Clear
                                 </Button>
-                                <Button x:Name="btnReload" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Background="#37a6e6" Foreground="Black">
+                                <Button x:Name="btnReload" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Background="#37a6e6" Foreground="Black" Click="Button_Reload">
                                     Reload
                                 </Button>
                                 <Button Width="100" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Insert" Background="#37a6e6" Foreground="Black">

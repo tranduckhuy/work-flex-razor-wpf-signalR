@@ -104,11 +104,11 @@ namespace WorkFlex.Desktop
                 JobFilter filter = new JobFilter
                 {
                     JobLocation = !string.IsNullOrEmpty(tbLocation.Text) ? tbLocation.Text : string.Empty,
-                    JobType = !string.IsNullOrEmpty(cbType.SelectedValuePath) ? cbType.SelectedValuePath : string.Empty,
-                    PostedWithin = !string.IsNullOrEmpty(cbPostedWithin.SelectedValuePath) ? cbPostedWithin.SelectedValuePath : string.Empty,
+                    JobType = !string.IsNullOrEmpty((string)cbType.SelectedValue) ? (string)cbType.SelectedValue : string.Empty,
+                    PostedWithin = !string.IsNullOrEmpty((string)cbPostedWithin.SelectedValue) ? (string)cbPostedWithin.SelectedValue : string.Empty,
                     MinSalary = !string.IsNullOrEmpty(tbMinSalary.Text) ? decimal.Parse(tbMinSalary.Text) : 0,
                     MaxSalary = !string.IsNullOrEmpty(tbMaxSalary.Text) ? decimal.Parse(tbMaxSalary.Text) : 0,
-                    SortBy = !string.IsNullOrEmpty(cbSortBy.SelectedValuePath) ? cbSortBy.SelectedValuePath : string.Empty,
+                    SortBy = !string.IsNullOrEmpty((string)cbSortBy.SelectedValue) ? (string)cbSortBy.SelectedValue : string.Empty,
                     PageNumber = CurrentPage,
                     PageSize = _pageSize,
                 };
@@ -168,6 +168,11 @@ namespace WorkFlex.Desktop
         {
             WindowJobCreate windowJobCreate = new WindowJobCreate(this,  _jobService);
             windowJobCreate.ShowDialog();
+        }
+
+        private void Button_Reload(object sender, RoutedEventArgs e)
+        {
+            LoadJobs();
         }
 
         public void RefreshJobList()
