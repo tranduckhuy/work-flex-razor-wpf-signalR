@@ -34,11 +34,15 @@ namespace WorkFlex.Infrastructure.Constants
         public const string UNDEFINE = "Undefine";
         public const string YOU = "Yourself";
 
-        // Constants for authentication
-        // 1. Success message
+        // Message Constants
+        // 1. Success messages (Authentication)
         public const string MESSAGE_REGISTER_SUCCESS = "We have sent an activation email to your account. Please check your inbox.";
         public const string MESSAGE_ACIVATE_ACCOUNT_SUCCESS = "Account activated successfully. You can now log in.";
-        // 2. Failed message
+        // 2. Success messages (Constant messages)
+        public const string MESSAGE_ADD_JOB_SUCCESS = "Job added successfully!";
+        public const string MESSAGE_UPDATE_JOB_SUCCESSFULLY = "Job updated successfully!";
+        public const string MESSAGE_DELETE_JOB_SUCCESSFULLY = "Job deleted successfully!";
+        // 3. Failed messages (Authentication)
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
         public const string MESSAGE_INVALID_PASSWORD = "Incorrect Password.";
         public const string MESSAGE_ACCOUNT_LOCKED = "Account Locked. Please contact with adminstrator for more information.";
@@ -50,6 +54,11 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_ACTIVATE_TOKEN_EXPIRED = "Your request has expired. A new activate link has been sent to your email.";
         public const string MESSAGE_UNAUTHORIZED = "You do not have permission to access this feature. Please contact the administrator if you need assistance.";
 		public const string MESSAGE_FAILED = "Error occurred during execution. Please try again later.";
+        // 4. Failed messages (Constant messages)
+        public const string MESSAGE_JOB_NOT_FOUND = "The job you're looking for does not exist. Please verify the ID and try again.";
+        public const string MESSAGE_ADD_JOB_FAILED = "Add unsuccessful. Please ensure all fields are correct and try again.";
+        public const string MESSAGE_UPDATE_JOB_FAILED = "Update unsuccessful. Please ensure all fields are correct and try again.";
+        public const string MESSAGE_DELETE_JOB_FAILED = "Deletion unsuccessful. Please ensure the job exists and try again.";
 
         // Session & Temp data & Pages name constants
         // 1. Session

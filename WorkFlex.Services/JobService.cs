@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using System.Security.Cryptography;
+using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Filters;
 using WorkFlex.Domain.Repositories;
@@ -21,21 +23,90 @@ namespace WorkFlex.Services
         }
 
 
-        public async Task AddJobPostAsync(JobPostDto jobPostDto)
+        public async Task<bool> AddJobPostAsync(JobPostDto jobPostDto)
         {
-            var jobPost = new JobPost
+            _logger.LogInformation("[AddJobPostAsync]: Service - Start add a job with information: {jobPostDto}", jobPostDto);
+            try
             {
-                Title = jobPostDto.Title,
-                SalaryRange = jobPostDto.SalaryRange,
-                JobDescription = jobPostDto.JobDescription,
-                JobLocation = jobPostDto.JobLocation,
-                JobTypeId = jobPostDto.JobTypeId,
-                IndustryId = jobPostDto.IndustryId,
-                UserId = jobPostDto.UserId,
-                Status = jobPostDto.Status
-            };
+                var jobPost = new JobPost
+                {
+                    Title = jobPostDto.Title,
+                    SalaryRange = jobPostDto.SalaryRange,
+                    JobDescription = jobPostDto.JobDescription,
+                    JobLocation = jobPostDto.JobLocation,
+                    JobTypeId = jobPostDto.JobTypeId,
+                    IndustryId = jobPostDto.IndustryId,
+                    UserId = jobPostDto.UserId,
+                    Status = jobPostDto.Status
+                };
+                _logger.LogDebug("[AddJobPostAsync]: Service - Job will be added into DB: {jobPost}", jobPost);
 
-            await _jobRepository.AddJobPostAsync(jobPost);
+                await _jobRepository.AddJobPostAsync(jobPost);
+                _logger.LogInformation("[AddJobPostAsync]: Service - End add a job with message: Added successfully.");
+
+                return true;
+            } catch (Exception ex)
+            {
+                _logger.LogInformation("[AddJobPostAsync]: Service - End add a job with error: {ex}", ex.StackTrace);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateJobPostAsync(JobPostDto jobPostDto)
+        {
+            _logger.LogInformation("[UpdateJobPostAsync]: Service - Start update a job with information: {jobPostDto}", jobPostDto);
+            try
+            {
+                var oldJob = await _jobRepository.GetJobByIdAsync(jobPostDto.Id);
+                if (oldJob == null)
+                {
+                    _logger.LogInformation("[UpdateJobPostAsync]: Service - End update a job with message: Job not found.");
+                    return false;
+                }
+                _logger.LogDebug("[UpdateJobPostAsync]: Service - Job before update: {oldJob}", oldJob);
+
+                oldJob.Title = jobPostDto.Title;
+                oldJob.SalaryRange = jobPostDto.SalaryRange;
+                oldJob.JobDescription = jobPostDto.JobDescription;
+                oldJob.JobLocation = jobPostDto.JobLocation;
+                oldJob.JobTypeId = jobPostDto.JobTypeId;
+                oldJob.IndustryId = jobPostDto.IndustryId;
+                _logger.LogDebug("[UpdateJobPostAsync]: Service - Job after update: {oldJob}", oldJob);
+
+                await _jobRepository.UpdateJobPostAsync(oldJob);
+                _logger.LogInformation("[UpdateJobPostAsync]: Service - End update a job with message: Updated successfully.");
+                return true;
+            } catch (Exception ex)
+            {
+                _logger.LogInformation("[UpdateJobPostAsync]: Service - End update a job with error: {ex}", ex.StackTrace);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteJobPostAsync(Guid id)
+        {
+            _logger.LogInformation("[DeleteJobPostAsync]: Service - Start delete a job with id: {id}", id);
+            try
+            {
+                var oldJob = await _jobRepository.GetJobByIdAsync(id);
+                if (oldJob == null)
+                {
+                    _logger.LogInformation("[DeleteJobPostAsync]: Service - End delete a job with message: Job not found.");
+                    return false;
+                }
+                _logger.LogDebug("[DeleteJobPostAsync]: Service - Job before delete: {oldJob}", oldJob);
+                oldJob.Status = Status.Inactive;
+                _logger.LogDebug("[DeleteJobPostAsync]: Service - Job after delete: {oldJob}", oldJob);
+
+                await _jobRepository.UpdateJobPostAsync(oldJob);
+                _logger.LogInformation("[DeleteJobPostAsync]: Service - End delete a job with message: Deleted successfully.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("[DeleteJobPostAsync]: Service - End delete a job with error: {ex}", ex.StackTrace);
+                return false;
+            }
         }
 
         public async Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobFilter filters)
