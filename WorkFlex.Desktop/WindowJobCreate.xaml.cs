@@ -143,13 +143,6 @@ namespace WorkFlex.Desktop
             }
         }
 
-        private void txtBoxSalaryRange_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox == null) return;
-
-        }
-
         private void txtBoxSalaryRange_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;

@@ -156,7 +156,7 @@ namespace WorkFlex.Services
             return null;
         }
 
-        private string FormatJobLocation(string jobLocation)
+        private static string FormatJobLocation(string jobLocation)
         {
             if (string.IsNullOrEmpty(jobLocation))
                 return jobLocation;
@@ -165,7 +165,7 @@ namespace WorkFlex.Services
             return jobLocationParts.LastOrDefault()?.Trim() ?? string.Empty;
         }
 
-        private string FormatDisplayCreatedAt(DateTime createdAt)
+        private static string FormatDisplayCreatedAt(DateTime createdAt)
         {
             var timeDifference = DateTime.UtcNow.Date - createdAt.Date;
 

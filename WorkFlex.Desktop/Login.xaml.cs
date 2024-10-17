@@ -31,7 +31,7 @@ namespace WorkFlex.Desktop
 
 		private async void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
-			var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new Exception("MainWindow Service not found");
+			var mainWindow = _serviceProvider.GetService<MainWindow>() ?? throw new ArgumentNullException("MainWindow Service not found");
 			string username = tbUsername.Text;
 			string password = pwdBox.Password;
 			var userSession = UserSession.Instance.GetUser();

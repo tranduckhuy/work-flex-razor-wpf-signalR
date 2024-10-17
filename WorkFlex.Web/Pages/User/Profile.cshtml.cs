@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
 
@@ -28,7 +29,7 @@ namespace WorkFlex.Web.Pages.User
 				if (string.IsNullOrEmpty(userId) || !Guid.TryParse(userId, out var guidUserId))
 				{
 					_logger.LogWarning("[OnGetAsync]: Invalid user ID format.");
-					return RedirectToPage("/Error/Error");
+					return RedirectToPage(AppConstants.PAGE_ERROR);
 				}
 
 				var userIdSession = HttpContext.Session.GetString("Id");
@@ -36,7 +37,7 @@ namespace WorkFlex.Web.Pages.User
 				if (userIdSession != null && Guid.TryParse(userIdSession, out var sessionId) && sessionId != guidUserId)
 				{
 					_logger.LogWarning("[OnGetAsync]: Unauthorized access attempt by user with ID: {SessionUserId}", userIdSession);
-					return RedirectToPage("/Error/Error");
+					return RedirectToPage(AppConstants.PAGE_ERROR);
 				}
 
 				User = await _userService.GetByIdAsync(guidUserId);
@@ -44,7 +45,7 @@ namespace WorkFlex.Web.Pages.User
 				if (User == null)
 				{
 					_logger.LogWarning("[OnGetAsync]: User not found for ID: {UserId}", userId);
-					return RedirectToPage("/Error/Error");
+					return RedirectToPage(AppConstants.PAGE_ERROR);
 				}
 
 				_logger.LogInformation("[OnGetAsync]: Successfully retrieved user with ID: {UserId}", userId);
@@ -53,7 +54,7 @@ namespace WorkFlex.Web.Pages.User
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "[OnGetAsync]: Error retrieving user by ID: {UserId}", userId);
-				return RedirectToPage("/Error/Error");
+				return RedirectToPage(AppConstants.PAGE_ERROR);
 			}
 		}
     }

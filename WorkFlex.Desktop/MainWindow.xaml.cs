@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WorkFlex.Desktop.BusinessObject;
-using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Filters;
 using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.DTOs;
@@ -36,7 +35,7 @@ namespace WorkFlex.Desktop
 
         public bool CanExecute(object? parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameter!);
+            return _canExecute == null || _canExecute(parameter!);
         }
 
         public void Execute(object? parameter) { _execute(parameter!); }
