@@ -31,6 +31,29 @@ namespace WorkFlex.Desktop.BusinessObject.Service
             _jobRepository.Add(jobPost);
         }
 
+        public void UpdateJobPost(JobPostDTO jobPostDto)
+        {
+            var jobPost = _jobRepository.GetJobById(jobPostDto.Id);
+            if (jobPost != null)
+            {
+                jobPost.Title = jobPostDto.Title;
+                jobPost.SalaryRange = jobPostDto.SalaryRange;
+                jobPost.JobDescription = jobPostDto.JobDescription;
+                jobPost.JobLocation = jobPostDto.JobLocation;
+                jobPost.JobTypeId = jobPostDto.JobTypeId;
+                jobPost.IndustryId = jobPostDto.IndustryId;
+                jobPost.Status = jobPostDto.Status;
+
+                _jobRepository.Update(jobPost);
+            }
+        }
+
+        public void DeleteJobPost(Guid jobId)
+        {
+            _jobRepository.Delete(jobId);
+        }
+
+
         public JobPostDTO? GetJobPostById(string jobId)
         {
             var jobPost = _jobRepository.GetJobPostById(jobId);
@@ -94,5 +117,6 @@ namespace WorkFlex.Desktop.BusinessObject.Service
                 return daysAgo > 0 ? $"{daysAgo} Days Ago" : "Today";
             }
         }
+
     }
 }

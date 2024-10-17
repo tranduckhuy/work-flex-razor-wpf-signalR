@@ -20,6 +20,27 @@ namespace WorkFlex.Desktop.DataAccess.Repositories
             _context.SaveChanges();
         }
 
+        public void Update(JobPost jobPost)
+        {
+            _context.JobPosts.Update(jobPost);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Guid jobId)
+        {
+            var jobPost = _context.JobPosts.Find(jobId);
+            if (jobPost != null)
+            {
+                _context.JobPosts.Remove(jobPost);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("JobPost not found.");
+            }
+        }
+
+
         public JobPost? GetJobPostById(string id)
         {
             var jobPost = _context.JobPosts.FirstOrDefault(j => j.Id.Equals(id));

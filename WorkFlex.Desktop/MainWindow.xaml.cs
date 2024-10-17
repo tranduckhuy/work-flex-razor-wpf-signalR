@@ -51,7 +51,6 @@ namespace WorkFlex.Desktop
 
                 if (width > 0)
                 {
-                    //double column1 = 0.05; // Job Id
                     double column1 = 0.15; // Job Title
                     double column2 = 0.15; // Salary Range
                     double column3 = 0.15; // Job Location
@@ -65,7 +64,7 @@ namespace WorkFlex.Desktop
                     gridView.Columns[3].Width = width * column4;
                     gridView.Columns[4].Width = width * column5;
                     gridView.Columns[5].Width = width * column6;
-                    //gridView.Columns[6].Width = width * column7;
+
                 }
             }
         }
@@ -84,6 +83,32 @@ namespace WorkFlex.Desktop
         {
             WindowJobCreate windowJobCreate = new WindowJobCreate(this,  _jobPostService);
             windowJobCreate.ShowDialog();
+        }
+
+        private void Button_Edit(object sender, RoutedEventArgs e)
+        {
+            if (listView.SelectedItem is JobPostDTO selectedJob)
+            {
+                var windowJobEdit = new WindowJobEdit(this, _jobPostService, selectedJob);
+                windowJobEdit.ShowDialog();
+            }
+        }
+
+        private void Button_Delete(object sender, RoutedEventArgs e)
+        {
+            if (listView.SelectedItem is JobPostDTO selectedJob)
+            {
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the job '{selectedJob.Title}'?", "Delete Job", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _jobPostService.DeleteJobPost(selectedJob.Id);
+                    RefreshJobList();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         public void RefreshJobList()
@@ -139,5 +164,13 @@ namespace WorkFlex.Desktop
                 MessageBox.Show("No job selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnEdit.IsEnabled = listView.SelectedItem != null;
+            btnDelete.IsEnabled = listView.SelectedItem != null;
+        }
+       
+
     }
 }

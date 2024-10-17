@@ -6,6 +6,10 @@ namespace WorkFlex.Desktop.DataAccess.Repositories.Interface
     {
         void Add(JobPost jobpost);
 
+        void Update(JobPost jobPost);
+
+        void Delete(Guid jobId);
+
         JobPost? GetJobPostById(string id);
 
         IEnumerable<JobPost> List();

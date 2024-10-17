@@ -7,6 +7,10 @@ namespace WorkFlex.Desktop.BusinessObject.Service.Interface
     {
         void AddJobPost(JobPostDTO add);
 
+        void UpdateJobPost(JobPostDTO jobPostDTO);
+
+        void DeleteJobPost(Guid jobId);
+
         JobPostDTO? GetJobPostById(string jobId);
 
         IEnumerable<JobPostDTO> GetAllJobPosts();
