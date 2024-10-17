@@ -118,12 +118,12 @@ namespace WorkFlex.Desktop
             windowJobCreate.ShowDialog();
         }
 
-        private void Button_Edit(object sender, RoutedEventArgs e)
+        private async void Button_Edit(object sender, RoutedEventArgs e)
         {
             if (listView.SelectedItem is JobPostDto selectedJob)
             {
                 var windowJobEdit = new WindowJobEdit(this, _jobService);
-                var job = _jobService.GetJobByIdAsync(selectedJob.Id);
+                var job = await _jobService.GetJobByIdAsync(selectedJob.Id);
                 if (job != null)
                 {
                     windowJobEdit.JobPostDto = selectedJob;
@@ -146,7 +146,7 @@ namespace WorkFlex.Desktop
                 MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the job '{selectedJob.Title}'?", "Delete Job", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var job = _jobService.GetJobByIdAsync(selectedJob.Id);
+                    var job = await _jobService.GetJobByIdAsync(selectedJob.Id);
                     if (job != null)
                     {
                         if (await _jobService.DeleteJobPostAsync(selectedJob.Id))
