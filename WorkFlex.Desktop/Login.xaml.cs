@@ -59,7 +59,10 @@ namespace WorkFlex.Desktop
 							{
 								UserSession.Instance.SetUser(loginResDto.User);
 								if (loginResDto.User.RoleId != 2)
+								{
 									MessageBox.Show(AppConstants.MESSAGE_UNAUTHORIZED, AppConstants.MESSAGE_LOGIN_FAILED, MessageBoxButton.OK, MessageBoxImage.Error);
+									return;
+								}
 								Hide();
 								Clear();
 								mainWindow.Show();

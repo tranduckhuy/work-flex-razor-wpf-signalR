@@ -43,7 +43,7 @@ namespace WorkFlex.Desktop
                 // Sử dụng SQL Server và lấy chuỗi kết nối từ appsettings.json
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
-            }, ServiceLifetime.Scoped);
+            });
 
             serviceCollection.AddLogging(configure =>
             {
@@ -55,6 +55,8 @@ namespace WorkFlex.Desktop
 
             serviceCollection.AddSingleton<IUserRepository, UserRepository>();
 			serviceCollection.AddSingleton<IJobRepository, JobRepository>();
+			serviceCollection.AddSingleton<IProfileRepository, ProfileRepository>();
+
             serviceCollection.AddScoped<IAuthenService, AuthenService>();
             serviceCollection.AddScoped<IJobService, JobService>();
 
