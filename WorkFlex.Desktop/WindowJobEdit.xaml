@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorkFlex.Desktop"
         mc:Ignorable="d"
-        Title="WindowProductCreate" Height="650" Width="800" Loaded="Window_Loaded">
+        Title="Update Job" Height="650" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Button -->
         <Style TargetType="{x:Type Button}" x:Key="btnLogout">
@@ -124,7 +124,7 @@
                 <Label Content="Status" x:Name="labelStatus" Visibility="Collapsed" IsEnabled="False" Style="{StaticResource labelPrimary}"/>
                 <TextBox x:Name="txtBoxStatus" Visibility="Collapsed" IsEnabled="False" Style="{StaticResource textboxPrimary}"/>
 
-                <Button x:Name="btnCreate" Content="Create" Style="{StaticResource btnLogout}" Width="100" Margin="0 25 0 5" Click="Button_Click"/>
+                <Button x:Name="btnCreate" Content="Update" Style="{StaticResource btnLogout}" Width="100" Margin="0 25 0 5" Click="Button_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

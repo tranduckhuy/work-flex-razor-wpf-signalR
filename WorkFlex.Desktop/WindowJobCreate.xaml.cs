@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WorkFlex.Desktop.BusinessObject;
+using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
 
@@ -97,9 +98,16 @@ namespace WorkFlex.Desktop
                         UserId = UserSession.Instance.GetUser().Id
                     };
 
-                    await _jobService.AddJobPostAsync(jobPostDto);
-                    _mainWindow.RefreshJobList();
-                    Close();
+                    if (await _jobService.AddJobPostAsync(jobPostDto))
+                    {
+                        MessageBox.Show(AppConstants.MESSAGE_ADD_JOB_SUCCESS, "Post Job", MessageBoxButton.OK, MessageBoxImage.Information);
+                        _mainWindow.RefreshJobList();
+                        Close();
+                    } else
+                    {
+                        MessageBox.Show(AppConstants.MESSAGE_ADD_JOB_FAILED, "Post Job", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
                 }
                 else
                 {

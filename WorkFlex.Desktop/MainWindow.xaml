@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorkFlex.Desktop"
         mc:Ignorable="d"
-        Title="WindowAdminManager" Height="650" Width="1200"
+        Title="Job List" Height="650" Width="1200"
         WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <DockPanel>
-
     <DockPanel>
         <!-- Header -->
         <Grid DockPanel.Dock="Top" Height="40" Background="#37a6e6">
@@ -38,18 +36,12 @@
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="TreeViewItem">
                         <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Background" Value="White"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="Margin" Value="0 5"/>
                         <Setter Property="Padding" Value="5"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#37a6e6"/>
-                                <Setter Property="FontWeight" Value="DemiBold"/>
-                            </Trigger>
-                        </Style.Triggers>
                     </Style>
                 </TreeView.ItemContainerStyle>
-                <!-- Thay thế RECRUITER bằng hình ảnh -->
                 <Image Source="DataAccess/Assets/Image/signin-image.jpg" Height="504" Width="122" 
                        HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.397,0.797"/>
             </TreeView>
@@ -106,11 +98,11 @@
                                 <Button Width="100" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Insert" Background="#37a6e6" Foreground="Black">
                                     Post New Job
                                 </Button>
-                                <Button x:Name="btnDelete" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Background="#ff4500" Foreground="Black">
-                                    Delete
-                                </Button>
-                                <Button x:Name="btnEdit" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Background="#ffd700" Foreground="Black">
+                                <Button x:Name="btnEdit" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Edit" Background="#37a6e6" Foreground="Black">
                                     Edit
+                                </Button>
+                                <Button x:Name="btnDelete" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Delete" Background="#37a6e6" Foreground="Black">
+                                    Delete
                                 </Button>
                             </StackPanel>
                         </StackPanel>
@@ -122,7 +114,7 @@
 
                             <ListView MaxHeight="400" x:Name="listView" ScrollViewer.VerticalScrollBarVisibility="Visible"
                                        ScrollViewer.CanContentScroll="False" Width="auto" Grid.Column="0"
-                                       SizeChanged="ListView_SizeChanged" MouseDoubleClick="ListView_MouseDoubleClick" Background="White" Margin="10,0,2,120">
+                                       SizeChanged="ListView_SizeChanged" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="ListView_MouseDoubleClick" Background="White" Margin="10,0,2,120">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Job Title" Width="150" DisplayMemberBinding="{Binding Path=Title}"/>

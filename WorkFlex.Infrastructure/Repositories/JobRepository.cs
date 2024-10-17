@@ -167,6 +167,12 @@ namespace WorkFlex.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateJobPostAsync(JobPost jobPost)
+        {
+            _appDbContext.Update(jobPost);
+            await _appDbContext.SaveChangesAsync();
+        }
+
         private static bool TryParseSalaryRange(string salaryRange, out decimal minSalary, out decimal maxSalary)
         {
             minSalary = 0;

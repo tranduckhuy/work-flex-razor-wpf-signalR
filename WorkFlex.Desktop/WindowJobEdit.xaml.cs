@@ -2,49 +2,55 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WorkFlex.Desktop.BusinessObject.DTO;
-using WorkFlex.Desktop.BusinessObject.Service.Interface;
+using WorkFlex.Infrastructure.Constants;
+using WorkFlex.Services.DTOs;
+using WorkFlex.Services.Interface;
 
 namespace WorkFlex.Desktop
 {
     public partial class WindowJobEdit : Window
     {
         private readonly MainWindow _mainWindow;
-        private readonly IJobPostService _jobPostService;
-        private readonly JobPostDTO _jobPostDTO;
+        private readonly IJobService _jobService;
 
-        public WindowJobEdit(MainWindow mainWindow, IJobPostService jobPostService, JobPostDTO jobPostDTO)
+        public WindowJobEdit(MainWindow mainWindow, IJobService jobService)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            _jobPostService = jobPostService;
-            _jobPostDTO = jobPostDTO;
+            _jobService = jobService;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public JobPostDto JobPostDto { get; set; } = null!;
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            comboBoxJobType.ItemsSource = _jobPostService.GetAllJobTypes();
+            comboBoxJobType.ItemsSource = await _jobService.GetJobTypesAsync();
             comboBoxJobType.DisplayMemberPath = "TypeName";
             comboBoxJobType.SelectedValuePath = "Id";
 
-            comboBoxIndustry.ItemsSource = _jobPostService.GetAllIndustries();
+            comboBoxIndustry.ItemsSource = await _jobService.GetIndustriesAsync();
             comboBoxIndustry.DisplayMemberPath = "IndustryName";
             comboBoxIndustry.SelectedValuePath = "Id";
 
-            txtBoxTitleJob.Text = _jobPostDTO.Title;
-            txtBoxDescriptionJob.Text = _jobPostDTO.JobDescription;
-            txtBoxSalaryRange.Text = _jobPostDTO.SalaryRange;
-            comboBoxJobType.SelectedValue = _jobPostDTO.JobTypeId;
-            comboBoxIndustry.SelectedValue = _jobPostDTO.IndustryId;
-            txtBoxLocation.Text = _jobPostDTO.JobLocation;
+            txtBoxTitleJob.Text = JobPostDto.Title;
+            txtBoxDescriptionJob.Text = JobPostDto.JobDescription;
+            txtBoxSalaryRange.Text = JobPostDto.SalaryRange;
+            comboBoxJobType.SelectedValue = JobPostDto.JobTypeId;
+            comboBoxIndustry.SelectedValue = JobPostDto.IndustryId;
+            txtBoxLocation.Text = JobPostDto.JobLocation;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateFields())
             {
-                _jobPostDTO.Title = txtBoxTitleJob.Text;
-                _jobPostDTO.JobDescription = txtBoxDescriptionJob.Text;
+                JobPostDto.Title = txtBoxTitleJob.Text;
+                JobPostDto.JobDescription = txtBoxDescriptionJob.Text;
+
+                JobPostDto.JobTypeId = (int)comboBoxJobType.SelectedValue;
+                JobPostDto.IndustryId = (int)comboBoxIndustry.SelectedValue;
+
+                JobPostDto.JobLocation = txtBoxLocation.Text;
 
                 string[] parts = txtBoxSalaryRange.Text.Split('-');
                 if (parts.Length == 2 &&
@@ -56,7 +62,7 @@ namespace WorkFlex.Desktop
                         MessageBox.Show("Please enter a valid value from 100 to 10000 and Min cannot be greater than Max.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
-                    _jobPostDTO.SalaryRange = $"{minSalary} - {maxSalary}";
+                    JobPostDto.SalaryRange = $"{minSalary} - {maxSalary}";
                 }
                 else
                 {
@@ -64,13 +70,15 @@ namespace WorkFlex.Desktop
                     return;
                 }
 
-                _jobPostDTO.JobTypeId = (int)comboBoxJobType.SelectedValue;
-                _jobPostDTO.IndustryId = (int)comboBoxIndustry.SelectedValue;
-                _jobPostDTO.JobLocation = txtBoxLocation.Text;
-
-                _jobPostService.UpdateJobPost(_jobPostDTO);
-                _mainWindow.RefreshJobList();
-                this.Close();
+                if (await _jobService.UpdateJobPostAsync(JobPostDto))
+                {
+                    MessageBox.Show(AppConstants.MESSAGE_UPDATE_JOB_SUCCESSFULLY, "Update Job", MessageBoxButton.OK, MessageBoxImage.Information);
+                    _mainWindow.RefreshJobList();
+                    this.Close();
+                } else
+                {
+                    MessageBox.Show(AppConstants.MESSAGE_UPDATE_JOB_FAILED, "Update Job", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {

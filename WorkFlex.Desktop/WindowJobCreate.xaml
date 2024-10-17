@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorkFlex.Desktop"
         mc:Ignorable="d"
-        Title="WindowProductCreate" Height="650" Width="800" Loaded="Window_Loaded">
+        Title="Post Job" Height="650" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <!-- Button -->
         <Style TargetType="{x:Type Button}" x:Key="btnLogout">
