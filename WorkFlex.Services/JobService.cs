@@ -35,7 +35,7 @@ namespace WorkFlex.Services
                 Status = jobPostDto.Status
             };
 
-            await _jobRepository.AddJobPost(jobPost);
+            await _jobRepository.AddJobPostAsync(jobPost);
         }
 
         public async Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobFilter filters)

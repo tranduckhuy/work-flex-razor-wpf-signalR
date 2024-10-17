@@ -8,6 +8,8 @@ namespace WorkFlex.Domain.Repositories
 
         Task<User?> GetUserByUsernameAsync(string username);
 
+        Task<User?> GetUserByIdAsync(Guid id);
+
         Task<bool> IsEmailExistAsync(string email);
 
         Task<bool> IsAccountLockedAsync(string email);

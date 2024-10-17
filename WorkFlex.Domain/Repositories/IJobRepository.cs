@@ -13,6 +13,6 @@ namespace WorkFlex.Domain.Repositories
 
         Task<JobPost> GetJobByIdAsync(Guid id);
 
-        Task AddJobPost(JobPost jobPost);
+        Task AddJobPostAsync(JobPost jobPost);
     }
 }

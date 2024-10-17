@@ -44,6 +44,7 @@ builder.Services.AddDbContext<AppDbContext>();
 // Repositories Register
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
 // Helpers Register
 builder.Services.AddScoped<IEmailHelper, EmailHelper>();
@@ -52,6 +53,7 @@ builder.Services.AddScoped<IAddressHelper, AddressHelper>();
 
 // Services Register
 builder.Services.AddScoped<IAuthenService, AuthenService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
 

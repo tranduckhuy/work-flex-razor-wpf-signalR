@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Repositories;
@@ -10,13 +9,16 @@ using WorkFlex.Services.Interface;
 using WorkFlex.Services.Mapping;
 using static WorkFlex.Infrastructure.Constants.AppConstants;
 
+using Profile = WorkFlex.Domain.Entities.Profile;
+
 namespace WorkFlex.Services
 {
     public class AuthenService : IAuthenService
     {
         private readonly ILogger<AuthenService> _logger;
         private readonly IUserRepository _userRepository;
-		private readonly IEmailHelper _emailHelper;
+        private readonly IProfileRepository _profileRepository;
+        private readonly IEmailHelper _emailHelper;
 		private readonly SendMailUtil _sendMailUtil;
 
         private const string RESET_TOKEN = "ResetToken";
@@ -26,10 +28,11 @@ namespace WorkFlex.Services
         private const string ACTIVATE_TOKEN = "ActivateToken";
         private const string ACTIVATE_TOKEN_EXPIRY_TIME = "ActivateTokenExpiryTime";
 
-		public AuthenService(ILogger<AuthenService> logger, IUserRepository userRepository, IEmailHelper emailHelper, SendMailUtil sendMailUtil)
+		public AuthenService(ILogger<AuthenService> logger, IUserRepository userRepository, IProfileRepository profileRepository, IEmailHelper emailHelper, SendMailUtil sendMailUtil)
         {
             _logger = logger;
             _userRepository = userRepository;
+            _profileRepository = profileRepository;
             _emailHelper = emailHelper;
             _sendMailUtil = sendMailUtil;
         }
@@ -223,8 +226,16 @@ namespace WorkFlex.Services
                 };
                 _logger.LogDebug("[addUser]: Service - User's information: {user}", user);
 
+                var profile = new Profile
+                {
+                    UserId = user.Id,
+                    Headline = "",
+                    Summary = ""
+                };
+
                 // Save user to DB
                 await _userRepository.AddUserAsync(user);
+                await _profileRepository.AddProfileAsync(profile);
 
                 // Send activation link to user
 				SendMailActivate(user.Email, session, httpContext);
