@@ -128,7 +128,7 @@ namespace WorkFlex.Infrastructure.Repositories
             }
 
             // Get total count before pagination
-            int totalCount = jobPosts.Count();
+            int totalCount = jobPosts.Count;
 
             // Pagination on the filtered jobs
             var jobs = jobPosts

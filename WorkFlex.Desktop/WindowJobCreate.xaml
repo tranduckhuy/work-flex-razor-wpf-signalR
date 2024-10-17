@@ -117,7 +117,6 @@
                          Style="{StaticResource textboxPrimary}" 
                          VerticalAlignment="Top"
                          PreviewTextInput="txtBoxSalaryRange_PreviewTextInput"
-                         TextChanged="txtBoxSalaryRange_TextChanged"
                          Loaded="txtBoxSalaryRange_Loaded"
                          KeyDown="txtBoxSalaryRange_KeyDown"/>
 

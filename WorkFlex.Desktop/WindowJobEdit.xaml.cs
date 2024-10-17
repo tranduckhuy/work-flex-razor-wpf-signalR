@@ -124,12 +124,6 @@ namespace WorkFlex.Desktop
             e.Handled = !Regex.IsMatch(e.Text, @"^[0-9-]+$");
         }
 
-        private void txtBoxSalaryRange_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox == null) return;
-        }
-
         private void txtBoxSalaryRange_Loaded(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtBoxSalaryRange.Text))
