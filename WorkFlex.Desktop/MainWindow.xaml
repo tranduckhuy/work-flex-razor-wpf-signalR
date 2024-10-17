@@ -10,54 +10,50 @@
     <Grid>
         <DockPanel>
 
-            <!-- Header -->
-            <Grid DockPanel.Dock="Top" Height="40" Background="#37a6e6">
-                <Border Padding="10 0">
-                    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="35" FontWeight="Medium">WorkFlex</TextBlock>
-                        </StackPanel>
-                        <Button Content="Logout" 
-                                FontWeight="Bold"
-                                Background="#37a6e6" 
-                                BorderBrush="Black" 
-                                BorderThickness="2" 
-                                Width="75" 
-                                Height="30" 
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Center" 
-                                Margin="0 0 10 0" 
-                                Click="ButtonLogOut_Click"/>
-                    </DockPanel>
-                </Border>
-            </Grid>
+    <DockPanel>
+        <!-- Header -->
+        <Grid DockPanel.Dock="Top" Height="40" Background="#37a6e6">
+            <Border Padding="10 0">
+                <DockPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" Foreground="Black" FontSize="35" FontWeight="Medium">WorkFlex</TextBlock>
+                    </StackPanel>
+                    <Button Content="Logout" 
+                            FontWeight="Bold"
+                            Background="#37a6e6" 
+                            BorderBrush="Black" 
+                            BorderThickness="2" 
+                            Width="75" 
+                            Height="30" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center" 
+                            Margin="0 0 10 0" Click="ButtonLogOut_Click"/>
+                </DockPanel>
+            </Border>
+        </Grid>
 
-            <!-- Sidebar -->
-            <Grid DockPanel.Dock="Left" Width="180" Background="White">
-                <TreeView Name="Menu" Background="White" BorderThickness="2" Margin="10">
-                    <TreeView.ItemContainerStyle>
-                        <Style TargetType="TreeViewItem">
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="FontSize" Value="14"/>
-                            <Setter Property="Margin" Value="0 5"/>
-                            <Setter Property="Padding" Value="5"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#37a6e6"/>
-                                    <Setter Property="FontWeight" Value="DemiBold"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TreeView.ItemContainerStyle>
-                    <!-- Thay thế RECRUITER bằng hình ảnh -->
-                    <Image Source="DataAccess/Assets/Image/signin-image.jpg"
-                           Height="504" 
-                           Width="122" 
-                           HorizontalAlignment="Left" 
-                           VerticalAlignment="Center" 
-                           RenderTransformOrigin="0.397,0.797"/>
-                </TreeView>
-            </Grid>
+        <!-- Sidebar -->
+        <Grid DockPanel.Dock="Left" Width="180" Background="White">
+            <TreeView Name="Menu" Background="White" BorderThickness="2" Margin="10">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Margin" Value="0 5"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#37a6e6"/>
+                                <Setter Property="FontWeight" Value="DemiBold"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <!-- Thay thế RECRUITER bằng hình ảnh -->
+                <Image Source="DataAccess/Assets/Image/signin-image.jpg" Height="504" Width="122" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.397,0.797"/>
+            </TreeView>
+        </Grid>
 
             <!-- Content Area with rounded border -->
             <Border CornerRadius="5" BorderBrush="Black" BorderThickness="3" Margin="10">
