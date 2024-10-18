@@ -56,7 +56,7 @@ namespace WorkFlex.Infrastructure.Repositories
         }
 
         public async Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page,
-        UserSearchCriteria? searchCriteria, int roleId = AppConstants.ALL_ROLE)
+            UserSearchCriteria? searchCriteria, int roleId = AppConstants.ALL_ROLE)
         {
             const int pageSize = 6;
 

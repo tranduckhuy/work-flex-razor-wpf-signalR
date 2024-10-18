@@ -19,7 +19,7 @@ namespace WorkFlex.Domain.Repositories
 
         Task UpdateUserAsync(User user);
 
-        Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCiteria, int roleId);
+        Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCriteria, int roleId);
 
         Task LockUnlockUser(Guid userId);
 

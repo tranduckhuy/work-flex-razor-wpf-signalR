@@ -18,7 +18,16 @@
             page = page < 1 ? 1 : page;
             TotalItems = totalItems;
             TotalPages = (int)Math.Ceiling(totalItems / (decimal)pageSize);
-            CurrentPage = page > TotalPages ? (TotalPages > 0 ? TotalPages : 1) : page;
+
+            if (page > TotalPages)
+            {
+                CurrentPage = TotalPages > 0 ? TotalPages : 1;
+            }
+            else
+            {
+                CurrentPage = page;
+            }
+
             StartPage = CurrentPage > 3 ? CurrentPage - 3 : 1;
             EndPage = TotalPages - 3 > CurrentPage ? CurrentPage + 3 : TotalPages;
         }
