@@ -29,6 +29,19 @@ namespace WorkFlex.Infrastructure.Constants
 			Error
 		}
 
+        public enum Role
+        {
+            Admin = 1,
+            Recruiter = 2,
+            JobSeeker = 3
+        }
+
+        public enum UserSearchOption
+        {
+            Name,
+            Email
+        }
+
 		// Constants for default values
 		public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
         public const string UNDEFINE = "Undefine";
@@ -81,6 +94,7 @@ namespace WorkFlex.Infrastructure.Constants
         public const string PAGE_DASHBOARD = "/Dashboard/Dashboard";
 
         // Constants Repository
+        public const int ALL_ROLE = 0;
         public const string ALL = "All";
         public const string ANY = "Any";
         public const string NONE = "None";

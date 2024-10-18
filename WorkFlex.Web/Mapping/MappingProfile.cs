@@ -13,6 +13,7 @@ namespace WorkFlex.Web.Mapping
             CreateMap<UserMessageVM, UserMessageDto>().ReverseMap();
             CreateMap<JobPostVM, JobFilter>().ReverseMap();
             CreateMap<ConversationReplyViewModel, ConversationReplyDto>().ReverseMap();
+            CreateMap<UserDto, UserVM>().ReverseMap();
         }
     }
 }

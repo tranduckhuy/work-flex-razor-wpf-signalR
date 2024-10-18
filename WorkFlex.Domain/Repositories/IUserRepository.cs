@@ -1,4 +1,5 @@
-﻿using WorkFlex.Domain.Entities;
+using WorkFlex.Domain.Entities;
+using WorkFlex.Domain.SearchCiteria;
 
 namespace WorkFlex.Domain.Repositories
 {
@@ -17,5 +18,11 @@ namespace WorkFlex.Domain.Repositories
         Task AddUserAsync(User user);
 
         Task UpdateUserAsync(User user);
+
+        Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCiteria, int roleId);
+
+        Task LockUnlockUser(Guid userId);
+
+        Task DemotePromoteUser(Guid userId);
     }
 }
