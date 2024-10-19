@@ -219,6 +219,7 @@ namespace WorkFlex.Services
                     Email = registerDto.Email,
                     Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
                     Avatar = DEFAULT_AVATAR,
+                    BackgroundImg = DEFAULT_BGR_IMG,
                     DateOfBirth = DateTime.MinValue,
                     IsActive = false,
                     IsLock = false,
