@@ -1,4 +1,4 @@
-﻿using WorkFlex.Domain.Entities;
+using WorkFlex.Domain.Entities;
 
 namespace WorkFlex.Services.DTOs
 {
