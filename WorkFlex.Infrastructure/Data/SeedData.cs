@@ -20,6 +20,7 @@ namespace WorkFlex.Infrastructure.Data
             var recruiterId = Guid.NewGuid();
             var jobSeekerId = Guid.NewGuid();
             var defaultAvatar = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+            var defaultBgrImg = "~img/banner/img.png";
 
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -32,6 +33,7 @@ namespace WorkFlex.Infrastructure.Data
                     Email = "admin@example.com",
                     RoleId = 1,
                     Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 },
@@ -45,6 +47,7 @@ namespace WorkFlex.Infrastructure.Data
                     Email = "recruiter@example.com",
                     RoleId = 2,
                     Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 },
@@ -58,6 +61,7 @@ namespace WorkFlex.Infrastructure.Data
                     Email = "jobseeker@example.com",
                     RoleId = 3,
                     Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow
                 }
