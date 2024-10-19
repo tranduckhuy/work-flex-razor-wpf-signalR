@@ -1,4 +1,3 @@
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
@@ -128,9 +127,9 @@ namespace WorkFlex.Infrastructure.Repositories
                 throw new Exception("Cannot demote/promote admin.");
             }
 
-            user.RoleId = AppConstants.Role.Recruiter.Equals(user.RoleId) ? 
+            user.RoleId = (int)AppConstants.Role.Recruiter == user.RoleId ? 
                 (int)AppConstants.Role.JobSeeker : 
-                (int)AppConstants.Role.Recruiter;
+                (int)AppConstants.Role.Recruiter;   
 
             await _appDbContext.SaveChangesAsync();
         }
