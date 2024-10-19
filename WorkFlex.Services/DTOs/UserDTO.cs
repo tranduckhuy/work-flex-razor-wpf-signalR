@@ -10,6 +10,8 @@ namespace WorkFlex.Services.DTOs
 
         public string Avatar { get; set; } = string.Empty;
 
+        public string BackgroundImg { get; set; } = string.Empty;
+
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
