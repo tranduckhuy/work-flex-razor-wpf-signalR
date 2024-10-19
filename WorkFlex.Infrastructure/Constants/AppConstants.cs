@@ -31,6 +31,7 @@ namespace WorkFlex.Infrastructure.Constants
 
 		// Constants for default values
 		public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+		public const string DEFAULT_BGR_IMG = "~img/banner/img.png";
         public const string UNDEFINE = "Undefine";
         public const string YOU = "Yourself";
 

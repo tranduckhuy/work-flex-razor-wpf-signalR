@@ -23,6 +23,9 @@ namespace WorkFlex.Domain.Entities
         [StringLength(255)]
         public string Avatar { get; set; } = string.Empty;
 
+        [StringLength(255)]
+        public string BackgroundImg { get; set; } = string.Empty;
+
         [StringLength(15)]
         public string? Phone { get; set; } = string.Empty;
 
