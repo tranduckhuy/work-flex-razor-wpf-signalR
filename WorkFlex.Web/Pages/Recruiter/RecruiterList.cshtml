@@ -1,5 +1,6 @@
 @page
 @using System.Web
+@using WorkFlex.Infrastructure.Constants
 @model WorkFlex.Web.Pages.Recruiter.RecruiterListModel
 @{
     Layout = "_LayoutAdmin";
@@ -140,26 +141,32 @@
                                                 <td class="sherah-table__column-6 sherah-table__data-6"
                                                     style="width: 3%;min-width:120px;padding:12px 12px 12px 0;margin-left:10px;">
                                                     <div class="sherah-table__status__group" style="justify-content:center;">
-                                                        <a href="#" onclick="handleDemoted()" title="Demoted"
-                                                           class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
-                                                            <i class="fas fa-arrow-alt-circle-down"></i>
-                                                        </a>
-                                                        @* <a href="#" onclick="handlePromoted()" title="Promoted"
-                                                    class="sherah-table__action sherah-color4 sherah-color4__bg--opactity">
-                                                    <i class="fa-solid fa-circle-up"></i>
-                                                    </a>
-                                                    *@
+                                                        @if (@user.RoleId == (int) AppConstants.Role.Recruiter)
+                                                        {
+                                                            <a href="#" onclick="handleDemoted('@Url.Page("/Recruiter/RecruiterList", "DemotePromoteUser", new { userId = user.Id })')"
+                                                               title="Demoted" class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
+                                                                <i class="fas fa-arrow-alt-circle-down"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" onclick="handlePromoted('@Url.Page("/Recruiter/RecruiterList", "DemotePromoteUser", new { userId = user.Id })')"
+                                                               title="Promoted" class="sherah-table__action sherah-color2 sherah-color2__bg--opactity">
+                                                                <i class="fa-solid fa-circle-up"></i>
+                                                            </a>
+                                                        }
+                                                        
                                                         @if (@user.IsLock)
                                                         {
-                                                            <a href="#" onclick="handleUnlockUser()" title="Unlock"
-                                                               class="sherah-table__action sherah-color2 sherah-color2__bg--offset">
+                                                            <a href="#" onclick="handleUnlockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
+                                                               title="Unlock" class="sherah-table__action sherah-color2 sherah-color2__bg--offset">
                                                                 <i class="fas fa-unlock"></i>
                                                             </a>
                                                         }
                                                         else
                                                         {
-                                                            <a href="#" onclick="handleLockUser()" title="Lock"
-                                                               class="sherah-table__action sherah-color3 sherah-color3__bg--opactity">
+                                                            <a href="#" onclick="handleLockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
+                                                               title="Lock" class="sherah-table__action sherah-color3 sherah-color3__bg--opactity">
                                                                 <i class="fas fa-lock"></i>
                                                             </a>
                                                         }

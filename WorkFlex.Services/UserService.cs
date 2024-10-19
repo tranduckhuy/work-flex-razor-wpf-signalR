@@ -33,7 +33,7 @@ namespace WorkFlex.Services
 
         public async Task DemotePromoteUser(Guid userId)
         {
-            await _userRepository.LockUnlockUser(userId);
+            await _userRepository.DemotePromoteUser(userId);
         }
 
         public async Task<UserDto?> GetByIdAsync(Guid id)

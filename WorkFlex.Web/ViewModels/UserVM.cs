@@ -27,6 +27,9 @@ namespace WorkFlex.Web.ViewModels
 		public int RoleId { get; set; }
 
 		public bool IsLock { get; set; }
-		public Role Role { get; set; } = null!;
+
+        public bool IsActive { get; set; }
+
+        public Role Role { get; set; } = null!;
 	}
 }
