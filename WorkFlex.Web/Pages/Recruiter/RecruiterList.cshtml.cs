@@ -55,7 +55,7 @@ namespace WorkFlex.Web.Pages.Recruiter
             }
         }
 
-        public async Task<IActionResult> OnPostLockUnlockUser(Guid userId)
+        public async Task<IActionResult> OnGetLockUnlockUser(Guid userId)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace WorkFlex.Web.Pages.Recruiter
             }
         }
 
-        public async Task<IActionResult> OnPostDemotePromoteUser(Guid userId)
+        public async Task<IActionResult> OnGetDemotePromoteUser(Guid userId)
         {
             try
             {
