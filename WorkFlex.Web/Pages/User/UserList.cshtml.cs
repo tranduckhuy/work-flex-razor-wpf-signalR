@@ -59,7 +59,18 @@ namespace WorkFlex.Web.Pages.User
                 return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
             }
         }
-
+        public async Task<IActionResult> OnGetLockUnlockUser(Guid userId)
+        {
+            try
+            {
+                await _userService.LockUnlockUser(userId);
+                return RedirectToPage();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
+            }
+        }
 
 
     }
