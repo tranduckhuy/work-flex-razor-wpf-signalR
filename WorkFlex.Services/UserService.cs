@@ -117,21 +117,26 @@ namespace WorkFlex.Services
                     return false;
                 }
                 
-                _logger.LogInformation("[UpdateUserProfileAsync]: Service - User before update: {user}", user);
+                _logger.LogDebug("[UpdateUserProfileAsync]: Service - User before update: {user}", user);
                 user.FirstName = profileDto.FirstName;
                 user.LastName = profileDto.LastName;
                 user.Phone = profileDto.Phone;
                 user.Email = profileDto.Email;
                 user.Profile.Headline = profileDto.Headline ?? "";
                 //user.Website = profileDto.Website ?? "";
-                user.Location =
-                    profileDto.Street + ", "
-                        + (profileDto.Apartment != null && profileDto.Apartment != "" ? profileDto.Apartment + ", " : "")
-                        + (profileDto.Ward != null && profileDto.Ward != "" ? profileDto.Ward + ", " : "")
-                        + profileDto.District + ", "
-                        + profileDto.Province;
+
+                var locationParts = new List<string>
+                {
+                    profileDto.Street!,
+                    profileDto.Apartment!,
+                    profileDto.Ward!,     
+                    profileDto.District!, 
+                    profileDto.Province!  
+                };
+                user.Location = string.Join(", ", locationParts.Where(part => !string.IsNullOrWhiteSpace(part)));
+
                 user.Profile.Summary = profileDto.AboutDescription ?? "";
-                _logger.LogInformation("[UpdateUserProfileAsync]: Service - User after update: {user}", user);
+                _logger.LogDebug("[UpdateUserProfileAsync]: Service - User after update: {user}", user);
 
                 await _userRepository.UpdateUserAsync(user);
                 return true;
