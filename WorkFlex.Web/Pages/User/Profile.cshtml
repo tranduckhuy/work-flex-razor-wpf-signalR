@@ -140,8 +140,16 @@
                                                             <h3 class="sharah-profile__title mg-btm-10">About</h3>
                                                             <p class="sharah-profile__text">@(!string.IsNullOrEmpty(user.Profile.Summary) ? user.Profile.Summary : "Summary not updated yet.")</p>
                                                             <div class="sharah-profile__meta mg-top-40">
-                                                                <h4>Headline: @(!string.IsNullOrEmpty(user.Profile.Headline) ? user.Profile.Headline : "")</h4>
-                                                                <p class="mg-top-10"><a href="#" class="sherah-color1">@user.Website</a></p>
+                                                                <h4>Headline: @(!string.IsNullOrEmpty(user.Profile.Headline) ? user.Profile.Headline : "Headline not updated yet.")</h4>
+                                                                <p class="mg-top-10">
+                                                                    @if (!string.IsNullOrEmpty(user.Website))
+                                                                    {
+                                                                        <a href="@user.Website">@user.Website</a>
+                                                                    } else
+                                                                    {
+                                                                        <p style="color:#5a5a5a">Website not updated yet.</p>
+                                                                    }
+                                                                </p>
                                                                 <p class="sharah-profile__id mg-top-30">@(user.DateOfBirth != DateTime.MinValue ? user.DateOfBirth.ToShortDateString() : "Date of Birth not updated yet.")</p>
                                                             </div>
                                                         </div>
@@ -415,7 +423,7 @@
         const isYourProfile = @Model.IsYourProfile.ToString().ToLower();
 
         document.addEventListener("DOMContentLoaded", () => {
-            if (fullAddress) {
+            if (fullAddress && fullAddress.trim() !== '') {
                 document.querySelector('#address-information').textContent = extractCityProvince(fullAddress);
             } else {
                 document.querySelector('#address-information').textContent = 'Location not updated yet.';
@@ -473,14 +481,17 @@
         }
 
         function extractCityProvince(fullAddress) {
-            if (!fullAddress) {
+            if (!fullAddress || fullAddress.trim() === '') {
                 return '';
             }
+
             const addressParts = fullAddress.split(',');
-            const maxIndex = Math.min(5, addressParts.length - 1);
-            const city = addressParts[maxIndex - 1].trim();
-            const province = addressParts[maxIndex].trim();
-            return city + ', ' + province;
+            const filteredParts = addressParts.map(part => part.trim()).filter(part => part !== '');
+            if (filteredParts.length === 0) {
+                return 'Location not updated yet.';
+            }
+
+            return filteredParts.join(', ');
         }
 
         function callAPI(api) {
