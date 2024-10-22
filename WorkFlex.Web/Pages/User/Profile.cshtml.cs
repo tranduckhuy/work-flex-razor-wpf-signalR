@@ -125,9 +125,6 @@ namespace WorkFlex.Web.Pages.User
                         await SetUserAsync(profileVM.Id);
                         return Page();
                     case AppConstants.ProfileResult.Error:
-                        TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
-                        await SetUserAsync(profileVM.Id);
-                        return Page();
                     default:
                         TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
                         await SetUserAsync(profileVM.Id);
