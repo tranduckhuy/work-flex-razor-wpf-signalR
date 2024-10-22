@@ -6,17 +6,17 @@
 
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public string Phone { get; set; } = string.Empty;
+        public string? Phone { get; set; }
         public string Email { get; set; } = null!;
-        public string Website { get; set; } = string.Empty;
-        public string Headline { get; set; } = string.Empty;
-        public string Street { get; set; } = string.Empty;
-        public string Apartment { get; set; } = string.Empty;
-        public string Province { get; set; } = string.Empty;
-        public string District { get; set; } = string.Empty;
-        public string Ward { get; set; } = string.Empty;
-        public string Location { get; set; } = string.Empty;
-        public string AboutDescription { get; set; } = string.Empty;
+        public string? Website { get; set; }
+        public string? Headline { get; set; }
+        public string? Street { get; set; }
+        public string? Apartment { get; set; }
+        public string? Province { get; set; }
+        public string? District { get; set; }
+        public string? Ward { get; set; }
+        public string? Location { get; set; }
+        public string? AboutDescription { get; set; }
 
         public string OldPassword { get; set; } = null!;
         public string NewPassword { get; set; } = null!;

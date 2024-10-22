@@ -124,7 +124,6 @@ namespace WorkFlex.Web.Pages.User
                         TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_NOT_MATCH_PASSWORD;
                         await SetUserAsync(profileVM.Id);
                         return Page();
-                    case AppConstants.ProfileResult.Error:
                     default:
                         TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
                         await SetUserAsync(profileVM.Id);
