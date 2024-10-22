@@ -123,6 +123,7 @@ namespace WorkFlex.Services
                 user.Phone = profileDto.Phone;
                 user.Email = profileDto.Email;
                 user.Profile.Headline = profileDto.Headline ?? "";
+                //user.Website = profileDto.Website ?? "";
                 user.Location =
                     profileDto.Street + ", "
                         + (profileDto.Apartment != null && profileDto.Apartment != "" ? profileDto.Apartment + ", " : "")
