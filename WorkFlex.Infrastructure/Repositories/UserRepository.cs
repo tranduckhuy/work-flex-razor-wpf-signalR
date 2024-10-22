@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Repositories;
@@ -55,7 +56,7 @@ namespace WorkFlex.Infrastructure.Repositories
         }
 
         public async Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page,
-            UserSearchCriteria? searchCriteria, int roleId = AppConstants.ALL_ROLE)
+            UserSearchCriteria? searchCriteria, int roleId = AppConstants.ALL_ROLE, Expression<Func<User, bool>> additionalCriteria = null!)
         {
             const int pageSize = 6;
 
@@ -64,6 +65,11 @@ namespace WorkFlex.Infrastructure.Repositories
             if (roleId != AppConstants.ALL_ROLE)
             {
                 query = query.Where(u => u.RoleId == roleId);
+            }
+
+            if (additionalCriteria != null)
+            {
+                query = query.Where(additionalCriteria);
             }
 
             if (searchCriteria != null && !string.IsNullOrEmpty(searchCriteria.SearchValue))
@@ -104,23 +110,15 @@ namespace WorkFlex.Infrastructure.Repositories
 
         public async Task LockUnlockUser(Guid userId)
         {
-            var user = await _appDbContext.Users.FindAsync(userId);
-            if (user == null)
-            {
-                throw new Exception("User not found.");
-            }
+            var user = await _appDbContext.Users.FindAsync(userId) ?? throw new Exception("User not found.");
 
             user.IsLock = !user.IsLock;
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task DemotePromoteUser(Guid userId)
+        public async Task<User> DemotePromoteUser(Guid userId)
         {
-            var user = await _appDbContext.Users.FindAsync(userId);
-            if (user == null)
-            {
-                throw new Exception("User not found.");
-            }
+            var user = await _appDbContext.Users.FindAsync(userId) ?? throw new Exception("User not found.");
 
             if (AppConstants.Role.Admin.Equals(user.RoleId))
             {
@@ -129,9 +127,12 @@ namespace WorkFlex.Infrastructure.Repositories
 
             user.RoleId = (int)AppConstants.Role.Recruiter == user.RoleId ? 
                 (int)AppConstants.Role.JobSeeker : 
-                (int)AppConstants.Role.Recruiter;   
+                (int)AppConstants.Role.Recruiter;
+            user.IsRecruiterRequestPending = false;
 
             await _appDbContext.SaveChangesAsync();
+
+            return user;
         }
 
         public async Task AddUserAsync(User user)
@@ -144,6 +145,44 @@ namespace WorkFlex.Infrastructure.Repositories
         {
             _appDbContext.Update(user);
             await _appDbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> RequestRecruiterApproval(Guid userId)
+        {
+            var user = await GetUserByIdAsync(userId) ?? throw new Exception("User not found.");
+
+            if (!IsProfileComplete(user))
+            {
+                return false;
+            }
+
+            if (AppConstants.Role.Recruiter.Equals(user.RoleId))
+            {
+                throw new Exception("User is already a recruiter!");
+            }
+
+            user.IsRecruiterRequestPending = true;
+
+            await _appDbContext.SaveChangesAsync();
+            return true;
+        }
+
+        private static bool IsProfileComplete(User user)
+        {
+            return !string.IsNullOrEmpty(user.Profile.Headline) &&
+                   !string.IsNullOrEmpty(user.Profile.Summary) &&
+                   !string.IsNullOrEmpty(user.Phone) &&
+                   !string.IsNullOrEmpty(user.Location);
+        }
+
+        public async Task<User> DeclineRecruiterRequest(Guid userId)
+        {
+            var user = await GetUserByIdAsync(userId) ?? throw new Exception("User not found.");
+
+            user.IsRecruiterRequestPending = false;
+
+            await _appDbContext.SaveChangesAsync();
+            return user;
         }
     }
 }

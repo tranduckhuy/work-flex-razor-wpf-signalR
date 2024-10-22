@@ -42,6 +42,7 @@ namespace WorkFlex.Domain.Entities
         public int RoleId { get; set; }
         public bool IsLock { get; set; }
         public bool IsActive { get; set; }
+        public bool IsRecruiterRequestPending { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime ModifiedAt { get; set; }
 

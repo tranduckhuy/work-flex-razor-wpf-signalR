@@ -80,6 +80,5 @@ namespace WorkFlex.Web.Pages.Recruiter
                 return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
             }
         }
-
     }
 }
