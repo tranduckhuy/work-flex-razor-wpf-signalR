@@ -20,7 +20,7 @@ namespace WorkFlex.Infrastructure.Data
             var recruiterId = Guid.NewGuid();
             var jobSeekerId = Guid.NewGuid();
             var defaultAvatar = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
-            var defaultBgrImg = "~img/banner/img.png";
+            var defaultBgrImg = "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=CMrJ2NGMR0MoAjanRnUyBygvaKToHnlXIAGG29MYqXI=";
 
             modelBuilder.Entity<User>().HasData(
                 new User

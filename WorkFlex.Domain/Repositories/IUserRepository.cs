@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.SearchCiteria;
 
@@ -19,10 +20,15 @@ namespace WorkFlex.Domain.Repositories
 
         Task UpdateUserAsync(User user);
 
-        Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCriteria, int roleId);
+        Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page, 
+            UserSearchCriteria? searchCriteria, int roleId, Expression<Func<User, bool>> additionalCriteria = null!);
 
         Task LockUnlockUser(Guid userId);
 
-        Task DemotePromoteUser(Guid userId);
+        Task<User> DemotePromoteUser(Guid userId);
+
+        Task<bool> RequestRecruiterApproval(Guid userId);
+        Task<User> DeclineRecruiterRequest(Guid userId);
+
     }
 }

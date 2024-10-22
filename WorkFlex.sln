@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.SignalR", "WorkFlex.SignalR\WorkFlex.SignalR.csproj", "{68E7906A-144A-4B2E-8430-5CE7178587F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Services", "WorkFlex.Services\WorkFlex.Services.csproj", "{B4766C6F-BDDB-4628-B5DC-35A78B27A282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Services", "WorkFlex.Services\WorkFlex.Services.csproj", "{B4766C6F-BDDB-4628-B5DC-35A78B27A282}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

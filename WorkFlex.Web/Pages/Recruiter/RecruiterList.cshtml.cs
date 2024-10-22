@@ -12,7 +12,6 @@ namespace WorkFlex.Web.Pages.Recruiter
     public class RecruiterListModel : PageModel
     {
         private readonly IUserService _userService;
-        private const int RECURITER_ROLE_ID = 2;
 
         public RecruiterListModel(IUserService userService)
         {
@@ -44,7 +43,7 @@ namespace WorkFlex.Web.Pages.Recruiter
         private async Task<IActionResult> LoadUsers(int currentPage, UserSearchCriteria searchCriteria)
         {
             try {
-                var (users, pageable) = await _userService.GetUsers(currentPage, searchCriteria, RECURITER_ROLE_ID);
+                var (users, pageable) = await _userService.GetUsers(currentPage, searchCriteria, (int)AppConstants.Role.Recruiter);
                 Users = AppMapper.Mapper.Map<ICollection<UserVM>>(users);
                 Pageable = pageable;
                 return Page();
@@ -80,6 +79,5 @@ namespace WorkFlex.Web.Pages.Recruiter
                 return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
             }
         }
-
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@Html.AntiForgeryToken()
+@using WorkFlex.Infrastructure.Constants
+@{
     var isLoggedIn = !string.IsNullOrEmpty(ViewContext.HttpContext.Session.GetString("Username"));
     var userId = ViewContext.HttpContext.Session.GetString("Id");
     var avatar = ViewContext.HttpContext.Session.GetString("Avatar");
@@ -29,6 +31,7 @@
     <link rel="stylesheet" href="~/css/slick.css">
     <link rel="stylesheet" href="~/css/nice-select.css">
     <link rel="stylesheet" href="~/css/sweetalert2.css">
+    <link rel="stylesheet" href="~/css/style-toast.css">
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
 </head>
 
@@ -67,9 +70,9 @@
                                             <li><a asp-page="/Job/JobList">Find a Jobs </a></li>
                                             <li><a href="/About/About">About</a></li>
                                             <li><a href="/Contact/Contact">Contact</a></li>
-                                            @if (isLoggedIn)
+                                            @if (isLoggedIn && roleId == (int)AppConstants.Role.JobSeeker)
                                             {
-                                                <li><a href="~/">Recruiter account</a></li>
+                                                <li><a href="#!" onclick="complex('@userId', '@Url.Page("/Recruiter/RecruiterRequest", "CheckUserInfo")')">Recruiter account</a></li>
                                             }
                                         </ul>
                                     </nav>
@@ -286,10 +289,13 @@
     <script src="~/js/jquery.validate.min.js"></script>
     <script src="~/js/jquery.ajaxchimp.min.js"></script>
 
-    <!-- Jquery Plugins, main Jquery, Sweet Alert -->
+    <!-- Jquery Plugins, main Jquery, Sweet Alert, Toast -->
     <script src="~/js/plugins.js"></script>
     <script src="~/js/sweetalert2.all.min.js"></script>
+    <script src="~/js/axios.min.js"></script>
+    <script src="~/js/toast-config.js"></script>
     <script src="~/js/main.js"></script>
+    <script src="~/js/handle-script.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

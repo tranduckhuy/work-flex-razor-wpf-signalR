@@ -17,7 +17,7 @@ namespace WorkFlex.Web.Pages.Job
 
         public JobPostDto JobPost { get; set; } = null!;
 
-        public async Task<IActionResult> OnGetAsync(Guid id, JobPostVM filters)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             try
             {

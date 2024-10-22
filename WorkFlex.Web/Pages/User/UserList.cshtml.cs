@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WorkFlex.Domain;
 using WorkFlex.Domain.SearchCiteria;
 using WorkFlex.Infrastructure.Constants;
-using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
 using WorkFlex.Web.Mapping;
 using WorkFlex.Web.ViewModels;
@@ -22,7 +21,9 @@ namespace WorkFlex.Web.Pages.User
         public ICollection<UserVM> Users { get; set; } = [];
 
         public int CurrentPage { get; set; }
+
         public int TotalPages { get; set; }
+
         public UserSearchCriteria? SearchCriteria { get; set; }
 
         public Pageable<UserSearchCriteria> Pageable { get; set; } = new Pageable<UserSearchCriteria>();
@@ -45,33 +46,32 @@ namespace WorkFlex.Web.Pages.User
             return await LoadUsers(currentPage, searchCriteria);
         }
 
-        private async Task<IActionResult> LoadUsers(int currentPage, UserSearchCriteria searchCriteria)
-        {
-            try
-            {
-                var (users, pageable) = await _userService.GetUsers(currentPage, searchCriteria, AppConstants.ALL_ROLE);
-                Users = AppMapper.Mapper.Map<ICollection<UserVM>>(users);
-                Pageable = pageable;
-                return Page();
-            }
-            catch (Exception ex)
-            {
-                return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
-            }
-        }
         public async Task<IActionResult> OnGetLockUnlockUser(Guid userId)
         {
             try
             {
                 await _userService.LockUnlockUser(userId);
-                return RedirectToPage();
+                return Page();
             }
-            catch (Exception ex)
+            catch
             {
-                return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
+                return RedirectToPage(AppConstants.PAGE_ERROR);
             }
         }
 
-
+        private async Task<IActionResult> LoadUsers(int currentPage, UserSearchCriteria searchCriteria)
+        {
+            try
+            {
+                var (users, pageable) = await _userService.GetUsers(currentPage, searchCriteria, (int)AppConstants.Role.JobSeeker);
+                Users = AppMapper.Mapper.Map<ICollection<UserVM>>(users);
+                Pageable = pageable;
+                return Page();
+            }
+            catch
+            {
+                return RedirectToPage(AppConstants.PAGE_ERROR);
+            }
+        }
     }
 }
