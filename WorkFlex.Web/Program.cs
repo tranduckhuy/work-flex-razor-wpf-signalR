@@ -1,5 +1,3 @@
-using WorkFlex.Domain.Repositories;
-using WorkFlex.Infrastructure.Repositories;
 using WorkFlex.Infrastructure.Utils.Mail;
 using WorkFlex.Web;
 using WorkFlex.Web.AuthenticationFilter;

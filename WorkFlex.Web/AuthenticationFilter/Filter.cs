@@ -34,11 +34,9 @@ namespace WorkFlex.Web.AuthenticationFilter
                 var roleIdBytes = context.HttpContext.Session.Get(AppConstants.ROLE);
                 if (roleIdBytes != null)
                 {
-                    // Convert byte[] to byte
                     var roleId = BitConverter.ToInt32(roleIdBytes, 0);
                     if (roleId != 1)
                     {
-                        // Redirect to Error page (403 page)
                         context.Result = new RedirectToPageResult("/Error/Error");
                         return;
                     }

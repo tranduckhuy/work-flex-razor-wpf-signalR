@@ -62,7 +62,7 @@ namespace WorkFlex.Infrastructure.Repositories
 
             IQueryable<User> query = _appDbContext.Users;
 
-            if (roleId != AppConstants.ALL_ROLE)
+            if (roleId != (int)AppConstants.Role.JobSeeker)
             {
                 query = query.Where(u => u.RoleId == roleId);
             }

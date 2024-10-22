@@ -22,11 +22,15 @@ namespace WorkFlex.Services.DTOs
 
         public string Location { get; set; } = string.Empty;
 
+        public string Website { get; set; } = string.Empty;
+
         public DateTime DateOfBirth { get; set; }
 
         public int RoleId { get; set; }
 
         public bool IsLock { get; set; }
+
+        public bool IsActive { get; set; }
 
         public bool IsRecruiterRequestPending { get; set; }
 

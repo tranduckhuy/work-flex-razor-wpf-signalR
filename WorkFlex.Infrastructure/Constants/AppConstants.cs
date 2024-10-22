@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace WorkFlex.Infrastructure.Constants
 {
     public class AppConstants
@@ -42,9 +44,18 @@ namespace WorkFlex.Infrastructure.Constants
             Email
         }
 
-		// Constants for default values
-		public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
-		public const string DEFAULT_BGR_IMG = "~img/banner/img.png";
+        public enum ProfileResult
+        {
+            Success,
+            UserNotFound,
+            InvalidPassword,
+            PasswordNotMatch,
+            Error
+        }
+
+        // Constants for default values
+        public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+		public const string DEFAULT_BGR_IMG = "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=CMrJ2NGMR0MoAjanRnUyBygvaKToHnlXIAGG29MYqXI=";
         public const string UNDEFINE = "Undefine";
         public const string YOU = "Yourself";
 
@@ -56,6 +67,8 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_ADD_JOB_SUCCESS = "Job added successfully!";
         public const string MESSAGE_UPDATE_JOB_SUCCESSFULLY = "Job updated successfully!";
         public const string MESSAGE_DELETE_JOB_SUCCESSFULLY = "Job deleted successfully!";
+        public const string MESSAGE_CHANGE_PASSWORD_SUCCESSFULLY = "Your password changed successfully!";
+        public const string MESSAGE_UPDATE_PROFILE_SUCCESSFULLY = "Your profile updated successfully!";
         // 3. Failed messages (Authentication)
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
         public const string MESSAGE_INVALID_PASSWORD = "Incorrect Password.";
@@ -70,9 +83,12 @@ namespace WorkFlex.Infrastructure.Constants
 		public const string MESSAGE_FAILED = "Error occurred during execution. Please try again later.";
         // 4. Failed messages (Constant messages)
         public const string MESSAGE_JOB_NOT_FOUND = "The job you're looking for does not exist. Please verify the ID and try again.";
+        public const string MESSAGE_USER_NOT_FOUND = "The user you're looking for does not exist. Please verify the ID and try again.";
         public const string MESSAGE_ADD_JOB_FAILED = "Add unsuccessful. Please ensure all fields are correct and try again.";
         public const string MESSAGE_UPDATE_JOB_FAILED = "Update unsuccessful. Please ensure all fields are correct and try again.";
         public const string MESSAGE_DELETE_JOB_FAILED = "Deletion unsuccessful. Please ensure the job exists and try again.";
+        public const string MESSAGE_INVALID_OLD_PASSWORD = "The old password you entered is incorrect. Please try again.";
+        public const string MESSAGE_UPDATE_PROFILE_FAILED = "Update profile unsuccessfully. Please ensure all fields are filled and try again.";
 
         // Session & Temp data & Pages name constants
         // 1. Session
@@ -83,8 +99,8 @@ namespace WorkFlex.Infrastructure.Constants
         public const string LOCATION= "Location";
         public const string ROLE = "Role";
         // 2. Temp data
-        public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
         public const string TEMP_DATA_SUCCESS_MESSAGE = "SuccessMessage";
+        public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
         public const string MESSAGE_LOGIN_REQUIRED = "You need to login to access this page.";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";

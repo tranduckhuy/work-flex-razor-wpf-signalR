@@ -28,8 +28,10 @@ namespace WorkFlex.Web.ViewModels
 
 		public bool IsLock { get; set; }
 
-        public bool IsRecruiterRequestPending { get; set; }
+        public bool IsActive { get; set; }
 
         public Role Role { get; set; } = null!;
+
+        public bool IsRecruiterRequestPending { get; set; }
 	}
 }

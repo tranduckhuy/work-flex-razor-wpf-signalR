@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using WorkFlex.Domain;
 using WorkFlex.Domain.SearchCiteria;
 using WorkFlex.Infrastructure.Constants;
-using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
 using WorkFlex.Web.Mapping;
 using WorkFlex.Web.ViewModels;
