@@ -28,6 +28,8 @@ namespace WorkFlex.Services.DTOs
 
         public bool IsLock { get; set; }
 
+        public bool IsRecruiterRequestPending { get; set; }
+
         public Role Role { get; set; } = null!;
 
         public Profile Profile { get; set; } = null!;

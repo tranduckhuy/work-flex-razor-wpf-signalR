@@ -93,6 +93,8 @@ namespace WorkFlex.Infrastructure.Constants
         public const string PAGE_JOB_LIST = "/Job/JobList";
         public const string PAGE_JOB_APPLY = "/Job/JobApply";
         public const string PAGE_DASHBOARD = "/Dashboard/Dashboard";
+        public const string PAGE_RECRUITER_REQUEST = "/Recruiter/RecruiterRequest";
+        public const string PAGE_RECRUITER_LIST = "/Recruiter/RecruiterList";
 
         // Constants Repository
         public const int ALL_ROLE = 0;

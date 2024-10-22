@@ -1,10 +1,10 @@
-@page
+﻿@page
 @using System.Web
 @using WorkFlex.Infrastructure.Constants
-@model WorkFlex.Web.Pages.Recruiter.RecruiterListModel
+@model WorkFlex.Web.Pages.Recruiter.RecruiterRequestModel
 @{
     Layout = "_LayoutAdmin";
-    ViewData["Title"] = "Admin Recruiter List";
+    ViewData["Title"] = "Admin Recruiter List Request";
 }
 
 <div class="container">
@@ -141,26 +141,14 @@
                                                 <td class="sherah-table__column-6 sherah-table__data-6"
                                                     style="width: 3%;min-width:120px;padding:12px 12px 12px 0;margin-left:10px;">
                                                     <div class="sherah-table__status__group" style="justify-content:center;">
-                                                        <a href="#" onclick="handleDemoted('@Url.Page("/Recruiter/RecruiterList", "DemotePromoteUser", new { userId = user.Id })')"
-                                                           title="Demoted" class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
-                                                            <i class="fas fa-arrow-alt-circle-down"></i>
+                                                        <a href="#" onclick="handleApproveRequest('@Url.Page("/Recruiter/RecruiterRequest", "ApproveRequest", new { userId = user.Id })')"
+                                                           title="Accept Request" class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
+                                                            <i class="fas fa-check"></i>
                                                         </a>
-
-                                                        @if (@user.IsLock)
-                                                        {
-                                                            <a href="#" onclick="handleUnlockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
-                                                               title="Unlock" class="sherah-table__action sherah-color2 sherah-color2__bg--offset">
-                                                                <i class="fas fa-unlock"></i>
-                                                            </a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="#" onclick="handleLockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
-                                                               title="Lock" class="sherah-table__action sherah-color3 sherah-color3__bg--opactity">
-                                                                <i class="fas fa-lock"></i>
-                                                            </a>
-                                                        }
-
+                                                        <a href="#" onclick="handleUnlockUser('@Url.Page("/Recruiter/RecruiterRequest", "DeclineRequest", new { userId = user.Id })')"
+                                                           title="Ignore Request" class="sherah-table__action sherah-color2 sherah-color2__bg--offset">
+                                                            <i class="fas fa-minus-circle"></i>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -185,7 +173,7 @@
                                                 <ul class="sherah-pagination__list">
                                                     @if (Model.Pageable.CurrentPage > 1)
                                                     {
-                                                        var previousUrl = Url.Page("/Recruiter/RecruiterList", null, new { currentPage = Model.Pageable.CurrentPage - 1 });
+                                                        var previousUrl = Url.Page("/Recruiter/RecruiterRequest", null, new { currentPage = Model.Pageable.CurrentPage - 1 });
 
                                                         var queryParams = new List<string>();
                                                         if (Model.Pageable.SearchCriteria?.SearchOption != null)
@@ -212,7 +200,7 @@
 
                                                     @for (var i = Model.Pageable.StartPage; i <= Model.Pageable.EndPage; i++)
                                                     {
-                                                        var pageUrl = Url.Page("/Recruiter/RecruiterList", null, new { currentPage = i });
+                                                        var pageUrl = Url.Page("/Recruiter/RecruiterRequest", null, new { currentPage = i });
 
                                                         var queryParams = new List<string>();
                                                         if (Model.Pageable.SearchCriteria?.SearchOption != null)
@@ -239,7 +227,7 @@
 
                                                     @if (Model.Pageable.CurrentPage < Model.Pageable.TotalPages)
                                                     {
-                                                        var nextUrl = Url.Page("/Recruiter/RecruiterList", null, new { currentPage = Model.Pageable.CurrentPage + 1 });
+                                                        var nextUrl = Url.Page("/Recruiter/RecruiterRequest", null, new { currentPage = Model.Pageable.CurrentPage + 1 });
 
                                                         var queryParams = new List<string>();
                                                         if (Model.Pageable.SearchCriteria?.SearchOption != null)
@@ -278,3 +266,4 @@
         </div>
     </div>
 </div>
+

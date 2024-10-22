@@ -16,5 +16,17 @@ namespace WorkFlex.Infrastructure.Utils.Helper
             string bodyEmail = MailConstants.MAIL_ACTIVATE_CONTENT.Replace("{activationLink}", activationLink);
             return bodyEmail;
         }
+
+        public string RenderBodyRecruiterApproval(string approvalLink)
+        {
+            string bodyEmail = MailConstants.MAIL_RECRUITER_APPROVAL_CONTENT.Replace("{approvalLink}", approvalLink);
+            return bodyEmail;
+        }
+
+        public string RenderBodyRecruiterDecline(string reapplyLink)
+        {
+            string bodyEmail = MailConstants.MAIL_RECRUITER_DECLINE_CONTENT.Replace("{reapplyLink}", reapplyLink);
+            return bodyEmail;
+        }
     }
 }
