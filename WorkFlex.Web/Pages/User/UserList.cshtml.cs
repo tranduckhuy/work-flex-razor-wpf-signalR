@@ -50,12 +50,23 @@ namespace WorkFlex.Web.Pages.User
         {
             try
             {
-                await _userService.LockUnlockUser(userId);
-                return Page();
+                var currentUserID = HttpContext.Session.GetString(AppConstants.ID);
+                if (currentUserID != (userId.ToString()))
+                {
+                    await _userService.LockUnlockUser(userId);
+                    TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_ACTION_SUCCESSFULLY;
+                    return RedirectToPage();
+                }
+                else
+                {
+                    TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_LOCKUNLOCK_USER_FAILED;
+                    return RedirectToPage();
+                }
+                
             }
-            catch
+            catch (Exception ex)
             {
-                return RedirectToPage(AppConstants.PAGE_ERROR);
+                return RedirectToPage(AppConstants.PAGE_ERROR, new { message = ex.Message });
             }
         }
 

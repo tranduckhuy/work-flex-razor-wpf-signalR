@@ -94,6 +94,7 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_DELETE_JOB_FAILED = "Deletion unsuccessful. Please ensure the job exists and try again.";
         public const string MESSAGE_INVALID_OLD_PASSWORD = "The old password you entered is incorrect. Please try again.";
         public const string MESSAGE_UPDATE_PROFILE_FAILED = "Update profile unsuccessfully. Please ensure all fields are filled and try again.";
+        public const string MESSAGE_LOCKUNLOCK_USER_FAILED = "You can't lock or unlock yourself!. Please ensure all fields are filled and try again.";
 
         // Session & Temp data & Pages name constants
         // 1. Session
