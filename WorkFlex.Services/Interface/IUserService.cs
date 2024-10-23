@@ -28,8 +28,6 @@ namespace WorkFlex.Services.Interface
 
         Task<UserDto?> GetByIdAsync(Guid id);
 
-        Task<(ICollection<UserDto>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCriteria, int roleId);
-
         Task<(ICollection<UserDto>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCriteria,
             int roleId, Expression<Func<User, bool>> additionalCriteria = null!);
     }

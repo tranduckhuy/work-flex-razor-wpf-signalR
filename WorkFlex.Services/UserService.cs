@@ -123,7 +123,7 @@ namespace WorkFlex.Services
                 user.Phone = profileDto.Phone;
                 user.Email = profileDto.Email;
                 user.Profile.Headline = profileDto.Headline ?? "";
-                //user.Website = profileDto.Website ?? "";
+                user.Profile.Website = profileDto.Website ?? "";
 
                 var locationParts = new List<string>
                 {
@@ -209,13 +209,6 @@ namespace WorkFlex.Services
                 _logger.LogError("[GetByIdAsync]: Service - End get user by id with error: {ex}", ex.StackTrace);
                 return null;
             }
-        }
-
-        public async Task<(ICollection<UserDto>, Pageable<UserSearchCriteria>)> GetUsers(
-            int page, UserSearchCriteria? searchCriteria, int roleId)
-        {
-            var result = await _userRepository.GetUsers(page, searchCriteria, roleId);
-            return (AppMapper.Mapper.Map<ICollection<UserDto>>(result.Item1), result.Item2);
         }
 
         public async Task<(ICollection<UserDto>, Pageable<UserSearchCriteria>)> GetUsers(

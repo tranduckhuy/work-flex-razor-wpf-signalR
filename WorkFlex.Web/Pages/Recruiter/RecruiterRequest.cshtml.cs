@@ -69,6 +69,7 @@ namespace WorkFlex.Web.Pages.Recruiter
             try
             {
                 await _userService.DeclineRecruiterRequest(userId, HttpContext.Session, HttpContext);
+                TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_DECLINE_RECRUITER_REQUEST_SUCCESSFULLY;
                 return RedirectToPage(AppConstants.PAGE_RECRUITER_REQUEST);
             }
             catch (Exception ex)
@@ -94,6 +95,7 @@ namespace WorkFlex.Web.Pages.Recruiter
             try
             {
                 await _userService.ApproveRecruiterRequest(userId, HttpContext.Session, HttpContext);
+                TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_APPROVE_RECRUITER_REQUEST_SUCCESSFULLY;
                 return RedirectToPage(AppConstants.PAGE_RECRUITER_REQUEST);
             }
             catch (Exception ex)

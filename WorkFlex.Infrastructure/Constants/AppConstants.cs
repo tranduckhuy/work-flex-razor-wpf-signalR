@@ -68,7 +68,12 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_UPDATE_JOB_SUCCESSFULLY = "Job updated successfully!";
         public const string MESSAGE_DELETE_JOB_SUCCESSFULLY = "Job deleted successfully!";
         public const string MESSAGE_CHANGE_PASSWORD_SUCCESSFULLY = "Your password changed successfully!";
+        public const string MESSAGE_APPLY_JOB_SUCCESSFULLY = "You have applied for this job successfully!";
         public const string MESSAGE_UPDATE_PROFILE_SUCCESSFULLY = "Your profile updated successfully!";
+        public const string MESSAGE_APPROVE_RECRUITER_REQUEST_SUCCESSFULLY = "Recruiter request approved successfully!";
+        public const string MESSAGE_DECLINE_RECRUITER_REQUEST_SUCCESSFULLY = "Recruiter request declined successfully!";
+        public const string MESSAGE_ACTION_SUCCESSFULLY = "Action completed successfully!";
+
         // 3. Failed messages (Authentication)
         public const string MESSAGE_INVALID_USERNAME = "Incorrect Username or Email.";
         public const string MESSAGE_INVALID_PASSWORD = "Incorrect Password.";
@@ -101,7 +106,7 @@ namespace WorkFlex.Infrastructure.Constants
         // 2. Temp data
         public const string TEMP_DATA_SUCCESS_MESSAGE = "SuccessMessage";
         public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
-        public const string MESSAGE_LOGIN_REQUIRED = "You need to login to access this page.";
+        public const string MESSAGE_LOGIN_REQUIRED = "You need to login to do this action.";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";
         public const string PAGE_ERROR = "/Error/Error";
