@@ -39,7 +39,8 @@
                 }, 600);
             });
         </script>
-    } else if (!string.IsNullOrEmpty(failedMsg))
+    }
+    else if (!string.IsNullOrEmpty(failedMsg))
     {
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -145,9 +146,10 @@
                                                                     @if (!string.IsNullOrEmpty(user.Profile.Website))
                                                                     {
                                                                         <a href="@user.Profile.Website">@user.Profile.Website</a>
-                                                                    } else
+                                                                    }
+                                                                    else
                                                                     {
-                                                                        <p style="color:#5a5a5a">Website not updated yet.</p>
+                                                                    <p style="color:#5a5a5a">Website not updated yet.</p>
                                                                     }
                                                                 </p>
                                                                 <p class="sharah-profile__id mg-top-30">@(user.DateOfBirth != DateTime.MinValue ? user.DateOfBirth.ToShortDateString() : "Date of Birth not updated yet.")</p>
@@ -160,11 +162,13 @@
                                                                 <ul class="sherah-contact-info">
                                                                     <li class="sherah-border"><span class="sherah-color1__bg--offset"><i class="fas fa-map-marker-alt"></i></span><p id="address-information" style="color:#1a1a1a"></p></li>
                                                                     <li class="sherah-border"><span class="sherah-color1__bg--offset"><i class="far fa-envelope"></i></span>Email : <a href="mailto:@user.Email" style="font-size:16px;text-decoration:underline;">@user.Email</a></li>
-                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset"><i class="fas fa-phone"></i></span>
+                                                                    <li class="sherah-border">
+                                                                        <span class="sherah-color1__bg--offset"><i class="fas fa-phone"></i></span>
                                                                         Phone : @if (!string.IsNullOrEmpty(user.Phone))
                                                                         {
                                                                             <a href="tel:@user.Phone">@user.Phone</a>
-                                                                        } else
+                                                                        }
+                                                                        else
                                                                         {
                                                                             <p style="color:#1a1a1a">Phone not updated yet.</p>
                                                                         }
@@ -193,60 +197,60 @@
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <!-- Sign in Form -->
-                                                                <form class="sherah-wc__form-main sherah-wc__form-profile sherah-form-main--v2 p-0" method="post">
+                                                                <form class="sherah-wc__form-main sherah-wc__form-profile sherah-form-main--v2 p-0" method="post" id="profile-form">
                                                                     <div class="row">
                                                                         <div class="col-lg-6 col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">First Name *</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="text" name="formType" value="profileForm" style="display:none;" />
-                                                                                    <input type="text" asp-for="ProfileVM.Id" name="ProfileVM.Id" value="@user.Id" style="display:none;" />
-                                                                                    <input type ="text" 
-                                                                                           asp-for="ProfileVM.FirstName"
-                                                                                           name="ProfileVM.FirstName"
-                                                                                           value="@user.FirstName"
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="Your First Name">
-                                                                                </div>
+                                                                                <input type="text" name="formType" value="profileForm" style="display:none;" />
+                                                                                <input type="text" asp-for="ProfileVM.Id" name="ProfileVM.Id" value="@user.Id" id="profile-id" style="display:none;" />
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.FirstName"
+                                                                                       name="ProfileVM.FirstName"
+                                                                                       value="@user.FirstName"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your First Name"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">Last Name *</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="text"
-                                                                                           asp-for="ProfileVM.LastName"
-                                                                                           name="ProfileVM.LastName"
-                                                                                           value="@user.LastName" 
-                                                                                           class="sherah-wc__form-input" 
-                                                                                           placeholder="Your Last Name">
-                                                                                </div>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.LastName"
+                                                                                       name="ProfileVM.LastName"
+                                                                                       value="@user.LastName"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Last Name"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">Phone Number</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="text"
-                                                                                           asp-for="ProfileVM.Phone"
-                                                                                           name="ProfileVM.Phone"
-                                                                                           value="@user.Phone"
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="Your Phone Number">
-                                                                                </div>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.Phone"
+                                                                                       name="ProfileVM.Phone"
+                                                                                       value="@user.Phone"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Phone Number"
+                                                                                       rules="max:10|phone">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-12">
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">Email Address *</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="text"
-                                                                                           asp-for="ProfileVM.Email"
-                                                                                           name="ProfileVM.Email"
-                                                                                           value="@user.Email" 
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="Your Email">
-                                                                                </div>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.Email"
+                                                                                       name="ProfileVM.Email"
+                                                                                       value="@user.Email"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Email"
+                                                                                       rules="required|email">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-12">
@@ -256,7 +260,7 @@
                                                                                     <input type="text"
                                                                                            asp-for="ProfileVM.Headline"
                                                                                            name="ProfileVM.Headline"
-                                                                                           value="@user.Profile.Headline" 
+                                                                                           value="@user.Profile.Headline"
                                                                                            class="sherah-wc__form-input"
                                                                                            placeholder="Your Headline">
                                                                                 </div>
@@ -276,18 +280,6 @@
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-12">
                                                                             <div class="form-group">
-                                                                                <label class="sherah-wc__form-label">Street</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="text"
-                                                                                           asp-for="ProfileVM.Street"
-                                                                                           name="ProfileVM.Street"
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="Your Street">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6 col-md-6 col-12">
-                                                                            <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">Apartment (Optional)</label>
                                                                                 <div class="form-group__input">
                                                                                     <input type="text"
@@ -296,6 +288,18 @@
                                                                                            class="sherah-wc__form-input"
                                                                                            placeholder="Your Apartment">
                                                                                 </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Street</label>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.Street"
+                                                                                       name="ProfileVM.Street"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Street"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 col-md-6 col-12">
@@ -325,8 +329,8 @@
                                                                                               name="ProfileVM.AboutDescription"
                                                                                               class="sherah-wc__form-input"
                                                                                               placeholder="About description write here">
-                                                                                              @user.Profile.Summary
-                                                                                    </textarea>
+                                                                                        @user.Profile.Summary
+                                                                                                                                                                                                    </textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -346,41 +350,42 @@
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <!-- Sign in Form -->
-                                                                <form class="sherah-wc__form-main sherah-wc__form-profile sherah-form-main--v2 p-0" method="post">
+                                                                <form class="sherah-wc__form-main sherah-wc__form-profile sherah-form-main--v2 p-0" method="post" id="password-form">
                                                                     <div class="row">
                                                                         <div class="col-lg-8 col-md-8 col-12">
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">Old Password *</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="text" name="formType" value="passwordForm" style="display:none;" />
-                                                                                    <input type="text" asp-for="ProfileVM.Id" name="ProfileVM.Id" value="@user.Id" style="display:none;" />
-                                                                                    <input type="password"
-                                                                                           asp-for="ProfileVM.OldPassword"
-                                                                                           name="ProfileVM.OldPassword"
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-                                                                                </div>
+                                                                                <input type="text" name="formType" value="passwordForm" style="display:none;" />
+                                                                                <input type="text" asp-for="ProfileVM.Id" name="ProfileVM.Id" value="@user.Id" id="password-id" style="display:none;" />
+                                                                                <input type="password"
+                                                                                       asp-for="ProfileVM.OldPassword"
+                                                                                       name="ProfileVM.OldPassword"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">New Password *</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type ="password" 
-                                                                                           asp-for="ProfileVM.NewPassword"
-                                                                                           name="ProfileVM.NewPassword"
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
-                                                                                    >
-                                                                                </div>
+                                                                                <input type="password"
+                                                                                       asp-for="ProfileVM.NewPassword"
+                                                                                       name="ProfileVM.NewPassword"
+                                                                                       id="pass"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                                                                                       rules="required|min:8|max:16|number|lower|upper|special">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label class="sherah-wc__form-label">Re-enter Password *</label>
-                                                                                <div class="form-group__input">
-                                                                                    <input type="password"
-                                                                                           asp-for="ProfileVM.ReEnterPassword"
-                                                                                           name="ProfileVM.ReEnterPassword"
-                                                                                           class="sherah-wc__form-input"
-                                                                                           placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
-                                                                                </div>
+                                                                                <input type="password"
+                                                                                       asp-for="ProfileVM.ReEnterPassword"
+                                                                                       name="ProfileVM.ReEnterPassword"
+                                                                                       id="repass"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                                                                                       rules="required|match:pass">
+                                                                                <span class="form-message"></span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-4 col-md-4 col-12">
@@ -442,24 +447,50 @@
                     const districtId = getSelectedDataId("#district");
                     if (districtId) callApiWard(host + "province/ward/" + districtId);
                 });
+
+                Validator("#profile-form");
+                Validator("#password-form");
             }
         });
 
         function setLocationOptions(address) {
             const parts = address.split(',');
 
+            // Get the DOM elements for the input/select fields
+            const apartment = document.querySelector('input[name="ProfileVM.Apartment"]');
+            const street = document.querySelector('input[name="ProfileVM.Street"]');
             const province = document.querySelector('#city');
             const district = document.querySelector('#district');
             const ward = document.querySelector('#ward');
 
+            // Reset all fields to default (empty)
+            apartment.value = '';
+            street.value = '';
+            province.textContent = '';
+            district.textContent = '';
+            ward.textContent = '';
+
+            // Map address parts to the fields based on the number of parts
             if (parts.length > 4) {
-                setTextContent(province, parts[4]);
-                setTextContent(district, parts[3]);
-                setTextContent(ward, parts[2]);
-            } else {
-                setTextContent(province, parts[3]);
-                setTextContent(district, parts[2]);
-                setTextContent(ward, parts[1]);
+                setTextContent(province, parts[4]);  // Province
+                setTextContent(district, parts[3]);  // District
+                setTextContent(ward, parts[2]);      // Ward
+                street.value = parts[1].trim();      // Street
+                apartment.value = parts[0].trim();   // Apartment
+            } else if (parts.length == 4) {
+                setTextContent(province, parts[3]);  // Province
+                setTextContent(district, parts[2]);  // District
+                setTextContent(ward, parts[1]);      // Ward
+                street.value = parts[0].trim();      // Street
+            } else if (parts.length == 3) {
+                setTextContent(province, parts[2]);  // Province
+                setTextContent(district, parts[1]);  // District
+                street.value = parts[0].trim();      // Street
+            } else if (parts.length == 2) {
+                setTextContent(province, parts[1]);  // Province
+                street.value = parts[0].trim();      // Street
+            } else if (parts.length == 1) {
+                street.value = parts[0].trim();      // Only street available
             }
         }
 

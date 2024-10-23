@@ -7,19 +7,19 @@
 
 <style>
     .job-details-list {
-        list-style: none; /* Bỏ dấu chấm trước các mục */
-        padding: 0; /* Bỏ padding */
-        margin: 0; /* Bỏ margin */
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
         .job-details-list li {
-            margin-bottom: 10px; /* Khoảng cách giữa các mục */
-            font-size: 14px; /* Kích thước chữ */
-            line-height: 1.5; /* Chiều cao dòng */
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
     .job-location-salary {
-        margin-top: 5px; /* Khoảng cách giữa địa chỉ và mức lương */
+        margin-top: 5px;
     }
 </style>
 
@@ -47,10 +47,10 @@
                 <!-- Job Single -->
                 <div class="single-job-items mb-50">
                     <div class="job-items">
-                        <div class="company-img company-img-details">
-                            <a href="#!"><img src="@Model.JobPost.User.Avatar" alt="User's Avatar"></a>
+                        <div class="company-img company-img-details" style="width:20%;">
+                            <a href="#!"><img src="@Model.JobPost.User.Avatar" alt="Recruiter's Avatar" style="width:100px;height:100px"></a>
                         </div>
-                        <div class="job-tittle">
+                        <div class="job-tittle" style="width:80%;">
                             <a href="#!">
                                 <h4>@Model.JobPost.Title</h4>
                             </a>

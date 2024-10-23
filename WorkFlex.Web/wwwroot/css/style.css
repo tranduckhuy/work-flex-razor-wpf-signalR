@@ -569,17 +569,20 @@ hr {
 }
 
 #scrollUp {
-    background: #fb246a;
-    height: 50px;
-    width: 50px;
     right: 31px;
     bottom: 18px;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border: 2px solid transparent;
+    border-radius: 50%;
     font-size: 20px;
     text-align: center;
-    border-radius: 50%;
     line-height: 48px;
-    border: 2px solid transparent
+    color: #fff;
+    background: #fb246a;
 }
 
 @media (max-width: 767px) {
@@ -7596,6 +7599,17 @@ form.search-box .search-form a {
     margin-right: 8px;
 }
 
-.hidden-input {
-    display: none;
+.form-message {
+    text-align: left;
+    font-size: .8rem;
+    line-height: 1.6rem;
+    padding: 4px 0 0;
+}
+
+.form-group.invalid input {
+    border-color: #f33a58;
+}
+
+.form-group.invalid .form-message {
+    color: #f33a58;
 }

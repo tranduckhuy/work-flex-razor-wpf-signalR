@@ -63,7 +63,7 @@ function Validator(formSelector) {
         },
         phone: function (value) {
             var regex = /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
-            return regex.test(value) ? undefined : "Please enter a phone number here!";
+            return regex.test(value) ? undefined : "Please enter a valid phone number here!";
         },
         price: function (value) {
             var regex = /^[1-9]\d{0,2}(?:([.,])\d{2})*(\1\d{3})*(?:[.,]\d{1,2})?$/;
@@ -77,7 +77,7 @@ function Validator(formSelector) {
     // Do sth when taked that form already
     if (formElement) {
 
-        var inputs = document.querySelectorAll('[name][rules]');
+        var inputs = formElement.querySelectorAll('[name][rules]');
 
         for (var input of inputs) {
 
@@ -114,10 +114,11 @@ function Validator(formSelector) {
             var rules = formRules[event.target.name];
             var errorMessage;
 
-            for (var rule of rules) {
-                errorMessage = rule(event.target.value);
-                if (errorMessage)
-                    break;
+            if (Array.isArray(rules)) {
+                for (var rule of rules) {
+                    errorMessage = rule(event.target.value);
+                    if (errorMessage) break;
+                }
             }
 
             if (errorMessage) {
@@ -165,8 +166,4 @@ function Validator(formSelector) {
             formElement.submit();
         }
     };
-
 }
-
-
-

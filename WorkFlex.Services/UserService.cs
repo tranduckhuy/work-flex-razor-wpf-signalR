@@ -127,8 +127,8 @@ namespace WorkFlex.Services
 
                 var locationParts = new List<string>
                 {
-                    profileDto.Street!,
                     profileDto.Apartment!,
+                    profileDto.Street!,
                     profileDto.Ward!,     
                     profileDto.District!, 
                     profileDto.Province!  
