@@ -23,15 +23,35 @@ namespace WorkFlex.Web.Untils.Helper
             if (filteredParts.Count == 0)
                 return "Location not updated yet.";
 
-            // Limit the number of parts to a maximum of 5
-            int maxIndex = Math.Min(5, filteredParts.Count);
+            // Extract city and province based on the number of parts
+            string city = null;
+            string province = null;
 
-            // Extract city and province from the last two parts
-            string city = filteredParts[maxIndex - 2];
-            string province = filteredParts[maxIndex - 1];
+            if (filteredParts.Count == 1)
+            {
+                // Only one part, assume it is the province
+                province = filteredParts[0];
+            }
+            else if (filteredParts.Count >= 2)
+            {
+                // If there are two or more parts, take the last as province and the second last as city
+                province = filteredParts.Last();
+                city = filteredParts[filteredParts.Count - 2];
+            }
 
-            // Return the city and province joined by a comma
-            return $"{city}, {province}";
+            // Construct the result based on the available data
+            if (!string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(province))
+            {
+                return $"{city}, {province}";
+            }
+            else if (!string.IsNullOrEmpty(province))
+            {
+                return province;
+            }
+            else
+            {
+                return "Location not updated yet.";
+            }
         }
     }
 }

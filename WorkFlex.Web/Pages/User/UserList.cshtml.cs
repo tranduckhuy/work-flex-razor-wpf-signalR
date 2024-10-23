@@ -24,7 +24,7 @@ namespace WorkFlex.Web.Pages.User
 
         public int TotalPages { get; set; }
 
-        public UserSearchCriteria? SearchCriteria { get; set; }
+        public UserSearchCriteria SearchCriteria { get; set; } = null!;
 
         public Pageable<UserSearchCriteria> Pageable { get; set; } = new Pageable<UserSearchCriteria>();
 
@@ -38,7 +38,7 @@ namespace WorkFlex.Web.Pages.User
                     SearchValue = searchValue
                 };
             }
-            return await LoadUsers(currentPage, SearchCriteria!);
+            return await LoadUsers(currentPage, SearchCriteria);
         }
 
         public async Task<IActionResult> OnPostAsync(UserSearchCriteria searchCriteria, int currentPage = 1)

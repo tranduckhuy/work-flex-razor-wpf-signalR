@@ -197,9 +197,9 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                 {
                                     <div class="single-job-items mb-30" style="cursor:pointer;"
                                          onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
-                                        <div class="job-items">
+                                        <div class="job-items" style="align-items:center;">
                                             <div class="company-img">
-                                                <a href="#"><img src="@job.User.Avatar" alt="Recr   uiter's Avatar'"></a>
+                                                <a href="#!"><img src="@job.User.Avatar" alt="Recruiter's Avatar'" style="width:100px;height:100px;"></a>
                                             </div>
                                             <div class="job-tittle job-tittle2">
                                                 <a href="#">
@@ -213,7 +213,7 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                             </div>
                                         </div>
                                         <div class="items-link items-link2 f-right" onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
-                                            <a href="#">@job.JobType.TypeName</a>
+                                            <a href="#!">@job.JobType.TypeName</a>
                                             <span>@job.DisplayCreatedAt</span>
                                         </div>
                                     </div>

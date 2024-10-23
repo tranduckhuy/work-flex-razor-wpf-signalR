@@ -38,7 +38,7 @@ namespace WorkFlex.Web.Pages.User
 				}
 
                 UserDto = await _userService.GetByIdAsync(guidUserId);
-				if (User == null)
+				if (UserDto == null)
 				{
 					_logger.LogWarning("[OnGetAsync]: Controller - User not found for ID: {UserId}", userId);
 					return RedirectToPage(AppConstants.PAGE_ERROR);
