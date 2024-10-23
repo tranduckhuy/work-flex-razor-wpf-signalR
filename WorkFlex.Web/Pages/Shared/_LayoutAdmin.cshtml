@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <!-- Fav Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="~/img/favicon.ico">
 
     <!-- sherah Stylesheet -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
@@ -127,7 +127,7 @@
                                 </li>
                             }
                             <li>
-                                <a class="collapsed" href="profile-info.html">
+                                <a class="collapsed" asp-page="/User/Profile" asp-route-userId="@userId">
                                     <span class="menu-bar__text">
                                         <span class="sherah-menu-icon sherah-svg-icon__v1">
                                             <svg class="sherah-svg-icon" xmlns="http://www.w3.org/2000/svg" width="22.103" height="22.368" viewBox="0 0 22.103 22.368">
@@ -163,7 +163,7 @@
                                 </li>
                             }
                             <li>
-                                <a href="chat-messages.html" class="collapsed">
+                                <a href="/Message/Message" class="collapsed">
                                     <span class="menu-bar__text">
                                         <span class="sherah-menu-icon sherah-svg-icon__v1">
                                             <svg class="sherah-svg-icon" xmlns="http://www.w3.org/2000/svg" width="22.029" height="22.368" viewBox="0 0 22.029 22.368">
@@ -283,7 +283,7 @@
                                                                             </g>
                                                                         </svg>
                                                                     </div>
-                                                                    <h4 class="sherah-dropdown-card-name "><a href="chat-messages.html">Message</a></h4>
+                                                                    <h4 class="sherah-dropdown-card-name "><a href="/Message/Message">Message</a></h4>
                                                                 </div>
                                                             </li>
                                                             <li>
@@ -300,7 +300,7 @@
                                                                             </g>
                                                                         </svg>
                                                                     </div>
-                                                                    <h4 class="sherah-dropdown-card-name"><a href="profile-info.html">Settings</a></h4>
+                                                                    <h4 class="sherah-dropdown-card-name"><a asp-page="/User/Profile" asp-route-userId="@userId">Settings</a></h4>
                                                                 </div>
                                                             </li>
                                                             <li>
@@ -354,7 +354,7 @@
     <script src="~/js/handle-script.js"></script>
     <script src="~/js/toast-config.js"></script>
     <script src="~/js/validator.js"></script>
-    <script src="~/js/main-admin.js"></script> 
+    <script src="~/js/main-admin.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
