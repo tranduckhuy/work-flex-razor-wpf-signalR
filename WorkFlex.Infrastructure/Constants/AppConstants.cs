@@ -68,7 +68,7 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_UPDATE_JOB_SUCCESSFULLY = "Job updated successfully!";
         public const string MESSAGE_DELETE_JOB_SUCCESSFULLY = "Job deleted successfully!";
         public const string MESSAGE_CHANGE_PASSWORD_SUCCESSFULLY = "Your password changed successfully!";
-        public const string MESSAGE_APPLY_JOB_SUCCESSFULLY = "You have applied for this job successfully!";
+        public const string MESSAGE_APPLY_JOB_SUCCESSFULLY = "You have sent request to apply for this job successfully!";
         public const string MESSAGE_UPDATE_PROFILE_SUCCESSFULLY = "Your profile updated successfully!";
         public const string MESSAGE_APPROVE_RECRUITER_REQUEST_SUCCESSFULLY = "Recruiter request approved successfully!";
         public const string MESSAGE_DECLINE_RECRUITER_REQUEST_SUCCESSFULLY = "Recruiter request declined successfully!";
