@@ -51,7 +51,7 @@
 
                 <!-- Logo -->
                 <div class="logo sherah-sidebar-padding">
-                    <a href="index.html">
+                    <a href=@(roleId == (int)AppConstants.Role.Admin ? "/Dashboard/Dashboard" : "/")>
                         <img class="sherah-logo__main" src="~/img/logo/logo1.png" style="width: 200px; height: auto;}" alt="#">
                     </a>
                     <div class="sherah__sicon close-icon d-xl-none">
