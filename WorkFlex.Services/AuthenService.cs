@@ -232,7 +232,8 @@ namespace WorkFlex.Services
                 {
                     UserId = user.Id,
                     Headline = "",
-                    Summary = ""
+                    Summary = "",
+                    Website = "",
                 };
 
                 // Save user to DB

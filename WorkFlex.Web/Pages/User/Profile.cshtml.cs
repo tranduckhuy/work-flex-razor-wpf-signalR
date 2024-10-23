@@ -19,7 +19,7 @@ namespace WorkFlex.Web.Pages.User
 			_userService = userService;
 		}
 
-		public new UserDto? User { get; set; }
+		public UserDto? UserDto { get; set; }
 
 		public ProfileVM ProfileVM { get; set; } = null!;
 
@@ -37,7 +37,7 @@ namespace WorkFlex.Web.Pages.User
 					return RedirectToPage(AppConstants.PAGE_ERROR);
 				}
 
-				User = await _userService.GetByIdAsync(guidUserId);
+                UserDto = await _userService.GetByIdAsync(guidUserId);
 				if (User == null)
 				{
 					_logger.LogWarning("[OnGetAsync]: Controller - User not found for ID: {UserId}", userId);
@@ -75,7 +75,7 @@ namespace WorkFlex.Web.Pages.User
 
         private async Task<IActionResult> HandleProfileUpdateAsync(ProfileVM profileVM)
         {
-            _logger.LogInformation("[HandleProfileUpdateAsync]: Controller - Start updating profile for user: {UserId}", User?.Id);
+            _logger.LogInformation("[HandleProfileUpdateAsync]: Controller - Start updating profile for user: {UserId}", UserDto?.Id);
             try
             {
                 var updateResult = await _userService.UpdateUserProfileAsync(AppMapper.Mapper.Map<ProfileDto>(profileVM));
@@ -140,8 +140,8 @@ namespace WorkFlex.Web.Pages.User
 
         private async Task SetUserAsync(Guid userId)
         {
-            User = await _userService.GetByIdAsync(userId);
-            if (User == null)
+            UserDto = await _userService.GetByIdAsync(userId);
+            if (UserDto == null)
             {
                 _logger.LogWarning("[SetUserAsync]: Controller - User not found for ID: {UserId}", userId);
                 RedirectToPage(AppConstants.PAGE_ERROR);

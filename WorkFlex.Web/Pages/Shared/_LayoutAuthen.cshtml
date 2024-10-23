@@ -13,13 +13,15 @@
     <!-- Main css -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/authen-css.css">
+    <link rel="stylesheet" href="~/css/style-toast.css">
+    <link rel="stylesheet" href="~/css/fontawesome-all.min.css">
 </head>
 <body oncontextmenu='return false' class='snippet-body'>
     @RenderBody()
 
     <script src="~/js/vendor/jquery/jquery.min.js"></script>
     <script src="~/js/validator.js"></script>
-
+    <script src="~/js/toast-config.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

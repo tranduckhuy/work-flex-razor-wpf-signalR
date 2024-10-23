@@ -59,6 +59,7 @@ namespace WorkFlex.Web.Pages.Recruiter
             try
             {
                 await _userService.LockUnlockUser(userId);
+                TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_ACTION_SUCCESSFULLY;
                 return RedirectToPage(); 
             }
             catch (Exception ex)
@@ -72,6 +73,7 @@ namespace WorkFlex.Web.Pages.Recruiter
             try
             {
                 await _userService.DemotePromoteUser(userId);
+                TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_ACTION_SUCCESSFULLY;
                 return RedirectToPage();
             }
             catch (Exception ex)

@@ -3,8 +3,40 @@
 @{
     Layout = "_LayoutAuthen";
     ViewData["Title"] = "Sign in";
-    var successMessage = TempData["SuccessMessage"] as string;
-    var failedMessage = TempData["FailedMessage"] as string;
+    var successMsg = TempData["SuccessMessage"] as string;
+    var failedMsg = TempData["FailedMessage"] as string;
+}
+
+<div id="toast"></div>
+@if (!string.IsNullOrEmpty(successMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Success",
+                    message: "@successMsg",
+                    type: "success",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+else if (!string.IsNullOrEmpty(failedMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Failed",
+                    message: "@failedMsg",
+                    type: "danger",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
 }
 
 <div class="main">
@@ -19,18 +51,6 @@
 
                 <div class="signin-form">
                     <h2 class="form-title">Sign in</h2>
-                    @if (!string.IsNullOrEmpty(successMessage))
-                    {
-                        <div class="alert alert-success" role="alert">
-                            @successMessage
-                        </div>
-                    }
-                    @if (!string.IsNullOrEmpty(failedMessage))
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @failedMessage
-                        </div>
-                    }
                     <form method="POST" class="register-form" id="login-form">
                         <div class="form-group">
                             <label for="username" asp-for="LoginVM.Username"><i class="zmdi zmdi-account material-icons-name"></i></label>

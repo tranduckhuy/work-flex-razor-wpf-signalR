@@ -71,7 +71,7 @@ namespace WorkFlex.Web.Pages.Job
 
                     _context.JobApplications.Add(jobApplication);
                     await _context.SaveChangesAsync();
-
+                    TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_APPLY_JOB_SUCCESSFULLY;
                     return RedirectToPage(AppConstants.PAGE_JOB_LIST);
                 }
                 return Page();

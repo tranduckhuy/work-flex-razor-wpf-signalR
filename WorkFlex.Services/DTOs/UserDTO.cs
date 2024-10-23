@@ -22,8 +22,6 @@ namespace WorkFlex.Services.DTOs
 
         public string Location { get; set; } = string.Empty;
 
-        public string Website { get; set; } = string.Empty;
-
         public DateTime DateOfBirth { get; set; }
 
         public int RoleId { get; set; }

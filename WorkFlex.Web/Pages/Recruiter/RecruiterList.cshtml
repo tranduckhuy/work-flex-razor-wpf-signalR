@@ -5,6 +5,40 @@
 @{
     Layout = "_LayoutAdmin";
     ViewData["Title"] = "Admin Recruiter List";
+    var successMsg = TempData["SuccessMessage"] as string;
+    var failedMsg = TempData["FailedMessage"] as string;
+}
+
+<div id="toast"></div>
+@if (!string.IsNullOrEmpty(successMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Success",
+                    message: "@successMsg",
+                    type: "success",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+else if (!string.IsNullOrEmpty(failedMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Failed",
+                    message: "@failedMsg",
+                    type: "danger",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
 }
 
 <div class="container">

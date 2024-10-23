@@ -6,7 +6,7 @@
 
     var successMsg = TempData["SuccessMessage"] as string;
     var failedMsg = TempData["FailedMessage"] as string;
-    var user = Model.User;
+    var user = Model.UserDto;
 }
 
 @if (user != null)
@@ -142,9 +142,9 @@
                                                             <div class="sharah-profile__meta mg-top-40">
                                                                 <h4>Headline: @(!string.IsNullOrEmpty(user.Profile.Headline) ? user.Profile.Headline : "Headline not updated yet.")</h4>
                                                                 <p class="mg-top-10">
-                                                                    @if (!string.IsNullOrEmpty(user.Website))
+                                                                    @if (!string.IsNullOrEmpty(user.Profile.Website))
                                                                     {
-                                                                        <a href="@user.Website">@user.Website</a>
+                                                                        <a href="@user.Profile.Website">@user.Profile.Website</a>
                                                                     } else
                                                                     {
                                                                         <p style="color:#5a5a5a">Website not updated yet.</p>
