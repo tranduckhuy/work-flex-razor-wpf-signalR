@@ -132,11 +132,13 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                                             <img src="@user.Avatar" alt="User's avatar"
                                                                  style="width:40px;height:40px;">
                                                         </div>
-                                                        <h5 class="sherah-table__vendor--title">
-                                                            @user.FullName
-                                                            <br />
-                                                            <i style="font-weight:400;font-size:16px;">Role - @user.Role.RoleName</i>
-                                                        </h5>
+                                                        <a href="@Url.Page("/User/Profile", null, new { userId = user.Id })" target="_blank" rel="noopener">
+                                                            <h5 class="sherah-table__vendor--title">
+                                                                @user.FullName
+                                                                <br />
+                                                                <i style="font-weight:400;font-size:16px;">Role - @user.Role.RoleName</i>
+                                                            </h5>
+                                                        </a>
                                                     </div>
                                                 </td>
                                                 <td class="sherah-table__column-2 sherah-table__data-2"
