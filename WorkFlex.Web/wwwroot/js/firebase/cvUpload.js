@@ -26,15 +26,18 @@ function updateUploadMessage() {
     }
 }
 function submitForm() {
-    $('.progress-container').show();
-    $('.progress-bar').css('width', '0%');
 
-    uploadFile(function () {
-        $('.progress-bar').css('width', '100%');
-        setTimeout(() => {
-            document.querySelector('form').submit();
-        }, 500);
-    });
+    if (validateForm()) {
+        $('.progress-container').show();
+        $('.progress-bar').css('width', '0%');
+
+        uploadFile(function () {
+            $('.progress-bar').css('width', '100%');
+            setTimeout(() => {
+                document.querySelector('form').submit();
+            }, 500);
+        });
+    }
 }
 
 function uploadFile(callback) {

@@ -3,8 +3,6 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Job Apply";
-    var successMsg = TempData["SuccessMessage"] as string;
-    var failedMsg = TempData["FailedMessage"] as string;
 }
 
 <style>
@@ -147,43 +145,13 @@
 
 
 <div id="toast"></div>
-@if (!string.IsNullOrEmpty(successMsg))
-{
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                toast({
-                    title: "Success",
-                    message: "@successMsg",
-                    type: "success",
-                    duration: 3000,
-                });
-            }, 600);
-        });
-    </script>
-}
-else if (!string.IsNullOrEmpty(failedMsg))
-{
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                toast({
-                    title: "Failed",
-                    message: "@failedMsg",
-                    type: "danger",
-                    duration: 3000,
-                });
-            }, 600);
-        });
-    </script>
-}
 
 <div class="container-outer">
     <form method="post" class="apply-container">
         <h1>@Model.JobPost.Title</h1>
         <p>Please Fill Out the Form Below to Submit Your Job Application!</p>
         <div class="form-group">
-            <label for="cover-letter">Cover Letter</label>
+            <label for="cover-letter">Cover Letter*</label>
             <textarea asp-for="JobApplyVM.Description" id="cover-letter" placeholder="Write your cover letter here..."></textarea>
             <small>Please do not exceed 200 words.</small>
         </div>
@@ -208,6 +176,33 @@ else if (!string.IsNullOrEmpty(failedMsg))
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"
         integrity="sha384-jm31kDh5bQXHL1gr/Qdq4Z1bVU+ZnEjbqMrZGhsEopCPF4HuGU0B0eH3LHcAz+H7"
         crossorigin="anonymous">
+</script>
+
+<script>
+    function showToast(message) {
+        toast({
+            title: "Error",
+            message: message,
+            type: "danger",
+            duration: 3000,
+        });
+    }
+
+    function validateForm() {
+        const coverLetter = document.getElementById('cover-letter').value.trim();
+        const fileUpload = document.getElementById('file-upload').value.trim();
+
+        if (!coverLetter) {
+            showToast("Please fill out the cover letter.");
+            return false;
+        }
+
+        if (!fileUpload) {
+            showToast("Please upload your CV.");
+            return false;
+        }
+        return true;
+    }
 </script>
 
 <script src="/js/firebase/cvUpload.js"></script>
