@@ -53,7 +53,7 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                 <h2 class="sherah-breadcrumb__title">Recruiter</h2>
                                 <ul class="sherah-breadcrumb__list">
                                     <li><a asp-page="/Dashboard/Dashboard">Home</a></li>
-                                    <li class="active"><a href="#!">Recruiter List</a></li>
+                                    <li class="active"><a href="#!">Recruiter Request List</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -90,13 +90,13 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                 </div>
                             </div>
                             <div class="sherah-table p-0">
-                                <table id="sherah-table__vendor" class="sherah-table__main sherah-table__main-v3" style="min-width: 500px">
+                                <table id="sherah-table__vendor" class="sherah-table__main sherah-table__main-v3" style="width: 100%; border: 1px solid #e2e7f1;">
                                     <!-- sherah Table Head -->
                                     <thead class="sherah-table__head">
                                         <tr>
                                         <tr>
                                             <th class="sherah-table__column-1 sherah-table__h1"
-                                                style="width:22%;min-width:290px;font-size: 16px;padding-top:12px;padding-bottom:12px;">
+                                                style="width:22%;font-size: 16px;padding-top:12px;padding-bottom:12px;">
                                                 Name
                                             </th>
                                             <th class="sherah-table__column-2 sherah-table__h2"
@@ -108,11 +108,11 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                                 Phone
                                             </th>
                                             <th class="sherah-table__column-4 sherah-table__h4"
-                                                style="width:25%;font-size:16px;padding-left:0;padding-top:12px;padding-bottom:12px;">
+                                                style="width:40%;font-size:16px;padding-left:0;padding-top:12px;padding-bottom:12px;">
                                                 Address
                                             </th>
                                             <th class="sherah-table__column-5 sherah-table__h5"
-                                                style="width:13%;font-size:16px;text-align:center;padding-top:12px;padding-bottom:12px;">
+                                                style="width:13%;font-size:16px;padding-top:12px;padding-bottom:12px;">
                                                 Status
                                             </th>
                                             <th class="sherah-table__column-6 sherah-table__h6"
@@ -126,7 +126,7 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                         {
                                             <tr style="height: 20px;">
                                                 <td class="sherah-table__column-1 sherah-table__data-1"
-                                                    style="width:30%;min-width:300px;padding:12px;text-align:left;">
+                                                    style="width:30%;padding:12px;text-align:left;">
                                                     <div class="sherah-table__product">
                                                         <div class="sherah-table__vendor-img">
                                                             <img src="@user.Avatar" alt="User's avatar"
@@ -142,25 +142,25 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                                     </div>
                                                 </td>
                                                 <td class="sherah-table__column-2 sherah-table__data-2"
-                                                    style="width:25%;min-width:150px;padding:12px;text-align:left;">
+                                                    style="width:25%;padding:12px;text-align:left;">
                                                     <div class="sherah-table__product-content">
                                                         <p class="sherah-table__product-desc">@user.Email</p>
                                                     </div>
                                                 </td>
                                                 <td class="sherah-table__column-3 sherah-table__data-3"
-                                                    style="width: 12%;min-width:80px;padding:12px 8px 12px 12px;text-align:left;">
+                                                    style="width: 12%;padding:12px 8px 12px 12px;text-align:left;">
                                                     <div class="sherah-table__product-content">
                                                         <p class="sherah-table__product-desc">@user.Phone</p>
                                                     </div>
                                                 </td>
                                                 <td class="sherah-table__column-4 sherah-table__data-4"
-                                                    style="width: 25%;min-width:80px;padding:12px 12px 12px 0;text-align:left;">
+                                                    style="width: 25%;padding:12px 12px 12px 0;text-align:left;">
                                                     <div class="sherah-table__product-content">
                                                         <p class="sherah-table__product-desc">@user.Location</p>
                                                     </div>
                                                 </td>
                                                 <td class="sherah-table__column-5 sherah-table__data-5"
-                                                    style="width: 13%;min-width:80px;padding:12px 12px 12px 0;text-align:center;">
+                                                    style="width: 13%;padding:12px;text-align:center;">
                                                     @if (@user.IsLock)
                                                     {
                                                         <div class="sherah-table__status sherah-color2 sherah-color2__bg--opactity">
@@ -175,7 +175,7 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                                     }
                                                 </td>
                                                 <td class="sherah-table__column-6 sherah-table__data-6"
-                                                    style="width: 3%;min-width:120px;padding:12px 12px 12px 0;margin-left:10px;">
+                                                    style="width: 3%;padding:12px;margin-left:10px;">
                                                     <div class="sherah-table__status__group" style="justify-content:center;">
                                                         <a href="#" onclick="handleApproveRequest('@Url.Page("/Recruiter/RecruiterRequest", "ApproveRequest", new { userId = user.Id })')"
                                                            title="Accept Request" class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
@@ -192,13 +192,13 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                     </tbody>
                                 </table>
                                 <div class="row" style="margin-top:16px;">
-                                    @if (Model.Pageable != null)
+                                    @if (Model.Pageable.TotalItems > 0)
                                     {
                                         <div class="col-sm-12 col-md-5">
                                             <div class="dataTables_info" id="sherah-table__vendor_info" role="status"
                                                  aria-live="polite" style="font-weight:500">
                                                 Total @Model.Pageable.TotalItems
-                                                recruiters
+                                                requests
                                             </div>
                                         </div>
                                     }
