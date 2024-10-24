@@ -162,9 +162,9 @@ namespace WorkFlex.Web.Pages.User
             HttpContext.Session.SetString(AppConstants.LOCATION, _addressHelper.ExtractCityProvince(user.Location ?? string.Empty));
         }
 
-        private IActionResult RedirectToErrorPage()
+        private void RedirectToErrorPage()
         {
-            return RedirectToPage(AppConstants.PAGE_ERROR);
+            RedirectToPage(AppConstants.PAGE_ERROR);
         }
     }
 }
