@@ -24,6 +24,8 @@ namespace WorkFlex.Services.DTOs
 
         public DateTime DateOfBirth { get; set; }
 
+        public string StringDateOfBirth { get; set; } = string.Empty;
+
         public int RoleId { get; set; }
 
         public bool IsLock { get; set; }

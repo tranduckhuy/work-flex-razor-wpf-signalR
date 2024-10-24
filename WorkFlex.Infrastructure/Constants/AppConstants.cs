@@ -54,8 +54,8 @@ namespace WorkFlex.Infrastructure.Constants
         }
 
         // Constants for default values
-        public const string DEFAULT_AVATAR = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg";
-		public const string DEFAULT_BGR_IMG = "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=CMrJ2NGMR0MoAjanRnUyBygvaKToHnlXIAGG29MYqXI=";
+        public const string DEFAULT_AVATAR = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fdefault_avatar.png?alt=media&token=8654c964-e226-4777-ac66-b60d4182d287";
+		public const string DEFAULT_BGR_IMG = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10";
         public const string UNDEFINE = "Undefine";
         public const string YOU = "Yourself";
 
