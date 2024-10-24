@@ -40,7 +40,7 @@
 						<div class="sherah-chatbox">
 							<div class="row">
 								<div class="col-lg-4 col-md-4 col-12 sherah-chatbox__one mg-top-30">
-									<div class="sherah-chatbox__sidebar sherah-default-bg sherah-border">
+									<div class="sherah-chatbox__sidebar sherah-default-bg sherah-border" style="height: 729px; overflow-y: scroll;">
 
 										<div class="sherah-chatbox__top">
 											<div class="sherah-chatbox__inner sherah-border-btm pd-btm-20 mg-btm-10">
@@ -76,8 +76,26 @@
 																	<img src="@user.Avatar" alt="@user.Name">
 																</div>
 																<div class="sherah-chatbox__author-content">
-																	<h4 class="sherah-chatbox__author-title">@user.Name</h4>
-																	<p class="sherah-chatbox__author-desc">Last message review....</p>
+																	<h4 class="sherah-chatbox__author-title">
+																		<strong>@user.Name</strong>
+																	</h4>
+																	<p class="sherah-chatbox__author-desc" style="color: #adabab" id="@user.Id">
+																		@if (user.LastMessage != null)
+																		{
+																			if (user.IsLastMessageCurrentUser)
+																			{
+																				<strong>You: </strong> @user.LastMessage
+																			}
+																			else
+																			{
+																				<strong>@user.Name: </strong> @user.LastMessage
+																			}
+																		}
+																		else
+																		{
+																			@:Last message review....
+																		}
+																	</p>
 																</div>
 															</div>
 														</div>
@@ -117,7 +135,7 @@
 																	<div class="sherah-chatbox__author-img sherah-chatbox__author-img-sticky">
 																		<img src="@message.Avatar" alt="@message.Name">
 																	</div>
-																	<div class="sherah-chatbox__main-content">
+																	<div class="sherah-chatbox__main-content" title="@message.Time">
 																		<div class="sherah-chatbox__incoming-chat">
 																			<p class="sherah-chatbox__incoming-text">@message.Reply</p>
 																		</div>
@@ -137,7 +155,7 @@
 															<li>
 																<div class="sherah-chatbox__chat">
 																	<div class="sherah-chatbox__main-content">
-																		<div class="sherah-chatbox__incoming-chat">
+																		<div class="sherah-chatbox__incoming-chat"  title="@message.Time">
 																			<p class="sherah-chatbox__incoming-text">@message.Reply</p>
 																		</div>
 																	</div>
@@ -267,11 +285,20 @@
 		});
 
 		connection.on("ReceiveMessage", function (userId, userName, message, avatar, time) {
-			const localTime = new Date(time).toLocaleTimeString();
+			const localTime = new Date(time).toLocaleString();
 
 			// Create the main div element for the message
 			const msg = document.createElement("div");
 			const currentUser = "@Model.CurrentUser.Id.ToString().ToUpper()";
+
+			const lastMessage = document.getElementById(otherUserId);
+			if (lastMessage) {
+				lastMessage.innerHTML = userId !== currentUser
+					? `<strong>${userName}:</strong> ${message}`
+					: `<strong>You:</strong> ${message}`;
+			} else {
+				console.error("lastMessage not found for userId:", userId);
+			}
 
 			// Set the appropriate class based on the user ID (incoming for the current user, outgoing for others)
 			msg.className = userId !== currentUser ? "sherah-chatbox__incoming" : "sherah-chatbox__incoming sherah-chatbox__outgoing";
@@ -302,6 +329,7 @@
 			// Create the div for the message text (chat bubble)
 			const incomingChatDiv = document.createElement("div");
 			incomingChatDiv.className = "sherah-chatbox__incoming-chat";
+			incomingChatDiv.title = localTime;
 
 			const messageText = document.createElement("p");
 			messageText.className = "sherah-chatbox__incoming-text";

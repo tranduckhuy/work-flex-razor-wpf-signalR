@@ -30,7 +30,7 @@ namespace WorkFlex.SignalR.Hubs
             var user = await _context.Users.FindAsync(userId);
 
             await Clients.Groups(conversationId.ToString())
-                .SendAsync("ReceiveMessage", userId.ToString().ToUpper(), user?.Username, message, user?.Avatar, reply.Time);
+                .SendAsync("ReceiveMessage", userId.ToString().ToUpper(), user?.FirstName + " " + user?.LastName, message, user?.Avatar, reply.Time);
         }
 
         public async Task JoinConversation(string conversationId)

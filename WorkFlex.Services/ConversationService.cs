@@ -68,28 +68,42 @@ namespace WorkFlex.Services
             return messages.OrderBy(m => m.Time).ToList();
         }
 
-        public async Task<List<UserMessageDto>> GetUserChats(string currentUserId)
-        {
-            var userId = new Guid(currentUserId);
+		public async Task<List<UserMessageDto>> GetUserChats(string currentUserId)
+		{
+			var userId = new Guid(currentUserId);
 
-            var conversations = await _context.Conversations
-                .Where(c => c.UserOne == userId || c.UserTwo == userId)
-                .Select(c => c.UserOne == userId ? c.UserTwo : c.UserOne)
-                .ToListAsync();
+			var query = from c in _context.Conversations
+						join m in _context.ConversationReplies on c.Id equals m.ConversationId into messages
+						where c.UserOne == userId || c.UserTwo == userId
+						select new
+						{
+							OtherUserId = c.UserOne == userId ? c.UserTwo : c.UserOne,
+							LastMessage = messages.OrderByDescending(msg => msg.Time).FirstOrDefault()
+						};
 
-            var userIds = conversations.Distinct().ToList();
+			var latestMessages = await query.ToListAsync();
 
-            userIds.Remove(new Guid(currentUserId));
+			var userIds = latestMessages.Select(x => x.OtherUserId).Distinct().ToList();
 
-            var users = await _context.Users
-                .Where(u => userIds.Contains(u.Id)).ToListAsync();
+			var users = await _context.Users.Where(u => userIds.Contains(u.Id)).ToListAsync();
 
-            return users.Select(u => new UserMessageDto
-            {
-                Id = u.Id,
-                Name = u.FirstName + " " + u.LastName,
-                Avatar = u.Avatar
-            }).ToList();
-        }
-    }
+			var userMessageDtos = users.Select(u => {
+				var messageInfo = latestMessages.FirstOrDefault(m => m.OtherUserId == u.Id);
+				return new UserMessageDto
+				{
+					Id = u.Id,
+					Name = u.Id != userId ? u.FirstName + " " + u.LastName : AppConstants.YOU,
+					Avatar = u.Avatar,
+					LastMessage = messageInfo?.LastMessage?.Reply,
+					IsLastMessageCurrentUser = messageInfo?.LastMessage?.UserId == userId,
+					LastMessageTime = messageInfo?.LastMessage?.Time
+				};
+			}).ToList();
+
+			return userMessageDtos
+		        .OrderByDescending(dto => dto.Id == userId)
+		        .ThenByDescending(dto => dto.LastMessageTime)
+		        .ToList();
+		}
+	}
 }
