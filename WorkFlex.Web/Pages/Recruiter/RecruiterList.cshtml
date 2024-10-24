@@ -177,11 +177,11 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                                 <td class="sherah-table__column-6 sherah-table__data-6"
                                                     style="width: 3%;padding:12px;margin-left:10px;">
                                                     <div class="sherah-table__status__group" style="justify-content:center;">
-                                                        <a href="#" onclick="handleDemoted('@Url.Page("/Recruiter/RecruiterList", "DemotePromoteUser", new { userId = user.Id })')"
+                                                        @* <a href="#" onclick="handleDemoted('@Url.Page("/Recruiter/RecruiterList", "DemotePromoteUser", new { userId = user.Id })')"
                                                            title="Demoted" class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
                                                             <i class="fas fa-arrow-alt-circle-down"></i>
                                                         </a>
-
+ *@
                                                         @if (@user.IsLock)
                                                         {
                                                             <a href="#" onclick="handleUnlockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
