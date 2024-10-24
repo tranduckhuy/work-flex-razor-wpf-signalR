@@ -1,6 +1,6 @@
-@WorkFlex.SignalR_HostAddress = http://localhost:5132
+@WorkFlex.SignalR_HostAddress = wss://localhost:5132
 
-GET {{WorkFlex.SignalR_HostAddress}}/weatherforecast/
+GET {{WorkFlex.SignalR_HostAddress}}/chatHub/
 Accept: application/json
 
 ###

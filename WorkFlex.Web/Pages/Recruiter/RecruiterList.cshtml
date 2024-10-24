@@ -1,0 +1,316 @@
+@page
+@using System.Web
+@using WorkFlex.Infrastructure.Constants
+@model WorkFlex.Web.Pages.Recruiter.RecruiterListModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Admin Recruiter List";
+    var successMsg = TempData["SuccessMessage"] as string;
+    var failedMsg = TempData["FailedMessage"] as string;
+}
+
+<div id="toast"></div>
+@if (!string.IsNullOrEmpty(successMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Success",
+                    message: "@successMsg",
+                    type: "success",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+else if (!string.IsNullOrEmpty(failedMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Failed",
+                    message: "@failedMsg",
+                    type: "danger",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="sherah-body">
+                <!-- Dashboard Inner -->
+                <div class="sherah-dsinner">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="sherah-breadcrumb mg-top-30">
+                                <h2 class="sherah-breadcrumb__title">Recruiter</h2>
+                                <ul class="sherah-breadcrumb__list">
+                                    <li><a asp-page="/Dashboard/Dashboard">Home</a></li>
+                                    <li class="active"><a href="#!">Recruiter List</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sherah-page-inner sherah-default-bg sherah-border mg-top-25">
+                        <div class="sherah-table sherah-page-inner sherah-border sherah-default-bg "
+                             style="padding-top:0;">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-7"></div>
+                                <div class="col-sm-12 col-md-5">
+                                    <form method="post" asp-page="/Recruiter/RecruiterList">
+                                        <div id="sherah-table__vendor_filter" class="dataTables_filter">
+                                            <div class="input-group display-flex" style="position: relative; margin: 20px 0;">
+                                                <select asp-for="SearchCriteria.SearchOption" name="SearchCriteria.SearchOption" id="searchType"
+                                                        style="height: 40px; width: 100px; font-size: 13px; color: #9AA2B1;">
+                                                    <option value="" selected disabled>Search Type</option>
+                                                    <option value="Name" id="name_option">Name</option>
+                                                    <option value="Email" id="email_option">Email</option>
+                                                </select>
+                                                &nbsp;
+                                                <input type="search"
+                                                       asp-for="SearchCriteria.SearchValue" 
+                                                       name="SearchCriteria.SearchValue" 
+                                                       placeholder="Search" 
+                                                       aria-controls="sherah-table__vendor"
+                                                       class="form-control form-control-sm my-input-search"
+                                                       style="padding-right: 80px"/>
+                                                <button style="position: absolute; top: 6px; right: 12px; z-index: 5; border: none; font-size: 16px; color: #6176FE; background-color: #F3F4F7;">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="sherah-table p-0">
+                                <table id="sherah-table__vendor" class="sherah-table__main sherah-table__main-v3" style="width: 100%; border: 1px solid #e2e7f1;">
+                                    <!-- sherah Table Head -->
+                                    <thead class="sherah-table__head">
+                                        <tr>
+                                        <tr>
+                                            <th class="sherah-table__column-1 sherah-table__h1"
+                                                style="width:22%;font-size: 16px;padding-top:12px;padding-bottom:12px;">
+                                                Name
+                                            </th>
+                                            <th class="sherah-table__column-2 sherah-table__h2"
+                                                style="width:25%;font-size:16px;padding-top:12px;padding-bottom:12px;">
+                                                Email
+                                            </th>
+                                            <th class="sherah-table__column-3 sherah-table__h3"
+                                                style="width:12%;font-size:16px;padding-left:12px;padding-top:12px;padding-bottom:12px;">
+                                                Phone
+                                            </th>
+                                            <th class="sherah-table__column-4 sherah-table__h4"
+                                                style="width:40%;font-size:16px;padding-left:0;padding-top:12px;padding-bottom:12px;">
+                                                Address
+                                            </th>
+                                            <th class="sherah-table__column-5 sherah-table__h5"
+                                                style="width:13%;font-size:16px;padding-top:12px;padding-bottom:12px;">
+                                                Status
+                                            </th>
+                                            <th class="sherah-table__column-6 sherah-table__h6"
+                                                style="width:3%;font-size:16px;text-align:center;padding-top:12px;padding-bottom:12px;">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sherah-table__body">
+                                        @foreach (var user in Model.Users)
+                                        {
+                                            <tr style="height: 20px;">
+                                                <td class="sherah-table__column-1 sherah-table__data-1"
+                                                    style="width:30%;padding:12px;text-align:left;">
+                                                    <div class="sherah-table__product">
+                                                        <div class="sherah-table__vendor-img">
+                                                            <img src="@user.Avatar" alt="User's avatar"
+                                                                 style="width:40px;height:40px;">
+                                                        </div>
+                                                        <a href="@Url.Page("/User/Profile", null, new { userId = user.Id })" target="_blank" rel="noopener">
+                                                            <h5 class="sherah-table__vendor--title">
+                                                                @user.FullName
+                                                                <br />
+                                                                <i style="font-weight:400;font-size:16px;">Role - @user.Role.RoleName</i>
+                                                            </h5>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td class="sherah-table__column-2 sherah-table__data-2"
+                                                    style="width:25%;padding:12px;text-align:left;">
+                                                    <div class="sherah-table__product-content">
+                                                        <p class="sherah-table__product-desc">@user.Email</p>
+                                                    </div>
+                                                </td>
+                                                <td class="sherah-table__column-3 sherah-table__data-3"
+                                                    style="width: 12%;padding:12px 8px 12px 12px;text-align:left;">
+                                                    <div class="sherah-table__product-content">
+                                                        <p class="sherah-table__product-desc">@user.Phone</p>
+                                                    </div>
+                                                </td>
+                                                <td class="sherah-table__column-4 sherah-table__data-4"
+                                                    style="width: 25%;padding:12px 12px 12px 0;text-align:left;">
+                                                    <div class="sherah-table__product-content">
+                                                        <p class="sherah-table__product-desc">@user.Location</p>
+                                                    </div>
+                                                </td>
+                                                <td class="sherah-table__column-5 sherah-table__data-5"
+                                                    style="width: 13%;padding:12px;text-align:center;">
+                                                    @if (@user.IsLock)
+                                                    {
+                                                        <div class="sherah-table__status sherah-color2 sherah-color2__bg--opactity">
+                                                            Locked
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="sherah-table__status sherah-color3 sherah-color3__bg--opactity">
+                                                            Active
+                                                        </div>
+                                                    }
+                                                </td>
+                                                <td class="sherah-table__column-6 sherah-table__data-6"
+                                                    style="width: 3%;padding:12px;margin-left:10px;">
+                                                    <div class="sherah-table__status__group" style="justify-content:center;">
+                                                        @* <a href="#" onclick="handleDemoted('@Url.Page("/Recruiter/RecruiterList", "DemotePromoteUser", new { userId = user.Id })')"
+                                                           title="Demoted" class="sherah-table__action sherah-color1 sherah-color1__bg--opactity">
+                                                            <i class="fas fa-arrow-alt-circle-down"></i>
+                                                        </a>
+ *@
+                                                        @if (@user.IsLock)
+                                                        {
+                                                            <a href="#" onclick="handleUnlockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
+                                                               title="Unlock" class="sherah-table__action sherah-color2 sherah-color2__bg--offset">
+                                                                <i class="fas fa-unlock"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#" onclick="handleLockUser('@Url.Page("/Recruiter/RecruiterList", "LockUnlockUser", new { userId = user.Id })')"
+                                                               title="Lock" class="sherah-table__action sherah-color3 sherah-color3__bg--opactity">
+                                                                <i class="fas fa-lock"></i>
+                                                            </a>
+                                                        }
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="row" style="margin-top:16px;">
+                                    @if (Model.Pageable != null)
+                                    {
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="sherah-table__vendor_info" role="status"
+                                                 aria-live="polite" style="font-weight:500">
+                                                Total @Model.Pageable.TotalItems
+                                                recruiters
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-sm-12 col-md-7">
+                                        @if (Model.Pageable != null)
+                                        {
+                                            <div class="sherah-pagination" style="margin-bottom: 0">
+                                                <ul class="sherah-pagination__list">
+                                                    @if (Model.Pageable.CurrentPage > 1)
+                                                    {
+                                                        var previousUrl = Url.Page("/Recruiter/RecruiterList", null, new { currentPage = Model.Pageable.CurrentPage - 1 });
+
+                                                        var queryParams = new List<string>();
+                                                        if (Model.Pageable.SearchCriteria?.SearchOption != null)
+                                                        {
+                                                            queryParams.Add($"searchOption={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchOption)}");
+                                                        }
+
+                                                        if (Model.Pageable.SearchCriteria?.SearchValue != null)
+                                                        {
+                                                            queryParams.Add($"searchValue={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchValue)}");
+                                                        }
+
+                                                        if (queryParams.Any())
+                                                        {
+                                                            previousUrl += "?" + string.Join("&", queryParams);
+                                                        }
+
+                                                        <li class="sherah-pagination__button">
+                                                            <a href="@previousUrl">
+                                                                <i class="fas fa-angle-left"></i>
+                                                            </a>
+                                                        </li>
+                                                    }
+
+                                                    @for (var i = Model.Pageable.StartPage; i <= Model.Pageable.EndPage; i++)
+                                                    {
+                                                        var pageUrl = Url.Page("/Recruiter/RecruiterList", null, new { currentPage = i });
+
+                                                        var queryParams = new List<string>();
+                                                        if (Model.Pageable.SearchCriteria?.SearchOption != null)
+                                                        {
+                                                            queryParams.Add($"searchOption={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchOption)}");
+                                                        }
+
+                                                        if (Model.Pageable.SearchCriteria?.SearchValue != null)
+                                                        {
+                                                            queryParams.Add($"searchValue={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchValue)}");
+                                                        }
+
+                                                        if (queryParams.Any())
+                                                        {
+                                                            pageUrl += "&" + string.Join("&", queryParams);
+                                                        }
+
+                                                        <li class="@(Model.Pageable.CurrentPage == i ? "active" : "")">
+                                                            <a href="@pageUrl">
+                                                                @i
+                                                            </a>
+                                                        </li>
+                                                    }
+
+                                                    @if (Model.Pageable.CurrentPage < Model.Pageable.TotalPages)
+                                                    {
+                                                        var nextUrl = Url.Page("/Recruiter/RecruiterList", null, new { currentPage = Model.Pageable.CurrentPage + 1 });
+
+                                                        var queryParams = new List<string>();
+                                                        if (Model.Pageable.SearchCriteria?.SearchOption != null)
+                                                        {
+                                                            queryParams.Add($"searchOption={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchOption)}");
+                                                        }
+
+                                                        if (Model.Pageable.SearchCriteria?.SearchValue != null)
+                                                        {
+                                                            queryParams.Add($"searchValue={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchValue)}");
+                                                        }
+
+                                                        if (queryParams.Any())
+                                                        {
+                                                            nextUrl += "&" + string.Join("&", queryParams);
+                                                        }
+
+                                                        <li class="sherah-pagination__button">
+                                                            <a href="@nextUrl">
+                                                                <i class="fas fa-angle-right"></i>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Dashboard Inner -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

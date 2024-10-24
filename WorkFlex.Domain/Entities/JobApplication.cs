@@ -14,6 +14,9 @@ namespace WorkFlex.Domain.Entities
         [Required]
         public Guid JobPostId { get; set; }
 
+        [Required]
+        public string Description { get; set; } = string.Empty;
+
         public DateTime ApplicationDate { get; set; }
 
         [Required, StringLength(255)]

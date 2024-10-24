@@ -12,6 +12,9 @@ namespace WorkFlex.Domain.Entities
 
         public string Summary { get; set; } = string.Empty;
 
+        [StringLength(255)]
+        public string? Website { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime ModifiedAt { get; set; }

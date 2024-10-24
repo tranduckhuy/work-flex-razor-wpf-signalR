@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkFlex.Infrastructure.Data;
 
@@ -15,22 +16,26 @@ namespace WorkFlex.Infrastructure.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("WorkFlex.Domain.Entities.Conversation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Time")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserOne")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UserTwo")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -45,20 +50,20 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ConversationId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Reply")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Time")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -73,63 +78,65 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("IndustryName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Industry");
+                    b.ToTable("Industries");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5262),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2136),
                             IndustryName = "Software Development",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5265),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2139),
                             IndustryName = "Artificial Intelligence",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5266),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2141),
                             IndustryName = "Healthcare",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5266),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2142),
                             IndustryName = "Finance",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5267),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2143),
                             IndustryName = "Transportation",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5268),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2145),
                             IndustryName = "Agriculture",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -139,24 +146,28 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ApplicationDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CvFile")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("JobPostId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -169,12 +180,13 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("76f17ef8-39cb-49d1-a7e1-b7a455749b72"),
-                            ApplicationDate = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5325),
+                            Id = new Guid("f3cabb95-6c1e-430f-8191-e22f002ea552"),
+                            ApplicationDate = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2245),
                             CvFile = "path/to/cv.pdf",
-                            JobPostId = new Guid("6528f2cc-3100-41cc-98b9-8ae95842b670"),
+                            Description = "",
+                            JobPostId = new Guid("80f5005d-2700-48b3-9f36-a058156b8cbf"),
                             Status = 2,
-                            UserId = new Guid("c74d1f3b-9af9-4e6f-b30f-deef918377b6")
+                            UserId = new Guid("da6f3cad-a2d7-4a24-a1a7-8faf3f8c0379")
                         });
                 });
 
@@ -182,47 +194,47 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ExpiredAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IndustryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("JobDescription")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobLocation")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("JobTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SalaryRange")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -237,48 +249,48 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6528f2cc-3100-41cc-98b9-8ae95842b670"),
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5290),
-                            ExpiredAt = new DateTime(2024, 11, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5290),
+                            Id = new Guid("80f5005d-2700-48b3-9f36-a058156b8cbf"),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2185),
+                            ExpiredAt = new DateTime(2024, 11, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2186),
                             IndustryId = 1,
                             JobDescription = "Looking for a skilled software engineer. Must have experience with C# and .NET Core. Angular experience is a plus.",
                             JobLocation = "Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5290),
-                            SalaryRange = "",
+                            ModifiedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2186),
+                            SalaryRange = "1000 - 6000",
                             Status = 0,
                             Title = "Software Engineer",
-                            UserId = new Guid("fae7a60c-115e-4e3e-b3c2-3aadc3145221")
+                            UserId = new Guid("e3e85a47-a123-4a2a-99d4-09d0f7270dc1")
                         },
                         new
                         {
-                            Id = new Guid("8552b8f7-5539-4d6c-8a94-aef6ede0d2b8"),
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5302),
-                            ExpiredAt = new DateTime(2024, 11, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5302),
+                            Id = new Guid("809b4dfd-e13c-44e7-ac86-a6db464b9679"),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2206),
+                            ExpiredAt = new DateTime(2024, 11, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2207),
                             IndustryId = 2,
                             JobDescription = "Looking for a data scientist to join our AI team. Must have experience with Python, TensorFlow, and Keras.",
                             JobLocation = " 239 Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5302),
-                            SalaryRange = "",
+                            ModifiedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2207),
+                            SalaryRange = "100 - 1000",
                             Status = 0,
                             Title = "AI Engineer",
-                            UserId = new Guid("fae7a60c-115e-4e3e-b3c2-3aadc3145221")
+                            UserId = new Guid("e3e85a47-a123-4a2a-99d4-09d0f7270dc1")
                         },
                         new
                         {
-                            Id = new Guid("317cb144-c805-4286-ae14-61030d19d290"),
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5305),
-                            ExpiredAt = new DateTime(2024, 11, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5305),
+                            Id = new Guid("59e6d1b4-921c-4346-a95a-e4016bf2f89c"),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2212),
+                            ExpiredAt = new DateTime(2024, 11, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2214),
                             IndustryId = 3,
                             JobDescription = "We are looking for a nurse to join our team. Must have a nursing degree and at least 2 years of experience.",
                             JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5305),
-                            SalaryRange = "",
+                            ModifiedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2213),
+                            SalaryRange = "100 - 500",
                             Status = 0,
                             Title = "Nurse",
-                            UserId = new Guid("fae7a60c-115e-4e3e-b3c2-3aadc3145221")
+                            UserId = new Guid("e3e85a47-a123-4a2a-99d4-09d0f7270dc1")
                         });
                 });
 
@@ -286,18 +298,20 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("TypeName")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -307,21 +321,21 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5244),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2101),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Full Time"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5246),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2105),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Part Time"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5247),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2107),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Internship"
                         });
@@ -331,25 +345,29 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Headline")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Summary")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Website")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -361,30 +379,30 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bee5fa1a-18f4-49d0-af21-5e5cf5256cd0"),
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5222),
+                            Id = new Guid("7881c662-ad37-420b-9a2b-3e7efb07e30e"),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2039),
                             Headline = "Admin Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("00b37dbc-8205-4a4a-ba57-745ed29c008f")
+                            UserId = new Guid("97499dfb-de28-4dc7-b5a3-8c583051d60a")
                         },
                         new
                         {
-                            Id = new Guid("becf2b39-e9f1-4ba9-94f9-47345a02341c"),
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5225),
+                            Id = new Guid("6b1a0b21-b4f7-4b16-bcb2-c926ca787842"),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2068),
                             Headline = "Recruiter Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("fae7a60c-115e-4e3e-b3c2-3aadc3145221")
+                            UserId = new Guid("e3e85a47-a123-4a2a-99d4-09d0f7270dc1")
                         },
                         new
                         {
-                            Id = new Guid("add311ba-fe31-40a3-918d-b1f58e2b8f4a"),
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5226),
+                            Id = new Guid("763d9c65-c7d2-412c-a19c-6235bc51573c"),
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2071),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("c74d1f3b-9af9-4e6f-b30f-deef918377b6")
+                            UserId = new Guid("da6f3cad-a2d7-4a24-a1a7-8faf3f8c0379")
                         });
                 });
 
@@ -392,12 +410,14 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -425,62 +445,71 @@ namespace WorkFlex.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("BackgroundImg")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsLock")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRecruiterRequestPending")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Location")
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("ModifiedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(15)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -491,54 +520,60 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("00b37dbc-8205-4a4a-ba57-745ed29c008f"),
-                            Avatar = "",
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5185),
+                            Id = new Guid("97499dfb-de28-4dc7-b5a3-8c583051d60a"),
+                            Avatar = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+                            BackgroundImg = "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=CMrJ2NGMR0MoAjanRnUyBygvaKToHnlXIAGG29MYqXI=",
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(1991),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             FirstName = "Admin",
                             IsActive = true,
                             IsLock = false,
+                            IsRecruiterRequestPending = false,
                             LastName = "User",
                             Location = "",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "admin@@",
+                            Password = "$2a$12$Qj8ov7RydnsbdkZfYAToaumQQIYDCeWcPyUTMeIW4sdhBoFujJHfm",
                             Phone = "",
                             RoleId = 1,
                             Username = "admin"
                         },
                         new
                         {
-                            Id = new Guid("fae7a60c-115e-4e3e-b3c2-3aadc3145221"),
-                            Avatar = "",
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5202),
+                            Id = new Guid("e3e85a47-a123-4a2a-99d4-09d0f7270dc1"),
+                            Avatar = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+                            BackgroundImg = "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=CMrJ2NGMR0MoAjanRnUyBygvaKToHnlXIAGG29MYqXI=",
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(1997),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "recruiter@example.com",
                             FirstName = "Recruiter",
                             IsActive = true,
                             IsLock = false,
+                            IsRecruiterRequestPending = false,
                             LastName = "User",
                             Location = "",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "recruiter@",
+                            Password = "$2a$12$RbvswLANBzRWrHEvwHJajem0x0uEv10NHZ7rFfdRG1Dn4oSulmavm",
                             Phone = "",
                             RoleId = 2,
                             Username = "recruiter"
                         },
                         new
                         {
-                            Id = new Guid("c74d1f3b-9af9-4e6f-b30f-deef918377b6"),
-                            Avatar = "",
-                            CreatedAt = new DateTime(2024, 10, 5, 14, 29, 15, 47, DateTimeKind.Utc).AddTicks(5205),
+                            Id = new Guid("da6f3cad-a2d7-4a24-a1a7-8faf3f8c0379"),
+                            Avatar = "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+                            BackgroundImg = "https://media.istockphoto.com/id/1501103626/photo/defocused-background-image-of-a-spacious-hallway-in-a-modern-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=CMrJ2NGMR0MoAjanRnUyBygvaKToHnlXIAGG29MYqXI=",
+                            CreatedAt = new DateTime(2024, 10, 23, 2, 33, 34, 625, DateTimeKind.Utc).AddTicks(2002),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jobseeker@example.com",
                             FirstName = "Job",
                             IsActive = true,
                             IsLock = false,
+                            IsRecruiterRequestPending = false,
                             LastName = "Seeker",
                             Location = "",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "jobseeker@@",
+                            Password = "$2a$12$L90P0yqjOYUyP8iuS5YkCe669W9DQnIRqqkzGVw24cJwVTVBhmc3i",
                             Phone = "",
                             RoleId = 3,
                             Username = "jobseeker"
@@ -550,13 +585,13 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasOne("WorkFlex.Domain.Entities.User", "UserOneNavigation")
                         .WithMany("ConversationsAsUserOne")
                         .HasForeignKey("UserOne")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WorkFlex.Domain.Entities.User", "UserTwoNavigation")
                         .WithMany("ConversationsAsUserTwo")
                         .HasForeignKey("UserTwo")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("UserOneNavigation");
@@ -575,7 +610,7 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasOne("WorkFlex.Domain.Entities.User", "User")
                         .WithMany("ConversationReplies")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Conversation");
@@ -588,7 +623,7 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasOne("WorkFlex.Domain.Entities.JobPost", "JobPost")
                         .WithMany("JobApplications")
                         .HasForeignKey("JobPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("WorkFlex.Domain.Entities.User", "User")
@@ -619,7 +654,7 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasOne("WorkFlex.Domain.Entities.User", "User")
                         .WithMany("JobPosts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Industry");

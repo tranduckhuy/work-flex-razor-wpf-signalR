@@ -8,7 +8,7 @@ namespace WorkFlex.Domain.Entities
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [Required, StringLength(40)]
+        [StringLength(40)]
         public string Username { get; set; } = string.Empty;
 
         [Required, StringLength(255)]
@@ -21,7 +21,10 @@ namespace WorkFlex.Domain.Entities
         public string LastName { get; set; } = string.Empty;
 
         [StringLength(255)]
-        public string? Avatar { get; set; } = string.Empty;
+        public string Avatar { get; set; } = string.Empty;
+
+        [StringLength(255)]
+        public string BackgroundImg { get; set; } = string.Empty;
 
         [StringLength(15)]
         public string? Phone { get; set; } = string.Empty;
@@ -39,6 +42,7 @@ namespace WorkFlex.Domain.Entities
         public int RoleId { get; set; }
         public bool IsLock { get; set; }
         public bool IsActive { get; set; }
+        public bool IsRecruiterRequestPending { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime ModifiedAt { get; set; }
 
