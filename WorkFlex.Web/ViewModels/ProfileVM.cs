@@ -11,6 +11,8 @@
 
         public string Phone { get; set; } = string.Empty;
 
+        public string DateOfBirth { get; set; } = string.Empty;
+
         public string Email { get; set; } = null!;
 
         public string Website { get; set; } = string.Empty;

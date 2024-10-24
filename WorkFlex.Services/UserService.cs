@@ -121,21 +121,28 @@ namespace WorkFlex.Services
                 user.FirstName = profileDto.FirstName;
                 user.LastName = profileDto.LastName;
                 user.Phone = profileDto.Phone;
+
+                if (!DateTime.TryParse(profileDto.DateOfBirth, out var parsedDateOfBirth))
+                {
+                    user.DateOfBirth = DateTime.MinValue;
+                }
+                user.DateOfBirth = parsedDateOfBirth;
+
                 user.Email = profileDto.Email;
-                user.Profile.Headline = profileDto.Headline ?? "";
-                user.Profile.Website = profileDto.Website ?? "";
+                user.Profile.Headline = profileDto.Headline ?? string.Empty;
+                user.Profile.Website = profileDto.Website ?? string.Empty;
 
                 var locationParts = new List<string>
                 {
                     profileDto.Apartment!,
                     profileDto.Street!,
-                    profileDto.Ward!,     
-                    profileDto.District!, 
-                    profileDto.Province!  
-                };
-                user.Location = string.Join(", ", locationParts.Where(part => !string.IsNullOrWhiteSpace(part)));
+                    profileDto.Ward!,
+                    profileDto.District!,
+                    profileDto.Province!
+                }.Where(part => !string.IsNullOrWhiteSpace(part)).ToList();
+                user.Location = string.Join(", ", locationParts);
 
-                user.Profile.Summary = profileDto.AboutDescription ?? "";
+                user.Profile.Summary = profileDto.AboutDescription ?? string.Empty;
                 _logger.LogDebug("[UpdateUserProfileAsync]: Service - User after update: {user}", user);
 
                 await _userRepository.UpdateUserAsync(user);

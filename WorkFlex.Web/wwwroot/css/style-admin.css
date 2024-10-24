@@ -6474,7 +6474,6 @@ blockquote {
 	border: 1px solid #E4F2FF;
 	border-radius: 4px;
 	padding-left: 30px;
-	height: 55px;
 	padding-right: 30px;
 	background-color: #fff;
 }
@@ -6495,7 +6494,6 @@ blockquote {
 	font-weight: 400;
 }
 .sherah-wc__form-profile textarea.sherah-wc__form-input {
-	display: ;
 	height: 210px;
 }
   .form-group__input--select .flag-label img {

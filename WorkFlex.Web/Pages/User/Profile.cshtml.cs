@@ -4,6 +4,7 @@ using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
 using WorkFlex.Web.Mapping;
+using WorkFlex.Web.Untils.Helper.Interface;
 using WorkFlex.Web.ViewModels;
 
 namespace WorkFlex.Web.Pages.User
@@ -12,11 +13,13 @@ namespace WorkFlex.Web.Pages.User
     {
 		private readonly ILogger<ProfileModel> _logger;
 		private readonly IUserService _userService;
+        private readonly IAddressHelper _addressHelper;
 
-        public ProfileModel(ILogger<ProfileModel> logger, IUserService userService)
+        public ProfileModel(ILogger<ProfileModel> logger, IUserService userService, IAddressHelper addressHelper)
 		{
 			_logger = logger;
 			_userService = userService;
+            _addressHelper = addressHelper;
 		}
 
 		public UserDto? UserDto { get; set; }
@@ -141,11 +144,27 @@ namespace WorkFlex.Web.Pages.User
         private async Task SetUserAsync(Guid userId)
         {
             UserDto = await _userService.GetByIdAsync(userId);
+
             if (UserDto == null)
             {
                 _logger.LogWarning("[SetUserAsync]: Controller - User not found for ID: {UserId}", userId);
-                RedirectToPage(AppConstants.PAGE_ERROR);
+                RedirectToErrorPage();
+                return;
             }
+
+            SetUserSession(UserDto);
+        }
+
+        private void SetUserSession(UserDto user)
+        {
+            HttpContext.Session.SetString(AppConstants.NAME, $"{user.FirstName} {user.LastName}");
+            HttpContext.Session.SetString(AppConstants.AVATAR, user.Avatar ?? string.Empty);
+            HttpContext.Session.SetString(AppConstants.LOCATION, _addressHelper.ExtractCityProvince(user.Location ?? string.Empty));
+        }
+
+        private IActionResult RedirectToErrorPage()
+        {
+            return RedirectToPage(AppConstants.PAGE_ERROR);
         }
     }
 }
