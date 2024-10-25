@@ -111,7 +111,7 @@ namespace WorkFlex.Infrastructure.Data
                                   "- Experience with HTML, CSS, JavaScript, and PHP.\n" +
                                   "- Problem-solving skills and logical thinking.\n" +
                                   "- Graduate in IT or equivalent.",
-                    JobLocation = "Tòa nhà A, Số 12, Phố Nguyễn Trãi, Quận Thanh Xuân, Hà Nội",
+                    JobLocation = "Tòa nhà A, Số 12, Phố Nguyễn Trãi, Quận Thanh Xuân, Hải Phòng",
                     UserId = recruiterId,
                     IndustryId = 1,
                     JobTypeId = 1,
