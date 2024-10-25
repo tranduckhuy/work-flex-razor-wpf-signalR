@@ -62,11 +62,11 @@ namespace WorkFlex.Web.Pages.Message
                 var userChatsDto = await _conversationService.GetUserChats(currentUserId).ConfigureAwait(false);
                 var userChats = AppMapper.Mapper.Map<List<UserMessageVM>>(userChatsDto);
 
-                Users.Add(CurrentUser);
                 Users.AddRange(userChats);
 
                 ConversationId = result.Item1.Id.ToString();
                 var messagesDto = await _conversationService.GetMessagesForConversation(result.Item1.Id);
+
                 Messages = AppMapper.Mapper.Map<List<ConversationReplyViewModel>>(messagesDto);
 
                 return Page();
