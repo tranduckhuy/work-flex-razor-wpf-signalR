@@ -13,14 +13,14 @@ namespace WorkFlex.Desktop
         private readonly MainWindow _mainWindow;
         private readonly IJobService _jobService;
 
+        public JobPostDto JobPostDto { get; set; } = null!;
+
         public WindowJobEdit(MainWindow mainWindow, IJobService jobService)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
             _jobService = jobService;
         }
-
-        public JobPostDto JobPostDto { get; set; } = null!;
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -38,6 +38,7 @@ namespace WorkFlex.Desktop
             comboBoxJobType.SelectedValue = JobPostDto.JobTypeId;
             comboBoxIndustry.SelectedValue = JobPostDto.IndustryId;
             txtBoxLocation.Text = JobPostDto.JobLocation;
+            datePickerExpiredAt.SelectedDate = JobPostDto.ExpiredAt;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -46,16 +47,15 @@ namespace WorkFlex.Desktop
             {
                 JobPostDto.Title = txtBoxTitleJob.Text;
                 JobPostDto.JobDescription = txtBoxDescriptionJob.Text;
-
                 JobPostDto.JobTypeId = (int)comboBoxJobType.SelectedValue;
                 JobPostDto.IndustryId = (int)comboBoxIndustry.SelectedValue;
-
                 JobPostDto.JobLocation = txtBoxLocation.Text;
+                JobPostDto.ExpiredAt = datePickerExpiredAt.SelectedDate.Value;
 
                 string[] parts = txtBoxSalaryRange.Text.Split('-');
                 if (parts.Length == 2 &&
-                    int.TryParse(parts[0].Trim().Replace(" ", ""), out int minSalary) &&
-                    int.TryParse(parts[1].Trim().Replace(" ", ""), out int maxSalary))
+                    int.TryParse(parts[0].Trim(), out int minSalary) &&
+                    int.TryParse(parts[1].Trim(), out int maxSalary))
                 {
                     if (minSalary < 100 || maxSalary > 10000 || minSalary > maxSalary)
                     {
@@ -75,7 +75,8 @@ namespace WorkFlex.Desktop
                     MessageBox.Show(AppConstants.MESSAGE_UPDATE_JOB_SUCCESSFULLY, "Update Job", MessageBoxButton.OK, MessageBoxImage.Information);
                     _mainWindow.RefreshJobList();
                     this.Close();
-                } else
+                }
+                else
                 {
                     MessageBox.Show(AppConstants.MESSAGE_UPDATE_JOB_FAILED, "Update Job", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
@@ -93,7 +94,8 @@ namespace WorkFlex.Desktop
                    !string.IsNullOrWhiteSpace(txtBoxSalaryRange.Text) &&
                    comboBoxJobType.SelectedItem != null &&
                    comboBoxIndustry.SelectedItem != null &&
-                   !string.IsNullOrWhiteSpace(txtBoxLocation.Text);
+                   !string.IsNullOrWhiteSpace(txtBoxLocation.Text) &&
+                   datePickerExpiredAt.SelectedDate != null;
         }
 
         private void txtBoxSalaryRange_KeyDown(object sender, KeyEventArgs e)
@@ -102,7 +104,6 @@ namespace WorkFlex.Desktop
             if (textBox == null) return;
 
             int caretIndex = textBox.SelectionStart;
-
             if ((caretIndex == 0 || caretIndex == 4) && (e.Key == Key.Back || e.Key == Key.Delete))
             {
                 e.Handled = true;

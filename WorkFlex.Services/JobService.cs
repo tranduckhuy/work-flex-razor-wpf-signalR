@@ -37,7 +37,8 @@ namespace WorkFlex.Services
                     JobTypeId = jobPostDto.JobTypeId,
                     IndustryId = jobPostDto.IndustryId,
                     UserId = jobPostDto.UserId,
-                    Status = jobPostDto.Status
+                    Status = jobPostDto.Status,
+                    ExpiredAt = jobPostDto.ExpiredAt
                 };
                 _logger.LogDebug("[AddJobPostAsync]: Service - Job will be added into DB: {jobPost}", jobPost);
 
@@ -71,6 +72,7 @@ namespace WorkFlex.Services
                 oldJob.JobLocation = jobPostDto.JobLocation;
                 oldJob.JobTypeId = jobPostDto.JobTypeId;
                 oldJob.IndustryId = jobPostDto.IndustryId;
+                oldJob.ExpiredAt = jobPostDto.ExpiredAt;
                 _logger.LogDebug("[UpdateJobPostAsync]: Service - Job after update: {oldJob}", oldJob);
 
                 await _jobRepository.UpdateJobPostAsync(oldJob);
