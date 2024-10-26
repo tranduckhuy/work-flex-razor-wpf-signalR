@@ -146,7 +146,7 @@
                             @if (roleId != (int)AppConstants.Role.JobSeeker)
                             {
                                 <li>
-                                    <a href="history.html" class="collapsed">
+                                    <a asp-page="/Job/JobPosts" asp-route-userId="@userId" class="collapsed">
                                         <span class="menu-bar__text">
                                             <span class="sherah-menu-icon sherah-svg-icon__v1">
                                                 <svg class="sherah-svg-icon" xmlns="http://www.w3.org/2000/svg" width="19.527" height="19.582" viewBox="0 0 19.527 19.582">
@@ -157,7 +157,7 @@
                                                     </g>
                                                 </svg>
                                             </span>
-                                            <span class="menu-bar__name">Job Applicants</span>
+                                            <span class="menu-bar__name">Job Posts</span>
                                         </span>
                                     </a>
                                 </li>

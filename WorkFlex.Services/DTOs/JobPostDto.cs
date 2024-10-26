@@ -19,6 +19,8 @@ namespace WorkFlex.Services.DTOs
 
         public string DisplayCreatedAt { get; set; } = string.Empty;
 
+        public int TotalApplicants { get; set; }
+
         public int JobTypeId { get; set; }
 
         public int IndustryId { get; set; }

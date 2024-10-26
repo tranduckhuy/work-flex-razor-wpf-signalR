@@ -1,4 +1,4 @@
-﻿using WorkFlex.Domain.Entities;
+using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Filters;
 
 namespace WorkFlex.Domain.Repositories
@@ -7,14 +7,17 @@ namespace WorkFlex.Domain.Repositories
     {
         Task<(IEnumerable<JobPost> Jobs, int TotalCount, int TotalPages)> GetJobsAsync(JobFilter filters);
 
-        Task<IEnumerable<JobType>> GetJobTypesAsync();
+		Task<(IEnumerable<JobPost> JobPosts, Pageable<SearchCriteria> pageable)> GetJobsByUserIdAsync(int page,
+                    Guid userId, SearchCriteria searchCriteria);
 
-        Task<IEnumerable<Industry>> GetIndustriesAsync();
+		Task<IEnumerable<JobType>> GetJobTypesAsync();
 
-        Task<JobPost> GetJobByIdAsync(Guid id);
+		Task<IEnumerable<Industry>> GetIndustriesAsync();
 
-        Task AddJobPostAsync(JobPost jobPost);
+		Task<JobPost> GetJobByIdAsync(Guid id);
 
-        Task UpdateJobPostAsync(JobPost jobPost);
-    }
+		Task AddJobPostAsync(JobPost jobPost);
+
+		Task UpdateJobPostAsync(JobPost jobPost);
+	}
 }

@@ -1,6 +1,6 @@
-﻿namespace WorkFlex.Domain.SearchCiteria
+﻿namespace WorkFlex.Domain
 {
-    public class UserSearchCriteria
+    public class SearchCriteria
     {
         public string SearchOption { get; set; } = string.Empty;
         public string SearchValue { get; set; } = string.Empty;

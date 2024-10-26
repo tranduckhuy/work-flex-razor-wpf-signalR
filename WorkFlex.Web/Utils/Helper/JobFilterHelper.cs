@@ -5,7 +5,7 @@ namespace WorkFlex.Web.Utils.Helper
 {
     public class JobFilterHelper : IJobFilterHelper
     {
-        public bool AreFiltersEqual(JobPostVM filters1, JobPostVM filters2)
+        public bool AreFiltersEqual(JobPostRqVM filters1, JobPostRqVM filters2)
         {
             return filters1.JobLocation == filters2.JobLocation &&
                    filters1.JobType == filters2.JobType &&
@@ -17,7 +17,7 @@ namespace WorkFlex.Web.Utils.Helper
                    filters1.PageSize == filters2.PageSize;
         }
 
-        public bool IsFilterEmpty(JobPostVM filters)
+        public bool IsFilterEmpty(JobPostRqVM filters)
         {
             return string.IsNullOrEmpty(filters.JobLocation) &&
                    string.IsNullOrEmpty(filters.JobType) &&

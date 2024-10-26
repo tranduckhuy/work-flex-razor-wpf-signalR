@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Repositories;
-using WorkFlex.Domain.SearchCiteria;
 using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Infrastructure.Data;
 
@@ -55,8 +54,8 @@ namespace WorkFlex.Infrastructure.Repositories
             return user.IsLock;
         }
 
-        public async Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page,
-            UserSearchCriteria? searchCriteria, int roleId = AppConstants.ALL_ROLE, Expression<Func<User, bool>> additionalCriteria = null!)
+        public async Task<(ICollection<User>, Pageable<SearchCriteria>)> GetUsers(int page,
+            SearchCriteria? searchCriteria, int roleId = AppConstants.ALL_ROLE, Expression<Func<User, bool>> additionalCriteria = null!)
         {
             const int pageSize = 6;
 
@@ -74,10 +73,10 @@ namespace WorkFlex.Infrastructure.Repositories
 
             if (searchCriteria != null && !string.IsNullOrEmpty(searchCriteria.SearchValue))
             {
+                string searchValue = searchCriteria.SearchValue.ToLower().Trim();
                 switch (searchCriteria.SearchOption)
                 {
                     case nameof(AppConstants.UserSearchOption.Name):
-                        string searchValue = searchCriteria.SearchValue.ToLower();
                         query = query.Where(u =>
                             EF.Functions.Like(
                                 EF.Functions.Collate((u.FirstName + " " + u.LastName), "Latin1_General_CI_AI"),
@@ -87,7 +86,7 @@ namespace WorkFlex.Infrastructure.Repositories
                         break;
 
                     case nameof(AppConstants.UserSearchOption.Email):
-                        query = query.Where(u => u.Email.ToLower().Contains(searchCriteria.SearchValue.ToLower()));
+                        query = query.Where(u => u.Email.ToLower().Contains(searchValue));
                         break;
 
                     default:
@@ -97,7 +96,7 @@ namespace WorkFlex.Infrastructure.Repositories
 
             int totalUsers = await query.CountAsync();
 
-            var pageable = new Pageable<UserSearchCriteria>(totalUsers, page, pageSize)
+            var pageable = new Pageable<SearchCriteria>(totalUsers, page, pageSize)
             {
                 SearchCriteria = searchCriteria
             };
@@ -125,8 +124,8 @@ namespace WorkFlex.Infrastructure.Repositories
                 throw new Exception("Cannot demote/promote admin.");
             }
 
-            user.RoleId = (int)AppConstants.Role.Recruiter == user.RoleId ? 
-                (int)AppConstants.Role.JobSeeker : 
+            user.RoleId = (int)AppConstants.Role.Recruiter == user.RoleId ?
+                (int)AppConstants.Role.JobSeeker :
                 (int)AppConstants.Role.Recruiter;
             user.IsRecruiterRequestPending = false;
 

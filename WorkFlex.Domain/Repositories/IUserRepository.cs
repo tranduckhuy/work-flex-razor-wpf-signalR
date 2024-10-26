@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using WorkFlex.Domain.Entities;
-using WorkFlex.Domain.SearchCiteria;
 
 namespace WorkFlex.Domain.Repositories
 {
@@ -28,7 +27,7 @@ namespace WorkFlex.Domain.Repositories
 
         Task LockUnlockUser(Guid userId);
 
-        Task<(ICollection<User>, Pageable<UserSearchCriteria>)> GetUsers(int page, 
-            UserSearchCriteria? searchCriteria, int roleId, Expression<Func<User, bool>> additionalCriteria = null!);
+        Task<(ICollection<User>, Pageable<SearchCriteria>)> GetUsers(int page, 
+            SearchCriteria? searchCriteria, int roleId, Expression<Func<User, bool>> additionalCriteria = null!);
     }
 }

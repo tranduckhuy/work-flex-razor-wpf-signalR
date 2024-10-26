@@ -1,0 +1,236 @@
+﻿@page
+@using WorkFlex.Domain
+@model WorkFlex.Web.Pages.Job.JobPostsModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Recruiter Job Posts";
+    var successMsg = TempData["SuccessMessage"] as string;
+    var failedMsg = TempData["FailedMessage"] as string;
+}
+
+<div id="toast"></div>
+@if (!string.IsNullOrEmpty(successMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Success",
+                    message: "@successMsg",
+                    type: "success",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+else if (!string.IsNullOrEmpty(failedMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Failed",
+                    message: "@failedMsg",
+                    type: "danger",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+
+@functions {
+    private string BuildPageUrl(int page)
+    {
+        var url = Url.Page("/Job/JobPosts", null, new { currentPage = page });
+
+        if (string.IsNullOrEmpty(url))
+        {
+            return "/";
+        }
+
+        var queryParams = new List<string>();
+
+        if (Model.Pageable.SearchCriteria?.SearchOption != null)
+        {
+            queryParams.Add($"searchOption={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchOption)}");
+        }
+
+        if (Model.Pageable.SearchCriteria?.SearchValue != null)
+        {
+            queryParams.Add($"searchValue={Uri.EscapeDataString(Model.Pageable.SearchCriteria.SearchValue)}");
+        }
+
+        if (Model.UserId != Guid.Empty)
+        {
+            queryParams.Add($"userId={Model.UserId}");
+        }
+
+        if (queryParams.Any())
+        {
+            url += (url.Contains("?") ? "&" : "?") + string.Join("&", queryParams);
+        }
+
+        return url;
+    }
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="sherah-body">
+                <!-- Dashboard Inner -->
+                <div class="sherah-dsinner">
+                    <div class="sherah-teams mg-top-40">
+                        <div class="row">
+                            <div class="col-12 sherah-flex-between">
+                                <!-- Sherah Breadcrumb -->
+                                <div class="sherah-breadcrumb">
+                                    <h2 class="sherah-breadcrumb__title">Recruiter Job Post</h2>
+                                    <ul class="sherah-breadcrumb__list">
+                                        <li><a href="/">Home</a></li>
+                                        <li class="active"><a href="#!">Recruiter Job Post</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sherah-page-inner sherah-default-bg sherah-border mg-top-25" style="padding: 5px 30px 30px 30px">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-7"></div>
+                                <div class="col-sm-12 col-md-5">
+                                    <form method="post" asp-page="/Job/JobPosts">
+                                        <div id="sherah-table__vendor_filter" class="dataTables_filter">
+                                            <div class="input-group display-flex" style="position: relative; margin: 20px 0;">
+                                                <select asp-for="SearchCriteria.SearchOption" name="SearchCriteria.SearchOption" id="searchType"
+                                                        style="height: 40px; width: 100px; font-size: 13px; color: #9AA2B1;">
+                                                    <option value="" selected disabled>Search Type</option>
+                                                    <option value="Title" id="title_option">Title</option>
+                                                    <option value="Location" id="location_option">Location</option>
+                                                </select>
+                                                &nbsp;
+                                                <input type="search"
+                                                       asp-for="SearchCriteria.SearchValue"
+                                                       name="SearchCriteria.SearchValue"
+                                                       placeholder="Search"
+                                                       aria-controls="sherah-table__vendor"
+                                                       class="form-control form-control-sm my-input-search"
+                                                       style="padding-right: 80px" />
+                                                <input type="hidden" asp-for="@Model.UserId" />
+                                                <button style="position: absolute; top: 6px; right: 12px; z-index: 5; border: none; font-size: 16px; color: #6176FE; background-color: #F3F4F7;">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="sherah-table sherah-page-inner sherah-border sherah-default-bg " style="padding: 0px 30px 30px 30px">
+                                <div class="row">
+                                    @foreach (var jobPost in Model.JobPostVM)
+                                    {
+                                        <div class="col-xxl-3 col-lg-4 col-md-6 col-12">
+                                            <a asp-page="/Job/ApplicantList" asp-route-jobPostId="@jobPost.Id" style="width: 100%">
+                                                <!-- Sherah Vcard -->
+                                                <div class="sherah-vcard sherah-default-bg sherah-border mg-top-30">
+                                                    <!-- Sherah Card Body -->
+                                                    <div class="sherah-vcard__body">
+                                                        <div class="sherah-vcard__content">
+                                                            <h4 class="sherah-vcard__title">@jobPost.Title</h4>
+                                                            <ul class="sherah-vcard__contact">
+                                                                <li style="color:#5a5a5a">
+                                                                    <i style="color: #6176fe; margin-right: 10px" class="fas fa-clock"></i>
+                                                                    Posted On: <span style="margin-left: 8px; font-weight: 500">@jobPost.DisplayCreatedAt</span>
+                                                                </li>
+                                                                <li style="color:#5a5a5a">
+                                                                    <i style="color: #6176fe; margin-right: 10px" class="fas fa-clock"></i>
+                                                                    Expiration Date: <span style="margin-left: 8px; font-weight: 500">@jobPost.ExpiredAt.ToString("dd/MM/yyyy")</span>
+                                                                </li>
+                                                                <li style="color:#5a5a5a">
+                                                                    <i style="color: #6176fe; margin-right: 10px" class="fas fa-location-arrow"></i>
+                                                                    Location: <span style="margin-left: 8px; font-weight: 500">@jobPost.JobLocation</span>
+                                                                </li>
+                                                                <li style="display: flex; align-items: center; color:#5a5a5a">
+                                                                    <i style="color: #6176fe; margin-right: 10px" class="fas fa-money-bill-alt"></i>
+                                                                    Salary range: <span style="margin-left: 8px; font-weight: 500">@jobPost.SalaryRange</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Sherah Card Body -->
+                                                    <div class="sherah-vcard__meta sherah-border-top">
+                                                        <ul class="sherah-vcard__meta--info" style="justify-content: space-around; color: #5a5a5f">
+                                                            <li>Status <span style="text-align: center;">@(jobPost.Status == Status.Pending ? "Pening" : "Active")</span></li>
+                                                            <li>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1" height="69" viewBox="0 0 1 69">
+                                                                    <defs>
+                                                                        <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+                                                                            <stop offset="0" stop-color="#fff" />
+                                                                            <stop offset="0.506" stop-color="#e2e7f1" />
+                                                                            <stop offset="1" stop-color="#fff" />
+                                                                        </linearGradient>
+                                                                    </defs>
+                                                                    <path id="Path_1274" data-name="Path 1274" d="M0,0H1V69H0Z" fill="url(#linear-gradient)" />
+                                                                </svg>
+                                                            </li>
+                                                            <li>Total Applicants <span style="text-align: center;">@jobPost.TotalApplicants</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="row mg-top-40" style="display: flex; justify-content: end">
+                                    @if (Model.Pageable != null)
+                                    {
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" role="status" aria-live="polite" style="font-weight:500">
+                                                Total @Model.Pageable.TotalItems recruiters
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="sherah-pagination" style="margin-bottom: 0">
+                                                <ul class="sherah-pagination__list">
+                                                    @if (Model.Pageable.CurrentPage > 1)
+                                                    {
+                                                        <li class="sherah-pagination__button">
+                                                            <a href="@BuildPageUrl(Model.Pageable.CurrentPage - 1)">
+                                                                <i class="fas fa-angle-left"></i>
+                                                            </a>
+                                                        </li>
+                                                    }
+
+                                                    @for (var i = Model.Pageable.StartPage; i <= Model.Pageable.EndPage; i++)
+                                                    {
+                                                        <li class="@(Model.Pageable.CurrentPage == i ? "active" : "")">
+                                                            <a href="@BuildPageUrl(i)">
+                                                                @i
+                                                            </a>
+                                                        </li>
+                                                    }
+
+                                                    @if (Model.Pageable.CurrentPage < Model.Pageable.TotalPages)
+                                                    {
+                                                        <li class="sherah-pagination__button">
+                                                            <a href="@BuildPageUrl(Model.Pageable.CurrentPage + 1)">
+                                                                <i class="fas fa-angle-right"></i>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Dashboard Inner -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,21 +1,38 @@
-﻿namespace WorkFlex.Web.ViewModels
+using WorkFlex.Domain.Entities;
+using WorkFlex.Domain;
+
+namespace WorkFlex.Web.ViewModels
 {
     public class JobPostVM
     {
+        public Guid Id { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+
+        public string SalaryRange { get; set; } = string.Empty;
+
+        public string JobDescription { get; set; } = string.Empty;
+
         public string JobLocation { get; set; } = string.Empty;
 
-        public string JobType { get; set; } = string.Empty;
+        public string DisplayCreatedAt { get; set; } = string.Empty;
 
-        public string PostedWithin { get; set; } = string.Empty;
+        public int TotalApplicants { get; set; }
 
-        public decimal? MinSalary { get; set; } = 100;
+        public Guid UserId { get; set; }
 
-        public decimal? MaxSalary { get; set; } = 10000;
+        public DateTime CreatedAt { get; set; }
 
-        public string SortBy { get; set; } = string.Empty;
+        public DateTime ExpiredAt { get; set; }
 
-        public int PageNumber { get; set; } = 1;
+        public Status Status { get; set; }
 
-        public int PageSize { get; set; } = 7;
+        public virtual User User { get; set; } = null!;
+
+        public virtual Industry Industry { get; set; } = null!;
+
+        public virtual JobType JobType { get; set; } = null!;
+
+        public virtual ICollection<JobApplication> JobApplications { get; set; } = [];
     }
 }
