@@ -43,23 +43,23 @@ namespace WorkFlex.Web.Pages.Job
 
         public async Task<IActionResult> OnGetAsync(JobPostVM filters)
         {
-            _logger.LogInformation("[OnGetAsync]: PageModel - Start getting job list data with request data: Req-data: {filters}", filters);
+            _logger.LogInformation("[OnGetAsync]: Start fetching job list with filters: {filters}", filters);
+
             try
             {
                 // Retrieve filters from the session
                 var sessionFilters = HttpContext.Session.GetObject<JobPostVM>("JobFilters");
 
-                // Check if session filters exist
-                if (sessionFilters != null && !_jobFilterHelper.IsFilterEmpty(sessionFilters)) // Check sessionFilters is not null and is not empty
+                if (sessionFilters != null && !_jobFilterHelper.IsFilterEmpty(sessionFilters))
                 {
-                    // If filters are empty (initial load), use session filters
-                    if (_jobFilterHelper.IsFilterEmpty(filters)) // Check filters is empty or not
+                    // If incoming filters are empty, use session filters
+                    if (_jobFilterHelper.IsFilterEmpty(filters))
                     {
-                        filters = sessionFilters; // Using session filters if filters is empty
+                        filters = sessionFilters; // Use session filters
                     }
                     else
                     {
-                        // If filters are not equal, update session with current filters
+                        // Update session if filters have changed
                         if (!_jobFilterHelper.AreFiltersEqual(filters, sessionFilters))
                         {
                             HttpContext.Session.SetObject("JobFilters", filters);
@@ -68,31 +68,35 @@ namespace WorkFlex.Web.Pages.Job
                 }
                 else
                 {
-                    // Save new filters into the session if no previous filters exist
+                    // Save new filters to session if no previous filters exist
                     HttpContext.Session.SetObject("JobFilters", filters);
                 }
 
-                // Set the filter
+                // Set the filters
                 Filters = filters;
 
-                // Set the current page, default to 1 if PageNumber is not greater than 1
-                CurrentPage = filters.PageNumber > 1 ? filters.PageNumber : 1;
-
                 // Get jobs based on filters
-                (Jobs, TotalCount) = await _jobService.GetJobsAsync(AppMapper.Mapper.Map<JobFilter>(filters));
+                (Jobs, TotalCount, TotalPages) = await _jobService.GetJobsAsync(AppMapper.Mapper.Map<JobFilter>(filters));
                 _logger.LogDebug("[OnGetAsync]: Jobs retrieved: {Jobs}", Jobs);
 
-                TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
-
-                // Get filter options
+                // Get filter options (JobTypes)
                 JobTypes = await _jobService.GetJobTypesAsync();
-                _logger.LogDebug("[OnGetAsync]: PageModel - Job types: {JobTypes}", JobTypes);
+                _logger.LogDebug("[OnGetAsync]: Job types: {JobTypes}", JobTypes);
 
-                _logger.LogInformation("[OnGetAsync]: PageModel - End getting job list data with data: Resp-data: {Jobs}, Total-count: {TotalCount}", Jobs, TotalCount);
+                // Ensure current page is valid
+                CurrentPage = filters.PageNumber > 1 ? filters.PageNumber : 1;
+                if (TotalPages < CurrentPage)
+                {
+                    filters.PageNumber = 1;
+                    CurrentPage = 1;
+                }
+
+                _logger.LogInformation("[OnGetAsync]: Successfully fetched job list with {Jobs} jobs and {TotalCount} total count", Jobs, TotalCount);
                 return Page();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                _logger.LogError("[OnGetAsync]: PageModel - End getting job list data with error: {ex}", ex.StackTrace);
+                _logger.LogError("[OnGetAsync]: Error fetching job list: {ex}", ex.StackTrace);
                 return Content(ex.ToString());
             }
         }

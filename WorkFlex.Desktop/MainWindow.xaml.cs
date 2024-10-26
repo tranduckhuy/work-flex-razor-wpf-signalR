@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WorkFlex.Desktop.BusinessObject;
-using WorkFlex.Domain.Filters;
+using WorkFlex.Desktop.ViewModels;
 using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
@@ -16,59 +16,10 @@ namespace WorkFlex.Desktop
     /// </summary>
     /// 
 
-    public class RelayCommand : ICommand
-    {
-        readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
-
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
-        {
-            _execute = execute;
-            _canExecute = canExecute;
-        }
-
-        public event EventHandler? CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-
-        public bool CanExecute(object? parameter)
-        {
-            return _canExecute == null || _canExecute(parameter!);
-        }
-
-        public void Execute(object? parameter) { _execute(parameter!); }
-    }
-
     public partial class MainWindow : Window
     {
 		private readonly IServiceProvider _serviceProvider;
 		private readonly IJobService _jobService;
-
-		private IEnumerable<JobPostDto> Jobs { get; set; } = new List<JobPostDto>();
-
-		private int TotalCount { get; set; }
-
-        private int _currentPage = 1;
-        private readonly int _pageSize = 20;
-
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public int CurrentPage
-        {
-            get => _currentPage;
-            set { _currentPage = value; OnPropertyChanged(nameof(CurrentPage)); LoadJobs(); }
-        }
-
-        public ICommand NextPageCommand { get; }
-
-        public ICommand PreviousPageCommand { get; }
 
 		public MainWindow(IServiceProvider serviceProvider, IJobService jobService)
         {
@@ -76,13 +27,13 @@ namespace WorkFlex.Desktop
 			_jobService = jobService;
             _serviceProvider = serviceProvider;
 
-            NextPageCommand = new RelayCommand(_ => CurrentPage++, _ => CurrentPage < ((double)TotalCount / _pageSize));
-            PreviousPageCommand = new RelayCommand(_ => CurrentPage--, _ => CurrentPage > 1);
+            DataContext = new JobListVM(_jobService);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadJobs();
+            var jobListVM = DataContext as JobListVM;
+            jobListVM?.LoadJobs();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -92,24 +43,20 @@ namespace WorkFlex.Desktop
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
-            LoadJobs();
-        }
-
-        private void Button_Clear(object sender, RoutedEventArgs e)
-        {
-
-            tbLocation.Clear();
-            tbMinSalary.Clear();
-            tbMaxSalary.Clear();
-
-            cbType.SelectedIndex = -1;
-            cbPostedWithin.SelectedIndex = -1;
-            cbSortBy.SelectedIndex = -1;
+            var jobListVM = DataContext as JobListVM;
+            jobListVM?.LoadJobs();
         }
 
         private void Button_Reload(object sender, RoutedEventArgs e)
         {
-            LoadJobs();
+            var jobListVM = DataContext as JobListVM;
+            jobListVM?.LoadJobs();
+        }
+
+        private void Button_Clear(object sender, RoutedEventArgs e)
+        {
+            var jobListVM = DataContext as JobListVM;
+            jobListVM?.ClearFields();
         }
 
         private void Button_Insert(object sender, RoutedEventArgs e)
@@ -248,46 +195,8 @@ namespace WorkFlex.Desktop
             btnDelete.IsEnabled = listView.SelectedItem != null;
         }
 
-        private async void LoadJobs()
-        {
-            try
-            {
-                // Filter Job Type
-                var jobTypesData = await _jobService.GetJobTypesAsync();
-                var jobTypes = jobTypesData.Select(jt => jt.TypeName).ToList();
-                cbType.ItemsSource = jobTypes;
-
-                // Filter Posted Within
-                cbPostedWithin.ItemsSource = new List<string> { "Any", "Today", "Last 2 days", "Last 3 days", "Last 5 days", "Last 10 days" };
-
-                // Filter Sort By
-                cbSortBy.ItemsSource = new List<string> { "None", "SalaryLowToHigh", "SalaryHighToLow" };
-
-                // Create filter for searching
-                JobFilter filter = new JobFilter
-                {
-                    JobLocation = !string.IsNullOrEmpty(tbLocation.Text) ? tbLocation.Text : string.Empty,
-                    JobType = !string.IsNullOrEmpty((string)cbType.SelectedValue) ? (string)cbType.SelectedValue : string.Empty,
-                    PostedWithin = !string.IsNullOrEmpty((string)cbPostedWithin.SelectedValue) ? (string)cbPostedWithin.SelectedValue : string.Empty,
-                    MinSalary = !string.IsNullOrEmpty(tbMinSalary.Text) ? decimal.Parse(tbMinSalary.Text) : 0,
-                    MaxSalary = !string.IsNullOrEmpty(tbMaxSalary.Text) ? decimal.Parse(tbMaxSalary.Text) : 0,
-                    SortBy = !string.IsNullOrEmpty((string)cbSortBy.SelectedValue) ? (string)cbSortBy.SelectedValue : string.Empty,
-                    PageNumber = CurrentPage,
-                    PageSize = _pageSize,
-                };
-
-                (Jobs, TotalCount) = await _jobService.GetJobsAsync(filter);
-                listView.ItemsSource = Jobs;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading jobs: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         public void RefreshJobList()
         {
-            LoadJobs();
         }
     }
 }

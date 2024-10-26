@@ -12,7 +12,7 @@ namespace WorkFlex.Services.Interface
 
         Task<bool> DeleteJobPostAsync(Guid id);
 
-        Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobFilter filters);
+        Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount, int TotalPages)> GetJobsAsync(JobFilter filters);
 
         Task<IEnumerable<JobType>> GetJobTypesAsync();
 

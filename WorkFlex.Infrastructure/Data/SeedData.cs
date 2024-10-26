@@ -537,6 +537,141 @@ namespace WorkFlex.Infrastructure.Data
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Doctor",
+                    SalaryRange = "2000 - 5000",
+                    JobDescription = "We are looking for a doctor to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 8, Tống Phước Phổ, Ghềnh Ráng, Quy Nhơn",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Artist",
+                    SalaryRange = "500 - 800",
+                    JobDescription = "We are looking for a Artist to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hải Phòng",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Accountant",
+                    SalaryRange = "900 - 15000",
+                    JobDescription = "We are looking for a Accountant to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Yên Bái",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Auditor",
+                    SalaryRange = "100 - 500",
+                    JobDescription = "We are looking for a Auditor to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Đà Nẵng",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Baker",
+                    SalaryRange = "200 - 700",
+                    JobDescription = "We are looking for a Baker to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Bà Rịa - Vũng Tàu",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Bodyguard",
+                    SalaryRange = "100 - 500",
+                    JobDescription = "We are looking for a Bodyguard to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Lâm Đồng",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Butler",
+                    SalaryRange = "1000 - 5000",
+                    JobDescription = "We are looking for a Butler to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Chef",
+                    SalaryRange = "3000 - 8000",
+                    JobDescription = "We are looking for a Chef to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Composer",
+                    SalaryRange = "2500 - 6500",
+                    JobDescription = "We are looking for a Composer to join our team. Must have a nursing degree and at least 2 years of experience.",
+                    JobLocation = "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hồ Chí Minh",
+                    UserId = recruiterId,
+                    IndustryId = 3,
+                    JobTypeId = 1,
+                    CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
                 }
             );
 

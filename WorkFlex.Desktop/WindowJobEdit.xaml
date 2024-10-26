@@ -124,7 +124,7 @@
                 <DatePicker x:Name="datePickerExpiredAt" Style="{StaticResource datePickerPrimary}" 
                             />
 
-                <Button x:Name="btnUpdate" Content="Update" Style="{StaticResource btnLogout}" Width="100" Margin="0 25 0 5" Click="Button_Click"/>
+                <Button x:Name="btnUpdate" Content="Update" Style="{StaticResource btnLogout}" Width="100" Margin="0 25 0 5" Click="Button_Click" IsDefault="True"/>
             </StackPanel>
         </StackPanel>
     </Grid>

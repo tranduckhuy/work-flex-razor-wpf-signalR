@@ -8,9 +8,9 @@
 
         public string PostedWithin { get; set; } = string.Empty;
 
-        public decimal? MinSalary { get; set; } = 0;
+        public decimal? MinSalary { get; set; } = 100;
 
-        public decimal? MaxSalary { get; set; } = 0;
+        public decimal? MaxSalary { get; set; } = 10000;
 
         public string SortBy { get; set; } = string.Empty;
 

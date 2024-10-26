@@ -111,12 +111,12 @@ namespace WorkFlex.Services
             }
         }
 
-        public async Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount)> GetJobsAsync(JobFilter filters)
+        public async Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount, int TotalPages)> GetJobsAsync(JobFilter filters)
         {
             _logger.LogInformation("[GetJobsAsync]: Service - Start getting job list data");
             try
             {
-                var (jobs, totalCount) = await _jobRepository.GetJobsAsync(filters);
+                var (jobs, totalCount, totalPages) = await _jobRepository.GetJobsAsync(filters);
                 var jobDtos = AppMapper.Mapper.Map<IEnumerable<JobPostDto>>(jobs);
 
                 foreach (var jobDto in jobDtos)
@@ -125,11 +125,11 @@ namespace WorkFlex.Services
                     jobDto.DisplayCreatedAt = FormatDisplayCreatedAt(jobDto.CreatedAt);
                 }
                 _logger.LogInformation("[GetJobsAsync]: Service - End getting job list data with data: List-data: {jobDtos}, Total-count: {totalCount}", jobDtos, totalCount);
-                return (jobDtos, totalCount);
+                return (jobDtos, totalCount, totalPages);
             } catch (Exception ex)
             {
                 _logger.LogError("[GetJobsAsync]: Service - End getting job list data with error: {ex}", ex.StackTrace);
-                return ([], 0);
+                return ([], 0, 0);
             }
         }
 

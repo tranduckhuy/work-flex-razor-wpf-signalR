@@ -55,7 +55,7 @@ else if (!string.IsNullOrEmpty(failedMsg))
 </div>
 <!-- Hero Area End -->
 <!-- Job list area start -->
-<div class="job-listing-area pt-120 pb-120">
+<div class="job-listing-area pt-120">
     <div class="container">
         <form id="filterForm" method="get">
             <div class="row">
@@ -121,7 +121,7 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                 <div class="small-section-tittle2">
                                     <h4>Posted Within</h4>
                                 </div>
-                                @foreach (var option in new List<string> { "Any", "Today", "Last 2 days", "Last 3 days", "Last 5 days", "Last 10 days" })
+                                @foreach (var option in new List<string> { "Any", "Today", "Last 5 days", "Last Week", "Last Month", "Last Year" })
                                 {
                                     bool isChecked = !string.IsNullOrEmpty(Model.Filters.PostedWithin) && Model.Filters.PostedWithin == option;
                                     <label class="container" for="@option">
@@ -150,9 +150,9 @@ else if (!string.IsNullOrEmpty(failedMsg))
                                                 <p>Salary :</p>
                                             </div>
                                             <div class="price_value d-flex justify-content-center">
-                                                <input type="text" asp-for="Filters.MinSalary" name="Filters.MinSalary" class="js-input-from" id="amount" oninput="setFilterTimeout()" onchange="setFilterTimeout()" readonly />
+                                                <input type="text" value="@Model.Filters.MinSalary" name="Filters.MinSalary" class="js-input-from" id="amount" onchange="setFilterTimeout()" readonly />
                                                 <span>to</span>
-                                                <input type="text" asp-for="Filters.MaxSalary" name="Filters.MaxSalary" class="js-input-to" id="amount" oninput="setFilterTimeout()" onchange="setFilterTimeout()" readonly />
+                                                <input type="text" value="@Model.Filters.MaxSalary" name="Filters.MaxSalary" class="js-input-to" id="amount" onchange="setFilterTimeout()" readonly />
                                             </div>
                                         </div>
                                     </div>
@@ -355,6 +355,9 @@ else if (!string.IsNullOrEmpty(failedMsg))
                 type: 'GET',
                 success: function (result) {
                     console.log("Fetch data job success!"); // Log success message
+
+                    $('html, body').animate({ scrollTop: 420 }, 500);
+
                     // Update the job list section with the new data
                     var newContent = $(result).find('#jobList').html();
                     $('#jobList').html(newContent);
@@ -378,11 +381,11 @@ else if (!string.IsNullOrEmpty(failedMsg))
 
         // Debounce function for avoid calling ajax frequently when changing salary slider
         let filterTimeout;
-        function setFilterTimeout(from, to) {
+        function setFilterTimeout() {
             clearTimeout(filterTimeout);
             filterTimeout = setTimeout(function () {
-                submitFilters(from, to);
-            }, 2000);
+                submitFilters();
+            }, 1000);
         }
 
         // Decode for compare location
@@ -433,7 +436,11 @@ else if (!string.IsNullOrEmpty(failedMsg))
 
             // Attach change events to filter inputs
             $('#filterForm').on('change', 'input, select', function () {
-                submitFilters();
+                if (!$(this).hasClass('js-input-from') && !$(this).hasClass('js-input-to')) {
+                    setFilterTimeout();
+                } else {
+                    submitFilters();
+                }
             });
         });
     </script>

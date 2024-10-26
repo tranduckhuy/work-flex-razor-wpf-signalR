@@ -432,8 +432,8 @@
 @section Scripts {
     <script>
         const fullAddress = "@Html.Raw(user!.Location)";
-        const host = "https://vapi.vnappmob.com/api/";
-        const apiProvince = host + 'province/';
+        const host = "https://provinces.open-api.vn/api/";
+        const apiProvince = host + '?depth=1';
         const isYourProfile = @Model.IsYourProfile.ToString().ToLower();
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -449,12 +449,16 @@
 
                 document.querySelector("#city").addEventListener("change", () => {
                     const cityId = getSelectedDataId("#city");
-                    if (cityId) callApiDistrict(host + "province/district/" + cityId);
+                    if (cityId) {
+                        callApiDistrict(host + "p/" + cityId + "?depth=2");
+                    }
                 });
 
                 document.querySelector("#district").addEventListener("change", () => {
                     const districtId = getSelectedDataId("#district");
-                    if (districtId) callApiWard(host + "province/ward/" + districtId);
+                    if (districtId) {
+                        callApiWard(host + "d/" + districtId + "?depth=2");
+                    }
                 });
 
                 Validator("#profile-form");
@@ -547,7 +551,7 @@
         function callApiDistrict(api) {
             axios.get(api)
                 .then((response) => {
-                    renderData(response.data, "district", renderDataDistrict);
+                    renderData(response.data.districts, "district", renderDataDistrict);
                 })
                 .catch((error) => {
                     console.error("Error fetching district data:", error);
@@ -557,7 +561,7 @@
         function callApiWard(api) {
             axios.get(api)
                 .then((response) => {
-                    renderData(response.data, "ward", renderDataWard);
+                    renderData(response.data.wards, "ward", renderDataWard);
                 })
                 .catch((error) => {
                     console.error("Error fetching ward data:", error);
@@ -565,8 +569,8 @@
         }
 
         function renderData(data, select, renderFunction) {
-            if (data && data.results && Array.isArray(data.results)) {
-                renderFunction(data.results, select);
+            if (data && Array.isArray(data)) {
+                renderFunction(data, select);
             } else {
                 console.error(`Invalid or missing ${select} data:`, data);
             }
@@ -574,23 +578,17 @@
 
         function renderDataCity(results, select) {
             let selectElement = document.querySelector("#" + select);
-            if (!selectElement.getAttribute('data-loaded')) {
-                let row = '';
-                if (!selectElement.value) {
-                    row += '<option disable value="" selected>Choose Provinces</option>';
-                }
-                results.forEach((element) => {
-                    row += `<option data-id="${element.province_id}" value="${element.province_name}">${element.province_name}</option>`;
-                });
-                selectElement.innerHTML += row;
-                selectElement.setAttribute('data-loaded', 'true');
-            }
+            let row = '<option disable value="" selected>Choose Provinces</option>';
+            results.forEach((element) => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`;
+            });
+            selectElement.innerHTML = row;
         }
 
         function renderDataDistrict(results, select) {
             let row = '<option disable value="" selected>Choose Districts</option>';
             results.forEach((element) => {
-                row += `<option data-id="${element.district_id}" value="${element.district_name}">${element.district_name}</option>`;
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`;
             });
             document.querySelector("#" + select).innerHTML = row;
         }
@@ -598,7 +596,7 @@
         function renderDataWard(results, select) {
             let row = '<option disable value="" selected>Choose Wards</option>';
             results.forEach((element) => {
-                row += `<option data-id="${element.ward_id}" value="${element.ward_name}">${element.ward_name}</option>`;
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`;
             });
             document.querySelector("#" + select).innerHTML = row;
         }
