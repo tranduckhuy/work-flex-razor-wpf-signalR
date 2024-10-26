@@ -102,7 +102,7 @@ namespace WorkFlex.Desktop.ViewModels
             PreviousPageCommand = new RelayCommand(_ => CurrentPage--, _ => CurrentPage > 1);
         }
 
-        public async void LoadJobs()
+        public async Task LoadJobs()
         {
             try
             {

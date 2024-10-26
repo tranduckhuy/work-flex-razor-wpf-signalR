@@ -96,7 +96,7 @@ namespace WorkFlex.Web.Pages.Job
             }
             catch (Exception ex)
             {
-                _logger.LogError("[OnGetAsync]: Error fetching job list: {Error}", ex);
+                _logger.LogError("[OnGetAsync]: Error fetching job list: {ex}", ex.StackTrace);
                 return Content(ex.ToString());
             }
         }
