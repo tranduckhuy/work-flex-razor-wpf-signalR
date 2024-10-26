@@ -44,6 +44,12 @@ namespace WorkFlex.Infrastructure.Constants
             Email
         }
 
+        public enum JobPostSearchOption
+        {
+            Title,
+            Location
+        }
+
         public enum ProfileResult
         {
             Success,
@@ -95,6 +101,7 @@ namespace WorkFlex.Infrastructure.Constants
         public const string MESSAGE_INVALID_OLD_PASSWORD = "The old password you entered is incorrect. Please try again.";
         public const string MESSAGE_UPDATE_PROFILE_FAILED = "Update profile unsuccessfully. Please ensure all fields are filled and try again.";
         public const string MESSAGE_LOCKUNLOCK_USER_FAILED = "You can't lock or unlock yourself!. Please ensure all fields are filled and try again.";
+        public const string MESSAGE_INVALID_JOB_POST_ID = "Invalid job post ID.";
 
         // Session & Temp data & Pages name constants
         // 1. Session
@@ -108,6 +115,7 @@ namespace WorkFlex.Infrastructure.Constants
         public const string TEMP_DATA_SUCCESS_MESSAGE = "SuccessMessage";
         public const string TEMP_DATA_FAILED_MESSAGE = "FailedMessage";
         public const string MESSAGE_LOGIN_REQUIRED = "You need to login to do this action.";
+        public const string MESSAGE_UNAUTHORIZED_ACTION = "You do not have permission to access this feature. Please contact the administrator if you need assistance.";
         // 3. Pages name (Pages URL)
         public const string PAGE_HOME = "/Home/Index";
         public const string PAGE_ERROR = "/Error/Error";

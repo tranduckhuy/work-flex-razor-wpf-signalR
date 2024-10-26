@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WorkFlex.Domain;
-using WorkFlex.Domain.SearchCiteria;
 using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.Interface;
 using WorkFlex.Web.Mapping;
@@ -18,9 +17,9 @@ namespace WorkFlex.Web.Pages.Recruiter
             _userService = userService;
         }
 
-        public UserSearchCriteria SearchCriteria { get; set; } = null!;
+        public SearchCriteria SearchCriteria { get; set; } = null!;
         public ICollection<UserVM> Users { get; set; } = [];
-        public Pageable<UserSearchCriteria> Pageable { get; set; } = new Pageable<UserSearchCriteria>();
+        public Pageable<SearchCriteria> Pageable { get; set; } = new Pageable<SearchCriteria>();
 
         public async Task<IActionResult> OnPostCheckUserInfo(Guid userId)
         {
@@ -108,7 +107,7 @@ namespace WorkFlex.Web.Pages.Recruiter
         {
             if (!string.IsNullOrEmpty(searchOption) && !string.IsNullOrEmpty(searchValue))
             {
-                SearchCriteria = new UserSearchCriteria
+                SearchCriteria = new SearchCriteria
                 {
                     SearchOption = searchOption,
                     SearchValue = searchValue
@@ -117,12 +116,12 @@ namespace WorkFlex.Web.Pages.Recruiter
             return await LoadUsers(currentPage, SearchCriteria);
         }
 
-        public async Task<IActionResult> OnPost(UserSearchCriteria searchCriteria, int currentPage = 1)
+        public async Task<IActionResult> OnPost(SearchCriteria searchCriteria, int currentPage = 1)
         {
             return await LoadUsers(currentPage, searchCriteria);
         }
 
-        private async Task<IActionResult> LoadUsers(int currentPage, UserSearchCriteria searchCriteria)
+        private async Task<IActionResult> LoadUsers(int currentPage, SearchCriteria searchCriteria)
         {
             try
             {

@@ -10,6 +10,7 @@ namespace WorkFlex.Services.Mapping
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Conversation, ConversationDto>().ReverseMap();
             CreateMap<JobPost, JobPostDto>().ReverseMap();
+            CreateMap<JobApplication, JobApplicantDto>().ReverseMap();
         }
     }
 }

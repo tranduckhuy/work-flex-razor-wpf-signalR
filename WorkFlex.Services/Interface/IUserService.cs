@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Http;
 using System.Linq.Expressions;
 using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
-using WorkFlex.Domain.SearchCiteria;
 using WorkFlex.Services.DTOs;
 using static WorkFlex.Infrastructure.Constants.AppConstants;
 
@@ -28,7 +27,7 @@ namespace WorkFlex.Services.Interface
 
         Task<UserDto?> GetByIdAsync(Guid id);
 
-        Task<(ICollection<UserDto>, Pageable<UserSearchCriteria>)> GetUsers(int page, UserSearchCriteria? searchCriteria,
+        Task<(ICollection<UserDto>, Pageable<SearchCriteria>)> GetUsers(int page, SearchCriteria? searchCriteria,
             int roleId, Expression<Func<User, bool>> additionalCriteria = null!);
     }
 }

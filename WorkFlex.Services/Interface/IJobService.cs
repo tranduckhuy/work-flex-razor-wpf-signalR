@@ -1,4 +1,5 @@
-﻿using WorkFlex.Domain.Entities;
+﻿using WorkFlex.Domain;
+using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Filters;
 using WorkFlex.Services.DTOs;
 
@@ -13,6 +14,9 @@ namespace WorkFlex.Services.Interface
         Task<bool> DeleteJobPostAsync(Guid id);
 
         Task<(IEnumerable<JobPostDto> JobDtos, int TotalCount, int TotalPages)> GetJobsAsync(JobFilter filters);
+
+        Task<(IEnumerable<JobPostDto> JobPosts, Pageable<SearchCriteria> pageable)> GetJobsByUserIdAsync(int page, 
+            Guid userId, SearchCriteria searchCriteria);
 
         Task<IEnumerable<JobType>> GetJobTypesAsync();
 

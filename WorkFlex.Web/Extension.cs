@@ -28,6 +28,7 @@ namespace WorkFlex.Web
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJobRepository, JobRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<IJobApplyRepository, JobApplyRepository>();
 
             // Helpers Register
             services.AddScoped<IEmailHelper, EmailHelper>();
@@ -39,6 +40,7 @@ namespace WorkFlex.Web
             services.AddScoped<IAuthenService, AuthenService>();
             services.AddScoped<IJobService, JobService>();
             services.AddScoped<IConversationService, ConversationService>();
+            services.AddScoped<IJobApplyService, JobApplyService>();
 
             return services;
         }

@@ -181,5 +181,20 @@ namespace WorkFlex.Services
                 return daysAgo > 0 ? $"{daysAgo} Days Ago" : "Today";
             }
         }
-    }
+
+		public async Task<(IEnumerable<JobPostDto> JobPosts, Pageable<SearchCriteria> pageable)> 
+            GetJobsByUserIdAsync(int page, Guid userId, SearchCriteria searchCriteria)
+		{
+            var (JobPosts, pageable) = await _jobRepository.GetJobsByUserIdAsync(page, userId, searchCriteria);
+            var jobDtos = AppMapper.Mapper.Map<IEnumerable<JobPostDto>>(JobPosts);
+            
+            foreach (var jobDto in jobDtos)
+            {
+                jobDto.DisplayCreatedAt = FormatDisplayCreatedAt(jobDto.CreatedAt);
+                jobDto.TotalApplicants = jobDto.JobApplications.Count;
+            }
+
+            return (jobDtos, pageable);
+		}
+	}
 }

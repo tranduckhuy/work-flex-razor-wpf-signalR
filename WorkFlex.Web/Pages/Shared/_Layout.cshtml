@@ -76,6 +76,11 @@
                                             {
                                                 <li><a href="#!" onclick="complex('@userId', '@Url.Page("/Recruiter/RecruiterRequest", "CheckUserInfo")')">Recruiter account</a></li>
                                             }
+
+                                            @if (isLoggedIn && roleId == (int)AppConstants.Role.Recruiter)
+                                            {
+                                                <li><a asp-page="/Job/JobPosts" asp-route-userId="@userId")">Job Posts</a></li>
+                                            }
                                         </ul>
                                     </nav>
                                 </div>

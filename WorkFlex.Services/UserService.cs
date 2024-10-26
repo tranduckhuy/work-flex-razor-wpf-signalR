@@ -5,7 +5,6 @@ using System.Net.Http;
 using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 using WorkFlex.Domain.Repositories;
-using WorkFlex.Domain.SearchCiteria;
 using WorkFlex.Infrastructure.Utils.Helper.Interface;
 using WorkFlex.Infrastructure.Utils.Mail;
 using WorkFlex.Services.DTOs;
@@ -218,8 +217,8 @@ namespace WorkFlex.Services
             }
         }
 
-        public async Task<(ICollection<UserDto>, Pageable<UserSearchCriteria>)> GetUsers(
-            int page, UserSearchCriteria? searchCriteria, int roleId, Expression<Func<User, bool>> additionalCriteria = null!)
+        public async Task<(ICollection<UserDto>, Pageable<SearchCriteria>)> GetUsers(
+            int page, SearchCriteria? searchCriteria, int roleId, Expression<Func<User, bool>> additionalCriteria = null!)
         {
             var result = await _userRepository.GetUsers(page, searchCriteria, roleId, additionalCriteria);
             return (AppMapper.Mapper.Map<ICollection<UserDto>>(result.Item1), result.Item2);

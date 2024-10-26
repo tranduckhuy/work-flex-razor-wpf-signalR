@@ -24,8 +24,8 @@ namespace WorkFlex.Web.Untils.Helper
                 return "Location not updated yet.";
 
             // Extract city and province based on the number of parts
-            string city = null;
-            string province = null;
+            string city = null!;
+            string province = null!;
 
             if (filteredParts.Count == 1)
             {

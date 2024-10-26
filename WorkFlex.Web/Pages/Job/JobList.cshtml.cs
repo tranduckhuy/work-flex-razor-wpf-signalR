@@ -27,7 +27,7 @@ namespace WorkFlex.Web.Pages.Job
 
         public IEnumerable<JobPostDto> Jobs { get; set; } = new List<JobPostDto>();
 
-        public JobPostVM Filters { get; set; } = null!;
+        public JobPostRqVM Filters { get; set; } = null!;
 
         public int TotalCount { get; set; }
 
@@ -41,14 +41,14 @@ namespace WorkFlex.Web.Pages.Job
 
         public IEnumerable<JobType> JobTypes { get; set; } = new List<JobType>();
 
-        public async Task<IActionResult> OnGetAsync(JobPostVM filters)
+        public async Task<IActionResult> OnGetAsync(JobPostRqVM filters)
         {
             _logger.LogInformation("[OnGetAsync]: Start fetching job list with filters: {filters}", filters);
 
             try
             {
                 // Retrieve filters from the session
-                var sessionFilters = HttpContext.Session.GetObject<JobPostVM>("JobFilters");
+                var sessionFilters = HttpContext.Session.GetObject<JobPostRqVM>("JobFilters");
 
                 if (sessionFilters != null && !_jobFilterHelper.IsFilterEmpty(sessionFilters))
                 {
