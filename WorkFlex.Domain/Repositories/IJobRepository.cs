@@ -5,7 +5,7 @@ namespace WorkFlex.Domain.Repositories
 {
     public interface IJobRepository
     {
-        Task<(IEnumerable<JobPost> Jobs, int TotalCount)> GetJobsAsync(JobFilter filters);
+        Task<(IEnumerable<JobPost> Jobs, int TotalCount, int TotalPages)> GetJobsAsync(JobFilter filters);
 
         Task<IEnumerable<JobType>> GetJobTypesAsync();
 

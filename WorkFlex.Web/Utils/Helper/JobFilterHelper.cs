@@ -22,8 +22,8 @@ namespace WorkFlex.Web.Utils.Helper
             return string.IsNullOrEmpty(filters.JobLocation) &&
                    string.IsNullOrEmpty(filters.JobType) &&
                    string.IsNullOrEmpty(filters.PostedWithin) &&
-                   filters.MinSalary == 0 &&
-                   filters.MaxSalary == 0 &&
+                   filters.MinSalary == 100 &&
+                   filters.MaxSalary == 10000 &&
                    string.IsNullOrEmpty(filters.SortBy) &&
                    filters.PageNumber == 1 &&
                    filters.PageSize == 7;

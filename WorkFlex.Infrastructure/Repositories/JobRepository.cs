@@ -18,7 +18,7 @@ namespace WorkFlex.Infrastructure.Repositories
 			_appDbContext = appDbContext;
 		}
 
-		public async Task<(IEnumerable<JobPost> Jobs, int TotalCount)> GetJobsAsync(JobFilter filters)
+		public async Task<(IEnumerable<JobPost> Jobs, int TotalCount, int TotalPages)> GetJobsAsync(JobFilter filters)
 		{
 			var query = _appDbContext.JobPosts
 				.Include(j => j.JobType)
@@ -30,18 +30,18 @@ namespace WorkFlex.Infrastructure.Repositories
 			// Filter by Status (Status == Status.Active)
 			query = query.Where(j => j.Status == Status.Active);
 
-			// Filter by Job Location
-			if (!string.IsNullOrEmpty(filters.JobLocation) && filters.JobLocation != AppConstants.ANY_WHERE)
-			{
-				string normalizedJobLocation = filters.JobLocation.ToLower()
-									.Replace("thành phố", "")
-									.Replace("tỉnh", "")
-									.Trim();
-				query = query.Where(j => j.JobLocation.Contains(normalizedJobLocation, StringComparison.CurrentCultureIgnoreCase));
-			}
+            // Filter by Job Location
+            if (!string.IsNullOrEmpty(filters.JobLocation) && filters.JobLocation != AppConstants.ANY_WHERE)
+            {
+                string normalizedJobLocation = filters.JobLocation.ToLower()
+                                    .Replace("thành phố", "")
+                                    .Replace("tỉnh", "")
+                                    .Trim();
+                query = query.Where(j => j.JobLocation.ToLower().Contains(normalizedJobLocation));
+            }
 
-			// Filter by Job Type
-			if (!string.IsNullOrEmpty(filters.JobType) && filters.JobType != AppConstants.ALL)
+            // Filter by Job Type
+            if (!string.IsNullOrEmpty(filters.JobType) && filters.JobType != AppConstants.ALL)
 			{
 				var jobTypes = filters.JobType.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 				query = query.Where(j => jobTypes.Contains(j.JobType.TypeName));
@@ -59,20 +59,20 @@ namespace WorkFlex.Infrastructure.Repositories
 						fromDate = DateTime.UtcNow.Date;
 						hasFilter = true;
 						break;
-					case "Last 2 days":
-						fromDate = DateTime.UtcNow.Date.AddDays(-2);
-						hasFilter = true;
-						break;
-					case "Last 3 days":
-						fromDate = DateTime.UtcNow.Date.AddDays(-3);
-						hasFilter = true;
-						break;
 					case "Last 5 days":
 						fromDate = DateTime.UtcNow.Date.AddDays(-5);
 						hasFilter = true;
 						break;
-					case "Last 10 days":
-						fromDate = DateTime.UtcNow.Date.AddDays(-10);
+					case "Last Week":
+						fromDate = DateTime.UtcNow.Date.AddDays(-7);
+						hasFilter = true;
+						break;
+					case "Last Month":
+						fromDate = DateTime.UtcNow.Date.AddMonths(-1);
+						hasFilter = true;
+						break;
+					case "Last Year":
+						fromDate = DateTime.UtcNow.Date.AddYears(-1);
 						hasFilter = true;
 						break;
 				}
@@ -131,13 +131,22 @@ namespace WorkFlex.Infrastructure.Repositories
 			// Get total count before pagination
 			int totalCount = jobPosts.Count;
 
-			// Pagination on the filtered jobs
-			var jobs = jobPosts
+            // Calculate total pages
+            int totalPages = (int)Math.Ceiling(totalCount / (double)filters.PageSize);
+
+            // Validate and adjust PageNumber if needed
+            if (filters.PageNumber > totalPages && totalPages > 0)
+            {
+                filters.PageNumber = 1; // Reset to the first page if current page is invalid
+            }
+
+            // Pagination on the filtered jobs
+            var jobs = jobPosts
 				.Skip((filters.PageNumber - 1) * filters.PageSize)
 				.Take(filters.PageSize)
 				.ToList();
 
-			return (jobs, totalCount);
+			return (jobs, totalCount, totalPages);
 		}
 
 		public async Task<IEnumerable<JobType>> GetJobTypesAsync()
