@@ -21,7 +21,7 @@ namespace WorkFlex.Services.Interface
 
         Task<bool> UpdateUserProfileAsync(ProfileDto profileDto);
 
-        Task<bool> UpdateUserImagesAsync(ProfileImageDto profileDto);
+        Task<bool> UpdateUserImagesAsync(ProfileImageDto profileImageDto);
 
         Task<ProfileResult> ChangePasswordAsync(ProfileDto profileDto);
 
