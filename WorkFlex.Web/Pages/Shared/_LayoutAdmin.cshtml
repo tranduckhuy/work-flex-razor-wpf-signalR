@@ -1,4 +1,5 @@
-﻿@using WorkFlex.Infrastructure.Constants
+﻿@Html.AntiForgeryToken()
+@using WorkFlex.Infrastructure.Constants
 @{
     var userId = ViewContext.HttpContext.Session.GetString("Id");
     var name = ViewContext.HttpContext.Session.GetString("Name");
@@ -25,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <!-- Fav Icon -->
-    <link rel="icon" type="image/x-icon" href="~/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 
     <!-- sherah Stylesheet -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
@@ -364,6 +365,13 @@
     <script src="~/js/toast-config.js"></script>
     <script src="~/js/validator.js"></script>
     <script src="~/js/main-admin.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"
+            integrity="sha384-jm31kDh5bQXHL1gr/Qdq4Z1bVU+ZnEjbqMrZGhsEopCPF4HuGU0B0eH3LHcAz+H7"
+            crossorigin="anonymous">
+    </script>
+    <script src="~/js/firebase/firebase-config.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WorkFlex.Domain.Entities;
 using WorkFlex.Infrastructure.Constants;
 using WorkFlex.Services.DTOs;
 using WorkFlex.Services.Interface;
@@ -20,13 +22,15 @@ namespace WorkFlex.Web.Pages.User
 			_logger = logger;
 			_userService = userService;
             _addressHelper = addressHelper;
-		}
+        }
 
-		public UserDto? UserDto { get; set; }
+        public UserDto? UserDto { get; set; }
 
 		public ProfileVM ProfileVM { get; set; } = null!;
 
-		public bool IsYourProfile { get; set; } = true;
+        public UpdateImageProfileVM UpdateImageProfileVM { get; set; } = null!;
+
+        public bool IsYourProfile { get; set; } = true;
 
 		public async Task<IActionResult> OnGetAsync(string userId)
 		{
@@ -76,6 +80,33 @@ namespace WorkFlex.Web.Pages.User
             }
         }
 
+        public async Task<IActionResult> OnPostImageUpdateAsync(UpdateImageProfileVM updateImageProfileVM)
+        {
+            _logger.LogInformation("[OnPostImageUpdateAsync]: Controller - Start updating images for user: {UserId}", UserDto?.Id);
+            try
+            {
+                var result = await _userService.UpdateUserImagesAsync(AppMapper.Mapper.Map<ProfileImageDto>(updateImageProfileVM));
+                if (!result)
+                {
+                    TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_UPDATE_PROFILE_FAILED;
+                    await SetUserAsync(updateImageProfileVM.Id);
+                    return Page();
+                }
+
+                _logger.LogInformation("[OnPostImageUpdateAsync]: Controller - Profile updated successfully.");
+                TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_UPDATE_PROFILE_SUCCESSFULLY;
+                await SetUserAsync(updateImageProfileVM.Id);
+                return Page();
+            } 
+            catch (Exception ex)
+            {
+                _logger.LogError("[OnPostImageUpdateAsync]: Controller - End updating profile for user: {UserId} with error: {ex}", updateImageProfileVM.Id, ex.StackTrace);
+                TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
+                await SetUserAsync(updateImageProfileVM.Id);
+                return Page();
+            }
+        }
+
         private async Task<IActionResult> HandleProfileUpdateAsync(ProfileVM profileVM)
         {
             _logger.LogInformation("[HandleProfileUpdateAsync]: Controller - Start updating profile for user: {UserId}", UserDto?.Id);
@@ -93,7 +124,8 @@ namespace WorkFlex.Web.Pages.User
                 TempData[AppConstants.TEMP_DATA_SUCCESS_MESSAGE] = AppConstants.MESSAGE_UPDATE_PROFILE_SUCCESSFULLY;
                 await SetUserAsync(profileVM.Id);
                 return Page();
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 _logger.LogError("[HandleProfileUpdateAsync]: Controller - End updating profile for user: {UserId} with error: {ex}", profileVM.Id, ex.StackTrace);
                 TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
@@ -132,7 +164,8 @@ namespace WorkFlex.Web.Pages.User
                         await SetUserAsync(profileVM.Id);
                         return Page();
                 }
-            } catch (Exception ex) 
+            } 
+            catch (Exception ex) 
             {
                 _logger.LogError("[HandleChangePasswordAsync]: Controller - End changing password for user: {UserId} with error: {ex}", profileVM.Id, ex.StackTrace);
                 TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;

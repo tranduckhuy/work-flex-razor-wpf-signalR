@@ -40,11 +40,6 @@ namespace WorkFlex.Services
             await _userRepository.DemotePromoteUser(userId);
         }
 
-        public async Task UpdateUserAsync(UserDto userDto)
-        {
-            await _userRepository.UpdateUserAsync(AppMapper.Mapper.Map<User>(userDto));
-        }
-
         public async Task<bool> RequestRecruiterApproval(Guid userId)
         {
             return await _userRepository.RequestRecruiterApproval(userId);
@@ -146,9 +141,38 @@ namespace WorkFlex.Services
 
                 await _userRepository.UpdateUserAsync(user);
                 return true;
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 _logger.LogError("[UpdateUserProfileAsync]: Service - End updating user: {id} with error: {ex}", profileDto.Id, ex.StackTrace);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateUserImagesAsync(ProfileImageDto profileImageDto)
+        {
+            _logger.LogInformation("[UpdateUserImagesAsync]: Service - Start updating images for user: {id}", profileImageDto.Id);
+
+            try
+            {
+                var user = await _userRepository.GetUserByIdAsync(profileImageDto.Id);
+                if (user == null)
+                {
+                    _logger.LogInformation("[UpdateUserImagesAsync]: Service - End updating images for user: {id} with status: User Not Found.", profileImageDto.Id);
+                    return false;
+                }
+
+                _logger.LogDebug("[UpdateUserImagesAsync]: Service - User before update: {user}", user);
+                user.Avatar = profileImageDto.AvatarUrl ?? string.Empty;
+                user.BackgroundImg = profileImageDto.BackgroundUrl ?? string.Empty;
+                _logger.LogDebug("[UpdateUserImagesAsync]: Service - User after update: {user}", user);
+
+                await _userRepository.UpdateUserAsync(user);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("[UpdateUserImagesAsync]: Service - End updating images for user: {id} with error: {ex}", profileImageDto.Id, ex.StackTrace);
                 return false;
             }
         }

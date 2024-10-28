@@ -79,41 +79,46 @@
 
                         <div class="sharah-profile--main sherah-default-bg sharah-border mg-top-40">
 
-                            <!-- Sharah Profile header -->
-                            <div class="sherah-userprofile__header">
-                                <img id="backgroundImage" src="@user.BackgroundImg" alt="Background" style="height:190px;max-height:200px;">
-                                @if (Model.IsYourProfile)
-                                {
-                                    <div class="sherah-userprofile__right">
-                                        <label for="backgroundFile" class="sherah-btn sherah-btn__white" style="padding:16px 20px;cursor:pointer;">
-                                            <input type="file" id="backgroundFile" style="display:none;" accept=".png,.jpg" />
-                                            <i class="fas fa-camera" style="color:#333;font-size:16px;"></i>
-                                            Change Background
-                                        </label>
-                                    </div>
-                                }
-                            </div>
-
-                            <div class="col-12" style="position:relative;">
-                                <!-- Profile Info -->
-                                <div class="sherah-profile-info">
-                                    <div class="sherah-profile-info__thumb" style="position:relative;">
-                                        <img id="avatarImage" src="@user.Avatar" alt="Avatar">
-                                        @if (Model.IsYourProfile)
-                                        {
-                                            <label for="avatarFile" class="avatar-badge" style="cursor:pointer;">
-                                                <input type="file" id="avatarFile" style="display:none;" accept=".png,.jpg" />
-                                                <i class="fas fa-camera" style="color:#5f5f5f;font-size:16px;"></i>
+                            <form id="profileImageForm" method="post" asp-page="/User/Profile" asp-page-handler="ImageUpdate">
+                                <!-- Sharah Profile header -->
+                                <div class="sherah-userprofile__header">
+                                    <img id="background-image" src="@user.BackgroundImg" alt="Background" style="height:190px;max-height:200px;">
+                                    @if (Model.IsYourProfile)
+                                    {
+                                        <div class="sherah-userprofile__right">
+                                            <label for="background-file" class="sherah-btn sherah-btn__white" style="padding:16px 20px;cursor:pointer;">
+                                                <input type="file" id="background-file" style="display:none;" accept=".png,.jpg" readonly />
+                                                <input type="text" id="background-hidden" name="UpdateImageProfileVM.BackgroundUrl" style="display:none" value="@user.BackgroundImg" readonly />
+                                                <input type="text" name="UpdateImageProfileVM.Id" style="display:none" value="@user.Id" readonly />
+                                                <i class="fas fa-camera" style="color:#333;font-size:16px;"></i>
+                                                Change Background
                                             </label>
-                                        }
-                                        <h3 class="sherah-profile-info__name">
-                                            @user.FirstName @user.LastName
-                                            <span>@user.Email</span>
-                                        </h3>
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
-                                <!-- End Profile Info -->
-                            </div>
+
+                                <div class="col-12" style="position:relative;">
+                                    <!-- Profile Info -->
+                                    <div class="sherah-profile-info">
+                                        <div class="sherah-profile-info__thumb" style="position:relative;">
+                                            <img id="avatar-image" src="@user.Avatar" alt="Avatar">
+                                            @if (Model.IsYourProfile)
+                                            {
+                                                <label for="avatar-file" class="avatar-badge" style="cursor:pointer;">
+                                                    <input type="file" id="avatar-file" style="display:none;" accept=".png,.jpg" />
+                                                    <input type="text" id="avatar-hidden" name="UpdateImageProfileVM.AvatarUrl" style="display:none" value="@user.Avatar" readonly />
+                                                    <i class="fas fa-camera" style="color:#5f5f5f;font-size:16px;"></i>
+                                                </label>
+                                            }
+                                            <h3 class="sherah-profile-info__name">
+                                                @user.FirstName @user.LastName
+                                                <span>@user.Email</span>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <!-- End Profile Info -->
+                                </div>
+                            </form>
 
                             <!-- Profile Inner Section -->
                             <div class="sherah-upinner">
