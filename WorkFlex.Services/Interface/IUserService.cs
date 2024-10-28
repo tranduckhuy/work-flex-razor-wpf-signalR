@@ -13,8 +13,6 @@ namespace WorkFlex.Services.Interface
 
         Task DemotePromoteUser(Guid userId);
 
-        Task UpdateUserAsync(UserDto userDto);
-
         Task<bool> RequestRecruiterApproval(Guid userId);
 
         Task<bool> ApproveRecruiterRequest(Guid userId, ISession session, HttpContext httpContext);
@@ -22,6 +20,8 @@ namespace WorkFlex.Services.Interface
         Task<bool> DeclineRecruiterRequest(Guid userId, ISession session, HttpContext httpContext);
 
         Task<bool> UpdateUserProfileAsync(ProfileDto profileDto);
+
+        Task<bool> UpdateUserImagesAsync(ProfileImageDto profileDto);
 
         Task<ProfileResult> ChangePasswordAsync(ProfileDto profileDto);
 

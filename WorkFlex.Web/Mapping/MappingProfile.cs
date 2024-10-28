@@ -17,6 +17,7 @@ namespace WorkFlex.Web.Mapping
             CreateMap<ProfileVM, ProfileDto>().ReverseMap();
             CreateMap<JobApplicantVM, JobApplicantDto>().ReverseMap();
             CreateMap<JobPostVM, JobPostDto>().ReverseMap();
+            CreateMap<UpdateImageProfileVM, ProfileImageDto>().ReverseMap();
         }
     }
 }
