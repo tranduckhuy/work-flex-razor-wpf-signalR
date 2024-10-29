@@ -1,85 +1,55 @@
-$(document).ready(function(){
-    
-    (function($) {
-        "use strict";
+$(document).ready(function () {
+    const form = $('#contact-form');
 
-    
-    jQuery.validator.addMethod('answercheck', function (value, element) {
-        return this.optional(element) || /^\bcat\b$/.test(value)
-    }, "type the correct answer -_-");
+    form.on('submit', function (e) {
+        e.preventDefault();
 
-    // validate contactForm form
-    $(function() {
-        $('#contactForm').validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 2
-                },
-                subject: {
-                    required: true,
-                    minlength: 4
-                },
-                number: {
-                    required: true,
-                    minlength: 5
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                message: {
-                    required: true,
-                    minlength: 20
+        const data = {
+            name: $('#name').val(),
+            email: $('#email').val(),
+            subject: $('#subject').val(),
+            message: $('#message').val()
+        };
+
+        postGoogleForm(data);
+    });
+
+    async function postGoogleForm(data) {
+        const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfG6iGwx187Mv3qiwVAPjxQtwb7LuCoT3TnPR_-tlGdAb3gKA/formResponse";
+        const formData = new FormData();
+        formData.append('entry.1254723452', data.name);
+        formData.append('entry.607270649', data.email);
+        formData.append('entry.184926896', data.subject);
+        formData.append('entry.1109167841', data.message);
+
+        try {
+            await fetch(formURL, {
+                method: 'post',
+                body: formData,
+                mode: 'no-cors'
+            });
+
+            // Show success message
+            Swal.fire({
+                title: "Success!",
+                text: "Thank you for reaching out. We will get back to you shortly!",
+                icon: "success"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form[0].reset();
                 }
-            },
-            messages: {
-                name: {
-                    required: "come on, you have a name, don't you?",
-                    minlength: "your name must consist of at least 2 characters"
-                },
-                subject: {
-                    required: "come on, you have a subject, don't you?",
-                    minlength: "your subject must consist of at least 4 characters"
-                },
-                number: {
-                    required: "come on, you have a number, don't you?",
-                    minlength: "your Number must consist of at least 5 characters"
-                },
-                email: {
-                    required: "no email, no message"
-                },
-                message: {
-                    required: "um...yea, you have to write something to send this form.",
-                    minlength: "thats all? really?"
+            });
+        } catch (error) {
+            // Show error message
+            Swal.fire({
+                title: "Error!",
+                text: "We could not send your message. Please check your internet connection and try again.",
+                icon: "error"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form[0].reset();
                 }
-            },
-            submitHandler: function(form) {
-                $(form).ajaxSubmit({
-                    type:"POST",
-                    data: $(form).serialize(),
-                    url:"contact_process.php",
-                    success: function() {
-                        $('#contactForm :input').attr('disabled', 'disabled');
-                        $('#contactForm').fadeTo( "slow", 1, function() {
-                            $(this).find(':input').attr('disabled', 'disabled');
-                            $(this).find('label').css('cursor','default');
-                            $('#success').fadeIn()
-                            $('.modal').modal('hide');
-		                	$('#success').modal('show');
-                        })
-                    },
-                    error: function() {
-                        $('#contactForm').fadeTo( "slow", 1, function() {
-                            $('#error').fadeIn()
-                            $('.modal').modal('hide');
-		                	$('#error').modal('show');
-                        })
-                    }
-                })
-            }
-        })
-    })
-        
- })(jQuery)
-})
+            });
+        }
+    }
+});
