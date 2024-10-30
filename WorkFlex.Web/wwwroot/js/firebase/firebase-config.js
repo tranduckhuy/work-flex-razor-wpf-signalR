@@ -26,15 +26,17 @@ function updateUploadMessage() {
     }
 }
 function submitForm() {
-    $('.progress-container').show();
-    $('.progress-bar').css('width', '0%');
+    if (validateForm()) {
+        $('.progress-container').show();
+        $('.progress-bar').css('width', '0%');
 
-    uploadFile(function () {
-        $('.progress-bar').css('width', '100%');
-        setTimeout(() => {
-            document.querySelector('form').submit();
-        }, 500);
-    });
+        uploadFile(function () {
+            $('.progress-bar').css('width', '100%');
+            setTimeout(() => {
+                document.querySelector('form').submit();
+            }, 500);
+        });
+    }
 }
 
 function uploadFile(callback) {
@@ -67,19 +69,21 @@ function uploadFile(callback) {
 
 // Get elements
 const fileInputAvatar = $('#avatar-file');
-const fileInputBackground = $('#background-file');
-
 const avtInputHidden = $('#avatar-hidden');
+if (fileInputAvatar.length && avtInputHidden.length) {
+    fileInputAvatar.on('change', function (e) {
+        avatarImage(e, "avatar-image");
+    });
+}
+
+// Check for elements exist or not
+const fileInputBackground = $('#background-file');
 const bgrInputHidden = $('#background-hidden');
-
-// Listen for file selection
-fileInputAvatar.on('change', function (e) {
-    avatarImage(e, "avatar-image");
-});
-
-fileInputBackground.on('change', function (e) {
-    backgroundImage(e, "background-image");
-});
+if (fileInputBackground.length && bgrInputHidden.length) {
+    fileInputBackground.on('change', function (e) {
+        backgroundImage(e, "background-image");
+    });
+}
 
 function avatarImage(e, imageId) {
     var file = e.target.files[0];

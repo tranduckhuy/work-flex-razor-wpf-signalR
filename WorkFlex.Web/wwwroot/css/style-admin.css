@@ -8077,3 +8077,9 @@ blockquote {
 .form-group.invalid .form-message {
 	color: #f33a58;
 }
+
+.icon-profile {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+}
