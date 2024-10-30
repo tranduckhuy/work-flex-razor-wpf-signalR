@@ -173,29 +173,31 @@
     </form>
 </div>
 
-<script>
-    function showToast(message) {
-        toast({
-            title: "Error",
-            message: message,
-            type: "danger",
-            duration: 3000,
-        });
-    }
-
-    function validateForm() {
-        const coverLetter = document.getElementById('cover-letter').value.trim();
-        const fileUpload = document.getElementById('file-upload').value.trim();
-
-        if (!coverLetter) {
-            showToast("Please fill out the cover letter.");
-            return false;
+@section Scripts {
+    <script>
+        function showToast(message) {
+            toast({
+                title: "Error",
+                message: message,
+                type: "danger",
+                duration: 3000,
+            });
         }
 
-        if (!fileUpload) {
-            showToast("Please upload your CV.");
-            return false;
+        function validateForm() {
+            const coverLetter = document.getElementById('cover-letter').value.trim();
+            const fileUpload = document.getElementById('file-upload').value.trim();
+
+            if (!coverLetter) {
+                showToast("Please fill out the cover letter.");
+                return false;
+            }
+
+            if (!fileUpload) {
+                showToast("Please upload your CV.");
+                return false;
+            }
+            return true;
         }
-        return true;
-    }
-</script>
+    </script>
+}

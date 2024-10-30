@@ -165,10 +165,10 @@
                                                             <div class="col-lg-6 col-md-6 col-12 mg-top-30">
                                                                 <h4 class="sherah-info-title mg-btm-20">Contact</h4>
                                                                 <ul class="sherah-contact-info">
-                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset"><i class="fas fa-map-marker-alt"></i></span><p id="address-information" style="color:#1a1a1a"></p></li>
-                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset"><i class="far fa-envelope"></i></span>Email : <a href="mailto:@user.Email" style="font-size:16px;text-decoration:underline;">@user.Email</a></li>
+                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset icon-profile"><i class="fas fa-map-marker-alt"></i></span><p id="address-information" style="color:#1a1a1a"></p></li>
+                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset icon-profile"><i class="far fa-envelope"></i></span>Email : <a href="mailto:@user.Email" style="font-size:16px;text-decoration:underline;">@user.Email</a></li>
                                                                     <li class="sherah-border">
-                                                                        <span class="sherah-color1__bg--offset"><i class="fas fa-phone"></i></span>
+                                                                        <span class="sherah-color1__bg--offset icon-profile"><i class="fas fa-phone"></i></span>
                                                                         Phone : @if (!string.IsNullOrEmpty(user.Phone))
                                                                         {
                                                                             <a href="tel:@user.Phone" style="font-size: 16px;">@user.Phone</a>
@@ -183,13 +183,13 @@
                                                             <div class="col-lg-6 col-md-6 col-12 mg-top-30">
                                                                 <h4 class="sherah-info-title mg-btm-20">Social</h4>
                                                                 <ul class="sherah-contact-info sherah-contact-social">
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-facebook-f"></i></span>Facebook</a></li>
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-twitter"></i></span>Twitter</a></li>
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-linkedin"></i></span>Linkedin</a></li>
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-dribbble"></i></span>Dribbble</a></li>
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-behance"></i></span>Behance</a></li>
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-youtube"></i></span>Youtube</a></li>
-                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset"><i class="fab fa-instagram"></i></span>Instagram</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-facebook-f"></i></span>Facebook</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-twitter"></i></span>Twitter</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-linkedin"></i></span>Linkedin</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-dribbble"></i></span>Dribbble</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-behance"></i></span>Behance</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-youtube"></i></span>Youtube</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-instagram"></i></span>Instagram</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -449,8 +449,9 @@
             }
 
             if (isYourProfile) {
-                setLocationOptions(fullAddress);
-                callAPI(apiProvince);
+                callAPI(apiProvince).then(() => {
+                    setLocationOptions(fullAddress);
+                });
 
                 document.querySelector("#city").addEventListener("change", () => {
                     const cityId = getSelectedDataId("#city");
@@ -484,9 +485,6 @@
             // Reset all fields to default (empty)
             apartment.value = '';
             street.value = '';
-            province.textContent = '';
-            district.textContent = '';
-            ward.textContent = '';
 
             // Map address parts to the fields based on the number of parts
             if (parts.length > 4) {
@@ -544,7 +542,7 @@
         }
 
         function callAPI(api) {
-            axios.get(api)
+            return axios.get(api)
                 .then((response) => {
                     renderData(response.data, "city", renderDataCity);
                 })

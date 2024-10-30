@@ -12,7 +12,7 @@ using WorkFlex.Infrastructure.Data;
 namespace WorkFlex.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241025040205_Initial")]
+    [Migration("20241030091441_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -104,70 +104,70 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2029),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7355),
                             IndustryName = "Software Development",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2032),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7357),
                             IndustryName = "Artificial Intelligence",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2032),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7358),
                             IndustryName = "Healthcare",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2033),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7359),
                             IndustryName = "Finance",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2034),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7360),
                             IndustryName = "Transportation",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2034),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7361),
                             IndustryName = "Agriculture",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2035),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7362),
                             IndustryName = "Customer Service",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2036),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7363),
                             IndustryName = "Marketing",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2036),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7364),
                             IndustryName = "Education",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2037),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7365),
                             IndustryName = "Logistics",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -211,13 +211,13 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11a72a3d-1a93-43db-8bd1-7a2dc3d40037"),
-                            ApplicationDate = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2180),
+                            Id = new Guid("4a778eb2-c33d-4fd4-a7ca-ebc198588cea"),
+                            ApplicationDate = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7567),
                             CvFile = "path/to/cv.pdf",
                             Description = "",
-                            JobPostId = new Guid("1042b213-a576-40a4-b90e-55ec7858259d"),
+                            JobPostId = new Guid("0f73a3ec-2fc0-4e9f-922f-2493a25d168c"),
                             Status = 2,
-                            UserId = new Guid("f7755a76-5c34-472c-a3c7-6e7b88c2ad4f")
+                            UserId = new Guid("e16702dc-edc3-4311-950a-5c78a273f377")
                         });
                 });
 
@@ -280,303 +280,303 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1042b213-a576-40a4-b90e-55ec7858259d"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2067),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2068),
+                            Id = new Guid("0f73a3ec-2fc0-4e9f-922f-2493a25d168c"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7407),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7408),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Develop and maintain web applications.\n- Participate in the design and product development process.\n- Optimize performance and security of web applications.\n\nCandidate Requirements:\n- Experience with HTML, CSS, JavaScript, and PHP.\n- Problem-solving skills and logical thinking.\n- Graduate in IT or equivalent.",
-                            JobLocation = "Tòa nhà A, Số 12, Phố Nguyễn Trãi, Quận Thanh Xuân, Hà Nội",
-                            JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2068),
+                            JobDescription = "Position Overview:\n- Develop and maintain web applications.\n- Participate in the design and product development process.\n- Optimize performance and security of web applications.\n\nCandidate Requirements:\n- Experience with HTML, CSS, JavaScript, and PHP.\n- Problem-solving skills and logical thinking.\n- Graduate in IT or equivalent.",
+                            JobLocation = "Tòa nhà A, Số 12, Phố Nguyễn Trãi, Quận Thanh Xuân, Hải Phòng",
+                            JobTypeId = 2,
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7408),
                             SalaryRange = "1500 - 2000",
                             Status = 0,
                             Title = "Web Developer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("120361d1-1fed-4103-a2d5-5c198d06728e"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2081),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2082),
+                            Id = new Guid("d932ccfc-1bf3-471b-9b04-e6da182b2c1e"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7421),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7422),
                             IndustryId = 2,
-                            JobDescription = "Job Description:\n- Analyze data and create reports for management.\n- Use analytical tools to detect data trends.\n- Collaborate with other departments to improve processes based on data.\n\nCandidate Requirements:\n- Experience with Excel, SQL, and data analysis tools.\n- Communication and data presentation skills.\n- Graduate in statistics, mathematics, or equivalent.",
+                            JobDescription = "Position Overview:\n- Analyze data and create reports for management.\n- Use analytical tools to detect data trends.\n- Collaborate with other departments to improve processes based on data.\n\nCandidate Requirements:\n- Experience with Excel, SQL, and data analysis tools.\n- Communication and data presentation skills.\n- Graduate in statistics, mathematics, or equivalent.",
                             JobLocation = "Văn phòng 5, Số 23, Phố Lê Duẩn, Quận Hải Châu, Đà Nẵng",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2082),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7422),
                             SalaryRange = "2000 - 2500",
                             Status = 0,
                             Title = "Data Analyst",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("aedb36cf-42d5-47e0-bcfd-a6139b4dba26"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2085),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2085),
+                            Id = new Guid("93bbf39f-2347-413e-861d-5d4e44fe106a"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7427),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7428),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Design user interfaces for applications and websites.\n- Research and analyze user needs to improve experiences.\n- Create design prototypes and collaborate with development teams.\n\nCandidate Requirements:\n- Experience with Figma, Sketch, or Adobe XD.\n- Good communication and teamwork skills.\n- Graduate in design or equivalent.",
+                            JobDescription = "Position Overview:\n- Design user interfaces for applications and websites.\n- Research and analyze user needs to improve experiences.\n- Create design prototypes and collaborate with development teams.\n\nCandidate Requirements:\n- Experience with Figma, Sketch, or Adobe XD.\n- Good communication and teamwork skills.\n- Graduate in design or equivalent.",
                             JobLocation = "Tầng 2, Số 45, Phố Lê Lai, Quận 1, Hồ Chí Minh",
-                            JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2085),
+                            JobTypeId = 2,
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7427),
                             SalaryRange = "1800 - 2200",
                             Status = 0,
                             Title = "UX/UI Designer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("828ccd46-20ab-4249-931f-cbf7441d81d8"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2088),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2088),
+                            Id = new Guid("3f5fd29c-62c9-4927-83d4-52dfd10b8613"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7432),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7433),
                             IndustryId = 2,
-                            JobDescription = "Job Description:\n- Manage the recruitment and training processes for new employees.\n- Develop HR policies and manage performance.\n- Advise management on HR-related issues.\n\nCandidate Requirements:\n- At least 3 years of experience in a similar position.\n- Strong communication and leadership skills.\n- Graduate in human resource management or equivalent.",
+                            JobDescription = "Position Overview:\n- Manage the recruitment and training processes for new employees.\n- Develop HR policies and manage performance.\n- Advise management on HR-related issues.\n\nCandidate Requirements:\n- At least 3 years of experience in a similar position.\n- Strong communication and leadership skills.\n- Graduate in human resource management or equivalent.",
                             JobLocation = "Văn phòng 3, Số 78, Phố Nguyễn Trãi, Quận Thanh Xuân, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2088),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7432),
                             SalaryRange = "2500 - 3000",
                             Status = 0,
                             Title = "HR Manager",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("70453267-2341-4a47-9d7e-99a4e4e10578"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2091),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2091),
+                            Id = new Guid("4417e32d-ad60-4302-aa82-da453e568ecc"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7437),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7438),
                             IndustryId = 8,
-                            JobDescription = "Job Description:\n- Design graphic products for marketing campaigns.\n- Collaborate with other departments to create creative content.\n- Maintain the company’s brand and design style.\n\nCandidate Requirements:\n- Experience with Adobe Illustrator, Photoshop.\n- Creative thinking and ability to work under pressure.\n- Graduate in graphic design or equivalent.",
+                            JobDescription = "Position Overview:\n- Design graphic products for marketing campaigns.\n- Collaborate with other departments to create creative content.\n- Maintain the company’s brand and design style.\n\nCandidate Requirements:\n- Experience with Adobe Illustrator, Photoshop.\n- Creative thinking and ability to work under pressure.\n- Graduate in graphic design or equivalent.",
                             JobLocation = "Tầng trệt, Số 92, Phố Võ Văn Kiệt, Quận 1, Hồ Chí Minh",
-                            JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2091),
+                            JobTypeId = 2,
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7437),
                             SalaryRange = "1200 - 1500",
                             Status = 0,
                             Title = "Graphic Designer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("a79fc53c-08df-4a2b-ba7d-772210541a0d"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2101),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2101),
+                            Id = new Guid("a691d792-63e2-49f0-8cfa-16eedd315b23"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7441),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7442),
                             IndustryId = 8,
-                            JobDescription = "Job Description:\n- Write content for blogs, websites, and social media.\n- Research and develop new content topics.\n- Optimize content for SEO.\n\nCandidate Requirements:\n- Good writing and editing skills.\n- Experience in content writing is a plus.\n- Graduate in journalism, communication, or equivalent.",
+                            JobDescription = "Position Overview:\n- Write content for blogs, websites, and social media.\n- Research and develop new content topics.\n- Optimize content for SEO.\n\nCandidate Requirements:\n- Good writing and editing skills.\n- Experience in content writing is a plus.\n- Graduate in journalism, communication, or equivalent.",
                             JobLocation = "Văn phòng 10, Số 56, Phố Nguyễn Thị Minh Khai, Quận Hải Châu, Đà Nẵng",
-                            JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2101),
+                            JobTypeId = 2,
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7442),
                             SalaryRange = "1000 - 1500",
                             Status = 0,
                             Title = "Content Writer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("1d90bfb7-d319-482f-a86c-1c9b44180acf"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2104),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2104),
+                            Id = new Guid("36fddd95-2455-46dc-b1c4-a315e4187767"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7447),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7448),
                             IndustryId = 4,
-                            JobDescription = "Job Description:\n- Seek and develop new customers.\n- Conduct calls and meet clients to introduce products.\n- Achieve monthly sales targets.\n\nCandidate Requirements:\n- Experience in sales.\n- Good communication and persuasion skills.\n- University graduate in business or equivalent.",
+                            JobDescription = "Position Overview:\n- Seek and develop new customers.\n- Conduct calls and meet clients to introduce products.\n- Achieve monthly sales targets.\n\nCandidate Requirements:\n- Experience in sales.\n- Good communication and persuasion skills.\n- University graduate in business or equivalent.",
                             JobLocation = "Văn phòng 4, Số 150, Phố Trần Hưng Đạo, Quận 5, Hồ Chí Minh",
-                            JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2104),
+                            JobTypeId = 2,
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7448),
                             SalaryRange = "2000 - 2500",
                             Status = 0,
                             Title = "Sales Executive",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("e3c7429d-d38a-4a07-a264-70f31de5b503"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2107),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2108),
+                            Id = new Guid("33ece889-02a7-477b-ab4f-fbd8abadcaed"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7455),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7456),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Design and implement computer networks.\n- Monitor and maintain network systems.\n- Troubleshoot network-related issues.\n\nCandidate Requirements:\n- Experience with networking equipment.\n- CCNA certification is a plus.\n- Graduate in IT or equivalent.",
+                            JobDescription = "Position Overview:\n- Design and implement computer networks.\n- Monitor and maintain network systems.\n- Troubleshoot network-related issues.\n\nCandidate Requirements:\n- Experience with networking equipment.\n- CCNA certification is a plus.\n- Graduate in IT or equivalent.",
                             JobLocation = "Tòa nhà B, Số 34, Phố Lê Văn Sỹ, Quận 3, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2107),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7456),
                             SalaryRange = "2500 - 3000",
                             Status = 0,
                             Title = "Network Engineer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("7fbe173d-1d48-4682-8c65-9dbd2f169090"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2112),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2112),
+                            Id = new Guid("7b44c719-2c45-429f-9a7c-170f8169953b"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7460),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7461),
                             IndustryId = 8,
-                            JobDescription = "Job Description:\n- Optimize websites to improve search engine rankings.\n- Research and analyze keywords.\n- Monitor and report on SEO performance.\n\nCandidate Requirements:\n- Experience in SEO.\n- Good analytical and problem-solving skills.\n- Graduate in marketing or equivalent.",
+                            JobDescription = "Position Overview:\n- Optimize websites to improve search engine rankings.\n- Research and analyze keywords.\n- Monitor and report on SEO performance.\n\nCandidate Requirements:\n- Experience in SEO.\n- Good analytical and problem-solving skills.\n- Graduate in marketing or equivalent.",
                             JobLocation = "Văn phòng 7, Số 88, Phố Nguyễn Đình Chiểu, Quận 1, Đà Nẵng",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2112),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7460),
                             SalaryRange = "1500 - 2000",
                             Status = 0,
                             Title = "SEO Specialist",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("e942dcef-ce41-438d-9b48-18167b98cd92"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2115),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2115),
+                            Id = new Guid("1f8581e8-b369-437e-83de-64b1c045d552"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7464),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7465),
                             IndustryId = 2,
-                            JobDescription = "Job Description:\n- Responsible for product development and management.\n- Coordinate with departments to ensure product timelines.\n- Research market trends and analyze customer needs.\n\nCandidate Requirements:\n- At least 3 years of experience in product management.\n- Strong leadership and communication skills.\n- Graduate in business management or equivalent.",
+                            JobDescription = "Position Overview:\n- Responsible for product development and management.\n- Coordinate with departments to ensure product timelines.\n- Research market trends and analyze customer needs.\n\nCandidate Requirements:\n- At least 3 years of experience in product management.\n- Strong leadership and communication skills.\n- Graduate in business management or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2115),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7465),
                             SalaryRange = "3000 - 3500",
                             Status = 0,
                             Title = "Product Manager",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("7fde71d8-3261-4e41-9d3b-0d66306e11c7"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2118),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2118),
+                            Id = new Guid("9fa99d22-d367-4174-8791-5a8be05499bc"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7469),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7470),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Perform software testing to ensure product quality.\n- Analyze and report bugs.\n- Collaborate with development engineers to improve testing processes.\n\nCandidate Requirements:\n- Experience in software testing.\n- Understanding of software development processes.\n- Graduate in IT or equivalent.",
+                            JobDescription = "Position Overview:\n- Perform software testing to ensure product quality.\n- Analyze and report bugs.\n- Collaborate with development engineers to improve testing processes.\n\nCandidate Requirements:\n- Experience in software testing.\n- Understanding of software development processes.\n- Graduate in IT or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2118),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7470),
                             SalaryRange = "1500 - 1800",
                             Status = 0,
                             Title = "Software Tester",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("7368b384-bb7b-4326-b084-caf8087f8c70"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2121),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2121),
+                            Id = new Guid("d6aceb1a-882a-4568-8700-866a5d8159a6"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7473),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7474),
                             IndustryId = 4,
-                            JobDescription = "Job Description:\n- Analyze financial situations and prepare financial reports.\n- Provide investment and risk management recommendations.\n- Monitor and analyze market trends.\n\nCandidate Requirements:\n- Experience in financial analysis.\n- Strong analytical and reporting skills.\n- Graduate in finance or equivalent.",
+                            JobDescription = "Position Overview:\n- Analyze financial situations and prepare financial reports.\n- Provide investment and risk management recommendations.\n- Monitor and analyze market trends.\n\nCandidate Requirements:\n- Experience in financial analysis.\n- Strong analytical and reporting skills.\n- Graduate in finance or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2121),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7474),
                             SalaryRange = "2500 - 3000",
                             Status = 0,
                             Title = "Financial Analyst",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("143300d3-9561-4b91-8961-8eaeb9e75a51"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2124),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2124),
+                            Id = new Guid("2c23c650-386c-48a1-830e-4b6f7512b2da"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7479),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7480),
                             IndustryId = 8,
-                            JobDescription = "Job Description:\n- Build and implement digital marketing campaigns.\n- Manage social media channels and optimize advertisements.\n- Analyze campaign effectiveness and report results.\n\nCandidate Requirements:\n- Experience in digital marketing.\n- Analytical skills and proficiency in online marketing tools.\n- Graduate in marketing or equivalent.",
+                            JobDescription = "Position Overview:\n- Build and implement digital marketing campaigns.\n- Manage social media channels and optimize advertisements.\n- Analyze campaign effectiveness and report results.\n\nCandidate Requirements:\n- Experience in digital marketing.\n- Analytical skills and proficiency in online marketing tools.\n- Graduate in marketing or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2124),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7480),
                             SalaryRange = "1500 - 2000",
                             Status = 0,
                             Title = "Digital Marketing Specialist",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("71d5e743-2b30-4a9f-8534-ec3ba5f9798a"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2126),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2127),
+                            Id = new Guid("19caef04-429a-4b2f-bfc2-753dc6b47567"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7483),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7484),
                             IndustryId = 4,
-                            JobDescription = "Job Description:\n- Analyze business requirements and processes.\n- Collaborate with departments to improve operational efficiency.\n- Prepare analytical documents and reports for management.\n\nCandidate Requirements:\n- Experience in business analysis.\n- Good communication and teamwork skills.\n- Graduate in business administration or equivalent.",
+                            JobDescription = "Position Overview:\n- Analyze business requirements and processes.\n- Collaborate with departments to improve operational efficiency.\n- Prepare analytical documents and reports for management.\n\nCandidate Requirements:\n- Experience in business analysis.\n- Good communication and teamwork skills.\n- Graduate in business administration or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Đà Nẵng",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2127),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7484),
                             SalaryRange = "2000 - 2500",
                             Status = 0,
                             Title = "Business Analyst",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("caeebf14-d12e-4d02-84a8-bd40e9587a02"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2129),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2130),
+                            Id = new Guid("6c16179c-379f-4bc6-aa3a-2061ed177c3a"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7488),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7489),
                             IndustryId = 7,
-                            JobDescription = "Job Description:\n- Provide customer support via phone, email, and chat.\n- Resolve customer issues quickly and effectively.\n- Collect customer feedback to improve services.\n\nCandidate Requirements:\n- Good communication and listening skills.\n- Experience in customer service is an advantage.\n- Graduate from vocational school or higher.",
+                            JobDescription = "Position Overview:\n- Provide customer support via phone, email, and chat.\n- Resolve customer issues quickly and effectively.\n- Collect customer feedback to improve services.\n\nCandidate Requirements:\n- Good communication and listening skills.\n- Experience in customer service is an advantage.\n- Graduate from vocational school or higher.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hà Nội",
-                            JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2130),
+                            JobTypeId = 2,
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7489),
                             SalaryRange = "1000 - 1500",
                             Status = 0,
                             Title = "Customer Support Specialist",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("93d23b45-2217-45e8-9acb-a907287caf62"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2132),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2134),
+                            Id = new Guid("4b932f05-563b-4088-b3a1-95ab5961ff85"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7496),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7497),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Develop and maintain mobile applications on iOS and Android.\n- Participate in product design and development processes.\n- Optimize application performance.\n\nCandidate Requirements:\n- Experience with Swift, Kotlin, or React Native.\n- Creative problem-solving skills.\n- Graduate in IT or equivalent.",
+                            JobDescription = "Position Overview:\n- Develop and maintain mobile applications on iOS and Android.\n- Participate in product design and development processes.\n- Optimize application performance.\n\nCandidate Requirements:\n- Experience with Swift, Kotlin, or React Native.\n- Creative problem-solving skills.\n- Graduate in IT or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2134),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7497),
                             SalaryRange = "2000 - 2500",
                             Status = 0,
                             Title = "Mobile App Developer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("4729b89a-4019-4883-8ef4-e3d201b40747"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2138),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2139),
+                            Id = new Guid("3fec9393-5be4-4d9a-9e3f-08db3594aeb3"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7501),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7502),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Design and implement cloud computing solutions.\n- Manage infrastructure and data security in the cloud.\n- Optimize costs and system performance.\n\nCandidate Requirements:\n- Experience with AWS, Azure, or Google Cloud.\n- Programming skills and understanding of computer networks.\n- Graduate in IT or equivalent.",
+                            JobDescription = "Position Overview:\n- Design and implement cloud computing solutions.\n- Manage infrastructure and data security in the cloud.\n- Optimize costs and system performance.\n\nCandidate Requirements:\n- Experience with AWS, Azure, or Google Cloud.\n- Programming skills and understanding of computer networks.\n- Graduate in IT or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Đà Nẵng",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2138),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7502),
                             SalaryRange = "2500 - 3000",
                             Status = 0,
                             Title = "Cloud Engineer",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("2641b128-0308-43ae-ab5d-2a469b97fc48"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2141),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2142),
+                            Id = new Guid("57fe3f04-09f8-4ade-b881-71f975ff0cce"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7506),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7507),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Analyze and assess security risks.\n- Implement measures to protect information systems.\n- Monitor and respond to security incidents.\n\nCandidate Requirements:\n- Experience in cybersecurity.\n- Certifications such as CISSP or CEH are a plus.\n- Graduate in IT or equivalent.",
+                            JobDescription = "Position Overview:\n- Analyze and assess security risks.\n- Implement measures to protect information systems.\n- Monitor and respond to security incidents.\n\nCandidate Requirements:\n- Experience in cybersecurity.\n- Certifications such as CISSP or CEH are a plus.\n- Graduate in IT or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2141),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7506),
                             SalaryRange = "3000 - 3500",
                             Status = 0,
                             Title = "Cybersecurity Analyst",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("02e34f01-3c96-487f-acb5-d99d0e2606df"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2144),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2144),
+                            Id = new Guid("052892fd-40e9-47e9-ad18-a7079e8d774e"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7511),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7512),
                             IndustryId = 1,
-                            JobDescription = "Job Description:\n- Manage and maintain the company's databases.\n- Optimize query performance and data security.\n- Support users in accessing and using databases.\n\nCandidate Requirements:\n- Experience with SQL Server, MySQL, or Oracle.\n- Strong analytical and problem-solving skills.\n- Graduate in IT or equivalent.",
+                            JobDescription = "Position Overview:\n- Manage and maintain the company's databases.\n- Optimize query performance and data security.\n- Support users in accessing and using databases.\n\nCandidate Requirements:\n- Experience with SQL Server, MySQL, or Oracle.\n- Strong analytical and problem-solving skills.\n- Graduate in IT or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hà Nội",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2144),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7512),
                             SalaryRange = "2000 - 2500",
                             Status = 0,
                             Title = "Database Administrator",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("f4d6969d-a090-4dbb-a4aa-8b25c56480e2"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2147),
-                            ExpiredAt = new DateTime(2024, 11, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2147),
+                            Id = new Guid("25970497-903e-40f4-a2aa-f2f8bb3ef14d"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7516),
+                            ExpiredAt = new DateTime(2024, 11, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7517),
                             IndustryId = 2,
-                            JobDescription = "Job Description:\n- Plan and implement marketing campaigns.\n- Manage marketing budgets and report results.\n- Analyze market trends and customer needs.\n\nCandidate Requirements:\n- At least 3 years of experience in marketing.\n- Strong leadership and communication skills.\n- Graduate in marketing or equivalent.",
+                            JobDescription = "Position Overview:\n- Plan and implement marketing campaigns.\n- Manage marketing budgets and report results.\n- Analyze market trends and customer needs.\n\nCandidate Requirements:\n- At least 3 years of experience in marketing.\n- Strong leadership and communication skills.\n- Graduate in marketing or equivalent.",
                             JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2147),
+                            ModifiedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7516),
                             SalaryRange = "2500 - 3000",
                             Status = 0,
                             Title = "Marketing Manager",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         });
                 });
 
@@ -607,21 +607,21 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2007),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7306),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Full Time"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2009),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7309),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Part Time"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(2010),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7310),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Internship"
                         });
@@ -665,30 +665,30 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("687a0532-cdc8-49f4-ab4a-25ae6eab6438"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(1980),
+                            Id = new Guid("be695160-5698-4dda-8e0d-63f7fc7036f7"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7264),
                             Headline = "Admin Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("cf1c3d4e-6e07-43cd-b237-6f94366d466f")
+                            UserId = new Guid("7c9d1ddc-51e9-400e-9acb-e9e3ea0d1115")
                         },
                         new
                         {
-                            Id = new Guid("75a58bdb-3c38-4817-bde4-6979c0034739"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(1987),
+                            Id = new Guid("6fb1bcf4-a939-4781-a7e6-24cde1044757"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7270),
                             Headline = "Recruiter Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("69350bda-5910-4a19-98a9-90f4695b2975")
+                            UserId = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029")
                         },
                         new
                         {
-                            Id = new Guid("7851a8ec-b85c-47a5-a780-f9a5e85d97a2"),
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(1989),
+                            Id = new Guid("695cfb22-68ba-47fc-aaec-7715a146c7f2"),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7272),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("f7755a76-5c34-472c-a3c7-6e7b88c2ad4f")
+                            UserId = new Guid("e16702dc-edc3-4311-950a-5c78a273f377")
                         });
                 });
 
@@ -806,10 +806,10 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cf1c3d4e-6e07-43cd-b237-6f94366d466f"),
+                            Id = new Guid("7c9d1ddc-51e9-400e-9acb-e9e3ea0d1115"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fdefault_avatar.png?alt=media&token=8654c964-e226-4777-ac66-b60d4182d287",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(1951),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7213),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             FirstName = "Admin",
@@ -826,10 +826,10 @@ namespace WorkFlex.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("69350bda-5910-4a19-98a9-90f4695b2975"),
+                            Id = new Guid("2a05cb86-de0a-456e-aa0f-feb165433029"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fdefault_avatar.png?alt=media&token=8654c964-e226-4777-ac66-b60d4182d287",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(1954),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7223),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "recruiter@example.com",
                             FirstName = "Recruiter",
@@ -846,10 +846,10 @@ namespace WorkFlex.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f7755a76-5c34-472c-a3c7-6e7b88c2ad4f"),
+                            Id = new Guid("e16702dc-edc3-4311-950a-5c78a273f377"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fdefault_avatar.png?alt=media&token=8654c964-e226-4777-ac66-b60d4182d287",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
-                            CreatedAt = new DateTime(2024, 10, 25, 4, 2, 5, 375, DateTimeKind.Utc).AddTicks(1957),
+                            CreatedAt = new DateTime(2024, 10, 30, 9, 14, 40, 911, DateTimeKind.Utc).AddTicks(7227),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jobseeker@example.com",
                             FirstName = "Job",
