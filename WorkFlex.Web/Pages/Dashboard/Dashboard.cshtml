@@ -1,8 +1,10 @@
 ﻿@page
 @model WorkFlex.Web.Pages.Dashboard.DashboardModel
 @{
-    Layout = "_LayoutAdmin";
-    ViewData["Title"] = "Admin Dashboard";
+	Layout = "_LayoutAdmin";
+	ViewData["Title"] = "Admin Dashboard";
+
+	var data = Model.DashboardData;
 }
 
 <div class="container">
@@ -12,6 +14,71 @@
 				<!-- Dashboard Inner -->
 				<div class="sherah-dsinner">
 					<div class="row mg-top-10">
+						<div class="col-lg-3 col-md-6 col-12">
+							<!-- Progress Card -->
+							<div class="sherah-progress-card sherah-border sherah-default-bg mg-top-30">
+								<div class="sherah-progress-card__icon sherah-default-bg sherah-border">
+									<svg class="sherah-color1__fill" xmlns="http://www.w3.org/2000/svg" width="35.176" height="30.636" viewBox="0 0 35.176 30.636">
+										<g id="Group_1177" data-name="Group 1177" transform="translate(-207.977 -44.521)">
+											<path id="Path_253" data-name="Path 253" d="M218.474,150.774c3.084-3.627,11.1-3.619,14.16-.016.113-.172.217-.333.324-.493a4.348,4.348,0,0,1,3.515-2.1,12.57,12.57,0,0,1,3.269.165,4.445,4.445,0,0,1,3.4,4.375c.019,2.426.01,4.853,0,7.28a2.083,2.083,0,0,1-2.259,2.276c-1.808.022-3.617.016-5.425,0-.419,0-.63.082-.767.542a2.316,2.316,0,0,1-2.413,1.657c-1.579.019-3.159.006-4.739.006q-4.224,0-8.447,0a2.493,2.493,0,0,1-2.761-1.87.806.806,0,0,0-.625-.312c-1.739-.025-3.479-.012-5.219-.015-1.79,0-2.51-.716-2.511-2.482,0-2.289,0-4.578,0-6.868a4.633,4.633,0,0,1,4.607-4.8c.343-.014.687.007,1.03-.008A4.854,4.854,0,0,1,218.474,150.774Zm7.083,11.624c2.172,0,4.345,0,6.517,0,.424,0,.705-.08.7-.594-.023-1.966.05-3.937-.055-5.9a5.977,5.977,0,0,0-4.737-5.523,15.559,15.559,0,0,0-3.272-.2,6.2,6.2,0,0,0-6.351,6.325c-.023,1.692.02,3.385-.017,5.076-.014.644.219.826.836.818C221.3,162.381,223.431,162.4,225.558,162.4Zm15.5-2.242c0-2.623.055-5.2-.025-7.779a2.373,2.373,0,0,0-2.232-2.155,14.355,14.355,0,0,0-1.85-.035,2.591,2.591,0,0,0-2.6,3.3,21.233,21.233,0,0,1,.49,5.781c0,.287,0,.575,0,.885Zm-24.813,0c.014-.264.033-.486.035-.708a22.529,22.529,0,0,1,.495-5.987,2.59,2.59,0,0,0-2.632-3.277c-.457-.015-.915-.013-1.372,0a2.581,2.581,0,0,0-2.727,2.773c-.007,2.2,0,4.392,0,6.588,0,.2.021.4.033.612Z" transform="translate(0 -89.312)" />
+											<path id="Path_254" data-name="Path 254" d="M298.589,44.523a5.972,5.972,0,1,1-6.069,5.89A5.967,5.967,0,0,1,298.589,44.523Zm-.1,2.068a3.9,3.9,0,1,0,3.912,3.931A3.889,3.889,0,0,0,298.486,46.591Z" transform="translate(-72.929 0)" />
+											<path id="Path_255" data-name="Path 255" d="M224.343,84.1a3.77,3.77,0,1,1,3.749-3.755A3.764,3.764,0,0,1,224.343,84.1Zm-.03-2.066a1.7,1.7,0,1,0-1.693-1.7A1.688,1.688,0,0,0,224.313,82.03Z" transform="translate(-10.849 -27.636)" />
+											<path id="Path_256" data-name="Path 256" d="M400.423,76.561a3.769,3.769,0,1,1-3.855,3.644A3.755,3.755,0,0,1,400.423,76.561Zm1.613,3.752a1.7,1.7,0,1,0-1.67,1.719A1.685,1.685,0,0,0,402.036,80.312Z" transform="translate(-162.683 -27.637)" />
+										</g>
+									</svg>
+								</div>
+								<div class="sherah-progress-card__content">
+									<div class="sherah-progress-card__heading">
+										<span class="sherah-pcolor">Total Users</span>
+										<h4 class="sherah-progress-card__title"><b class="count-animate">@data!.TotalUser Users</b></h4>
+									</div>
+									<div class="sherah-progress-card__button">
+										<p class="sherah-progress-card__text sherah-color1">
+											<svg class="sherah-color1__fill" xmlns="http://www.w3.org/2000/svg" width="8.407" height="15.353" viewBox="0 0 8.407 15.353">
+												<g id="Arrow_Icon" data-name="Arrow Icon" transform="translate(-584.97 -306)">
+													<path id="Path_247" data-name="Path 247" d="M267.12,84.017c-.794.794-1.506,1.529-2.249,2.231a.7.7,0,0,1-1.2-.195.615.615,0,0,1,.177-.742q.744-.738,1.483-1.481.949-.949,1.9-1.9a.718.718,0,0,1,1.185-.016q1.659,1.653,3.311,3.312a.7.7,0,0,1,.077,1.067.718.718,0,0,1-1.069-.08c-.712-.708-1.422-1.418-2.206-2.2,0,.193,0,.312,0,.431q0,5.747.005,11.495c0,.076,0,.153,0,.229a.719.719,0,0,1-.689.8.71.71,0,0,1-.718-.8q-.008-3.406-.006-6.812,0-2.44,0-4.88C267.119,84.356,267.12,84.237,267.12,84.017Z" transform="translate(321.362 224.389)"></path>
+												</g>
+											</svg>
+											+80.00 %
+										</p>
+										<a href="#" class="sherah-see-all">See details</a>
+									</div>
+								</div>
+							</div>
+							<!-- End Progress Card -->
+						</div>
+						<div class="col-lg-3 col-md-6 col-12">
+							<!-- Progress Card -->
+							<div class="sherah-progress-card sherah-border sherah-default-bg mg-top-30">
+								<div class="sherah-progress-card__icon sherah-default-bg sherah-border">
+									<svg class="sherah-color4__fill" xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 35.176 30.636">
+										<g id="Icon" transform="translate(-319.516 -268.72)">
+											<path id="Path_221" data-name="Path 221" d="M340.751,385.008c.034.446.08.824.088,1.2a.755.755,0,0,1-.86.88q-6.792.005-13.585,0c-.619,0-.88-.279-.878-.907a7.668,7.668,0,0,1,12.323-5.909c.071.054.145.1.241.172a5.8,5.8,0,0,1,2.906-1.574,5.524,5.524,0,0,1,6.566,5.177c.016.69-.23.954-.916.956-1.775,0-3.549,0-5.324,0Zm-1.467.59a6.1,6.1,0,0,0-6.281-5.43c-3.108.1-6.1,2.872-5.9,5.43Zm-.127-4.139c.349.615.686,1.16.97,1.731a.524.524,0,0,0,.55.351c1.649-.013,3.3-.006,4.947-.008.117,0,.234-.019.394-.034a4.053,4.053,0,0,0-6.861-2.042Z" transform="translate(0 -94.43)" />
+											<path id="Path_222" data-name="Path 222" d="M363.308,278.9a4.192,4.192,0,1,1,4.144,4.208A4.177,4.177,0,0,1,363.308,278.9Zm1.472-.009a2.721,2.721,0,1,0,2.718-2.7A2.717,2.717,0,0,0,364.779,278.892Z" transform="translate(-34.322)" />
+											<path id="Path_223" data-name="Path 223" d="M474.686,302.114a3.121,3.121,0,1,1-3.123,3.119A3.121,3.121,0,0,1,474.686,302.114Zm1.649,3.123a1.651,1.651,0,1,0-1.665,1.648A1.652,1.652,0,0,0,476.335,305.237Z" transform="translate(-132.638 -24.879)" />
+										</g>
+									</svg>
+								</div>
+								<div class="sherah-progress-card__content">
+									<div class="sherah-progress-card__heading">
+										<span class="sherah-pcolor">Total Recruiters</span>
+										<h4 class="sherah-progress-card__title"><b class="count-animate">@data!.TotalRecruiter Recruiters</b></h4>
+									</div>
+									<div class="sherah-progress-card__button">
+										<p class="sherah-progress-card__text sherah-color4">
+											<svg class="sherah-color4__fill" xmlns="http://www.w3.org/2000/svg" width="8.407" height="15.353" viewBox="0 0 8.407 15.353">
+												<g id="Arrow_Icon" data-name="Arrow Icon" transform="translate(-584.97 -306)">
+													<path id="Path_247" data-name="Path 247" d="M267.12,84.017c-.794.794-1.506,1.529-2.249,2.231a.7.7,0,0,1-1.2-.195.615.615,0,0,1,.177-.742q.744-.738,1.483-1.481.949-.949,1.9-1.9a.718.718,0,0,1,1.185-.016q1.659,1.653,3.311,3.312a.7.7,0,0,1,.077,1.067.718.718,0,0,1-1.069-.08c-.712-.708-1.422-1.418-2.206-2.2,0,.193,0,.312,0,.431q0,5.747.005,11.495c0,.076,0,.153,0,.229a.719.719,0,0,1-.689.8.71.71,0,0,1-.718-.8q-.008-3.406-.006-6.812,0-2.44,0-4.88C267.119,84.356,267.12,84.237,267.12,84.017Z" transform="translate(321.362 224.389)"></path>
+												</g>
+											</svg>
+											+80.00 %
+										</p>
+										<a href="#" class="sherah-see-all">See details</a>
+									</div>
+								</div>
+							</div>
+							<!-- End Progress Card -->
+						</div>
 						<div class="col-lg-3 col-md-6 col-12">
 							<!-- Progress Card -->
 							<div class="sherah-progress-card sherah-border sherah-default-bg mg-top-30">
@@ -26,8 +93,8 @@
 								</div>
 								<div class="sherah-progress-card__content">
 									<div class="sherah-progress-card__heading">
-										<span class="sherah-pcolor">Total Sells</span>
-										<h4 class="sherah-progress-card__title"><b class="count-animate">$654.66k</b></h4>
+										<span class="sherah-pcolor">Total Jobs</span>
+										<h4 class="sherah-progress-card__title"><b class="count-animate">@data!.TotalJobPost Jobs</b></h4>
 									</div>
 									<div class="sherah-progress-card__button">
 										<p class="sherah-progress-card__text sherah-color3">
@@ -38,9 +105,8 @@
 											</svg>
 											+16.24 %
 										</p>
-										<a href="#" class="sherah-see-all">View net earnings</a>
+										<a href="#" class="sherah-see-all">See details</a>
 									</div>
-
 								</div>
 							</div>
 							<!-- End Progress Card -->
@@ -58,8 +124,8 @@
 								</div>
 								<div class="sherah-progress-card__content">
 									<div class="sherah-progress-card__heading">
-										<span class="sherah-pcolor">Total Orders</span>
-										<h4 class="sherah-progress-card__title"><b class="count-animate">$854.66k</b></h4>
+										<span class="sherah-pcolor">Total Applicants</span>
+										<h4 class="sherah-progress-card__title"><b class="count-animate">@data!.TotalApplicant Applicants</b></h4>
 									</div>
 									<div class="sherah-progress-card__button">
 										<p class="sherah-progress-card__text sherah-color2">
@@ -70,177 +136,43 @@
 											</svg>
 											+80.00 %
 										</p>
-										<a href="#" class="sherah-see-all">View all orders</a>
-									</div>
-
-								</div>
-							</div>
-							<!-- End Progress Card -->
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<!-- Progress Card -->
-							<div class="sherah-progress-card sherah-border sherah-default-bg mg-top-30">
-								<div class="sherah-progress-card__icon sherah-default-bg sherah-border">
-									<svg class="sherah-color1__fill" xmlns="http://www.w3.org/2000/svg" width="35.176" height="30.636" viewBox="0 0 35.176 30.636">
-										<g id="Group_1177" data-name="Group 1177" transform="translate(-207.977 -44.521)">
-											<path id="Path_253" data-name="Path 253" d="M218.474,150.774c3.084-3.627,11.1-3.619,14.16-.016.113-.172.217-.333.324-.493a4.348,4.348,0,0,1,3.515-2.1,12.57,12.57,0,0,1,3.269.165,4.445,4.445,0,0,1,3.4,4.375c.019,2.426.01,4.853,0,7.28a2.083,2.083,0,0,1-2.259,2.276c-1.808.022-3.617.016-5.425,0-.419,0-.63.082-.767.542a2.316,2.316,0,0,1-2.413,1.657c-1.579.019-3.159.006-4.739.006q-4.224,0-8.447,0a2.493,2.493,0,0,1-2.761-1.87.806.806,0,0,0-.625-.312c-1.739-.025-3.479-.012-5.219-.015-1.79,0-2.51-.716-2.511-2.482,0-2.289,0-4.578,0-6.868a4.633,4.633,0,0,1,4.607-4.8c.343-.014.687.007,1.03-.008A4.854,4.854,0,0,1,218.474,150.774Zm7.083,11.624c2.172,0,4.345,0,6.517,0,.424,0,.705-.08.7-.594-.023-1.966.05-3.937-.055-5.9a5.977,5.977,0,0,0-4.737-5.523,15.559,15.559,0,0,0-3.272-.2,6.2,6.2,0,0,0-6.351,6.325c-.023,1.692.02,3.385-.017,5.076-.014.644.219.826.836.818C221.3,162.381,223.431,162.4,225.558,162.4Zm15.5-2.242c0-2.623.055-5.2-.025-7.779a2.373,2.373,0,0,0-2.232-2.155,14.355,14.355,0,0,0-1.85-.035,2.591,2.591,0,0,0-2.6,3.3,21.233,21.233,0,0,1,.49,5.781c0,.287,0,.575,0,.885Zm-24.813,0c.014-.264.033-.486.035-.708a22.529,22.529,0,0,1,.495-5.987,2.59,2.59,0,0,0-2.632-3.277c-.457-.015-.915-.013-1.372,0a2.581,2.581,0,0,0-2.727,2.773c-.007,2.2,0,4.392,0,6.588,0,.2.021.4.033.612Z" transform="translate(0 -89.312)" />
-											<path id="Path_254" data-name="Path 254" d="M298.589,44.523a5.972,5.972,0,1,1-6.069,5.89A5.967,5.967,0,0,1,298.589,44.523Zm-.1,2.068a3.9,3.9,0,1,0,3.912,3.931A3.889,3.889,0,0,0,298.486,46.591Z" transform="translate(-72.929 0)" />
-											<path id="Path_255" data-name="Path 255" d="M224.343,84.1a3.77,3.77,0,1,1,3.749-3.755A3.764,3.764,0,0,1,224.343,84.1Zm-.03-2.066a1.7,1.7,0,1,0-1.693-1.7A1.688,1.688,0,0,0,224.313,82.03Z" transform="translate(-10.849 -27.636)" />
-											<path id="Path_256" data-name="Path 256" d="M400.423,76.561a3.769,3.769,0,1,1-3.855,3.644A3.755,3.755,0,0,1,400.423,76.561Zm1.613,3.752a1.7,1.7,0,1,0-1.67,1.719A1.685,1.685,0,0,0,402.036,80.312Z" transform="translate(-162.683 -27.637)" />
-										</g>
-									</svg>
-								</div>
-								<div class="sherah-progress-card__content">
-									<div class="sherah-progress-card__heading">
-										<span class="sherah-pcolor">Daily Visitors</span>
-										<h4 class="sherah-progress-card__title"><b class="count-animate">$987.21M</b></h4>
-									</div>
-									<div class="sherah-progress-card__button">
-										<p class="sherah-progress-card__text sherah-color1">
-											<svg class="sherah-color1__fill" xmlns="http://www.w3.org/2000/svg" width="8.407" height="15.353" viewBox="0 0 8.407 15.353">
-												<g id="Arrow_Icon" data-name="Arrow Icon" transform="translate(-584.97 -306)">
-													<path id="Path_247" data-name="Path 247" d="M267.12,84.017c-.794.794-1.506,1.529-2.249,2.231a.7.7,0,0,1-1.2-.195.615.615,0,0,1,.177-.742q.744-.738,1.483-1.481.949-.949,1.9-1.9a.718.718,0,0,1,1.185-.016q1.659,1.653,3.311,3.312a.7.7,0,0,1,.077,1.067.718.718,0,0,1-1.069-.08c-.712-.708-1.422-1.418-2.206-2.2,0,.193,0,.312,0,.431q0,5.747.005,11.495c0,.076,0,.153,0,.229a.719.719,0,0,1-.689.8.71.71,0,0,1-.718-.8q-.008-3.406-.006-6.812,0-2.44,0-4.88C267.119,84.356,267.12,84.237,267.12,84.017Z" transform="translate(321.362 224.389)"></path>
-												</g>
-											</svg>
-											+80.00 %
-										</p>
-										<a href="#" class="sherah-see-all">See details</a>
-									</div>
-
-								</div>
-							</div>
-							<!-- End Progress Card -->
-						</div>
-						<div class="col-lg-3 col-md-6 col-12">
-							<!-- Progress Card -->
-							<div class="sherah-progress-card sherah-border sherah-default-bg mg-top-30">
-								<div class="sherah-progress-card__icon sherah-default-bg sherah-border">
-									<svg class="sherah-color4__fill" xmlns="http://www.w3.org/2000/svg" width="35.176" height="30.636" viewBox="0 0 35.176 30.636">
-										<g id="Group_1177" data-name="Group 1177" transform="translate(-207.977 -44.521)">
-											<path id="Path_253" data-name="Path 253" d="M218.474,150.774c3.084-3.627,11.1-3.619,14.16-.016.113-.172.217-.333.324-.493a4.348,4.348,0,0,1,3.515-2.1,12.57,12.57,0,0,1,3.269.165,4.445,4.445,0,0,1,3.4,4.375c.019,2.426.01,4.853,0,7.28a2.083,2.083,0,0,1-2.259,2.276c-1.808.022-3.617.016-5.425,0-.419,0-.63.082-.767.542a2.316,2.316,0,0,1-2.413,1.657c-1.579.019-3.159.006-4.739.006q-4.224,0-8.447,0a2.493,2.493,0,0,1-2.761-1.87.806.806,0,0,0-.625-.312c-1.739-.025-3.479-.012-5.219-.015-1.79,0-2.51-.716-2.511-2.482,0-2.289,0-4.578,0-6.868a4.633,4.633,0,0,1,4.607-4.8c.343-.014.687.007,1.03-.008A4.854,4.854,0,0,1,218.474,150.774Zm7.083,11.624c2.172,0,4.345,0,6.517,0,.424,0,.705-.08.7-.594-.023-1.966.05-3.937-.055-5.9a5.977,5.977,0,0,0-4.737-5.523,15.559,15.559,0,0,0-3.272-.2,6.2,6.2,0,0,0-6.351,6.325c-.023,1.692.02,3.385-.017,5.076-.014.644.219.826.836.818C221.3,162.381,223.431,162.4,225.558,162.4Zm15.5-2.242c0-2.623.055-5.2-.025-7.779a2.373,2.373,0,0,0-2.232-2.155,14.355,14.355,0,0,0-1.85-.035,2.591,2.591,0,0,0-2.6,3.3,21.233,21.233,0,0,1,.49,5.781c0,.287,0,.575,0,.885Zm-24.813,0c.014-.264.033-.486.035-.708a22.529,22.529,0,0,1,.495-5.987,2.59,2.59,0,0,0-2.632-3.277c-.457-.015-.915-.013-1.372,0a2.581,2.581,0,0,0-2.727,2.773c-.007,2.2,0,4.392,0,6.588,0,.2.021.4.033.612Z" transform="translate(0 -89.312)" />
-											<path id="Path_254" data-name="Path 254" d="M298.589,44.523a5.972,5.972,0,1,1-6.069,5.89A5.967,5.967,0,0,1,298.589,44.523Zm-.1,2.068a3.9,3.9,0,1,0,3.912,3.931A3.889,3.889,0,0,0,298.486,46.591Z" transform="translate(-72.929 0)" />
-											<path id="Path_255" data-name="Path 255" d="M224.343,84.1a3.77,3.77,0,1,1,3.749-3.755A3.764,3.764,0,0,1,224.343,84.1Zm-.03-2.066a1.7,1.7,0,1,0-1.693-1.7A1.688,1.688,0,0,0,224.313,82.03Z" transform="translate(-10.849 -27.636)" />
-											<path id="Path_256" data-name="Path 256" d="M400.423,76.561a3.769,3.769,0,1,1-3.855,3.644A3.755,3.755,0,0,1,400.423,76.561Zm1.613,3.752a1.7,1.7,0,1,0-1.67,1.719A1.685,1.685,0,0,0,402.036,80.312Z" transform="translate(-162.683 -27.637)" />
-										</g>
-									</svg>
-								</div>
-								<div class="sherah-progress-card__content">
-									<div class="sherah-progress-card__heading">
-										<span class="sherah-pcolor">Daily Visitors</span>
-										<h4 class="sherah-progress-card__title"><b class="count-animate">$987.21M</b></h4>
-									</div>
-									<div class="sherah-progress-card__button">
-										<p class="sherah-progress-card__text sherah-color4">
-											<svg class="sherah-color4__fill" xmlns="http://www.w3.org/2000/svg" width="8.407" height="15.353" viewBox="0 0 8.407 15.353">
-												<g id="Arrow_Icon" data-name="Arrow Icon" transform="translate(-584.97 -306)">
-													<path id="Path_247" data-name="Path 247" d="M267.12,84.017c-.794.794-1.506,1.529-2.249,2.231a.7.7,0,0,1-1.2-.195.615.615,0,0,1,.177-.742q.744-.738,1.483-1.481.949-.949,1.9-1.9a.718.718,0,0,1,1.185-.016q1.659,1.653,3.311,3.312a.7.7,0,0,1,.077,1.067.718.718,0,0,1-1.069-.08c-.712-.708-1.422-1.418-2.206-2.2,0,.193,0,.312,0,.431q0,5.747.005,11.495c0,.076,0,.153,0,.229a.719.719,0,0,1-.689.8.71.71,0,0,1-.718-.8q-.008-3.406-.006-6.812,0-2.44,0-4.88C267.119,84.356,267.12,84.237,267.12,84.017Z" transform="translate(321.362 224.389)"></path>
-												</g>
-											</svg>
-											+80.00 %
-										</p>
 										<a href="#" class="sherah-see-all">See details</a>
 									</div>
 								</div>
 							</div>
 							<!-- End Progress Card -->
 						</div>
-
 					</div>
 
 					<div class="row sherah-gap-30">
-
-						<div class="col-lg-6 col-12">
-							<!-- Charts Two -->
-							<div class="charts-main sherah-default-bg charts-home-two sherah-border mg-top-30">
-								<div class="charts-main__heading  mg-btm-20 charts-main__heading--v2">
-									<h3 class="sherah-heading__title">Total sales</h3>
-									<div class="sherah-charts-tabs">
-										<!-- Tab List -->
-										<div class="sherah-charts-tabs__list list-group " id="list-tab" role="tablist">
-											<a class="list-group-item" data-bs-toggle="list" href="#sherah_tab1" role="tab" href="profile.html">7 Days</a>
-											<a class="list-group-item active" data-bs-toggle="list" href="#sherah_tab1" role="tab">Monthly</a>
-											<a class="list-group-item" data-bs-toggle="list" href="#sherah_tab1" role="tab">Yearly</a>
-										</div>
-									</div>
-									<!-- End Topbar -->
-								</div>
-								<div class="tab-content" id="nav-tabContent">
-									<div class="tab-pane fade show active" id="sherah_tab1" role="tabpanel" aria-labelledby="sherah_tab1">
-										<div class="sherah-chart__inside sherah-chart__total--sales">
-											<canvas id="myChart_Total_Sales_Home"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Charts Two -->
-							<div class="row">
-								<div class="col-lg-6 col-md-6 col-12">
-									<!-- Sherah Order Card -->
-									<div class="sherah-order-card sherah-default-bg sherah-border sherah-flex-between mg-top-30">
-										<div class="sherah-order-card__first">
-											<p class="sherah-order-card__text mg-btm-10">Active Creator <span class="sherah-bcolor">86,346</span></p>
-											<div class="sherah-chart__inside sherah-chart__inside--aorder">
-												<canvas id="myChart_active_creators"></canvas>
-											</div>
-										</div>
-										<div class="sherah-progress__single circle__one" data-value="0.115">
-										</div>
-									</div>
-									<!-- End Sherah Order Card -->
-								</div>
-								<div class="col-lg-6 col-md-6 col-12">
-									<!-- Sherah Order Card -->
-									<div class="sherah-order-card sherah-default-bg sherah-border sherah-flex-between mg-top-30">
-										<div class="sherah-order-card__first">
-											<p class="sherah-order-card__text mg-btm-10">Recent Order <span class="sherah-bcolor">135,86,346</span></p>
-											<div class="sherah-chart__inside sherah-chart__inside--aorder">
-												<canvas id="myChart_recent_orders"></canvas>
-											</div>
-										</div>
-										<div class="sherah-progress__single circle__two" data-value="0.115"></div>
-									</div>
-									<!-- End Sherah Order Card -->
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-12">
+						<div class="col-12">
 							<!-- Charts One -->
 							<div class="charts-main sherah-default-bg charts-home-two sherah-border mg-top-30">
 								<!-- Top Heading -->
 								<div class="charts-main__heading  mg-btm-20">
-									<h3 class="sherah-heading__title">Monthly Statistics</h3>
+									<h3 class="sherah-heading__title">Current Year Statistics</h3>
 								</div>
 								<div class="sherah-flex-between mg-btm-30">
 									<div class="charts-main__middle m-0">
 										<ul class="sherah-progress-list sherah-progress-list__bg sherah-progress-list__inline sherah-gap-50">
 											<li>
-												<span class="sherah-progress-list__color sherah-color4__bg"></span>
-												<p>Profit <span>13,570</span></p>
+												<span class="sherah-progress-list__color sherah-color1__bg"></span>
+												<p>Jobseekers<span id="total-user-month"></span></p>
 											</li>
 											<li>
-												<span class="sherah-progress-list__color sherah-color1__bg"></span>
-												<p>Refunds<span>455,877</span></p>
+												<span class="sherah-progress-list__color sherah-color4__bg"></span>
+												<p>Recruiters<span id="total-recruiter-month"></span></p>
 											</li>
 											<li>
 												<span class="sherah-progress-list__color sherah-color3__bg"></span>
-												<p>Expenses<span>455,877</span></p>
+												<p>Job Posts<span id="total-job-month"></span></p>
+											</li>
+											<li>
+												<span class="sherah-progress-list__color sherah-color2__bg"></span>
+												<p>Applicants<span id="total-applicant-month"></span></p>
 											</li>
 										</ul>
 									</div>
-									<!-- Chart Dropdown Menu -->
-									<div class="sherah-chart__dropdown sherah-chart__dropdown--bg">
-										<ul class="nav nav-tabs sherah-dropdown__list" id="nav-tab" role="tablist">
-											<li class="nav-item dropdown">
-												<a class="sherah-sidebar_btn sherah-offset-bg  sherah-border sherah-heading__tabs nav-link dropdown-toggle" onkeydown="javascript:void()" onmouseover="javascript:void(0)" onfocus="javascript:void(0)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Last 7 days <svg width="13" height="6" viewBox="0 0 13 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.7" d="M12.4124 0.247421C12.3327 0.169022 12.2379 0.106794 12.1335 0.0643287C12.0291 0.0218632 11.917 0 11.8039 0C11.6908 0 11.5787 0.0218632 11.4743 0.0643287C11.3699 0.106794 11.2751 0.169022 11.1954 0.247421L7.27012 4.07837C7.19045 4.15677 7.09566 4.219 6.99122 4.26146C6.88678 4.30393 6.77476 4.32579 6.66162 4.32579C6.54848 4.32579 6.43646 4.30393 6.33202 4.26146C6.22758 4.219 6.13279 4.15677 6.05312 4.07837L2.12785 0.247421C2.04818 0.169022 1.95338 0.106794 1.84895 0.0643287C1.74451 0.0218632 1.63249 0 1.51935 0C1.40621 0 1.29419 0.0218632 1.18975 0.0643287C1.08531 0.106794 0.990517 0.169022 0.910844 0.247421C0.751218 0.404141 0.661621 0.616141 0.661621 0.837119C0.661621 1.0581 0.751218 1.2701 0.910844 1.42682L4.84468 5.26613C5.32677 5.73605 5.98027 6 6.66162 6C7.34297 6 7.99647 5.73605 8.47856 5.26613L12.4124 1.42682C12.572 1.2701 12.6616 1.0581 12.6616 0.837119C12.6616 0.616141 12.572 0.404141 12.4124 0.247421Z"></path></svg></a>
-												<ul class="dropdown-menu sherah-sidebar_dropdown">
-													<a class="list-group-item" data-bs-toggle="list" data-bs-target="#sherah-chart__t1" role="tab">Last 15 Days</a>
-													<a class="list-group-item" data-bs-toggle="list" data-bs-target="#sherah-chart__t1" role="tab">Last 7 Days</a>
-													<a class="list-group-item" data-bs-toggle="list" data-bs-target="#sherah-chart__t1" role="tab">Last Month</a>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<!-- End Chart Dropdown Menu -->
 								</div>
 								<div class="charts-main__one">
 									<div class="tab-content" id="nav-tabContent">
@@ -250,405 +182,10 @@
 												<canvas id="myChart_one_monthly"></canvas>
 											</div>
 										</div>
-										<div class="tab-pane fade" id="sherah-chart__t1" role="tabpanel" aria-labelledby="sherah-chart__t1">
-											<div class="sherah-chart__inside sherah-chart__monthly--states">
-												<!-- Chart One -->
-												<canvas id="myChart_one_monthly"></canvas>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
 							<!-- End Charts One -->
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-12">
-							<div class="sherah-table sherah-default-bg sherah-border mg-top-30">
-								<div class="sherah-table__heading">
-									<h3 class="sherah-heading__title mb-0">Recent Orders</h3>
-								</div>
-								<!-- sherah Table -->
-								<table id="sherah-table__main" class="sherah-table__main sherah-table__main--front sherah-table__main-v1">
-									<!-- sherah Table Head -->
-									<thead class="sherah-table__head">
-										<tr>
-											<th class="sherah-table__column-1 sherah-table__h1">Order Id</th>
-											<th class="sherah-table__column-2 sherah-table__h2">Customer</th>
-											<th class="sherah-table__column-3 sherah-table__h3">Prodcut</th>
-											<th class="sherah-table__column-4 sherah-table__h4">Amount</th>
-											<th class="sherah-table__column-5 sherah-table__h5">Vendor</th>
-											<th class="sherah-table__column-7 sherah-table__h7">Status</th>
-										</tr>
-									</thead>
-									<!-- sherah Table Body -->
-									<tbody class="sherah-table__body">
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025417</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-1.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Alshan</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-1.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Leather bag</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$55.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Garikokar Fashion</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color2 sherah-color2__bg--opactity">Paid</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025418</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-2.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Gogdukh</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-2.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Fashion jeket</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$98.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Hamasto Fashion</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color3 sherah-color3__bg--opactity">Pending</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025419</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-3.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Nichara Jhon</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-3.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Cotton tops</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$60.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Technologies</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color1 sherah-color1__bg--opactity">Unpaid</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025420</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-4.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Aslihan Jaga</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-4.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Black half shirt</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$50.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Design Fashion </h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color3 sherah-color3__bg--opactity">Pending</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025421</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-5.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Nishachor</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-5.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Leather shoe</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$85.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Nihari Shoes</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color1 sherah-color1__bg--opactity">Unpaid</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025417</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-1.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Alshan</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-1.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Leather bag</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$55.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Garikokar Fashion</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color2 sherah-color2__bg--opactity">Paid</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025418</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-2.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Gogdukh</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-2.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Fashion jeket</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$98.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Hamasto Fashion</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color3 sherah-color3__bg--opactity">Pending</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025419</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-3.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Nichara Jhon</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-3.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Cotton tops</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$60.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Technologies</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color1 sherah-color1__bg--opactity">Unpaid</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025420</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-4.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Aslihan Jaga</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-4.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Black half shirt</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$50.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Design Fashion </h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color3 sherah-color3__bg--opactity">Pending</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="sherah-table__column-1 sherah-table__data-1">
-												<div class="sherah-table__product--id">
-													<p class="crany-table__product--number"><a href="#">#Kz025421</a></p>
-												</div>
-											</td>
-											<td class="sherah-table__column-2 sherah-table__data-2">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/customer-5.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Nishachor</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-3 sherah-table__data-3">
-												<div class="sherah-table__product">
-													<div class="sherah-table__product-img">
-														<img src="img/product-5.png" alt="#">
-													</div>
-													<div class="sherah-table__product-content">
-														<p class="sherah-table__product-desc">Leather shoe</p>
-													</div>
-												</div>
-											</td>
-											<td class="sherah-table__column-4 sherah-table__data-4">
-												<h5 class="sherah-table__inner--title">$85.00</h5>
-											</td>
-											<td class="sherah-table__column-5 sherah-table__data-5">
-												<h5 class="sherah-table__inner--title">Nihari Shoes</h5>
-											</td>
-											<td class="sherah-table__column-7 sherah-table__data-7">
-												<div class="sherah-table__status sherah-color1 sherah-color1__bg--opactity">Unpaid</div>
-											</td>
-										</tr>
-									</tbody>
-									<!-- End sherah Table Body -->
-								</table>
-								<!-- End sherah Table -->
-							</div>
 						</div>
 					</div>
 
@@ -674,20 +211,6 @@
 											</li>
 										</ul>
 									</div>
-									<!-- Chart Dropdown Menu -->
-									<div class="sherah-chart__dropdown sherah-chart__dropdown--bg">
-										<ul class="nav nav-tabs sherah-dropdown__list" id="nav-tab" role="tablist">
-											<li class="nav-item dropdown">
-												<a class="sherah-sidebar_btn sherah-offset-bg  sherah-border sherah-heading__tabs nav-link dropdown-toggle" onkeydown="javascript:void()" onmouseover="javascript:void(0)" onfocus="javascript:void(0)" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Last 7 days <svg width="13" height="6" viewBox="0 0 13 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.7" d="M12.4124 0.247421C12.3327 0.169022 12.2379 0.106794 12.1335 0.0643287C12.0291 0.0218632 11.917 0 11.8039 0C11.6908 0 11.5787 0.0218632 11.4743 0.0643287C11.3699 0.106794 11.2751 0.169022 11.1954 0.247421L7.27012 4.07837C7.19045 4.15677 7.09566 4.219 6.99122 4.26146C6.88678 4.30393 6.77476 4.32579 6.66162 4.32579C6.54848 4.32579 6.43646 4.30393 6.33202 4.26146C6.22758 4.219 6.13279 4.15677 6.05312 4.07837L2.12785 0.247421C2.04818 0.169022 1.95338 0.106794 1.84895 0.0643287C1.74451 0.0218632 1.63249 0 1.51935 0C1.40621 0 1.29419 0.0218632 1.18975 0.0643287C1.08531 0.106794 0.990517 0.169022 0.910844 0.247421C0.751218 0.404141 0.661621 0.616141 0.661621 0.837119C0.661621 1.0581 0.751218 1.2701 0.910844 1.42682L4.84468 5.26613C5.32677 5.73605 5.98027 6 6.66162 6C7.34297 6 7.99647 5.73605 8.47856 5.26613L12.4124 1.42682C12.572 1.2701 12.6616 1.0581 12.6616 0.837119C12.6616 0.616141 12.572 0.404141 12.4124 0.247421Z"></path></svg></a>
-												<ul class="dropdown-menu sherah-sidebar_dropdown">
-													<a class="list-group-item" data-bs-toggle="list" data-bs-target="#sherah-chart__rev" role="tab">Last 15 Days</a>
-													<a class="list-group-item" data-bs-toggle="list" data-bs-target="#sherah-chart__rev" role="tab">Last 7 Days</a>
-													<a class="list-group-item" data-bs-toggle="list" data-bs-target="#sherah-chart__rev" role="tab">Last Month</a>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<!-- End Chart Dropdown Menu -->
 								</div>
 								<div class="charts-main__three">
 									<div class="tab-content" id="nav-tabContent">
@@ -715,195 +238,6 @@
 							<!-- End Charts One -->
 						</div>
 					</div>
-
-					<div class="row">
-						<div class="col-12">
-							<div class="sherah-products sherah-default-bg sherah-border  mg-top-30">
-								<h4 class="sherah-heading__title">Top Products</h4>
-
-								<div class="sherah-product-slider">
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-1.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-2.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-3.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-4.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-5.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-6.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-									<!-- Sharah Product Card -->
-									<div class="sherah-product-card sherah-default-bg sherah-border mg-top-30">
-										<!-- Card Image -->
-										<div class="sherah-product-card__img">
-											<img src="img/product-slider-1.png">
-										</div>
-										<!-- Card Content -->
-										<div class="sherah-product-card__content sherah-dflex-column sherah-flex-gap-5">
-											<h4 class="sherah-product-card__title">
-												<a href="#" class="sherah-pcolor">Stylish <b>leather bag</b></a>
-											</h4>
-											<h5 class="sherah-product-card__price"><del>$150</del>$130</h5>
-											<div class="sherah-product-card__meta sherah-dflex sherah-flex-gap-30">
-												<div class="sherah-product-card__rating sherah-dflex sherah-flex-gap-5">
-													<span class="sherah-color4"><i class="fa fa-star"></i></span>51
-												</div>
-												<div class="sherah-product-card__sales sherah-pcolor sherah-dflex">
-													<svg class="sherah-offset__fill" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 5.961 10.425">
-														<path id="Path_467" data-name="Path 467" d="M-292.343,706.88c-.352-.119-.71-.222-1.055-.36a2.132,2.132,0,0,1-1.245-1.047,2.08,2.08,0,0,1,1.107-2.766,6.637,6.637,0,0,1,.989-.291,2.124,2.124,0,0,1,.218-.036c0-.238,0-.467,0-.7a.405.405,0,0,1,.42-.445.4.4,0,0,1,.4.44c0,.231,0,.461.006.692a.025.025,0,0,0,.005.013,6.038,6.038,0,0,1,.922.229,6.612,6.612,0,0,1,1.029.561.506.506,0,0,1,.141.745.539.539,0,0,1-.787.116,3.057,3.057,0,0,0-1.18-.524l-.11-.019a1.2,1.2,0,0,0-.019.146c0,.665,0,1.33,0,2,0,.137.054.178.175.219a9.93,9.93,0,0,1,1.14.425,1.969,1.969,0,0,1,1.2,2.07,2.109,2.109,0,0,1-1.415,1.935,9.979,9.979,0,0,1-1.1.292c0,.2,0,.418,0,.641a.4.4,0,0,1-.413.45.411.411,0,0,1-.412-.455c0-.2,0-.407,0-.611,0-.012-.009-.025,0-.012-.4-.092-.781-.161-1.154-.273a3.455,3.455,0,0,1-1.228-.7.543.543,0,0,1-.091-.791.508.508,0,0,1,.773-.057,3.382,3.382,0,0,0,1.6.714c.026,0,.053,0,.093.007Zm.859.271v2.342a1.27,1.27,0,0,0,1.3-1.2A1.312,1.312,0,0,0-291.484,707.152Zm-.856-1.53v-2.179a1.577,1.577,0,0,0-.912.345.878.878,0,0,0,0,1.4A6.98,6.98,0,0,0-292.34,705.622Z" transform="translate(294.936 -701.239)" />
-													</svg>Sales (60)
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Sharah Product Card -->
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
 				</div>
 				<!-- End Dashboard Inner -->
 			</div>
@@ -914,8 +248,6 @@
 @section Scripts {
 	<script>
 		$(document).ready(function () {
-
-
 			$('#sherah-map').vectorMap({
 				map: 'world_mill_en',
 				backgroundColor: 'transparent',
@@ -930,169 +262,88 @@
 					}
 				},
 				showTooltip: true,
-
 			});
-
-		});
-
-
-		$(".sherah-product-slider").slick({
-			autoplay: false,
-			speed: 800,
-			autoplaySpeed: 3500,
-			slidesToShow: 4,
-			pauseOnHover: true,
-			dots: false,
-			center: true,
-			arrows: true,
-			cssEase: 'ease',
-			margin: 30,
-			speed: 700,
-			draggable: true,
-			prevArrow: '<button class="Prev"><i class="fa-solid fa-angle-left"></i></button>',
-			nextArrow: '<button class="Next"><i class="fa-solid fa-angle-right"></i></button>',
-			responsive: [
-				{
-					breakpoint: 2000,
-					settings: {
-						slidesToShow: 6,
-					}
-				},
-				{
-					breakpoint: 1600,
-					settings: {
-						slidesToShow: 4,
-					}
-				},
-				{
-					breakpoint: 800,
-					settings: {
-						slidesToShow: 3,
-					}
-				},
-				{
-					breakpoint: 600,
-					settings: {
-						slidesToShow: 3,
-					}
-				},
-				{
-					breakpoint: 500,
-					settings: {
-						slidesToShow: 2,
-					}
-				},
-			]
 		});
 	</script>
-
 	<script>
-		new CircleProgress('.circle__one', {
-			max: 100,
-			value: 60,
+		// Get data for chart current year
+		const userData = @Html.Raw(Json.Serialize(data.TotalUserMonth));
+		const recruiterData = @Html.Raw(Json.Serialize(data.TotalRecruiterMonth));
+		const jobPostData = @Html.Raw(Json.Serialize(data.TotalJobPostMonth));
+		const applicantData = @Html.Raw(Json.Serialize(data.TotalApplicantMonth));
 
+		// Function to calculate the total from an array of numbers
+		const calculateTotal = (data) => data.reduce((sum, value) => sum + value, 0);
+
+		// Calculate totals for each category
+		const totals = {
+			user: calculateTotal(userData),
+			recruiter: calculateTotal(recruiterData),
+			job: calculateTotal(jobPostData),
+			applicant: calculateTotal(applicantData)
+		};
+
+		// Update the HTML span elements with the totals using jQuery
+		$.each(totals, (key, value) => {
+			$(`#total-${key}-month`).text(value.toLocaleString());
 		});
 
-		new CircleProgress('.circle__two', {
-			max: 100,
-			value: 60,
+		// Combine all data to find the maximum value
+		const allData = [...userData, ...recruiterData, ...jobPostData, ...applicantData];
+		const maxValue = Math.max(...allData);
+		const yAxisMaxValue = Math.floor(maxValue + 20);
 
-		});
-	</script>
-
-	<script>
-		// Chart One
+		// Chart Current Year Statics
 		const ctx = document.getElementById('myChart_one_monthly').getContext('2d');
 		const myChart_one_monthly = new Chart(ctx, {
 			type: 'bar',
-
 			data: {
-				labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'],
-				datasets: [{
-					label: 'Profit',
-					data: [90, 60, 85, 40, 75, 45, 95, 75, 45, 65, 35, 90, 40, 50, 30, 70],
-					backgroundColor: [
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-						'#F9C200',
-					],
-					fill: true,
-					tension: 0.4,
-					borderWidth: 0,
-					borderSkipped: false,
-					borderRadius: 4,
-					barPercentage: 0.7,
-					categoryPercentage: 0.5,
-				}, {
-					label: 'Profit',
-					data: [85, 55, 80, 45, 70, 50, 90, 60, 55, 60, 45, 85, 50, 60, 40, 65],
-					backgroundColor: [
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-						'#6176FE',
-					],
-					fill: true,
-					tension: 0.4,
-					borderWidth: 0,
-					borderSkipped: false,
-					borderRadius: 4,
-					barPercentage: 0.7,
-					categoryPercentage: 0.5,
-				}, {
-					label: 'Profit',
-					data: [90, 60, 85, 40, 75, 45, 95, 75, 45, 65, 35, 90, 40, 50, 30, 90],
-					backgroundColor: [
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-						'#09AD95',
-					],
-					fill: true,
-					tension: 0.4,
-					borderWidth: 0,
-					borderSkipped: false,
-					borderRadius: 4,
-					barPercentage: 0.7,
-					categoryPercentage: 0.5,
-				},
+				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				datasets: [
+					{
+						label: 'User',
+						data: userData,
+						backgroundColor: Array(12).fill('#6176FE'),
+						fill: true,
+						tension: 0.4,
+						borderWidth: 0,
+						borderRadius: 4,
+						barPercentage: 0.7,
+						categoryPercentage: 0.5,
+					},
+					{
+						label: 'Recruiter',
+						data: recruiterData,
+						backgroundColor: Array(12).fill('#F9C200'),
+						fill: true,
+						tension: 0.4,
+						borderWidth: 0,
+						borderRadius: 4,
+						barPercentage: 0.7,
+						categoryPercentage: 0.5,
+					},
+					{
+						label: 'Job Post',
+						data: jobPostData,
+						backgroundColor: Array(12).fill('#09AD95'),
+						fill: true,
+						tension: 0.4,
+						borderWidth: 0,
+						borderRadius: 4,
+						barPercentage: 0.7,
+						categoryPercentage: 0.5,
+					},
+					{
+						label: 'Applicant',
+						data: applicantData,
+						backgroundColor: Array(12).fill('#FF6767'),
+						fill: true,
+						tension: 0.4,
+						borderWidth: 0,
+						borderRadius: 4,
+						barPercentage: 0.7,
+						categoryPercentage: 0.5,
+					}
 				]
 			},
 			options: {
@@ -1101,27 +352,21 @@
 				responsive: true,
 				scales: {
 					x: {
-						ticks: {
-						},
-						grid: {
-							display: false,
-						},
-
+						ticks: {},
+						grid: { display: false }
 					},
 					y: {
+						min: 0,
+						max: yAxisMaxValue,
 						ticks: {
-							callback: function (value, index, values) {
-								return value + '%';
-							}
+							callback: value => value
 						},
 						grid: {
 							drawBorder: false,
 							color: '#c5c5c573',
 							borderDash: [10, 10]
-						},
-					},
-
-
+						}
+					}
 				},
 				plugins: {
 					tooltip: {
@@ -1133,316 +378,86 @@
 						titleFont: { weight: 'normal' },
 						bodyColor: '#2F3032',
 						cornerRadius: 12,
-						font: {
-							size: 14
-						},
+						font: { size: 14 },
 						caretSize: 9,
-						bodySpacing: 100,
-
+						bodySpacing: 100
 					},
-					legend: {
-						position: 'top',
-						display: false,
-					},
-					title: {
-						display: false,
-						text: 'Sell History'
-					}
+					legend: { position: 'top', display: false },
+					title: { display: false, text: 'Sell History' }
 				}
 			}
 		});
 		setInterval(() => {
-			if (document.body.classList.contains('active')) {
-				myChart_one_monthly.options.scales.y.grid.color = '#E2E7F11C ';
-			} else {
-				myChart_one_monthly.options.scales.y.grid.color = '#c5c5c573 ';
-			}
+			const color = document.body.classList.contains('active') ? '#E2E7F11C' : '#c5c5c573';
+			myChart_one_monthly.options.scales.y.grid.color = color;
 			myChart_one_monthly.update();
-		}, 500);
-
-
-		// Chart Two
-		const ctx_two = document.getElementById('myChart_Total_Sales_Home').getContext('2d');
-
-		const gradientBg = ctx_two.createLinearGradient(0, 0, 0, 190);
-
-		gradientBg.addColorStop(0, 'rgba(97, 118, 254, 0.43)');
-		gradientBg.addColorStop(1, 'rgba(97, 118, 254, 0)');
-		const myChart_Total_Sales_Home = new Chart(ctx_two, {
-			type: 'line',
-
-			data: {
-				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-				datasets: [{
-					label: 'Visitor',
-					data: [20, 15, 35, 45, 60, 45, 70, 50, 70, 70, 44, 50],
-					backgroundColor: gradientBg,
-					borderColor: '#6176FE',
-					pointRadius: 0,
-					tension: 0.5,
-					borderWidth: 6,
-					fill: true,
-					fillColor: '#fff',
-				}]
-			},
-
-			options: {
-
-				maintainAspectRatio: false,
-				responsive: true,
-				scales: {
-					x: {
-						grid: {
-							display: true,
-							color: '#c5c5c573',
-						},
-						suggestedMax: 80, suggestedMin: 80,
-
-					},
-					y: {
-						suggestedMax: 80, suggestedMin: 80,
-						grid: {
-							display: true,
-
-							color: '#c5c5c573',
-							borderDash: [10, 10]
-						},
-					},
-				},
-
-				plugins: {
-					legend: {
-						position: 'bottom',
-						display: false,
-					},
-					title: {
-						display: false,
-					}
-				}
-			}
-		});
-
-		setInterval(() => {
-			if (document.body.classList.contains('active')) {
-				myChart_Total_Sales_Home.options.scales.x.grid.color = '#E2E7F11C ';
-				myChart_Total_Sales_Home.options.scales.y.grid.color = '#E2E7F11C ';
-			} else {
-				myChart_Total_Sales_Home.options.scales.x.grid.color = '#c5c5c573 ';
-				myChart_Total_Sales_Home.options.scales.y.grid.color = '#c5c5c573 ';
-			}
-			myChart_Total_Sales_Home.update();
 		}, 500);
 
 		// Chart Revenue
 		const ctx_market = document.getElementById('myChart_Revenue').getContext('2d');
-
 		const myChart_Revenue = new Chart(ctx_market, {
 			type: 'line',
-
 			data: {
 				labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-				datasets: [{
-					label: 'Visitor',
-					data: [10, 15, 15, 90, 90, 45, 45, 45, 70, 70, 45, 45],
-					backgroundColor: 'transparent',
-					borderColor: '#F2C94C',
-					borderWidth: 5,
-					fill: true,
-					fillColor: '#fff',
-					tension: 0.5,
-					pointRadius: 0,
-				},
-				{
-					label: 'Sells',
-					data: [20, 86, 79, 30, 60, 45, 70, 50, 70, 30, 44, 50],
-					backgroundColor: 'transparent',
-					borderColor: '#09AD95',
-					borderWidth: 5,
-					fill: true,
-					tension: 0.5,
-					fillColor: '#fff',
-					fill: 'start',
-					pointRadius: 0,
-				},
-				{
-					label: 'Profit',
-					data: [20, 20, 79, 80, 60, 45, 70, 30, 20, 90, 44, 50],
-					backgroundColor: 'transparent',
-					borderColor: '#6176FE',
-					borderWidth: 5,
-					fill: true,
-					tension: 0.5,
-					fillColor: '#fff',
-					fill: 'start',
-					pointRadius: 0,
-				}]
+				datasets: [
+					{
+						label: 'Visitor',
+						data: [10, 15, 15, 90, 90, 45, 45, 45, 70, 70, 45, 45],
+						backgroundColor: 'transparent',
+						borderColor: '#F2C94C',
+						borderWidth: 5,
+						fill: true,
+						tension: 0.5,
+						pointRadius: 0,
+					},
+					{
+						label: 'Sells',
+						data: [20, 86, 79, 30, 60, 45, 70, 50, 70, 30, 44, 50],
+						backgroundColor: 'transparent',
+						borderColor: '#09AD95',
+						borderWidth: 5,
+						fill: true,
+						tension: 0.5,
+						pointRadius: 0,
+					},
+					{
+						label: 'Profit',
+						data: [20, 20, 79, 80, 60, 45, 70, 30, 20, 90, 44, 50],
+						backgroundColor: 'transparent',
+						borderColor: '#6176FE',
+						borderWidth: 5,
+						fill: true,
+						tension: 0.5,
+						pointRadius: 0,
+					}
+				]
 			},
-
 			options: {
 				maintainAspectRatio: false,
 				responsive: true,
 				scales: {
 					x: {
-						grid: {
-							display: true,
-							color: '#c5c5c573',
-						},
-						suggestedMax: 100, suggestedMin: 100,
-
+						grid: { display: true, color: '#c5c5c573' },
+						suggestedMax: 100,
+						suggestedMin: 100
 					},
 					y: {
-						suggestedMax: 100, suggestedMin: 100,
-						grid: {
-							display: true,
-
-							color: '#c5c5c573',
-							borderDash: [10, 10]
-						},
-					},
+						suggestedMax: 100,
+						suggestedMin: 100,
+						grid: { display: true, color: '#c5c5c573', borderDash: [10, 10] }
+					}
 				},
 				plugins: {
-					legend: {
-						position: 'top',
-						display: false,
-					},
-					title: {
-						display: false,
-						text: 'Sell History'
-					}
+					legend: { position: 'top', display: false },
+					title: { display: false, text: 'Sell History' }
 				}
 			}
 		});
-
 		setInterval(() => {
-			if (document.body.classList.contains('active')) {
-				myChart_Revenue.options.scales.y.grid.color = '#E2E7F11C ';
-				myChart_Revenue.options.scales.x.grid.color = '#E2E7F11C ';
-			} else {
-				myChart_Revenue.options.scales.y.grid.color = '#c5c5c573 ';
-				myChart_Revenue.options.scales.x.grid.color = '#c5c5c573 ';
-			}
+			const color = document.body.classList.contains('active') ? '#E2E7F11C' : '#c5c5c573';
+			myChart_Revenue.options.scales.y.grid.color = color;
+			myChart_Revenue.options.scales.x.grid.color = color;
 			myChart_Revenue.update();
 		}, 500);
-
-		// Chart Seven
-		const ctx_total_clients = document.getElementById('myChart_active_creators').getContext('2d');
-
-		const myChart_active_creators = new Chart(ctx_total_clients, {
-			type: 'line',
-
-			data: {
-				labels: ['1', '2', '3', '4', '5'],
-				datasets: [{
-					label: 'Total Clients',
-					data: [0, 10, 15, 10, 20],
-					borderColor: '#F9C200',
-					backgroundColor: 'transparent',
-					pointRadius: 0,
-					tension: 0.5,
-					borderWidth: 7,
-					fill: true,
-					fillColor: '#fff',
-				}]
-			},
-
-			options: {
-
-				maintainAspectRatio: false,
-				responsive: true,
-				scales: {
-					x: {
-						grid: {
-							display: false,
-							drawBorder: false,
-						},
-						ticks: {
-							display: false
-						},
-						suggestedMax: 10, suggestedMin: 30,
-
-					},
-
-					y: {
-						grid: {
-							display: false,
-							drawBorder: false,
-						},
-						ticks: {
-							display: false
-						},
-						suggestedMax: 10, suggestedMin: 30,
-					},
-				},
-
-				plugins: {
-					legend: {
-						display: false,
-					},
-					title: {
-						display: false,
-					}
-				}
-			}
-		});
-
-		const ctx_recent_orders = document.getElementById('myChart_recent_orders').getContext('2d');
-
-		const myChart_recent_orders = new Chart(ctx_recent_orders, {
-			type: 'line',
-
-			data: {
-				labels: ['1', '2', '3', '4', '5'],
-				datasets: [{
-					label: 'Total Clients',
-					data: [0, 10, 15, 10, 20],
-					borderColor: '#09AD95',
-					backgroundColor: 'transparent',
-					pointRadius: 0,
-					tension: 0.5,
-					borderWidth: 7,
-					fill: true,
-					fillColor: '#fff',
-				}]
-			},
-
-			options: {
-
-				maintainAspectRatio: false,
-				responsive: true,
-				scales: {
-					x: {
-						grid: {
-							display: false,
-							drawBorder: false,
-						},
-						ticks: {
-							display: false
-						},
-						suggestedMax: 10, suggestedMin: 30,
-
-					},
-
-					y: {
-						grid: {
-							display: false,
-							drawBorder: false,
-						},
-						ticks: {
-							display: false
-						},
-						suggestedMax: 10, suggestedMin: 30,
-					},
-				},
-
-				plugins: {
-					legend: {
-						display: false,
-					},
-					title: {
-						display: false,
-					}
-				}
-			}
-		});
 	</script>
 }
