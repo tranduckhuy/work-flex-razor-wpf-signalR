@@ -19,6 +19,16 @@ namespace WorkFlex.Infrastructure.Data
             var adminId = Guid.NewGuid();
             var recruiterId = Guid.NewGuid();
             var jobSeekerId = Guid.NewGuid();
+            var johnWeekId = Guid.NewGuid();
+            var huyId = Guid.NewGuid();
+            var sangId = Guid.NewGuid();
+            var quyId = Guid.NewGuid();
+            var haoId = Guid.NewGuid();
+            var thuanId = Guid.NewGuid();
+            var hoangId = Guid.NewGuid();
+            var thinhId = Guid.NewGuid();
+            var nghiaId = Guid.NewGuid();
+
             var defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fdefault_avatar.png?alt=media&token=8654c964-e226-4777-ac66-b60d4182d287";
             var defaultBgrImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10";
 
@@ -49,7 +59,7 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = defaultAvatar,
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = new DateTime(2024, 10, 15)
                 },
                 new User
                 {
@@ -63,7 +73,133 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = defaultAvatar,
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = new DateTime(2024, 12, 25)
+                },
+                new User
+                {
+                    Id = johnWeekId,
+                    Username = "johnweek",
+                    Password = "$2a$12$zWTkYvKaD2nrl/FIEzZvAus4fK1zT5kIk9U.IrzNxHZOzLxYzIYNe",
+                    FirstName = "John",
+                    LastName = "Week",
+                    Email = "johnweek@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 1, 15)
+                },
+                new User
+                {
+                    Id = huyId,
+                    Username = "tranduckhuy",
+                    Password = "$2a$12$MNV7kUVAks5PkB4cMD8cNuLvONZlKt/ej7.hCdRTGyj4F/csD8oKK",
+                    FirstName = "Tran Duck",
+                    LastName = "Huy",
+                    Email = "huy@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 2, 20)
+                },
+                new User
+                {
+                    Id = sangId,
+                    Username = "sang",
+                    Password = "$2a$12$CwxlScy8xNpcrGL/2sg7V.vDUC1zh.QOjZD1qefQgxmq3vn0Q7R9.",
+                    FirstName = "Tran Ngoc",
+                    LastName = "Sang",
+                    Email = "sang@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 3, 26)
+                },
+                new User
+                {
+                    Id = quyId,
+                    Username = "quy",
+                    Password = "$2a$12$O/urkLFsFi/GN9s0asTeZ.3YnvDozIBPXS5vpDbl6Kvz4RsxZYRIS",
+                    FirstName = "Nguyen Xuan",
+                    LastName = "Quy",
+                    Email = "quy@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 4, 3)
+                },
+                new User
+                {
+                    Id = haoId,
+                    Username = "hao",
+                    Password = "$2a$12$KcwDWaYdePFeLgKTwoJd7OQl6YCi9ZvCzdPDdt7lROYp2paxwpyGC",
+                    FirstName = "Nguyen Nhat",
+                    LastName = "Hao",
+                    Email = "hao@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 5, 25)
+                },
+                new User
+                {
+                    Id = thuanId,
+                    Username = "thuan",
+                    Password = "$2a$12$3hGHatEPOSTNLlvBEUMw.uxZMLNxLz74/Ls47cvbccwwlJlhFELqS",
+                    FirstName = "Nguyen Dao",
+                    LastName = "Minh Thuan",
+                    Email = "thuan@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 6, 24)
+                },
+                new User
+                {
+                    Id = hoangId,
+                    Username = "hoang",
+                    Password = "$2a$12$aYH6ji8QMczfCJxRGoBUqeTA7Ttk1JnanbTXBiafDDrrOQcy6hK7O",
+                    FirstName = "Ngo Gia",
+                    LastName = "Hoang",
+                    Email = "hoang@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 7, 15)
+                },
+                new User
+                {
+                    Id = thinhId,
+                    Username = "thinh",
+                    Password = "$2a$12$kzs6W6lPdNmhq9mAxWfov.FJAHD2YDQJgQ/oiDeeMo78LKzDExz2O",
+                    FirstName = "Gia",
+                    LastName = "Thinh",
+                    Email = "thinh@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 8, 15)
+                },
+                new User
+                {
+                    Id = nghiaId,
+                    Username = "nghia",
+                    Password = "$2a$12$zD2J2lknJ27rADmUbwJM9eSS0sX16W/FUw/xVx7XauSjOuxauzeZa",
+                    FirstName = "Trong",
+                    LastName = "Nghia",
+                    Email = "nghia@example.com",
+                    RoleId = 3,
+                    Avatar = defaultAvatar,
+                    BackgroundImg = defaultBgrImg,
+                    IsActive = true,
+                    CreatedAt = new DateTime(2024, 9, 11)
                 }
             );
 
@@ -71,7 +207,16 @@ namespace WorkFlex.Infrastructure.Data
             modelBuilder.Entity<Profile>().HasData(
                 new Profile { Id = Guid.NewGuid(), Headline = "Admin Profile", UserId = adminId },
                 new Profile { Id = Guid.NewGuid(), Headline = "Recruiter Profile", UserId = recruiterId },
-                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = jobSeekerId }
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = jobSeekerId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = johnWeekId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = huyId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = sangId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = quyId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = haoId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = thuanId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = hoangId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = thinhId },
+                new Profile { Id = Guid.NewGuid(), Headline = "Job Seeker Profile", UserId = nghiaId }
             );
 
             // Seed JobTypes
@@ -104,18 +249,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Web Developer",
                     SalaryRange = "1500 - 2000",
                     JobDescription = "Position Overview:\n" +
-                                  "- Develop and maintain web applications.\n" +
-                                  "- Participate in the design and product development process.\n" +
-                                  "- Optimize performance and security of web applications.\n\n" +
-                                  "Candidate Requirements:\n" +
-                                  "- Experience with HTML, CSS, JavaScript, and PHP.\n" +
-                                  "- Problem-solving skills and logical thinking.\n" +
-                                  "- Graduate in IT or equivalent.",
+                        "- Develop and maintain web applications.\n" +
+                        "- Participate in the design and product development process.\n" +
+                        "- Optimize performance and security of web applications.\n\n" +
+                        "Candidate Requirements:\n" +
+                        "- Experience with HTML, CSS, JavaScript, and PHP.\n" +
+                        "- Problem-solving skills and logical thinking.\n" +
+                        "- Graduate in IT or equivalent.",
                     JobLocation = "Tòa nhà A, Số 12, Phố Nguyễn Trãi, Quận Thanh Xuân, Hải Phòng",
                     UserId = recruiterId,
                     IndustryId = 1,
                     JobTypeId = 2,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 1, 15),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -126,18 +271,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Data Analyst",
                     SalaryRange = "2000 - 2500",
                     JobDescription = "Position Overview:\n" +
-                                    "- Analyze data and create reports for management.\n" +
-                                    "- Use analytical tools to detect data trends.\n" +
-                                    "- Collaborate with other departments to improve processes based on data.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience with Excel, SQL, and data analysis tools.\n" +
-                                    "- Communication and data presentation skills.\n" +
-                                    "- Graduate in statistics, mathematics, or equivalent.",
+                                     "- Analyze data and create reports for management.\n" +
+                                     "- Use analytical tools to detect data trends.\n" +
+                                     "- Collaborate with other departments to improve processes based on data.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Experience with Excel, SQL, and data analysis tools.\n" +
+                                     "- Communication and data presentation skills.\n" +
+                                     "- Graduate in statistics, mathematics, or equivalent.",
                     JobLocation = "Văn phòng 5, Số 23, Phố Lê Duẩn, Quận Hải Châu, Đà Nẵng",
                     UserId = recruiterId,
                     IndustryId = 2,
-                    JobTypeId = 1,
-                    CreatedAt = DateTime.UtcNow,
+                    JobTypeId = 2,
+                    CreatedAt = new DateTime(2024, 2, 10),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -148,18 +293,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "UX/UI Designer",
                     SalaryRange = "1800 - 2200",
                     JobDescription = "Position Overview:\n" +
-                                    "- Design user interfaces for applications and websites.\n" +
-                                    "- Research and analyze user needs to improve experiences.\n" +
-                                    "- Create design prototypes and collaborate with development teams.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience with Figma, Sketch, or Adobe XD.\n" +
-                                    "- Good communication and teamwork skills.\n" +
-                                    "- Graduate in design or equivalent.",
+                                     "- Design user interfaces for applications and websites.\n" +
+                                     "- Research and analyze user needs to improve experiences.\n" +
+                                     "- Create design prototypes and collaborate with development teams.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Experience with Figma, Sketch, or Adobe XD.\n" +
+                                     "- Good communication and teamwork skills.\n" +
+                                     "- Graduate in design or equivalent.",
                     JobLocation = "Tầng 2, Số 45, Phố Lê Lai, Quận 1, Hồ Chí Minh",
                     UserId = recruiterId,
                     IndustryId = 1,
                     JobTypeId = 2,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 3, 5),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -170,18 +315,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "HR Manager",
                     SalaryRange = "2500 - 3000",
                     JobDescription = "Position Overview:\n" +
-                                    "- Manage the recruitment and training processes for new employees.\n" +
-                                    "- Develop HR policies and manage performance.\n" +
-                                    "- Advise management on HR-related issues.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- At least 3 years of experience in a similar position.\n" +
-                                    "- Strong communication and leadership skills.\n" +
-                                    "- Graduate in human resource management or equivalent.",
+                                     "- Manage the recruitment and training processes for new employees.\n" +
+                                     "- Develop HR policies and manage performance.\n" +
+                                     "- Advise management on HR-related issues.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- At least 3 years of experience in a similar position.\n" +
+                                     "- Strong communication and leadership skills.\n" +
+                                     "- Graduate in human resource management or equivalent.",
                     JobLocation = "Văn phòng 3, Số 78, Phố Nguyễn Trãi, Quận Thanh Xuân, Hà Nội",
                     UserId = recruiterId,
                     IndustryId = 2,
                     JobTypeId = 1,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 4, 12),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -192,18 +337,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Graphic Designer",
                     SalaryRange = "1200 - 1500",
                     JobDescription = "Position Overview:\n" +
-                                    "- Design graphic products for marketing campaigns.\n" +
-                                    "- Collaborate with other departments to create creative content.\n" +
-                                    "- Maintain the company’s brand and design style.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience with Adobe Illustrator, Photoshop.\n" +
-                                    "- Creative thinking and ability to work under pressure.\n" +
-                                    "- Graduate in graphic design or equivalent.",
+                                     "- Design graphic products for marketing campaigns.\n" +
+                                     "- Collaborate with other departments to create creative content.\n" +
+                                     "- Maintain the company’s brand and design style.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Experience with Adobe Illustrator, Photoshop.\n" +
+                                     "- Creative thinking and ability to work under pressure.\n" +
+                                     "- Graduate in graphic design or equivalent.",
                     JobLocation = "Tầng trệt, Số 92, Phố Võ Văn Kiệt, Quận 1, Hồ Chí Minh",
                     UserId = recruiterId,
                     IndustryId = 8,
                     JobTypeId = 2,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 5, 8),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -214,18 +359,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Content Writer",
                     SalaryRange = "1000 - 1500",
                     JobDescription = "Position Overview:\n" +
-                                    "- Write content for blogs, websites, and social media.\n" +
-                                    "- Research and develop new content topics.\n" +
-                                    "- Optimize content for SEO.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Good writing and editing skills.\n" +
-                                    "- Experience in content writing is a plus.\n" +
-                                    "- Graduate in journalism, communication, or equivalent.",
+                                     "- Write content for blogs, websites, and social media.\n" +
+                                     "- Research and develop new content topics.\n" +
+                                     "- Optimize content for SEO.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Good writing and editing skills.\n" +
+                                     "- Experience in content writing is a plus.\n" +
+                                     "- Graduate in journalism, communication, or equivalent.",
                     JobLocation = "Văn phòng 10, Số 56, Phố Nguyễn Thị Minh Khai, Quận Hải Châu, Đà Nẵng",
                     UserId = recruiterId,
                     IndustryId = 8,
                     JobTypeId = 2,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 6, 25),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -236,18 +381,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Sales Executive",
                     SalaryRange = "2000 - 2500",
                     JobDescription = "Position Overview:\n" +
-                                    "- Seek and develop new customers.\n" +
-                                    "- Conduct calls and meet clients to introduce products.\n" +
-                                    "- Achieve monthly sales targets.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience in sales.\n" +
-                                    "- Good communication and persuasion skills.\n" +
-                                    "- University graduate in business or equivalent.",
+                                     "- Seek and develop new customers.\n" +
+                                     "- Conduct calls and meet clients to introduce products.\n" +
+                                     "- Achieve monthly sales targets.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Experience in sales.\n" +
+                                     "- Good communication and persuasion skills.\n" +
+                                     "- University graduate in business or equivalent.",
                     JobLocation = "Văn phòng 4, Số 150, Phố Trần Hưng Đạo, Quận 5, Hồ Chí Minh",
                     UserId = recruiterId,
                     IndustryId = 4,
                     JobTypeId = 2,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 7, 20),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -258,40 +403,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Network Engineer",
                     SalaryRange = "2500 - 3000",
                     JobDescription = "Position Overview:\n" +
-                                    "- Design and implement computer networks.\n" +
-                                    "- Monitor and maintain network systems.\n" +
-                                    "- Troubleshoot network-related issues.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience with networking equipment.\n" +
-                                    "- CCNA certification is a plus.\n" +
-                                    "- Graduate in IT or equivalent.",
+                                     "- Design and implement computer networks.\n" +
+                                     "- Monitor and maintain network systems.\n" +
+                                     "- Troubleshoot network-related issues.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Experience with networking equipment.\n" +
+                                     "- CCNA certification is a plus.\n" +
+                                     "- Graduate in IT or equivalent.",
                     JobLocation = "Tòa nhà B, Số 34, Phố Lê Văn Sỹ, Quận 3, Hà Nội",
                     UserId = recruiterId,
                     IndustryId = 1,
                     JobTypeId = 1,
-                    CreatedAt = DateTime.UtcNow,
-                    ModifiedAt = DateTime.UtcNow,
-                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
-                    Status = Status.Active
-                },
-                new JobPost
-                {
-                    Id = Guid.NewGuid(),
-                    Title = "SEO Specialist",
-                    SalaryRange = "1500 - 2000",
-                    JobDescription = "Position Overview:\n" +
-                                    "- Optimize websites to improve search engine rankings.\n" +
-                                    "- Research and analyze keywords.\n" +
-                                    "- Monitor and report on SEO performance.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience in SEO.\n" +
-                                    "- Good analytical and problem-solving skills.\n" +
-                                    "- Graduate in marketing or equivalent.",
-                    JobLocation = "Văn phòng 7, Số 88, Phố Nguyễn Đình Chiểu, Quận 1, Đà Nẵng",
-                    UserId = recruiterId,
-                    IndustryId = 8,
-                    JobTypeId = 1,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 8, 11),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -302,18 +425,18 @@ namespace WorkFlex.Infrastructure.Data
                     Title = "Product Manager",
                     SalaryRange = "3000 - 3500",
                     JobDescription = "Position Overview:\n" +
-                                    "- Responsible for product development and management.\n" +
-                                    "- Coordinate with departments to ensure product timelines.\n" +
-                                    "- Research market trends and analyze customer needs.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- At least 3 years of experience in product management.\n" +
-                                    "- Strong leadership and communication skills.\n" +
-                                    "- Graduate in business management or equivalent.",
-                    JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
+                                     "- Responsible for product development and management.\n" +
+                                     "- Coordinate with departments to ensure product timelines.\n" +
+                                     "- Research market trends and analyze customer needs.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- At least 3 years of experience in product management.\n" +
+                                     "- Strong leadership and communication skills.\n" +
+                                     "- Graduate in business or marketing.",
+                    JobLocation = "Tòa nhà D, Số 80, Phố Trần Phú, Quận Hà Đông, Hải Phòng",
                     UserId = recruiterId,
-                    IndustryId = 2,
+                    IndustryId = 3,
                     JobTypeId = 1,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 9, 14),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -321,21 +444,21 @@ namespace WorkFlex.Infrastructure.Data
                 new JobPost
                 {
                     Id = Guid.NewGuid(),
-                    Title = "Software Tester",
-                    SalaryRange = "1500 - 1800",
+                    Title = "Full-stack Developer",
+                    SalaryRange = "3000 - 5000",
                     JobDescription = "Position Overview:\n" +
-                                    "- Perform software testing to ensure product quality.\n" +
-                                    "- Analyze and report bugs.\n" +
-                                    "- Collaborate with development engineers to improve testing processes.\n\n" +
-                                    "Candidate Requirements:\n" +
-                                    "- Experience in software testing.\n" +
-                                    "- Understanding of software development processes.\n" +
-                                    "- Graduate in IT or equivalent.",
-                    JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hà Nội",
+                                     "- Develop both frontend and backend web applications.\n" +
+                                     "- Collaborate with design and product teams.\n" +
+                                     "- Optimize code and application performance.\n\n" +
+                                     "Candidate Requirements:\n" +
+                                     "- Experience with React, Node.js, and databases.\n" +
+                                     "- Ability to manage both frontend and backend tasks.\n" +
+                                     "- Graduate in IT or equivalent.",
+                    JobLocation = "Tòa nhà C, Số 65, Phố Trần Duy Hưng, Quận Cầu Giấy, Hà Nội",
                     UserId = recruiterId,
                     IndustryId = 1,
                     JobTypeId = 1,
-                    CreatedAt = DateTime.UtcNow,
+                    CreatedAt = new DateTime(2024, 11, 5),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
@@ -356,7 +479,7 @@ namespace WorkFlex.Infrastructure.Data
                     JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                     UserId = recruiterId,
                     IndustryId = 4,
-                    JobTypeId = 1,
+                    JobTypeId = 2,
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
@@ -378,7 +501,7 @@ namespace WorkFlex.Infrastructure.Data
                     JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                     UserId = recruiterId,
                     IndustryId = 8,
-                    JobTypeId = 1,
+                    JobTypeId = 2,
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
@@ -466,7 +589,7 @@ namespace WorkFlex.Infrastructure.Data
                     JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Đà Nẵng",
                     UserId = recruiterId,
                     IndustryId = 1,
-                    JobTypeId = 1,
+                    JobTypeId = 2,
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
@@ -510,7 +633,7 @@ namespace WorkFlex.Infrastructure.Data
                     JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hà Nội",
                     UserId = recruiterId,
                     IndustryId = 1,
-                    JobTypeId = 1,
+                    JobTypeId = 3,
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
@@ -532,8 +655,30 @@ namespace WorkFlex.Infrastructure.Data
                     JobLocation = "Văn phòng 2, Số 100, Phố Trần Nhân Tông, Quận 3, Hồ Chí Minh",
                     UserId = recruiterId,
                     IndustryId = 2,
-                    JobTypeId = 1,
+                    JobTypeId = 3,
                     CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
+                    ExpiredAt = DateTime.UtcNow.AddMonths(1),
+                    Status = Status.Active
+                },
+                new JobPost
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Content Strategist",
+                    SalaryRange = "1500 - 2200",
+                    JobDescription = "Position Overview:\n" +
+                         "- Plan and oversee content strategies for branding.\n" +
+                         "- Coordinate with writers and designers for content creation.\n" +
+                         "- Analyze audience insights to improve content.\n\n" +
+                         "Candidate Requirements:\n" +
+                         "- Strong writing and editorial skills.\n" +
+                         "- Experience in content strategy or journalism.\n" +
+                         "- Graduate in communication or marketing.",
+                    JobLocation = "Văn phòng 7, Số 11, Phố Lê Lợi, Quận 1, Đà Nẵng",
+                    UserId = recruiterId,
+                    IndustryId = 8,
+                    JobTypeId = 3,
+                    CreatedAt = new DateTime(2024, 9, 28),
                     ModifiedAt = DateTime.UtcNow,
                     ExpiredAt = DateTime.UtcNow.AddMonths(1),
                     Status = Status.Active
