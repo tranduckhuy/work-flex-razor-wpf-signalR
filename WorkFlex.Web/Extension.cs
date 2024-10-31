@@ -29,9 +29,10 @@ namespace WorkFlex.Web
             services.AddScoped<IJobRepository, JobRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IJobApplyRepository, JobApplyRepository>();
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
 
-            // Helpers Register
-            services.AddScoped<IEmailHelper, EmailHelper>();
+			// Helpers Register
+			services.AddScoped<IEmailHelper, EmailHelper>();
             services.AddScoped<IJobFilterHelper, JobFilterHelper>();
             services.AddScoped<IAddressHelper, AddressHelper>();
 
@@ -41,8 +42,9 @@ namespace WorkFlex.Web
             services.AddScoped<IJobService, JobService>();
             services.AddScoped<IConversationService, ConversationService>();
             services.AddScoped<IJobApplyService, JobApplyService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
-            return services;
+			return services;
         }
     }
 }
