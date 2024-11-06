@@ -6,7 +6,6 @@ namespace WorkFlex.Payment.Utils.Helpers
     {
         public static string HmacSHA256(string data, string key)
         {
-            var hash = new StringBuilder();
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] dataBytes = Encoding.UTF8.GetBytes(data);
             using (var hmacSha256 = new System.Security.Cryptography.HMACSHA256(keyBytes))

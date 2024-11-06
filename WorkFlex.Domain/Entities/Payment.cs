@@ -2,7 +2,7 @@
 {
     public class Payment
     {
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string PaymentContent { get; set; } = string.Empty;
         public string PaymentCurrency { get; set; } = string.Empty;
         public string PaymentRefId { get; set; } = string.Empty;

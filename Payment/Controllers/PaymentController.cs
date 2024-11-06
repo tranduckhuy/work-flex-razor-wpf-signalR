@@ -12,12 +12,10 @@ namespace Payment.Controllers
     public class PaymentController : BaseController
     {
         private readonly IPaymentService _paymentService;
-        private readonly MomoConfig _momoConfig;
 
-        public PaymentController(IPaymentService paymentService, IOptions<MomoConfig> momoConfig)
+        public PaymentController(IPaymentService paymentService)
         {
             _paymentService = paymentService;
-            _momoConfig = momoConfig.Value;
         }
 
         /// <summary>
