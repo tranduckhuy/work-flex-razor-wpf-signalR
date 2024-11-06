@@ -53,5 +53,6 @@ namespace WorkFlex.Domain.Entities
         public virtual ICollection<Conversation> ConversationsAsUserTwo { get; set; } = [];
         public virtual ICollection<ConversationReply> ConversationReplies { get; set; } = [];
         public virtual ICollection<JobApplication> JobApplications { get; set; } = [];
+        public virtual ICollection<Payment> Payments { get; set; } = [];
     }
 }
