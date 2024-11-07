@@ -1,15 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using WorkFlex.Payment.Configs.Momo;
+using System.Net;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
 using WorkFlex.Payment.Services;
-using System.Net;
-using Microsoft.AspNetCore.Components.Forms;
-using WorkFlex.Payment.Configs.Responses;
 using WorkFlex.Payment.Utils.Extensions;
-using WorkFlex.Payment.Utils.Mappers;
 
 namespace Payment.Controllers
 {

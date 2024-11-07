@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using WorkFlex.Payment.Configs.Responses;
 using WorkFlex.Payment.Utils.Helpers;
 using System.Text;
 using System.Text.Json;
+using WorkFlex.Payment.Configs.Momo.Responses;
 
-namespace WorkFlex.Payment.Configs.Requests
+namespace WorkFlex.Payment.Configs.Momo.Requests
 {
     public class MomoOneTimePaymentRequest
     {

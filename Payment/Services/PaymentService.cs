@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
-using WorkFlex.Payment.Configs.Requests;
+using WorkFlex.Payment.Configs.Momo.Requests;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;

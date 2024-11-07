@@ -1,4 +1,4 @@
-﻿namespace WorkFlex.Payment.Configs.Responses
+﻿namespace WorkFlex.Payment.Configs.Momo.Responses
 {
     public class MomoOneTimePaymentCreateLinkResponse
     {
