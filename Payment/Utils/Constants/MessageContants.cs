@@ -7,5 +7,6 @@
         public const string Error = "An error occurred";
         public const string Exception = "Exception";
         public const string Success = "Success";
+        public const string OK = "OK";
     }
 }

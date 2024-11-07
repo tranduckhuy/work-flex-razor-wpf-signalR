@@ -7,5 +7,6 @@ namespace WorkFlex.Payment.Services
     public interface IPaymentService
     {
         Task<ApiResponse<PaymentLinkDtos>> CreatePayment(CreatePaymentRequest request);
+        Task<ApiResponse<(PaymentReturnDto, string)>> ProcessMomoPaymentReturn(MomoOneTimePaymentResultRequest request);
     }
 }

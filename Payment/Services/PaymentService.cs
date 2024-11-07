@@ -49,9 +49,9 @@ namespace WorkFlex.Payment.Services
                                 Amount = (long)request.RequiredAmount,
                                 OrderId = paymentId.ToString(),
                                 OrderInfo = request.PaymentContent,
-                                RedirectUrl = _momoConfig.ReturnUrl,
+                                RedirectUrl = _momoConfig.RedirectUrl,
                                 IpnUrl = _momoConfig.IpnUrl,
-                                RequestType = RequestType.CaptureWallet
+                                RequestType = RequestType.PayWithATM
                             };
 
                             momoPayment.MakeSignature(_momoConfig.AccessKey, _momoConfig.SecretKey);
@@ -64,6 +64,7 @@ namespace WorkFlex.Payment.Services
                             else
                             {
                                 result.Set(false, message);
+                                return result;
                             }
 
                             break;
@@ -106,6 +107,63 @@ namespace WorkFlex.Payment.Services
                         Code = "Sql",
                         Message = "Insert payment failed"
                     });
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Set(false, MessageContants.Error);
+                result.Errors.Add(new BaseError()
+                {
+                    Code = MessageContants.Exception,
+                    Message = ex.Message
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessMomoPaymentReturn(MomoOneTimePaymentResultRequest request)
+        {
+            string redirectWebUrl = _momoConfig.RedirectWebUrl;
+            var result = new ApiResponse<(PaymentReturnDto, string)>();
+            result.Success = false;
+
+            try
+            {
+                var resultData = new PaymentReturnDto();
+                var isValidSignature = request.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey);
+
+                Guid paymentId = Guid.Empty;
+
+                if (isValidSignature && Guid.TryParse(request.OrderId, out paymentId))
+                {
+                    var payment = _context.Payments.FirstOrDefault(p => p.Id == paymentId);
+
+                    if (payment != null)
+                    {
+
+                        if (request.ResultCode == 0)
+                        {
+                            payment.IsPaid = request.ResultCode == 0;
+                            await _context.SaveChangesAsync();
+
+                            resultData.PaymentStatus = "00";
+                            resultData.PaymentId = payment.Id.ToString();
+                            resultData.Signature = Guid.NewGuid().ToString();
+
+                            result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
+                        }
+                        else
+                        {
+                            resultData.PaymentStatus = "10";
+                            resultData.PaymentMessage = "Payment process failed";
+                        }
+                    }
+                }
+                else
+                {
+                    resultData.PaymentStatus = "11";
+                    resultData.PaymentMessage = "Can't find payment at payment service or Invalid signature in response";
                 }
             }
             catch (Exception ex)
