@@ -152,153 +152,115 @@ namespace WorkFlex.Payment.Services
 
         public async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessMomoPaymentReturn(MomoOneTimePaymentResultRequest request)
         {
-            string redirectWebUrl = _momoConfig.RedirectWebUrl;
-            var result = new ApiResponse<(PaymentReturnDto, string)>() { Success = false };
-            var resultData = new PaymentReturnDto();
-
-            try
-            {
-                if (!request.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey) ||
-                    !Guid.TryParse(request.OrderId, out Guid paymentId))
-                {
-                    return CreateErrorResponse(result, resultData, "11", "Can't find payment at payment service or Invalid signature in response");
-                }
-
-                var payment = await _context.Payments.FindAsync(paymentId);
-                if (payment == null)
-                {
-                    return CreateErrorResponse(result, resultData, "11", "Payment not found");
-                }
-
-                if (request.ResultCode != 0)
-                {
-                    return CreateErrorResponse(result, resultData, "10", "Payment process failed");
-                }
-
-                payment.IsPaid = true;
-                await _context.SaveChangesAsync();
-
-                var user = await _context.Users.FindAsync(payment.UserId);
-                if (user != null)
-                {
-                    user.SubscriptionType = SubscriptionType.Premium;
-                    await _context.SaveChangesAsync();
-                }
-
-                resultData.PaymentStatus = "00";
-                resultData.PaymentId = payment.Id.ToString();
-                resultData.Signature = Guid.NewGuid().ToString();
-                result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
-            }
-            catch (Exception ex)
-            {
-                result.Set(false, MessageContants.Error);
-                result.Errors.Add(new BaseError
-                {
-                    Code = MessageContants.Exception,
-                    Message = ex.Message
-                });
-            }
-
-            return result;
+            return await ProcessPaymentReturn(
+                request,
+                req => req.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey), // Validate signature for Momo
+                req => Guid.Parse(req.OrderId!), // Get payment ID from the order ID
+                req => req.ResultCode.ToString(), // Get the result code from the request
+                req => req.ResultCode == 0 ? "00" : "10", // If ResultCode == 0, it is considered successful
+                _momoConfig.RedirectWebUrl // Redirect URL after payment processing
+            );
         }
 
         public async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessVnpayPaymentReturn(VnPayOneTimePaymentCreateLinkResponse response)
         {
-            string redirectWebUrl = _vnPayConfig.RedirectWebUrl;
-            var result = new ApiResponse<(PaymentReturnDto, string)>() { Success = false };
-            var resultData = new PaymentReturnDto();
+            return await ProcessPaymentReturn(
+                response,
+                request => request.isValidSignature(_vnPayConfig.HashSecret), // Validate signature for VnPay
+                request => Guid.Parse(request.vnp_TxnRef), // Get payment ID from VnPay transaction reference
+                request => request.vnp_ResponseCode, // Get response code from the VnPay response
+                request => request.vnp_TransactionStatus, // Get transaction status from VnPay response
+                _vnPayConfig.RedirectWebUrl // Redirect URL after payment processing
+            );
+        }
+
+        private async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessPaymentReturn<T>(
+            T request, Func<T, bool> validateSignature, Func<T, Guid> getPaymentId,
+            Func<T, string> getStatusCode, Func<T, string> getTransactionStatus,
+            string redirectWebUrl, SubscriptionType subscriptionType = SubscriptionType.Premium)
+        {
+            var result = new ApiResponse<(PaymentReturnDto, string)>() { Success = false }; // Initialize response result
+            var resultData = new PaymentReturnDto(); // Initialize payment return data
 
             try
             {
-                var isValidSignature = response.isValidSignature(_vnPayConfig.HashSecret);
-
-                if (isValidSignature && Guid.TryParse(response.vnp_TxnRef, out Guid paymentId))
+                // Validate signature and ensure that the payment ID can be parsed from the request
+                if (!validateSignature(request) || !Guid.TryParse(getPaymentId(request).ToString(), out Guid paymentId))
                 {
-                    var payment = await _context.Payments.FindAsync(paymentId);
+                    // If validation fails or payment ID is invalid, return error response
+                    return CreateErrorResponse(result, resultData, "11", "Can't find payment at payment service or Invalid signature in response");
+                }
 
-                    if (payment == null)
+                // Retrieve payment details from the database using the payment ID
+                var payment = await _context.Payments.FindAsync(paymentId);
+                if (payment == null)
+                {
+                    // If no payment record is found, return error response
+                    return CreateErrorResponse(result, resultData, "11", "Payment not found");
+                }
+
+                // Check if both status code and transaction status indicate a successful transaction
+                if (getStatusCode(request) == "00" && getTransactionStatus(request) == "00")
+                {
+                    // If successful, mark the payment as paid in the database
+                    payment.IsPaid = true;
+                    await _context.SaveChangesAsync();
+
+                    // Update the user's subscription type if a user record is found
+                    var user = await _context.Users.FindAsync(payment.UserId);
+                    if (user != null)
                     {
-                        return CreateErrorResponse(result, resultData, "11", "Payment not found");
+                        user.SubscriptionType = subscriptionType; // Assign subscription type
+                        await _context.SaveChangesAsync();
                     }
 
-                    // Kiểm tra các mã phản hồi từ VNPay
-                    switch (response.vnp_ResponseCode)
-                    {
-                        case "00":
-                            if (response.vnp_TransactionStatus == "00")
-                            {
-                                payment.IsPaid = true;
-                                await _context.SaveChangesAsync();
-
-                                resultData.PaymentStatus = "00";
-                                resultData.PaymentId = payment.Id.ToString();
-                                resultData.Signature = Guid.NewGuid().ToString();
-                                result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
-                            }
-                            else
-                            {
-                                return CreateErrorResponse(result, resultData, response.vnp_TransactionStatus, "Transaction failed at VNPAY gateway");
-                            }
-                            break;
-
-                        case "07":
-                            return CreateErrorResponse(result, resultData, "07", "Suspicious transaction, potential fraud detected");
-
-                        case "09":
-                            return CreateErrorResponse(result, resultData, "09", "Transaction failed due to unregistered InternetBanking account");
-
-                        case "10":
-                            return CreateErrorResponse(result, resultData, "10", "Transaction failed due to incorrect account/card authentication");
-
-                        case "11":
-                            return CreateErrorResponse(result, resultData, "11", "Transaction timeout");
-
-                        case "12":
-                            return CreateErrorResponse(result, resultData, "12", "Account/card is locked");
-
-                        case "13":
-                            return CreateErrorResponse(result, resultData, "13", "Incorrect OTP entered");
-
-                        case "24":
-                            return CreateErrorResponse(result, resultData, "24", "Transaction cancelled by user");
-
-                        case "51":
-                            return CreateErrorResponse(result, resultData, "51", "Insufficient account balance");
-
-                        case "65":
-                            return CreateErrorResponse(result, resultData, "65", "Transaction limit exceeded for the day");
-
-                        case "75":
-                            return CreateErrorResponse(result, resultData, "75", "Bank under maintenance");
-
-                        case "79":
-                            return CreateErrorResponse(result, resultData, "79", "Incorrect payment password entered multiple times");
-
-                        case "99":
-                        default:
-                            return CreateErrorResponse(result, resultData, "99", "Unknown error occurred");
-                    }
+                    // Prepare successful payment details in the response
+                    resultData.PaymentStatus = "00";
+                    resultData.PaymentId = payment.Id.ToString();
+                    resultData.Signature = Guid.NewGuid().ToString(); // Generate a new signature for the payment
+                    result.Set(true, MessageContants.OK, (resultData, redirectWebUrl)); // Set success response with payment data and redirect URL
                 }
                 else
                 {
-                    return CreateErrorResponse(result, resultData, "11", "Can't find payment at payment service or invalid signature");
+                    // If payment failed, set the error status and message from the transaction response
+                    resultData.PaymentStatus = getTransactionStatus(request);
+                    resultData.PaymentMessage = GetErrorMessage(getStatusCode(request));
+                    result.Set(false, resultData.PaymentMessage, (resultData, redirectWebUrl)); // Return error response
                 }
             }
             catch (Exception ex)
             {
+                // If an unexpected error occurs, log the exception and return a generic error response
                 result.Set(false, MessageContants.Error);
                 result.Errors.Add(new BaseError
                 {
                     Code = MessageContants.Exception,
-                    Message = ex.Message
+                    Message = ex.Message // Add exception details to the error response
                 });
             }
 
             return result;
         }
 
-
+        private static string GetErrorMessage(string statusCode)
+        {
+            // Switch expression to handle different error status codes and return corresponding messages
+            return statusCode switch
+            {
+                "07" => "Suspicious transaction, potential fraud detected",
+                "09" => "Transaction failed due to unregistered InternetBanking account",
+                "10" => "Transaction failed due to incorrect account/card authentication",
+                "11" => "Transaction timeout",
+                "12" => "Account/card is locked",
+                "13" => "Incorrect OTP entered",
+                "24" => "Transaction cancelled by user",
+                "51" => "Insufficient account balance",
+                "65" => "Transaction limit exceeded for the day",
+                "75" => "Bank under maintenance",
+                "79" => "Incorrect payment password entered multiple times",
+                _ => "Unknown error occurred" // Default error message for unrecognized status codes
+            };
+        }
 
         private static ApiResponse<(PaymentReturnDto, string)> CreateErrorResponse(ApiResponse<(PaymentReturnDto, string)> result,
             PaymentReturnDto resultData, string status, string message)
