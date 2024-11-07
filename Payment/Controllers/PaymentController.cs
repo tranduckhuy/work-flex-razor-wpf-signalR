@@ -81,7 +81,7 @@ namespace Payment.Controllers
                 returnModel = result.Data.Item1;
             }
 
-            if (returnUrl.EndsWith("/"))
+            if (returnUrl.EndsWith('/'))
             {
                 returnUrl = returnUrl.Remove(returnUrl.Length - 1, 1);
             }

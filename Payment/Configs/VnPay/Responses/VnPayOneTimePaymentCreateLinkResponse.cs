@@ -12,7 +12,7 @@ namespace WorkFlex.Payment.Configs.VnPay.Responses
         private readonly SortedList<string, string> responseData = new SortedList<string, string>(new VnPayCompare());
 
         public string vnp_TmnCode { get; set; } = string.Empty;
-        public decimal vnp_Amount { get; set; }
+        public decimal vnp_Amount { get; set; } = 0;
         public string vnp_BankCode { get; set; } = string.Empty;
         public string vnp_BankTranNo { get; set; } = string.Empty;
         public string vnp_CardType { get; set; } = string.Empty;
