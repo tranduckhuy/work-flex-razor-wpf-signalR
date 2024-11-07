@@ -35,7 +35,7 @@ namespace WorkFlex.Web.Untils.Helper
             else if (filteredParts.Count >= 2)
             {
                 // If there are two or more parts, take the last as province and the second last as city
-                province = filteredParts.Last();
+                province = filteredParts[filteredParts.Count - 1];
                 city = filteredParts[filteredParts.Count - 2];
             }
 

@@ -131,10 +131,6 @@ namespace WorkFlex.Web.Pages.Authen
 						TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_ACTIVATE_TOKEN_EXPIRED;
 						_logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_ACTIVATE_TOKEN_EXPIRED);
 						return Page();
-                    case AppConstants.ActivateResult.Error:
-                        TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
-						_logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_FAILED);
-						return Page();
                     default:
 						TempData[AppConstants.TEMP_DATA_FAILED_MESSAGE] = AppConstants.MESSAGE_FAILED;
                         _logger.LogInformation("[OnGetActivate]: Controller - End activate account for user {email} with message: {message}", email, AppConstants.MESSAGE_FAILED);
