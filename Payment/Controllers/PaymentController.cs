@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using WorkFlex.Payment.Configs.VnPay.Responses;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
@@ -64,5 +65,28 @@ namespace Payment.Controllers
 
             return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
         }
+
+
+        [HttpGet]
+        [Route("VnpayReturn")]
+        public async Task<IActionResult> VnpayReturn([FromQuery] VnPayOneTimePaymentCreateLinkResponse response)
+        {
+            string returnUrl = string.Empty;
+            var returnModel = new PaymentReturnDto();
+            var result = await _paymentService.ProcessVnpayPaymentReturn(response);
+
+            if (result.Success)
+            {
+                returnUrl = result.Data.Item2;
+                returnModel = result.Data.Item1;
+            }
+
+            if (returnUrl.EndsWith('/'))
+            {
+                returnUrl = returnUrl.Remove(returnUrl.Length - 1, 1);
+            }
+            return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
+        }
+
     }
 }

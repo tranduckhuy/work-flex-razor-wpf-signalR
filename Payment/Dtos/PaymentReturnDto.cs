@@ -8,14 +8,14 @@
         /// 99: Unknown
         /// 10: Error
         /// </summary>
-        public string? PaymentStatus { get; set; }
-        public string? PaymentMessage { get; set; }
+        public string PaymentStatus { get; set; } = string.Empty;
+        public string PaymentMessage { get; set; } = string.Empty;
         /// <summary>
         /// Format: yyyyMMddHHmmss
         /// </summary>
-        public string? PaymentDate { get; set; }
-        public string? PaymentRefId { get; set; }
-        public decimal? Amount { get; set; }
-        public string? Signature { get; set; }
+        public string PaymentDate { get; set; } = string.Empty;
+        public string PaymentRefId { get; set; } = string.Empty;
+        public decimal Amount { get; set; }
+        public string Signature { get; set; } = string.Empty;
     }
 }
