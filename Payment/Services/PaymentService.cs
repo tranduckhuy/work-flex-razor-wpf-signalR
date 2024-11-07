@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using System.Security.Cryptography;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
 using WorkFlex.Payment.Configs.Momo.Requests;
@@ -69,8 +70,7 @@ namespace WorkFlex.Payment.Services
 
                             break;
                         case nameof(PaymentMethod.ZALOPAY):
-                            var random = new Random();
-                            int randomNumber = random.Next(1000000);
+                            int randomNumber = GetRandomNumber(1000001);
 
                             var zaloPayment = new ZaloOneTimePaymentRequest(_zaloConfig.AppId, _zaloConfig.AppUser, 
                                 DateTime.Now.ToString("yyMMdd") + "_" + randomNumber, DateTime.Now.GetTimeStamp(),
@@ -199,6 +199,19 @@ namespace WorkFlex.Payment.Services
             var affectedRows = await _context.SaveChangesAsync();
 
             return (affectedRows, payment.Id);
+        }
+
+        private static int GetRandomNumber(int maxValue)
+        {
+            byte[] bytes = new byte[4]; // 4 bytes for a 32-bit integer
+            using (var randomGenerator = RandomNumberGenerator.Create())
+            {
+                randomGenerator.GetBytes(bytes);
+            }
+
+            // Convert bytes to a positive integer, and use modulo to limit the range
+            int result = Math.Abs(BitConverter.ToInt32(bytes, 0)) % maxValue;
+            return result;
         }
     }
 }
