@@ -1,6 +1,6 @@
 # WorkFlex Razor WPF SignalR
 
-![WorkFlex Logo](https://www.example.com)
+![WorkFlex Logo](https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/logo%2Flogo1.png?alt=media&token=cb5fd456-af3b-4ad4-b77b-23acd5a5ac62)
 
 ## 📖 Overview
 
