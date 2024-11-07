@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using System.Text;
+﻿using Newtonsoft.Json;
 using WorkFlex.Payment.Configs.ZaloPay.Response;
 using WorkFlex.Payment.Utils.Helpers;
 
@@ -17,6 +15,7 @@ namespace WorkFlex.Payment.Configs.ZaloPay.Request
         public string BankCode { get; set; } = string.Empty;
         public string Mac { get; set; } = string.Empty;
         public string RedirectUrl { get; set; } = string.Empty;
+        public int ReturnCode { get; set; }
         public string IpnUrl { get; set; } = string.Empty;
         public string RequestId { get; set; } = string.Empty;
         public string RequestType { get; set; } = string.Empty;
@@ -25,7 +24,9 @@ namespace WorkFlex.Payment.Configs.ZaloPay.Request
         {
         }
 
-        public ZaloOneTimePaymentRequest(int appId, string appUser, string appTransId, long appTime, long amount, string description, string bankCode)
+        public ZaloOneTimePaymentRequest(int appId, string appUser, string appTransId, 
+                                         long appTime, long amount, string description, 
+                                         string bankCode, string redirectUrl)
         {
             AppId = appId;
             AppUser = appUser;
@@ -34,16 +35,22 @@ namespace WorkFlex.Payment.Configs.ZaloPay.Request
             Amount = amount;
             Description = description;
             BankCode = bankCode;
+            RedirectUrl = redirectUrl;
         }
 
         public void MakeSignature(string key)
         {
+            var dataObject = new
+            {
+                redirecturl = RedirectUrl,
+                preferred_payment_method = Array.Empty<string>(),
+            };
             var rawHash = AppId.ToString() + "|"
               + AppTransId + "|"
               + AppUser + "|"
               + Amount.ToString() + "|"
               + AppTime.ToString() + "|"
-              + JsonConvert.SerializeObject(new { }) + "|"  
+              + JsonConvert.SerializeObject(dataObject) + "|"  
               + JsonConvert.SerializeObject(Array.Empty<object>()).Trim(); 
 
             Mac = HashHelper.HmacSHA256(rawHash, key);
@@ -51,6 +58,11 @@ namespace WorkFlex.Payment.Configs.ZaloPay.Request
 
         public Dictionary<string, string> GetContent()
         {
+            var embedDataObject = new
+            {
+                redirecturl = RedirectUrl,
+                preferred_payment_method = Array.Empty<string>()
+            };
             Dictionary<string, string> keyValuePairs = new()
             {
                 { "app_id", AppId.ToString() },
@@ -60,7 +72,7 @@ namespace WorkFlex.Payment.Configs.ZaloPay.Request
                 { "amount", Amount.ToString() },
                 { "description", Description },
                 { "bank_code", "zalopayapp" },
-                { "embed_data", "{}" },
+                { "embed_data", JsonConvert.SerializeObject(embedDataObject) },
                 { "item", "[]" },
                 { "mac", Mac }
             };
@@ -85,6 +97,7 @@ namespace WorkFlex.Payment.Configs.ZaloPay.Request
                     return (false, "Response data is null");
                 }
 
+                ReturnCode = responseData.ReturnCode;
                 if (responseData.ReturnCode == 1)
                 {
                     return (true, responseData.OrderUrl);

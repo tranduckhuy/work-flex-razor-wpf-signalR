@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
@@ -7,6 +8,7 @@ using WorkFlex.Payment.Configs.VnPay.Configs;
 using WorkFlex.Payment.Configs.VnPay.Requests;
 using WorkFlex.Payment.Configs.ZaloPay.Config;
 using WorkFlex.Payment.Configs.ZaloPay.Request;
+using WorkFlex.Payment.Configs.ZaloPay.Response;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
@@ -76,10 +78,19 @@ namespace WorkFlex.Payment.Services
                             break;
                         case nameof(PaymentMethod.ZALOPAY):
                             int randomNumber = GetRandomNumber(1000001);
+                            var shortPaymentId = paymentId.ToString()[..8];
 
-                            var zaloPayment = new ZaloOneTimePaymentRequest(_zaloConfig.AppId, _zaloConfig.AppUser, 
-                                DateTime.Now.ToString("yyMMdd") + "_" + randomNumber, DateTime.Now.GetTimeStamp(),
-                                (long)request.RequiredAmount!, request.PaymentContent ?? string.Empty, "zalopayapp");
+                            var zaloPayment = new ZaloOneTimePaymentRequest
+                            (
+                                _zaloConfig.AppId, 
+                                _zaloConfig.AppUser, 
+                                DateTime.Now.ToString("yyMMdd")  + "_" + shortPaymentId, 
+                                DateTime.Now.GetTimeStamp(),
+                                (long)request.RequiredAmount!, 
+                                request.PaymentContent ?? string.Empty, 
+                                "zalopayapp",
+                                _zaloConfig.RedirectUrl
+                            );
                             zaloPayment.MakeSignature(_zaloConfig.Key1);
 
                             var (successZalo, messageZalo) = zaloPayment.GetLink(_zaloConfig.PaymentUrl);
@@ -90,6 +101,7 @@ namespace WorkFlex.Payment.Services
                             else
                             {
                                 result.Set(false, messageZalo);
+                                return result;
                             }
 
                             break;
@@ -190,6 +202,68 @@ namespace WorkFlex.Payment.Services
                 {
                     resultData.PaymentStatus = "11";
                     resultData.PaymentMessage = "Can't find payment at payment service or Invalid signature in response";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Set(false, MessageContants.Error);
+                result.Errors.Add(new BaseError()
+                {
+                    Code = MessageContants.Exception,
+                    Message = ex.Message
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessZaloPaymentReturn(ZaloOneTimePaymentResultRequest request)
+        {
+            string redirectWebUrl = _zaloConfig.RedirectWebUrl;
+            var result = new ApiResponse<(PaymentReturnDto, string)>
+            {
+                Success = false
+            };
+
+            try
+            {
+                var resultData = new PaymentReturnDto();
+
+                // Slpit paymentId from AppTransId
+                var appTransIdParts = request.AppTransId?.Split('_');
+                if (appTransIdParts != null && appTransIdParts.Length > 1)
+                {
+                    var payment = await _context.Payments.FirstOrDefaultAsync(p => p.Id.ToString().Contains(appTransIdParts[1]));
+
+                    if (payment != null)
+                    {
+                        if (request.Status == 1)
+                        {
+                            payment.IsPaid = request.Status == 1;
+                            await _context.SaveChangesAsync();
+
+                            resultData.PaymentStatus = "00";
+                            resultData.PaymentId = payment.Id.ToString();
+                            resultData.Signature = Guid.NewGuid().ToString();
+
+                            result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
+                        }
+                        else
+                        {
+                            resultData.PaymentStatus = "10";
+                            resultData.PaymentMessage = "Payment process failed";
+                        }
+                    }
+                    else
+                    {
+                        resultData.PaymentStatus = "11";
+                        resultData.PaymentMessage = "Payment not found in the database.";
+                    }
+                }
+                else
+                {
+                    resultData.PaymentStatus = "11";
+                    resultData.PaymentMessage = "Invalid payment ID format in Description or missing payment ID.";
                 }
             }
             catch (Exception ex)

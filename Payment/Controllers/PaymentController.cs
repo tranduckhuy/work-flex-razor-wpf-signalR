@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using WorkFlex.Payment.Configs.ZaloPay.Request;
+using WorkFlex.Payment.Configs.ZaloPay.Response;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
@@ -58,6 +60,23 @@ namespace Payment.Controllers
             var result = await _paymentService.ProcessMomoPaymentReturn(request);
 
             if (result.Success) {
+                returnUrl = result.Data.Item2;
+                returnModel = result.Data.Item1;
+            }
+
+            return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
+        }
+
+        [HttpGet]
+        [Route("ZaloReturn")]
+        public async Task<IActionResult> ZaloReturn([FromQuery] ZaloOneTimePaymentResultRequest request)
+        {
+            string returnUrl = string.Empty;
+            var returnModel = new PaymentReturnDto();
+            var result = await _paymentService.ProcessZaloPaymentReturn(request);
+
+            if (result.Success)
+            {
                 returnUrl = result.Data.Item2;
                 returnModel = result.Data.Item1;
             }

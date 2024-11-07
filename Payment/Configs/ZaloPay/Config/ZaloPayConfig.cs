@@ -12,6 +12,8 @@
 
         public string PaymentUrl { get; set; } = string.Empty;
 
+        public string RedirectWebUrl { get; set; } = string.Empty;
+
         public string IpnUrl { get; set; } = string.Empty;
 
         public string Key1 { get; set; } = string.Empty;
