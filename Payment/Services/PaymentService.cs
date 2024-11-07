@@ -9,7 +9,7 @@ using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
 using WorkFlex.Payment.Utils.Constants;
-using WorkFlex.Payment.Utils.Helpers;
+using WorkFlex.Payment.Utils.Extensions;
 
 namespace WorkFlex.Payment.Services
 {
