@@ -66,6 +66,23 @@ namespace Payment.Controllers
             return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
         }
 
+        [HttpGet]
+        [Route("ZaloReturn")]
+        public async Task<IActionResult> ZaloReturn([FromQuery] ZaloOneTimePaymentResultRequest request)
+        {
+            string returnUrl = string.Empty;
+            var returnModel = new PaymentReturnDto();
+            var result = await _paymentService.ProcessZaloPaymentReturn(request);
+
+            if (result.Success)
+            {
+                returnUrl = result.Data.Item2;
+                returnModel = result.Data.Item1;
+            }
+
+            return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
+        }
+
 
         [HttpGet]
         [Route("VnpayReturn")]
