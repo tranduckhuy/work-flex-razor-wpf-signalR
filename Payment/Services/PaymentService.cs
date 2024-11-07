@@ -3,6 +3,8 @@ using System.Security.Cryptography;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
 using WorkFlex.Payment.Configs.Momo.Requests;
+using WorkFlex.Payment.Configs.VnPay.Configs;
+using WorkFlex.Payment.Configs.VnPay.Requests;
 using WorkFlex.Payment.Configs.ZaloPay.Config;
 using WorkFlex.Payment.Configs.ZaloPay.Request;
 using WorkFlex.Payment.Dtos;
@@ -17,11 +19,13 @@ namespace WorkFlex.Payment.Services
     {
         private readonly MomoConfig _momoConfig;
         private readonly ZaloPayConfig _zaloConfig;
+        private readonly VnPayConfig _vnPayConfig;
         private readonly AppDbContext _context;
 
-        public PaymentService(IOptions<MomoConfig> momoConfig, IOptions<ZaloPayConfig> zaloConfig, AppDbContext context)
+        public PaymentService(IOptions<MomoConfig> momoConfig, IOptions<VnPayConfig> vnpayOptions, IOptions<ZaloPayConfig> zaloConfig, AppDbContext context)
         {
             _momoConfig = momoConfig.Value;
+            _vnPayConfig = vnpayOptions.Value;
             _zaloConfig = zaloConfig.Value;
             _context = context;
         }
@@ -37,6 +41,7 @@ namespace WorkFlex.Payment.Services
                 if (affectedRows > 0)
                 {
                     string paymentUrl = string.Empty;
+                    string ipAddress = GenerateRandomIpAddress();
 
                     switch (request.PaymentDestinationId)
                     {
@@ -88,6 +93,27 @@ namespace WorkFlex.Payment.Services
                             }
 
                             break;
+                        case nameof(PaymentMethod.VNPAY):
+
+                            var vnPayPayment = new VnPayOneTimePaymentRequest
+                            {
+                                vnp_Version = _vnPayConfig.Version,
+                                vnp_TmnCode = _vnPayConfig.TmnCode,
+                                vnp_Amount = (int)request.RequiredAmount * 100,
+                                vnp_OrderInfo = request.PaymentContent ?? string.Empty,
+                                vnp_OrderType = "130005",
+                                vnp_ReturnUrl = _vnPayConfig.ReturnUrl,
+                                vnp_TxnRef = paymentId.ToString(),
+                                vnp_IpAddr = ipAddress,
+                                vnp_CreateDate = DateTime.Now.ToString("yyyyMMddHHmmss"),
+                                vnp_ExpireDate = DateTime.Now.AddMinutes(15).ToString("yyyyMMddHHmmss"),
+                                vnp_CurrCode = "VND",
+                                vnp_Locale = "vn"
+                            };
+
+                            paymentUrl = vnPayPayment.GetLink(_vnPayConfig.PaymentUrl, _vnPayConfig.HashSecret);
+                            break;
+
                         default:
                             result.Set(false, MessageContants.PaymentMethodNotSupported);
                             break;
@@ -213,5 +239,16 @@ namespace WorkFlex.Payment.Services
             int result = Math.Abs(BitConverter.ToInt32(bytes, 0)) % maxValue;
             return result;
         }
+        private string GenerateRandomIpAddress()
+        {
+            Random rnd = new Random();
+            int part1 = rnd.Next(1, 256);
+            int part2 = rnd.Next(0, 256);
+            int part3 = rnd.Next(0, 256);
+            int part4 = rnd.Next(0, 256);
+
+            return $"{part1}.{part2}.{part3}.{part4}";
+        }
+
     }
 }

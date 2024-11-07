@@ -2,6 +2,7 @@ using WorkFlex.Payment.Configs.Momo;
 using WorkFlex.Payment.Services;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.ZaloPay.Config;
+using WorkFlex.Payment.Configs.VnPay.Configs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.Configure<MomoConfig>(builder.Configuration.GetSection(MomoConfig.ConfigName));
+builder.Services.Configure<VnPayConfig>(builder.Configuration.GetSection(VnPayConfig.ConfigName));
 builder.Services.Configure<ZaloPayConfig>(builder.Configuration.GetSection(ZaloPayConfig.ConfigName));
 
 builder.Services.AddScoped<IPaymentService, PaymentService>();
