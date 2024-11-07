@@ -1,0 +1,446 @@
+﻿@page
+@model WorkFlex.Web.Pages.Job.JobListModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Job List";
+    var successMsg = TempData["SuccessMessage"] as string;
+    var failedMsg = TempData["FailedMessage"] as string;
+}
+
+<div id="toast"></div>
+@if (!string.IsNullOrEmpty(successMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Success",
+                    message: "@successMsg",
+                    type: "success",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+else if (!string.IsNullOrEmpty(failedMsg))
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                toast({
+                    title: "Failed",
+                    message: "@failedMsg",
+                    type: "danger",
+                    duration: 3000,
+                });
+            }, 600);
+        });
+    </script>
+}
+
+<!-- Hero Area Start-->
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="/img/hero/about.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Get your job</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+<!-- Job list area start -->
+<div class="job-listing-area pt-120">
+    <div class="container">
+        <form id="filterForm" method="get">
+            <div class="row">
+                <!-- Left content -->
+                <div class="col-xl-3 col-lg-3 col-md-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="small-section-tittle2 mb-45">
+                                <div class="ion">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="20px" height="12px">
+                                        <path fill-rule="evenodd" fill="rgb(27, 207, 107)"
+                                              d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z" />
+                                    </svg>
+                                </div>
+                                <h4>Filter Jobs</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Job filter start -->
+                    <div class="job-category-listing mb-50">
+                        <!-- single one -->
+                        <div class="single-listing">
+                            <div class="small-section-tittle2">
+                                <h4>Job Location</h4>
+                            </div>
+                            <!-- Select job location start -->
+                            <div class="select-job-items2">
+                                <select name="Filters.JobLocation" asp-for="Filters.JobLocation" onchange="submitFilters()" id="jobLocationSelect"></select>
+                            </div>
+                            <!--  Select job location end-->
+                            <!-- Select types start -->
+                            <div class="select-Categories pt-80 pb-50">
+                                <div class="small-section-tittle2">
+                                    <h4>Job Type</h4>
+                                </div>
+                                <label class="container" for="Filters.JobType.All">
+                                    All
+                                    <input type="checkbox" name="Filters.JobType" id="Filters.JobType.All" value="All" onchange="submitFilters()" />
+                                    <span class="checkmark"></span>
+                                </label>
+                                <input type="text" name="hiddenFilters.JobType" value="All" hidden />
+                                @foreach (var jobType in Model.JobTypes)
+                                {
+                                    // Check if Filters.JobType contains the current jobType.TypeName
+                                    bool isChecked = !string.IsNullOrEmpty(Model.Filters.JobType) && Model.Filters.JobType.Contains(jobType.TypeName);
+                                    <label class="container" for="Filters.JobType.@jobType.TypeName">
+                                        @jobType.TypeName
+                                        <input type="checkbox" name="Filters.JobType" onchange="submitFilters()" id="Filters.JobType.@jobType.TypeName"
+                                               value="@jobType.TypeName" @(isChecked ? "checked" : "") />
+                                        <input type="text" name="hiddenFilters.JobType" value="@jobType.TypeName" hidden />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                }
+                            </div>
+                            <!-- Select types End -->
+                        </div>
+                        <!-- single two -->
+                        <div class="single-listing">
+                            <!-- Select posted date start -->
+                            <div class="select-Categories pb-50">
+                                <div class="small-section-tittle2">
+                                    <h4>Posted Within</h4>
+                                </div>
+                                @foreach (var option in new List<string> { "Any", "Today", "Last 5 days", "Last Week", "Last Month", "Last Year" })
+                                {
+                                    bool isChecked = !string.IsNullOrEmpty(Model.Filters.PostedWithin) && Model.Filters.PostedWithin == option;
+                                    <label class="container" for="@option">
+                                        @option
+                                        <input type="radio" name="Filters.PostedWithin" onchange="submitFilters()" id="@option"
+                                               value="@option" @(isChecked ? "checked" : "") />
+                                        <input type="text" name="hiddenFilters.PostedWithin" value="@option" hidden />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                }
+                            </div>
+                            <!-- Select posted date end -->
+                        </div>
+                        <div class="single-listing">
+                            <!-- Range salary start -->
+                            <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
+                                <div class="small-section-tittle2">
+                                    <h4>Salary Range</h4>
+                                </div>
+                                <div class="widgets_inner">
+                                    <div class="range_item">
+                                        <input type="text" class="js-range-slider" value="" />
+                                        <div class="d-flex align-items-center">
+                                            <div class="price_text">
+                                                <p>Salary :</p>
+                                            </div>
+                                            <div class="price_value d-flex justify-content-center">
+                                                <input type="text" value="@Model.Filters.MinSalary" name="Filters.MinSalary" class="js-input-from" id="amount" onchange="setFilterTimeout()" readonly />
+                                                <span>to</span>
+                                                <input type="text" value="@Model.Filters.MaxSalary" name="Filters.MaxSalary" class="js-input-to" id="amount" onchange="setFilterTimeout()" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                            <!-- Range salary end -->
+                        </div>
+                    </div>
+                    <!-- Job filter end -->
+                </div>
+                <!-- Right content -->
+                <div class="col-xl-9 col-lg-9 col-md-8">
+                    <!-- Featured_job_start -->
+                    <section class="featured-job-area">
+                        <div class="container">
+                            <!-- Count of Job list Start -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="count-job mb-35">
+                                        <div id="totalCount">
+                                            <span>@Model.TotalCount Jobs found</span>
+                                        </div>
+                                        <!-- Select job items start -->
+                                        <div class="select-job-items">
+                                            <span>Sort by</span>
+                                            <select name="Filters.SortBy" asp-for="Filters.SortBy" onchange="submitFilters()">
+                                                <option value="None">None</option>
+                                                <option value="SalaryLowToHigh">Low</option>
+                                                <option value="SalaryHighToLow">High</option>
+                                            </select>
+                                        </div>
+                                        <!-- Hidden Fields -->
+                                        <input type="hidden" name="pageNumber" value="@Model.CurrentPage" />
+                                        <!--  Select job items End-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Count of Job list End -->
+                            <!-- single-job-content -->
+                            <div id="jobList">
+                                @foreach (var job in Model.Jobs)
+                                {
+                                    <div class="single-job-items mb-30" style="cursor:pointer;"
+                                         onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
+                                        <div class="job-items" style="align-items:center;">
+                                            <div class="company-img">
+                                                <a href="#!"><img src="@job.User.Avatar" alt="Recruiter's Avatar'" style="width:100px;height:100px;"></a>
+                                            </div>
+                                            <div class="job-tittle job-tittle2">
+                                                <a href="#">
+                                                    <h4>@job.Title</h4>
+                                                </a>
+                                                <ul>
+                                                    <li>@job.Industry.IndustryName</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>@job.DisplayBriefLocation</li>
+                                                    <li>@job.SalaryRange</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="items-link items-link2 f-right" onclick="goToJobDetail('@job.Id')" onkeydown="goToJobDetail('@job.Id')">
+                                            <a href="#!">@job.JobType.TypeName</a>
+                                            <span>@job.DisplayCreatedAt</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Featured_job_end -->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Job list area end -->
+<!--Pagination Start  -->
+<div class="pagination-area pb-115 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="single-wrap d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-start">
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)" onclick="goToPage(@(Model.CurrentPage - 1))"><span class="ti-angle-left"></span></a>
+                                </li>
+                            }
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                                    <a class="page-link" href="javascript:void(0)" onclick="goToPage(@i)">@i.ToString("D1")</a>
+                                </li>
+                            }
+                            @if (Model.CurrentPage < Model.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)" onclick="goToPage(@(Model.CurrentPage + 1))"><span class="ti-angle-right"></span></a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Pagination End  -->
+@section Scripts {
+    <script>
+        function submitFilters() {
+            var form = $('#filterForm');
+            form.find('input, select').prop('disabled', true); // Disable form elements during submission
+
+            // Create Object JobListVM
+            const jobListVm = {
+                JobLocation: '',
+                JobType: [],
+                PostedWithin: '',
+                MinSalary: 0,
+                MaxSalary: 0,
+                SortBy: '',
+                PageNumber: 1,
+                PageSize: 7
+            };
+
+            // Loop through each input and select in the form
+            form.find('input, select').each(function () {
+                var name = $(this).attr('name'); // Get the name of the input or select
+                var value;
+
+                // Check if it is a checkbox
+                if ($(this).is(':checkbox')) {
+                    // If checked, get the value from the hidden input next to it
+                    if ($(this).is(':checked')) {
+                        value = $(this).closest('label').find('input[type="text"]').val();
+
+                        // Only add to JobType if the checkbox is checked and the value is not already present
+                        if (value && name === 'Filters.JobType' && !jobListVm.JobType.includes(value)) {
+                            jobListVm.JobType.push(value);
+                        }
+                    } else {
+                        // If unchecked, remove the value from JobType if it exists
+                        value = $(this).closest('label').find('input[type="text"]').val();
+                        if (name === 'Filters.JobType') {
+                            jobListVm.JobType = jobListVm.JobType.filter(item => item !== value);
+                        }
+                    }
+                    // Check if it is a radio
+                } else if ($(this).is(':radio')) {
+                    // Get value for radio inputs (only if checked)
+                    if ($(this).is(':checked')) {
+                        value = $(this).closest('label').find('input[type="text"]').val();
+                        // Assign value directly for radio buttons
+                        jobListVm.PostedWithin = value;
+                    }
+                } else {
+                    value = $(this).val(); // Get value for non-checkbox/non-radio inputs
+                }
+
+                // Assign value to jobListVm based on the name
+                switch (name) {
+                    case 'Filters.JobLocation':
+                        jobListVm.JobLocation = value;
+                        break;
+                    case 'Filters.MinSalary':
+                        jobListVm.MinSalary = value ? parseFloat(value) : 0;
+                        break;
+                    case 'Filters.MaxSalary':
+                        jobListVm.MaxSalary = value ? parseFloat(value) : 0;
+                        break;
+                    case 'Filters.SortBy':
+                        jobListVm.SortBy = value;
+                        break;
+                    case 'pageNumber':
+                        jobListVm.PageNumber = parseInt(value) || 1;
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            // Create a new object for sending data
+            const dataToSend = {
+                JobLocation: jobListVm.JobLocation,
+                JobType: jobListVm.JobType.join(', ') || '', // Convert JobType to a string only when sending
+                PostedWithin: jobListVm.PostedWithin || '',
+                MinSalary: jobListVm.MinSalary,
+                MaxSalary: jobListVm.MaxSalary,
+                SortBy: jobListVm.SortBy,
+                PageNumber: jobListVm.PageNumber,
+                PageSize: jobListVm.PageSize
+            };
+
+            // AJAX call to submit the filters
+            $.ajax({
+                url: form.attr('action'),
+                data: dataToSend, // Send the constructed data
+                type: 'GET',
+                success: function (result) {
+                    console.log("Fetch data job success!"); // Log success message
+
+                    $('html, body').animate({ scrollTop: 420 }, 500);
+
+                    // Update the job list section with the new data
+                    var newContent = $(result).find('#jobList').html();
+                    $('#jobList').html(newContent);
+
+                    // Update total count section with new data
+                    var newTotal = $(result).find('#totalCount').html();
+                    $('#totalCount').html(newTotal);
+
+                    // Update pagination
+                    var newPagination = $(result).find('.pagination-area').html();
+                    $('.pagination-area').html(newPagination);
+
+                    form.find('input, select').prop('disabled', false); // Re-enable form elements
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error occurred: " + error); // Log error message
+                    form.find('input, select').prop('disabled', false); // Re-enable form elements in case of error
+                }
+            });
+        }
+
+        // Debounce function for avoid calling ajax frequently when changing salary slider
+        let filterTimeout;
+        function setFilterTimeout() {
+            clearTimeout(filterTimeout);
+            filterTimeout = setTimeout(function () {
+                submitFilters();
+            }, 1000);
+        }
+
+        // Decode for compare location
+        function decodeHtml(html) {
+            const txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
+
+        // Call API provinces
+        const currentJobLocation = '@Model.Filters.JobLocation';
+        function renderData(array, selectId) {
+            const decodedCurrentJobLocation = decodeHtml(currentJobLocation);
+            let options = '<option value="Anywhere" ' + (decodedCurrentJobLocation.toLowerCase() === "anywhere" ? "selected" : "") + '>Anywhere</option>';
+            array.forEach(element => {
+                // Check if the current element.name matches the JobLocation to set it as selected
+                options += '<option value="' + element.name + '" ' + (decodedCurrentJobLocation.toLowerCase() === element.name.toLowerCase() ? "selected" : "") + '>' + element.name + '</option>';
+            });
+
+            const selectElement = document.querySelector("#" + selectId);
+            selectElement.innerHTML = options;
+            $(selectElement).niceSelect('update');
+        }
+
+        function callAPI(api) {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data, 'jobLocationSelect');
+                })
+                .catch(error => {
+                    console.error("Error occured when call API:", error);
+                });
+        }
+
+        function goToJobDetail(jobId) {
+            window.location.href = `/Job/JobDetail/${jobId}`;
+        }
+
+        function goToPage(pageNumber) {
+            $('input[name="pageNumber"]').val(pageNumber);
+            submitFilters();
+        }
+
+        $(document).ready(function () {
+            // Call API for province's name
+            const host = "https://provinces.open-api.vn/api/";
+            callAPI(host + '?depth=1');
+
+            // Attach change events to filter inputs
+            $('#filterForm').on('change', 'input, select', function () {
+                if (!$(this).hasClass('js-input-from') && !$(this).hasClass('js-input-to')) {
+                    setFilterTimeout();
+                } else {
+                    submitFilters();
+                }
+            });
+        });
+    </script>
+}

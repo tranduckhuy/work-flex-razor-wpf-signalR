@@ -1,0 +1,611 @@
+﻿@page
+@model WorkFlex.Web.Pages.User.ProfileModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Profile";
+
+    var successMsg = TempData["SuccessMessage"] as string;
+    var failedMsg = TempData["FailedMessage"] as string;
+    var user = Model.UserDto;
+}
+
+@if (user != null)
+{
+    <style>
+        .avatar-badge {
+            position: absolute;
+            left: 116px;
+            bottom: -8px;
+            padding: 4px 8px;
+            border-radius: 50%;
+            background: #f4f4f4;
+            border: 4px solid #fff;
+        }
+    </style>
+
+
+    <div id="toast"></div>
+    if (!string.IsNullOrEmpty(successMsg))
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                    toast({
+                        title: "Success",
+                        message: "@successMsg",
+                        type: "success",
+                        duration: 3000,
+                    });
+                }, 600);
+            });
+        </script>
+    }
+    else if (!string.IsNullOrEmpty(failedMsg))
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                    toast({
+                        title: "Failed",
+                        message: "@failedMsg",
+                        type: "danger",
+                        duration: 3000,
+                    });
+                }, 600);
+            });
+        </script>
+    }
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="sherah-body">
+                    <!-- Dashboard Inner -->
+                    <div class="sherah-dsinner">
+
+                        <div class="row mg-top-30">
+                            <div class="col-12 sherah-flex-between">
+                                <!-- Sherah Breadcrumb -->
+                                <div class="sherah-breadcrumb">
+                                    <h2 class="sherah-breadcrumb__title">Profile</h2>
+                                    <ul class="sherah-breadcrumb__list">
+                                        <li><a asp-page="/">Home</a></li>
+                                        <li class="active"><a href="#!">Personal Information</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Sherah Breadcrumb -->
+                            </div>
+                        </div>
+
+                        <div class="sharah-profile--main sherah-default-bg sharah-border mg-top-40">
+
+                            <form id="profileImageForm" method="post" asp-page="/User/Profile" asp-page-handler="ImageUpdate">
+                                <!-- Sharah Profile header -->
+                                <div class="sherah-userprofile__header">
+                                    <img id="background-image" src="@user.BackgroundImg" alt="Background" style="height:190px;max-height:200px;">
+                                    @if (Model.IsYourProfile)
+                                    {
+                                        <div class="sherah-userprofile__right">
+                                            <label for="background-file" class="sherah-btn sherah-btn__white" style="padding:16px 20px;cursor:pointer;">
+                                                <input type="file" id="background-file" style="display:none;" accept=".png,.jpg" readonly />
+                                                <input type="text" id="background-hidden" name="UpdateImageProfileVM.BackgroundUrl" style="display:none" value="@user.BackgroundImg" readonly />
+                                                <input type="text" name="UpdateImageProfileVM.Id" style="display:none" value="@user.Id" readonly />
+                                                <i class="fas fa-camera" style="color:#333;font-size:16px;"></i>
+                                                Change Background
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="col-12" style="position:relative;">
+                                    <!-- Profile Info -->
+                                    <div class="sherah-profile-info">
+                                        <div class="sherah-profile-info__thumb" style="position:relative;">
+                                            <img id="avatar-image" src="@user.Avatar" alt="Avatar">
+                                            @if (Model.IsYourProfile)
+                                            {
+                                                <label for="avatar-file" class="avatar-badge" style="cursor:pointer;">
+                                                    <input type="file" id="avatar-file" style="display:none;" accept=".png,.jpg" />
+                                                    <input type="text" id="avatar-hidden" name="UpdateImageProfileVM.AvatarUrl" style="display:none" value="@user.Avatar" readonly />
+                                                    <i class="fas fa-camera" style="color:#5f5f5f;font-size:16px;"></i>
+                                                </label>
+                                            }
+                                            <h3 class="sherah-profile-info__name">
+                                                @user.FirstName @user.LastName
+                                                <span>@user.Email</span>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <!-- End Profile Info -->
+                                </div>
+                            </form>
+
+                            <!-- Profile Inner Section -->
+                            <div class="sherah-upinner">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- Profile Overview -->
+                                        <div class="sherah-upcontent mg-top-30">
+                                            <!-- Tab List -->
+                                            <div class="sherah-pcats__bar">
+                                                <div class="sherah-pcats__list list-group" id="list-tab" role="tablist">
+                                                    <a class="list-group-item active" data-bs-toggle="list" href="#tab_1" role="tab" style="border:1px solid #E2E7F1">About</a>
+                                                    @if (Model.IsYourProfile)
+                                                    {
+                                                        <a class="list-group-item" data-bs-toggle="list" href="#tab_2" role="tab" style="border:1px solid #E2E7F1">Edit Profile</a>
+                                                        <a class="list-group-item" data-bs-toggle="list" href="#tab_3" role="tab" style="border:1px solid #E2E7F1">Change Password</a>
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="tab_1" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                    <div class="sherah-upcontent__text sherah-border">
+                                                        <!-- Profile Info -->
+                                                        <div class="sharah-profile__about">
+                                                            <h3 class="sharah-profile__title mg-btm-10">About</h3>
+                                                            <p class="sharah-profile__text">@(!string.IsNullOrEmpty(user.Profile.Summary) ? user.Profile.Summary : "Summary not updated yet.")</p>
+                                                            <div class="sharah-profile__meta mg-top-40">
+                                                                <h4>Headline: @(!string.IsNullOrEmpty(user.Profile.Headline) ? user.Profile.Headline : "Headline not updated yet.")</h4>
+                                                                <p class="mg-top-10">
+                                                                    @if (!string.IsNullOrEmpty(user.Profile.Website))
+                                                                    {
+                                                                        <a href="@user.Profile.Website">@user.Profile.Website</a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                    <p style="color:#5a5a5a">Website not updated yet.</p>
+                                                                    }
+                                                                </p>
+                                                                <p class="sharah-profile__id mg-top-30">@(user.DateOfBirth != DateTime.MinValue ? user.DateOfBirth.ToString("dd/MM/yyyy") : "Date of Birth not updated yet.")</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="sherah-border-btm mg-top-30"></div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6 col-12 mg-top-30">
+                                                                <h4 class="sherah-info-title mg-btm-20">Contact</h4>
+                                                                <ul class="sherah-contact-info">
+                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset icon-profile"><i class="fas fa-map-marker-alt"></i></span><p id="address-information" style="color:#1a1a1a"></p></li>
+                                                                    <li class="sherah-border"><span class="sherah-color1__bg--offset icon-profile"><i class="far fa-envelope"></i></span>Email : <a href="mailto:@user.Email" style="font-size:16px;text-decoration:underline;">@user.Email</a></li>
+                                                                    <li class="sherah-border">
+                                                                        <span class="sherah-color1__bg--offset icon-profile"><i class="fas fa-phone"></i></span>
+                                                                        Phone : @if (!string.IsNullOrEmpty(user.Phone))
+                                                                        {
+                                                                            <a href="tel:@user.Phone" style="font-size: 16px;">@user.Phone</a>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <p style="color:#1a1a1a">Phone not updated yet.</p>
+                                                                        }
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-12 mg-top-30">
+                                                                <h4 class="sherah-info-title mg-btm-20">Social</h4>
+                                                                <ul class="sherah-contact-info sherah-contact-social">
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-facebook-f"></i></span>Facebook</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-twitter"></i></span>Twitter</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-linkedin"></i></span>Linkedin</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-dribbble"></i></span>Dribbble</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-behance"></i></span>Behance</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-youtube"></i></span>Youtube</a></li>
+                                                                    <li class="sherah-border"><a href="#"><span class="sherah-color1__bg--offset icon-profile"><i class="fab fa-instagram"></i></span>Instagram</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                @if (Model.IsYourProfile)
+                                                {
+                                                    <div class="tab-pane fade" id="tab_2" role="tabpanel" aria-labelledby="nav-home-tab" style="padding: 0 10px; border: 1px solid #e4f2ff">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <!-- Sign in Form -->
+                                                                <form class="sherah-wc__form-main sherah-wc__form-profile sherah-form-main--v2 p-0" method="post" id="profile-form">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">First Name *</label>
+                                                                                <input type="text" name="formType" value="profileForm" style="display:none;" />
+                                                                                <input type="text" asp-for="ProfileVM.Id" name="ProfileVM.Id" value="@user.Id" id="profile-id" style="display:none;" />
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.FirstName"
+                                                                                       name="ProfileVM.FirstName"
+                                                                                       value="@user.FirstName"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your First Name"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Last Name *</label>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.LastName"
+                                                                                       name="ProfileVM.LastName"
+                                                                                       value="@user.LastName"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Last Name"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Phone Number *</label>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.Phone"
+                                                                                       name="ProfileVM.Phone"
+                                                                                       value="@user.Phone"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Phone Number"
+                                                                                       rules="required|max:10|phone">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Date Of Birth</label>
+                                                                                <input type="date"
+                                                                                       asp-for="ProfileVM.DateOfBirth"
+                                                                                       name="ProfileVM.DateOfBirth"
+                                                                                       value="@user.DateOfBirth.ToString("yyyy-MM-dd")"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="dd/MM/yyyy">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Email Address *</label>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.Email"
+                                                                                       name="ProfileVM.Email"
+                                                                                       value="@user.Email"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Email"
+                                                                                       rules="required|email"
+                                                                                       readonly>
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Headline</label>
+                                                                                <div class="form-group__input">
+                                                                                    <input type="text"
+                                                                                           asp-for="ProfileVM.Headline"
+                                                                                           name="ProfileVM.Headline"
+                                                                                           value="@user.Profile.Headline"
+                                                                                           class="sherah-wc__form-input"
+                                                                                           placeholder="Your Headline">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Website</label>
+                                                                                <div class="form-group__input">
+                                                                                    <input type="text"
+                                                                                           asp-for="ProfileVM.Website"
+                                                                                           name="ProfileVM.Website"
+                                                                                           class="sherah-wc__form-input"
+                                                                                           placeholder="www.workflex.com">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Apartment (Optional)</label>
+                                                                                <div class="form-group__input">
+                                                                                    <input type="text"
+                                                                                           asp-for="ProfileVM.Apartment"
+                                                                                           name="ProfileVM.Apartment"
+                                                                                           class="sherah-wc__form-input"
+                                                                                           placeholder="Your Apartment">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Street</label>
+                                                                                <input type="text"
+                                                                                       asp-for="ProfileVM.Street"
+                                                                                       name="ProfileVM.Street"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="Your Street"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Province</label>
+                                                                                <select asp-for="ProfileVM.Province" id="city"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">District</label>
+                                                                                <select asp-for="ProfileVM.District" id="district"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Ward</label>
+                                                                                <select asp-for="ProfileVM.Ward" id="ward"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">About Description</label>
+                                                                                <div class="form-group__input">
+                                                                                    <textarea type="text"
+                                                                                              name="ProfileVM.AboutDescription"
+                                                                                              class="sherah-wc__form-input"
+                                                                                              placeholder="About description write here">@user.Profile.Summary</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group mg-top-30 sherah-dflex sherah-dflex-gap-30 justify-content-end">
+                                                                        <button type="submit" class="sherah-btn sherah-btn__primary">Save</button>
+                                                                    </div>
+                                                                </form>
+                                                                <!-- End Sign in Form -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" id="tab_3" role="tabpanel" aria-labelledby="nav-home-tab" style="padding: 0 10px; border: 1px solid #e4f2ff">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <!-- Sign in Form -->
+                                                                <form class="sherah-wc__form-main sherah-wc__form-profile sherah-form-main--v2 p-0" method="post" id="password-form">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-8 col-md-8 col-12">
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Old Password *</label>
+                                                                                <input type="text" name="formType" value="passwordForm" style="display:none;" />
+                                                                                <input type="text" asp-for="ProfileVM.Id" name="ProfileVM.Id" value="@user.Id" id="password-id" style="display:none;" />
+                                                                                <input type="password"
+                                                                                       asp-for="ProfileVM.OldPassword"
+                                                                                       name="ProfileVM.OldPassword"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                                                                                       rules="required">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">New Password *</label>
+                                                                                <input type="password"
+                                                                                       asp-for="ProfileVM.NewPassword"
+                                                                                       name="ProfileVM.NewPassword"
+                                                                                       id="pass"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                                                                                       rules="required|min:8|max:16|number|lower|upper|special">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="sherah-wc__form-label">Re-enter Password *</label>
+                                                                                <input type="password"
+                                                                                       asp-for="ProfileVM.ReEnterPassword"
+                                                                                       name="ProfileVM.ReEnterPassword"
+                                                                                       id="repass"
+                                                                                       class="sherah-wc__form-input"
+                                                                                       placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                                                                                       rules="required|match:pass">
+                                                                                <span class="form-message"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-4 col-12">
+                                                                            <div class="sherah-password__img" style="margin-top: 25px;">
+                                                                                <img src="~/img/hero/p-update-img.png" alt="Change Password">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group mg-top-30 sherah-dflex sherah-dflex-gap-30 justify-content-end">
+                                                                        <button type="submit" class="sherah-btn sherah-btn__primary">Change Password</button>
+                                                                    </div>
+                                                                </form>
+                                                                <!-- End Sign in Form -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <!-- End Profile Overview -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Profile Inner Section -->
+                        </div>
+                    </div>
+                    <!-- End Dashboard Inner -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        const fullAddress = "@Html.Raw(user!.Location)";
+        const host = "https://provinces.open-api.vn/api/";
+        const apiProvince = host + '?depth=1';
+        const isYourProfile = @Model.IsYourProfile.ToString().ToLower();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (fullAddress && fullAddress.trim() !== '') {
+                document.querySelector('#address-information').textContent = extractCityProvince(fullAddress);
+            } else {
+                document.querySelector('#address-information').textContent = 'Location not updated yet.';
+            }
+
+            if (isYourProfile) {
+                callAPI(apiProvince).then(() => {
+                    setLocationOptions(fullAddress);
+                });
+
+                document.querySelector("#city").addEventListener("change", () => {
+                    const cityId = getSelectedDataId("#city");
+                    if (cityId) {
+                        callApiDistrict(host + "p/" + cityId + "?depth=2");
+                    }
+                });
+
+                document.querySelector("#district").addEventListener("change", () => {
+                    const districtId = getSelectedDataId("#district");
+                    if (districtId) {
+                        callApiWard(host + "d/" + districtId + "?depth=2");
+                    }
+                });
+
+                Validator("#profile-form");
+                Validator("#password-form");
+            }
+        });
+
+        function setLocationOptions(address) {
+            const parts = address.split(',');
+
+            // Get the DOM elements for the input/select fields
+            const apartment = document.querySelector('input[name="ProfileVM.Apartment"]');
+            const street = document.querySelector('input[name="ProfileVM.Street"]');
+            const province = document.querySelector('#city');
+            const district = document.querySelector('#district');
+            const ward = document.querySelector('#ward');
+
+            // Reset all fields to default (empty)
+            apartment.value = '';
+            street.value = '';
+
+            // Map address parts to the fields based on the number of parts
+            if (parts.length > 4) {
+                setTextContent(province, parts[4]);  // Province
+                setTextContent(district, parts[3]);  // District
+                setTextContent(ward, parts[2]);      // Ward
+                street.value = parts[1].trim();      // Street
+                apartment.value = parts[0].trim();   // Apartment
+            } else if (parts.length == 4) {
+                setTextContent(province, parts[3]);  // Province
+                setTextContent(district, parts[2]);  // District
+                setTextContent(ward, parts[1]);      // Ward
+                street.value = parts[0].trim();      // Street
+            } else if (parts.length == 3) {
+                setTextContent(province, parts[2]);  // Province
+                setTextContent(district, parts[1]);  // District
+                street.value = parts[0].trim();      // Street
+            } else if (parts.length == 2) {
+                setTextContent(province, parts[1]);  // Province
+                street.value = parts[0].trim();      // Street
+            } else if (parts.length == 1) {
+                street.value = parts[0].trim();      // Only street available
+            }
+        }
+
+        function setTextContent(element, text) {
+            if (!text) {
+                element.textContent = '';
+                element.value = '';
+                return;
+            }
+
+            const trimmedText = text.trim();
+
+            const option = document.createElement('option');
+            option.textContent = trimmedText;
+            option.value = trimmedText;
+            option.selected = true;
+
+            element.appendChild(option);
+        }
+
+        function extractCityProvince(fullAddress) {
+            if (!fullAddress || fullAddress.trim() === '') {
+                return '';
+            }
+
+            const addressParts = fullAddress.split(',');
+            const filteredParts = addressParts.map(part => part.trim()).filter(part => part !== '');
+            if (filteredParts.length === 0) {
+                return 'Location not updated yet.';
+            }
+
+            return filteredParts.join(', ');
+        }
+
+        function callAPI(api) {
+            return axios.get(api)
+                .then((response) => {
+                    renderData(response.data, "city", renderDataCity);
+                })
+                .catch((error) => {
+                    console.error("Error fetching province data:", error);
+                });
+        }
+
+        function callApiDistrict(api) {
+            axios.get(api)
+                .then((response) => {
+                    renderData(response.data.districts, "district", renderDataDistrict);
+                })
+                .catch((error) => {
+                    console.error("Error fetching district data:", error);
+                });
+        }
+
+        function callApiWard(api) {
+            axios.get(api)
+                .then((response) => {
+                    renderData(response.data.wards, "ward", renderDataWard);
+                })
+                .catch((error) => {
+                    console.error("Error fetching ward data:", error);
+                });
+        }
+
+        function renderData(data, select, renderFunction) {
+            if (data && Array.isArray(data)) {
+                renderFunction(data, select);
+            } else {
+                console.error(`Invalid or missing ${select} data:`, data);
+            }
+        }
+
+        function renderDataCity(results, select) {
+            let selectElement = document.querySelector("#" + select);
+            let row = '<option disable value="" selected>Choose Provinces</option>';
+            results.forEach((element) => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`;
+            });
+            selectElement.innerHTML = row;
+        }
+
+        function renderDataDistrict(results, select) {
+            let row = '<option disable value="" selected>Choose Districts</option>';
+            results.forEach((element) => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`;
+            });
+            document.querySelector("#" + select).innerHTML = row;
+        }
+
+        function renderDataWard(results, select) {
+            let row = '<option disable value="" selected>Choose Wards</option>';
+            results.forEach((element) => {
+                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`;
+            });
+            document.querySelector("#" + select).innerHTML = row;
+        }
+
+        function getSelectedDataId(select) {
+            const selectedOption = document.querySelector(select).selectedOptions[0];
+            return selectedOption ? selectedOption.getAttribute('data-id') : null;
+        }
+    </script>
+}

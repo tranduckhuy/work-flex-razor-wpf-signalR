@@ -1,0 +1,64 @@
+﻿@page
+@model WorkFlex.Web.Pages.Authen.ForgotModel
+@{
+    Layout = "_LayoutAuthen";
+    ViewData["Title"] = "Forgot Password";
+    var failedMessage = TempData["FailedMessage"] as string;
+}
+
+<div class="container padding-bottom-3x mb-2 mt-5" style="padding-bottom:35px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="forgot">
+                <a href="~/"
+                   style="text-decoration: none; color: #555;">
+                    <i class="d-flex fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+                <br>
+                <h2>Forgot your password?</h2>
+                @if (!string.IsNullOrEmpty(failedMessage))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @failedMessage
+                    </div>
+                }
+                <p>Change your password in three easy steps. This will help you to secure your password!</p>
+                <ol class="list-unstyled">
+                    <li><span class="text-dark text-medium">1. </span>Enter your email address below.</li>
+                    <li>
+                        <span class="text-dark text-medium">2. </span>Our system will send you a Temporary Password
+                        to your email.
+                    </li>
+                    <li><span class="text-dark text-medium">3. </span>Enter the Password on the next page.</li>
+                </ol>
+            </div>
+            <br>
+            <form class="card mt-2" method="post" id="forgot-form">
+                <div class="card-body">
+                    <div class="input-box">
+                        <div class="form-group">
+                            <input class="form-control" name="email" type="text" id="email-for-pass" rules="required|email">
+                            <small class="form-text text-muted">
+                                Enter the registered email address.
+                                Then we'll email a temporary Password to this address.
+                            </small>
+                            <span class="form-message"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-submit" type="submit"
+                            style="background-color: #6dabe4; border-color: #6dabe4; color: #fff;">
+                        Get New Password
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        Validator("#forgot-form");
+    </script>
+}

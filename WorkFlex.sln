@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Web", "WorkFlex.Web\WorkFlex.Web.csproj", "{F395231D-F3F1-4F5D-B158-50C57ED700DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Web", "WorkFlex.Web\WorkFlex.Web.csproj", "{F395231D-F3F1-4F5D-B158-50C57ED700DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Domain", "WorkFlex.Domain\WorkFlex.Domain.csproj", "{2BCEE65B-50D0-403F-99E2-399E403EC18B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Domain", "WorkFlex.Domain\WorkFlex.Domain.csproj", "{2BCEE65B-50D0-403F-99E2-399E403EC18B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Desktop", "WorkFlex.Desktop\WorkFlex.Desktop.csproj", "{6011C886-E81E-4698-A46A-DB69A7DF8218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Desktop", "WorkFlex.Desktop\WorkFlex.Desktop.csproj", "{6011C886-E81E-4698-A46A-DB69A7DF8218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Infrastructure", "WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj", "{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Infrastructure", "WorkFlex.Infrastructure\WorkFlex.Infrastructure.csproj", "{6F8CF5EC-73A1-44B7-9F0E-032A9FC38619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.SignalR", "WorkFlex.SignalR\WorkFlex.SignalR.csproj", "{68E7906A-144A-4B2E-8430-5CE7178587F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.SignalR", "WorkFlex.SignalR\WorkFlex.SignalR.csproj", "{68E7906A-144A-4B2E-8430-5CE7178587F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Services", "WorkFlex.Services\WorkFlex.Services.csproj", "{B4766C6F-BDDB-4628-B5DC-35A78B27A282}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68E7906A-144A-4B2E-8430-5CE7178587F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

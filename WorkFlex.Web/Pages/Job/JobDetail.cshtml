@@ -1,0 +1,101 @@
+﻿@page "{id:guid}"
+@model WorkFlex.Web.Pages.Job.JobDetailModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Job Detail";
+}
+
+<style>
+    .job-details-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .job-details-list li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+    .job-location-salary {
+        margin-top: 5px;
+    }
+</style>
+
+<!-- Hero Area Start-->
+<div class="slider-area">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="/img/hero/about.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>@Model.JobPost.Title</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Area End -->
+<!-- Job Post Company Start -->
+<div class="job-post-company pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- Left Content -->
+            <div class="col-xl-7 col-lg-8">
+                <!-- Job Single -->
+                <div class="single-job-items mb-50">
+                    <div class="job-items">
+                        <div class="company-img company-img-details" style="width:20%;">
+                            <a href="#!"><img src="@Model.JobPost.User.Avatar" alt="Recruiter's Avatar" style="width:100px;height:100px"></a>
+                        </div>
+                        <div class="job-tittle" style="width:80%;">
+                            <a href="#!">
+                                <h4>@Model.JobPost.Title</h4>
+                            </a>
+                            <ul class="job-details-list">
+                                <li>@Model.JobPost.Industry.IndustryName</li>
+                                <li><i class="fas fa-map-marker-alt"></i><span>@Model.JobPost.JobLocation</span></li>
+                                <li class="job-location-salary">
+                                    <span>@Model.JobPost.SalaryRange</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Job Single End -->
+
+                <div class="job-post-details">
+                    <div class="post-details1 mb-50">
+                        <div class="small-section-tittle">
+                            <h4>Job Description</h4>
+                        </div>
+                        <p>@Html.Raw(Model.JobPost.JobDescription.Replace("\n", "<br />"))</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Content -->
+            <div class="col-xl-4 col-lg-4">
+                <div class="post-details3 mb-50">
+                    <div class="small-section-tittle">
+                        <h4>Job Overview</h4>
+                    </div>
+                    <ul>
+                        <li>Posted date: <span>@Model.JobPost.DisplayCreatedAt</span></li>
+                        <li>Location: <span>@Model.JobPost.DisplayBriefLocation</span></li>
+                        <li>Applicants: <span>@Model.JobPost.JobApplications.Count</span></li>
+                        <li>Job nature: <span>@Model.JobPost.JobType.TypeName</span></li>
+                        <li>Salary: <span>@Model.JobPost.SalaryRange</span></li>
+                        <li>Application date: <span>@Model.JobPost.ExpiredAt.ToString("dd/MM/yyyy")</span></li>
+                    </ul>
+                    <div class="apply-btn2">
+                        <a asp-page="/Job/JobApply" asp-route-jobPostId="@Model.JobPost.Id" class="btn">Apply Now</a>
+                        <a asp-page="/Message/Message" asp-route-otherUserId="@Model.JobPost.User.Id" class="ml-2 btn head-btn2" style="padding: 26px 44px;">Chat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Job Post Company End -->
