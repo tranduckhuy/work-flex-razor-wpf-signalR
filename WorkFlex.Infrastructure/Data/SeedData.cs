@@ -44,7 +44,8 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Ftjw6hg_1730428353803_table-img1.png?alt=media&token=fa6ddab5-418a-4cfb-ab75-2aa0d578c164",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -58,7 +59,8 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2F2q2joa_1730428345764_vendor-14.png?alt=media&token=75952a9b-a099-4ec3-acc5-3240f0839dd2",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 10, 15)
+                    CreatedAt = new DateTime(2024, 10, 15),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -72,7 +74,8 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2F17mshd_1730428341488_vendor-13.png?alt=media&token=33092b37-f077-4863-9329-63fa6e5964f7",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 12, 25)
+                    CreatedAt = new DateTime(2024, 12, 25),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -86,7 +89,8 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fwobtrg_1730428336088_vendor-11.png?alt=media&token=306e81e3-dee1-4e09-bd09-0ea22d9bcd66",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 1, 15)
+                    CreatedAt = new DateTime(2024, 1, 15),
+                    SubscriptionType = SubscriptionType.Standard
                 },
                 new User
                 {
@@ -95,8 +99,8 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$MNV7kUVAks5PkB4cMD8cNuLvONZlKt/ej7.hCdRTGyj4F/csD8oKK",
                     FirstName = "Tran Duck",
                     LastName = "Huy",
-                    Email = "huy@example.com",
-                    RoleId = 2,
+                    Email = "huytdqe170235@fpt.edu.vn",
+                    RoleId = 3,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Frijtlx_1730428289939_vendor-1.png?alt=media&token=529439ae-4bc1-4c9a-ad2a-6d97f0c5ae25",
                     BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fmau-cua-hang-tap-hoa-12-aeros.webp?alt=media&token=55cb771a-c564-4d29-b0fa-f6cccea186e2",
                     IsActive = true,
@@ -109,12 +113,13 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$CwxlScy8xNpcrGL/2sg7V.vDUC1zh.QOjZD1qefQgxmq3vn0Q7R9.",
                     FirstName = "Tran Ngoc",
                     LastName = "Sang",
-                    Email = "sang@example.com",
-                    RoleId = 2,
+                    Email = "sangtnqe170193@fpt.edu.vn",
+                    RoleId = 3,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2F9xi15_1730428296376_vendor-2.png?alt=media&token=e850aa0f-9798-45da-851a-1b4a7bc6726d",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 3, 26)
+                    CreatedAt = new DateTime(2024, 3, 26),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -123,12 +128,13 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$O/urkLFsFi/GN9s0asTeZ.3YnvDozIBPXS5vpDbl6Kvz4RsxZYRIS",
                     FirstName = "Nguyen Xuan",
                     LastName = "Quy",
-                    Email = "quy@example.com",
+                    Email = "quynxqe170239@fpt.edu.vn",
                     RoleId = 2,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fvn1m3b_1730428306808_vendor-4.png?alt=media&token=f1e61339-1c7f-4065-acbf-d49a012dc604",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 4, 3)
+                    CreatedAt = new DateTime(2024, 4, 3),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -137,12 +143,13 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$KcwDWaYdePFeLgKTwoJd7OQl6YCi9ZvCzdPDdt7lROYp2paxwpyGC",
                     FirstName = "Nguyen Nhat",
                     LastName = "Hao",
-                    Email = "hao@example.com",
+                    Email = "haonnqe170204@fpt.edu.vn",
                     RoleId = 3,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Faq8ir_1730428301407_vendor-3.png?alt=media&token=295216c1-4ea0-4a0c-8a61-3c66200f41bb",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 5, 25)
+                    CreatedAt = new DateTime(2024, 5, 25),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -151,12 +158,13 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$3hGHatEPOSTNLlvBEUMw.uxZMLNxLz74/Ls47cvbccwwlJlhFELqS",
                     FirstName = "Nguyen Dao",
                     LastName = "Minh Thuan",
-                    Email = "thuan@example.com",
+                    Email = "thuanndmqe170240@fpt.edu.vn",
                     RoleId = 3,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Ftvujfq_1730428311602_vendor-5.png?alt=media&token=65db1056-55f6-4620-990b-c3641807507f",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 6, 24)
+                    CreatedAt = new DateTime(2024, 6, 24),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -165,12 +173,13 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$aYH6ji8QMczfCJxRGoBUqeTA7Ttk1JnanbTXBiafDDrrOQcy6hK7O",
                     FirstName = "Ngo Gia",
                     LastName = "Hoang",
-                    Email = "hoang@example.com",
+                    Email = "hoangngqe170225@fpt.edu.vn",
                     RoleId = 3,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fkxakd5_1730428320184_vendor-7.png?alt=media&token=9a4cabc8-8372-45d8-9d3e-364766154550",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 7, 15)
+                    CreatedAt = new DateTime(2024, 7, 15),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -179,12 +188,13 @@ namespace WorkFlex.Infrastructure.Data
                     Password = "$2a$12$kzs6W6lPdNmhq9mAxWfov.FJAHD2YDQJgQ/oiDeeMo78LKzDExz2O",
                     FirstName = "Gia",
                     LastName = "Thinh",
-                    Email = "thinh@example.com",
+                    Email = "thinhhqgqs170196@fpt.edu.vn",
                     RoleId = 3,
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Ffc2hi5_1730428324559_vendor-9.png?alt=media&token=fa4632f1-2584-4496-9927-d0a645413638",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 8, 15)
+                    CreatedAt = new DateTime(2024, 8, 15),
+                    SubscriptionType = SubscriptionType.Premium
                 },
                 new User
                 {
@@ -198,7 +208,8 @@ namespace WorkFlex.Infrastructure.Data
                     Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fmrcf7_1730428331026_vendor-10.png?alt=media&token=9e787b31-eea6-4f38-a2c2-fa3c8a2140e1",
                     BackgroundImg = defaultBgrImg,
                     IsActive = true,
-                    CreatedAt = new DateTime(2024, 9, 11)
+                    CreatedAt = new DateTime(2024, 9, 11),
+                    SubscriptionType = SubscriptionType.Basic
                 }
             );
 
