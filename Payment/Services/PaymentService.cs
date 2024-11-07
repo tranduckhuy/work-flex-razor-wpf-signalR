@@ -1,22 +1,28 @@
 ﻿using Microsoft.Extensions.Options;
+using System.Security.Cryptography;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
 using WorkFlex.Payment.Configs.Momo.Requests;
+using WorkFlex.Payment.Configs.ZaloPay.Config;
+using WorkFlex.Payment.Configs.ZaloPay.Request;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
 using WorkFlex.Payment.Utils.Constants;
+using WorkFlex.Payment.Utils.Extensions;
 
 namespace WorkFlex.Payment.Services
 {
     public class PaymentService : IPaymentService
     {
         private readonly MomoConfig _momoConfig;
+        private readonly ZaloPayConfig _zaloConfig;
         private readonly AppDbContext _context;
 
-        public PaymentService(IOptions<MomoConfig> options, AppDbContext context)
+        public PaymentService(IOptions<MomoConfig> momoConfig, IOptions<ZaloPayConfig> zaloConfig, AppDbContext context)
         {
-            _momoConfig = options.Value;
+            _momoConfig = momoConfig.Value;
+            _zaloConfig = zaloConfig.Value;
             _context = context;
         }
 
@@ -60,6 +66,25 @@ namespace WorkFlex.Payment.Services
                             {
                                 result.Set(false, message);
                                 return result;
+                            }
+
+                            break;
+                        case nameof(PaymentMethod.ZALOPAY):
+                            int randomNumber = GetRandomNumber(1000001);
+
+                            var zaloPayment = new ZaloOneTimePaymentRequest(_zaloConfig.AppId, _zaloConfig.AppUser, 
+                                DateTime.Now.ToString("yyMMdd") + "_" + randomNumber, DateTime.Now.GetTimeStamp(),
+                                (long)request.RequiredAmount!, request.PaymentContent ?? string.Empty, "zalopayapp");
+                            zaloPayment.MakeSignature(_zaloConfig.Key1);
+
+                            var (successZalo, messageZalo) = zaloPayment.GetLink(_zaloConfig.PaymentUrl);
+                            if (successZalo)
+                            {
+                                paymentUrl = messageZalo;
+                            }
+                            else
+                            {
+                                result.Set(false, messageZalo);
                             }
 
                             break;
@@ -174,6 +199,19 @@ namespace WorkFlex.Payment.Services
             var affectedRows = await _context.SaveChangesAsync();
 
             return (affectedRows, payment.Id);
+        }
+
+        private static int GetRandomNumber(int maxValue)
+        {
+            byte[] bytes = new byte[4]; // 4 bytes for a 32-bit integer
+            using (var randomGenerator = RandomNumberGenerator.Create())
+            {
+                randomGenerator.GetBytes(bytes);
+            }
+
+            // Convert bytes to a positive integer, and use modulo to limit the range
+            int result = Math.Abs(BitConverter.ToInt32(bytes, 0)) % maxValue;
+            return result;
         }
     }
 }
