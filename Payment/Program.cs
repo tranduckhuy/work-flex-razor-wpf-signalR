@@ -51,6 +51,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors("WorkFlex.Web");
+
 app.MapControllers();
+
 
 await app.RunAsync();

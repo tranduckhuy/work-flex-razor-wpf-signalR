@@ -6,6 +6,10 @@ using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
 using WorkFlex.Payment.Services;
 using System.Net;
+using Microsoft.AspNetCore.Components.Forms;
+using WorkFlex.Payment.Configs.Responses;
+using WorkFlex.Payment.Utils.Extensions;
+using WorkFlex.Payment.Utils.Mappers;
 
 namespace Payment.Controllers
 {
@@ -42,7 +46,28 @@ namespace Payment.Controllers
         public async Task<IActionResult> CreatePayment([FromBody]CreatePaymentRequest request)
         {
             var response = await _paymentService.CreatePayment(request);
-            return Ok(response);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet]
+        [Route("MomoReturn")]
+        public async Task<IActionResult> MomoReturn([FromQuery] MomoOneTimePaymentResultRequest request)
+        {
+            string returnUrl = string.Empty;
+            var returnModel = new PaymentReturnDto();
+            var result = await _paymentService.ProcessMomoPaymentReturn(request);
+
+            if (result.Success) {
+                returnUrl = result.Data.Item2;
+                returnModel = result.Data.Item1;
+            }
+
+            return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
         }
     }
 }
