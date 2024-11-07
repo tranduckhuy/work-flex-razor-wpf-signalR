@@ -47,7 +47,6 @@ namespace WorkFlex.Web.AuthenticationFilter
             if (user == null)
             {
                 context.Result = new RedirectToPageResult("/Authen/Login");
-                return;
             }
         }
 
