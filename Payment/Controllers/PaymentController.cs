@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using WorkFlex.Payment.Configs.ZaloPay.Request;
-using WorkFlex.Payment.Configs.ZaloPay.Response;
 using WorkFlex.Payment.Configs.VnPay.Responses;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;

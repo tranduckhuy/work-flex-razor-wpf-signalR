@@ -10,7 +10,6 @@ using WorkFlex.Payment.Configs.VnPay.Requests;
 using WorkFlex.Payment.Configs.VnPay.Responses;
 using WorkFlex.Payment.Configs.ZaloPay.Config;
 using WorkFlex.Payment.Configs.ZaloPay.Request;
-using WorkFlex.Payment.Configs.ZaloPay.Response;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
@@ -379,7 +378,7 @@ namespace WorkFlex.Payment.Services
             int result = Math.Abs(BitConverter.ToInt32(bytes, 0)) % maxValue;
             return result;
         }
-        private string GenerateRandomIpAddress()
+        private static string GenerateRandomIpAddress()
         {
             Random rnd = new Random();
             int part1 = rnd.Next(1, 256);
