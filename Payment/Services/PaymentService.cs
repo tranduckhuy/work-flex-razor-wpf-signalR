@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
+using WorkFlex.Domain;
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
 using WorkFlex.Payment.Configs.Momo.Requests;
@@ -152,51 +153,47 @@ namespace WorkFlex.Payment.Services
         public async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessMomoPaymentReturn(MomoOneTimePaymentResultRequest request)
         {
             string redirectWebUrl = _momoConfig.RedirectWebUrl;
-            var result = new ApiResponse<(PaymentReturnDto, string)>();
-            result.Success = false;
+            var result = new ApiResponse<(PaymentReturnDto, string)>() { Success = false };
+            var resultData = new PaymentReturnDto();
 
             try
             {
-                var resultData = new PaymentReturnDto();
-                var isValidSignature = request.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey);
-
-                Guid paymentId = Guid.Empty;
-
-                if (isValidSignature && Guid.TryParse(request.OrderId, out paymentId))
+                if (!request.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey) ||
+                    !Guid.TryParse(request.OrderId, out Guid paymentId))
                 {
-                    var payment = _context.Payments.FirstOrDefault(p => p.Id == paymentId);
-
-                    if (payment != null)
-                    {
-
-                        if (request.ResultCode == 0)
-                        {
-                            payment.IsPaid = request.ResultCode == 0;
-                            await _context.SaveChangesAsync();
-
-                            resultData.PaymentStatus = "00";
-                            resultData.PaymentId = payment.Id.ToString();
-                            resultData.Signature = Guid.NewGuid().ToString();
-
-                            result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
-                        }
-                        else
-                        {
-                            resultData.PaymentStatus = "10";
-                            resultData.PaymentMessage = "Payment process failed";
-                        }
-                    }
+                    return CreateErrorResponse(result, resultData, "11", "Can't find payment at payment service or Invalid signature in response");
                 }
-                else
+
+                var payment = await _context.Payments.FindAsync(paymentId);
+                if (payment == null)
                 {
-                    resultData.PaymentStatus = "11";
-                    resultData.PaymentMessage = "Can't find payment at payment service or Invalid signature in response";
+                    return CreateErrorResponse(result, resultData, "11", "Payment not found");
                 }
+
+                if (request.ResultCode != 0)
+                {
+                    return CreateErrorResponse(result, resultData, "10", "Payment process failed");
+                }
+
+                payment.IsPaid = true;
+                await _context.SaveChangesAsync();
+
+                var user = await _context.Users.FindAsync(payment.UserId);
+                if (user != null)
+                {
+                    user.SubscriptionType = SubscriptionType.Premium;
+                    await _context.SaveChangesAsync();
+                }
+
+                resultData.PaymentStatus = "00";
+                resultData.PaymentId = payment.Id.ToString();
+                resultData.Signature = Guid.NewGuid().ToString();
+                result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
             }
             catch (Exception ex)
             {
                 result.Set(false, MessageContants.Error);
-                result.Errors.Add(new BaseError()
+                result.Errors.Add(new BaseError
                 {
                     Code = MessageContants.Exception,
                     Message = ex.Message
@@ -337,6 +334,15 @@ namespace WorkFlex.Payment.Services
             return result;
         }
 
+
+        private ApiResponse<(PaymentReturnDto, string)> CreateErrorResponse(ApiResponse<(PaymentReturnDto, string)> result,
+            PaymentReturnDto resultData, string status, string message)
+        {
+            resultData.PaymentStatus = status;
+            resultData.PaymentMessage = message;
+            result.Set(false, MessageContants.Error, (resultData, string.Empty));
+            return result;
+        }
 
         private async Task<(int affectedRows, Guid paymentId)> InsertPayment(CreatePaymentRequest request)
         {
