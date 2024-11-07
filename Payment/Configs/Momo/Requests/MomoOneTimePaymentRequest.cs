@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using WorkFlex.Payment.Configs.Responses;
 using WorkFlex.Payment.Utils.Helpers;
 using System.Text;
+using System.Text.Json;
+using WorkFlex.Payment.Configs.Momo.Responses;
 
-namespace WorkFlex.Payment.Configs.Requests
+namespace WorkFlex.Payment.Configs.Momo.Requests
 {
     public class MomoOneTimePaymentRequest
     {
@@ -77,7 +78,9 @@ namespace WorkFlex.Payment.Configs.Requests
             }
             else
             {
-                return (false, createPaymentLinkRes.ReasonPhrase ?? "An error occurred when getting payment link");
+                var responseContent = createPaymentLinkRes.Content.ReadAsStringAsync().Result;
+                return (false, JsonDocument.Parse(responseContent).RootElement.GetProperty("message").GetString() ??
+                        "An error occurred when getting payment link. Status Code: " + createPaymentLinkRes.StatusCode);
             }
         }
     }

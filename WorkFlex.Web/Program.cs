@@ -37,6 +37,16 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("WorkFlex.Payment", policy =>
+    {
+        policy.WithOrigins("https://localhost:7102")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -49,6 +59,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
+app.UseCors("WorkFlex.Payment");
 
 app.UseRouting();
 

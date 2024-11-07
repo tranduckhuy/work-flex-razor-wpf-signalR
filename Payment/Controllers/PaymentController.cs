@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using WorkFlex.Payment.Configs.Momo;
+using System.Net;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
 using WorkFlex.Payment.Services;
-using System.Net;
+using WorkFlex.Payment.Utils.Extensions;
 
 namespace Payment.Controllers
 {
@@ -42,7 +41,28 @@ namespace Payment.Controllers
         public async Task<IActionResult> CreatePayment([FromBody]CreatePaymentRequest request)
         {
             var response = await _paymentService.CreatePayment(request);
-            return Ok(response);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet]
+        [Route("MomoReturn")]
+        public async Task<IActionResult> MomoReturn([FromQuery] MomoOneTimePaymentResultRequest request)
+        {
+            string returnUrl = string.Empty;
+            var returnModel = new PaymentReturnDto();
+            var result = await _paymentService.ProcessMomoPaymentReturn(request);
+
+            if (result.Success) {
+                returnUrl = result.Data.Item2;
+                returnModel = result.Data.Item1;
+            }
+
+            return Redirect($"{returnUrl}?{returnModel.ToQueryString()}");
         }
     }
 }
