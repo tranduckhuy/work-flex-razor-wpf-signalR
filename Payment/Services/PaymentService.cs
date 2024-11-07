@@ -206,125 +206,89 @@ namespace WorkFlex.Payment.Services
         public async Task<ApiResponse<(PaymentReturnDto, string)>> ProcessVnpayPaymentReturn(VnPayOneTimePaymentCreateLinkResponse response)
         {
             string redirectWebUrl = _vnPayConfig.RedirectWebUrl;
-            var result = new ApiResponse<(PaymentReturnDto, string)>();
-            result.Success = false;
+            var result = new ApiResponse<(PaymentReturnDto, string)>() { Success = false };
+            var resultData = new PaymentReturnDto();
 
             try
             {
-                var resultData = new PaymentReturnDto();
                 var isValidSignature = response.isValidSignature(_vnPayConfig.HashSecret);
 
-                Guid paymentId = Guid.Empty;
-
-                if (isValidSignature && Guid.TryParse(response.vnp_TxnRef, out paymentId))
+                if (isValidSignature && Guid.TryParse(response.vnp_TxnRef, out Guid paymentId))
                 {
-                    var payment = _context.Payments.FirstOrDefault(p => p.Id == paymentId);
+                    var payment = await _context.Payments.FindAsync(paymentId);
 
-                    if (payment != null)
+                    if (payment == null)
                     {
-                        switch (response.vnp_ResponseCode)
-                        {
-                            case "00":
-                                if (response.vnp_TransactionStatus == "00")
-                                {
-                                    payment.IsPaid = true;
-                                    await _context.SaveChangesAsync();
-
-                                    resultData.PaymentStatus = "00"; 
-                                    resultData.PaymentId = payment.Id.ToString();
-                                    resultData.Signature = Guid.NewGuid().ToString();
-                                    result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
-                                }
-                                else
-                                {
-                                    resultData.PaymentStatus = response.vnp_TransactionStatus;
-                                    resultData.PaymentMessage = "Transaction failed at VNPAY gateway";
-                                }
-                                break;
-
-                            case "07":
-                                resultData.PaymentStatus = "07";
-                                resultData.PaymentMessage = "Suspicious transaction, potential fraud detected";
-                                break;
-
-                            case "09":
-                                resultData.PaymentStatus = "09";
-                                resultData.PaymentMessage = "Transaction failed due to unregistered InternetBanking account";
-                                break;
-
-                            case "10":
-                                resultData.PaymentStatus = "10";
-                                resultData.PaymentMessage = "Transaction failed due to incorrect account/card authentication";
-                                break;
-
-                            case "11":
-                                resultData.PaymentStatus = "11";
-                                resultData.PaymentMessage = "Transaction timeout";
-                                break;
-
-                            case "12":
-                                resultData.PaymentStatus = "12";
-                                resultData.PaymentMessage = "Account/card is locked";
-                                break;
-
-                            case "13":
-                                resultData.PaymentStatus = "13";
-                                resultData.PaymentMessage = "Incorrect OTP entered";
-                                break;
-
-                            case "24":
-                                resultData.PaymentStatus = "24";
-                                resultData.PaymentMessage = "Transaction cancelled by user";
-                                break;
-
-                            case "51":
-                                resultData.PaymentStatus = "51";
-                                resultData.PaymentMessage = "Insufficient account balance";
-                                break;
-
-                            case "65":
-                                resultData.PaymentStatus = "65";
-                                resultData.PaymentMessage = "Transaction limit exceeded for the day";
-                                break;
-
-                            case "75":
-                                resultData.PaymentStatus = "75";
-                                resultData.PaymentMessage = "Bank under maintenance";
-                                break;
-
-                            case "79":
-                                resultData.PaymentStatus = "79";
-                                resultData.PaymentMessage = "Incorrect payment password entered multiple times";
-                                break;
-
-                            case "99":
-                            default:
-                                resultData.PaymentStatus = "99";
-                                resultData.PaymentMessage = "Unknown error occurred";
-                                break;
-                        }
-
-                        if (!result.Success)
-                        {
-                            result.Set(false, resultData.PaymentMessage, (resultData, redirectWebUrl));
-                        }
+                        return CreateErrorResponse(result, resultData, "11", "Payment not found");
                     }
-                    else
+
+                    // Kiểm tra các mã phản hồi từ VNPay
+                    switch (response.vnp_ResponseCode)
                     {
-                        resultData.PaymentStatus = "11";
-                        resultData.PaymentMessage = "Payment not found in service or invalid signature";
+                        case "00":
+                            if (response.vnp_TransactionStatus == "00")
+                            {
+                                payment.IsPaid = true;
+                                await _context.SaveChangesAsync();
+
+                                resultData.PaymentStatus = "00";
+                                resultData.PaymentId = payment.Id.ToString();
+                                resultData.Signature = Guid.NewGuid().ToString();
+                                result.Set(true, MessageContants.OK, (resultData, redirectWebUrl));
+                            }
+                            else
+                            {
+                                return CreateErrorResponse(result, resultData, response.vnp_TransactionStatus, "Transaction failed at VNPAY gateway");
+                            }
+                            break;
+
+                        case "07":
+                            return CreateErrorResponse(result, resultData, "07", "Suspicious transaction, potential fraud detected");
+
+                        case "09":
+                            return CreateErrorResponse(result, resultData, "09", "Transaction failed due to unregistered InternetBanking account");
+
+                        case "10":
+                            return CreateErrorResponse(result, resultData, "10", "Transaction failed due to incorrect account/card authentication");
+
+                        case "11":
+                            return CreateErrorResponse(result, resultData, "11", "Transaction timeout");
+
+                        case "12":
+                            return CreateErrorResponse(result, resultData, "12", "Account/card is locked");
+
+                        case "13":
+                            return CreateErrorResponse(result, resultData, "13", "Incorrect OTP entered");
+
+                        case "24":
+                            return CreateErrorResponse(result, resultData, "24", "Transaction cancelled by user");
+
+                        case "51":
+                            return CreateErrorResponse(result, resultData, "51", "Insufficient account balance");
+
+                        case "65":
+                            return CreateErrorResponse(result, resultData, "65", "Transaction limit exceeded for the day");
+
+                        case "75":
+                            return CreateErrorResponse(result, resultData, "75", "Bank under maintenance");
+
+                        case "79":
+                            return CreateErrorResponse(result, resultData, "79", "Incorrect payment password entered multiple times");
+
+                        case "99":
+                        default:
+                            return CreateErrorResponse(result, resultData, "99", "Unknown error occurred");
                     }
                 }
                 else
                 {
-                    resultData.PaymentStatus = "11";
-                    resultData.PaymentMessage = "Payment not found in service or invalid signature";
+                    return CreateErrorResponse(result, resultData, "11", "Can't find payment at payment service or invalid signature");
                 }
             }
             catch (Exception ex)
             {
                 result.Set(false, MessageContants.Error);
-                result.Errors.Add(new BaseError()
+                result.Errors.Add(new BaseError
                 {
                     Code = MessageContants.Exception,
                     Message = ex.Message
@@ -335,7 +299,8 @@ namespace WorkFlex.Payment.Services
         }
 
 
-        private ApiResponse<(PaymentReturnDto, string)> CreateErrorResponse(ApiResponse<(PaymentReturnDto, string)> result,
+
+        private static ApiResponse<(PaymentReturnDto, string)> CreateErrorResponse(ApiResponse<(PaymentReturnDto, string)> result,
             PaymentReturnDto resultData, string status, string message)
         {
             resultData.PaymentStatus = status;
