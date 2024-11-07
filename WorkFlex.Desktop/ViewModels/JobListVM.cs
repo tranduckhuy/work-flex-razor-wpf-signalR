@@ -85,7 +85,7 @@ namespace WorkFlex.Desktop.ViewModels
         public int CurrentPage
         {
             get => _currentPage;
-            set { _currentPage = value; OnPropertyChanged(nameof(CurrentPage)); LoadJobs(); }
+            set { _currentPage = value; OnPropertyChanged(nameof(CurrentPage)); _ = LoadJobs(); }
         }
 
         // Command cho việc chuyển trang
