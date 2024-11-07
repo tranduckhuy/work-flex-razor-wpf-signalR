@@ -11,8 +11,7 @@ namespace WorkFlex.Payment.Utils.Helpers
             using (var hmacSha256 = new System.Security.Cryptography.HMACSHA256(keyBytes))
             {
                 byte[] hashBytes = hmacSha256.ComputeHash(dataBytes);
-                string hex = BitConverter.ToString(hashBytes).Replace("-", string.Empty).ToLower();
-                return hex;
+                return BitConverter.ToString(hashBytes).Replace("-", string.Empty).ToLower();
             }
         }
     }

@@ -2,21 +2,26 @@
 using WorkFlex.Infrastructure.Data;
 using WorkFlex.Payment.Configs.Momo;
 using WorkFlex.Payment.Configs.Requests;
+using WorkFlex.Payment.Configs.ZaloPay.Config;
+using WorkFlex.Payment.Configs.ZaloPay.Request;
 using WorkFlex.Payment.Dtos;
 using WorkFlex.Payment.RequestModels;
 using WorkFlex.Payment.ResponseModels;
 using WorkFlex.Payment.Utils.Constants;
+using WorkFlex.Payment.Utils.Helpers;
 
 namespace WorkFlex.Payment.Services
 {
     public class PaymentService : IPaymentService
     {
         private readonly MomoConfig _momoConfig;
+        private readonly ZaloPayConfig _zaloConfig;
         private readonly AppDbContext _context;
 
-        public PaymentService(IOptions<MomoConfig> options, AppDbContext context)
+        public PaymentService(IOptions<MomoConfig> momoConfig, IOptions<ZaloPayConfig> zaloConfig, AppDbContext context)
         {
-            _momoConfig = options.Value;
+            _momoConfig = momoConfig.Value;
+            _zaloConfig = zaloConfig.Value;
             _context = context;
         }
 
@@ -59,6 +64,26 @@ namespace WorkFlex.Payment.Services
                             else
                             {
                                 result.Set(false, message);
+                            }
+
+                            break;
+                        case nameof(PaymentMethod.ZALOPAY):
+                            var random = new Random();
+                            int randomNumber = random.Next(1000000);
+
+                            var zaloPayment = new ZaloOneTimePaymentRequest(_zaloConfig.AppId, _zaloConfig.AppUser, 
+                                DateTime.Now.ToString("yyMMdd") + "_" + randomNumber, DateTime.Now.GetTimeStamp(),
+                                (long)request.RequiredAmount!, request.PaymentContent ?? string.Empty, "zalopayapp");
+                            zaloPayment.MakeSignature(_zaloConfig.Key1);
+
+                            var (successZalo, messageZalo) = zaloPayment.GetLink(_zaloConfig.PaymentUrl);
+                            if (successZalo)
+                            {
+                                paymentUrl = messageZalo;
+                            }
+                            else
+                            {
+                                result.Set(false, messageZalo);
                             }
 
                             break;
