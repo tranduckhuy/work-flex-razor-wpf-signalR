@@ -60,7 +60,7 @@ namespace WorkFlex.Payment.Services
                                 OrderInfo = request.PaymentContent,
                                 RedirectUrl = _momoConfig.RedirectUrl,
                                 IpnUrl = _momoConfig.IpnUrl,
-                                RequestType = RequestType.PayWithATM
+                                RequestType = RequestType.CaptureWallet
                             };
 
                             momoPayment.MakeSignature(_momoConfig.AccessKey, _momoConfig.SecretKey);
@@ -277,6 +277,13 @@ namespace WorkFlex.Payment.Services
                         {
                             payment.IsPaid = request.Status == 1;
                             await _context.SaveChangesAsync();
+
+                            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == payment.UserId);
+                            if (user != null)
+                            {
+                                user.SubscriptionType = SubscriptionType.Premium;
+                                await _context.SaveChangesAsync();
+                            }
 
                             resultData.PaymentStatus = "00";
                             resultData.PaymentId = payment.Id.ToString();

@@ -1,3 +1,4 @@
+using WorkFlex.Domain;
 using WorkFlex.Domain.Entities;
 
 namespace WorkFlex.Services.DTOs
@@ -33,6 +34,8 @@ namespace WorkFlex.Services.DTOs
         public bool IsActive { get; set; }
 
         public bool IsRecruiterRequestPending { get; set; }
+
+        public SubscriptionType SubscriptionType { get; set; }
 
         public Role Role { get; set; } = null!;
 

@@ -1,9 +1,11 @@
 ﻿@Html.AntiForgeryToken()
 @using WorkFlex.Infrastructure.Constants
+@using WorkFlex.Domain
 @{
     var isLoggedIn = !string.IsNullOrEmpty(ViewContext.HttpContext.Session.GetString("Username"));
     var userId = ViewContext.HttpContext.Session.GetString("Id");
     var avatar = ViewContext.HttpContext.Session.GetString("Avatar");
+    var subcriptionType = ViewContext.HttpContext.Session.GetString("Subscription");
     byte[]? roleIdBytes = ViewContext.HttpContext.Session.Get("Role");
     var roleId = roleIdBytes != null ? BitConverter.ToInt32(roleIdBytes, 0) : 0;
 }
@@ -99,8 +101,12 @@
                                         <a href="/Message/Message" class="header__msg-btn">
                                             <i class="fas fa-comments"></i>
                                         </a>
-                                        <div class="header__avt-block">
+                                        <div class="header__avt-block" style="@(subcriptionType == SubscriptionType.Premium.ToString() ? "border:2px solid #e6cc00" : "")">
                                             <img src="@avatar" alt="User's Avatar" class="header__avt" />
+                                            @if (subcriptionType == SubscriptionType.Premium.ToString())
+                                            {
+                                                <img src="~/img/icon/crown.svg" alt="Crown" class="header__crown" />
+                                            }
                                             <i class="fas fa-chevron-down header__avt-icon" style="font-size:14px;"></i>
                                             <ul class="submenu">
                                                 <li><a asp-page="/User/Profile" asp-route-userId="@userId">Profile</a></li>
