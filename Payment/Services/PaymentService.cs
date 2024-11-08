@@ -167,7 +167,7 @@ namespace WorkFlex.Payment.Services
                 request,
                 req => req.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey), // Validate signature for Momo
                 req => Guid.Parse(req.OrderId!), // Get payment ID from the order ID
-                req => req.ResultCode.ToString(), // Get the result code from the request
+                req => req.ResultCode == 0 ? "00" : "10", // Get the result code from the request
                 req => req.ResultCode == 0 ? "00" : "10", // If ResultCode == 0, it is considered successful
                 _momoConfig.RedirectWebUrl // Redirect URL after payment processing
             );
