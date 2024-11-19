@@ -60,7 +60,7 @@ namespace WorkFlex.Payment.Services
                                 OrderInfo = request.PaymentContent,
                                 RedirectUrl = _momoConfig.RedirectUrl,
                                 IpnUrl = _momoConfig.IpnUrl,
-                                RequestType = RequestType.PayWithATM
+                                RequestType = RequestType.CaptureWallet
                             };
 
                             momoPayment.MakeSignature(_momoConfig.AccessKey, _momoConfig.SecretKey);
@@ -167,7 +167,7 @@ namespace WorkFlex.Payment.Services
                 request,
                 req => req.IsValidSignature(_momoConfig.AccessKey, _momoConfig.SecretKey), // Validate signature for Momo
                 req => Guid.Parse(req.OrderId!), // Get payment ID from the order ID
-                req => req.ResultCode.ToString(), // Get the result code from the request
+                req => req.ResultCode == 0 ? "00" : "10", // Get the result code from the request
                 req => req.ResultCode == 0 ? "00" : "10", // If ResultCode == 0, it is considered successful
                 _momoConfig.RedirectWebUrl // Redirect URL after payment processing
             );
@@ -277,6 +277,13 @@ namespace WorkFlex.Payment.Services
                         {
                             payment.IsPaid = request.Status == 1;
                             await _context.SaveChangesAsync();
+
+                            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == payment.UserId);
+                            if (user != null)
+                            {
+                                user.SubscriptionType = SubscriptionType.Premium;
+                                await _context.SaveChangesAsync();
+                            }
 
                             resultData.PaymentStatus = "00";
                             resultData.PaymentId = payment.Id.ToString();

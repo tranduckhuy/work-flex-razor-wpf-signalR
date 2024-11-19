@@ -1,9 +1,13 @@
 ﻿@page "/"
 @model IndexModel
+@using WorkFlex.Domain
 @{
     ViewData["Title"] = "Home";
+
+    var subcriptionType = ViewContext.HttpContext.Session.GetString("Subscription");
 }
 
+<div id="toast"></div>
 <!-- slider Area Start-->
 <div class="slider-area ">
     <!-- Mobile Menu -->
@@ -46,7 +50,6 @@
     </div>
 </div>
 <!-- slider Area End-->
-
 <!-- Our Services Start -->
 <div class="our-services section-pad-t30">
     <div class="container">
@@ -161,7 +164,6 @@
     </div>
 </div>
 <!-- Our Services End -->
-
 <!-- Premium Plan Start -->
 <div class="home-blog-area" data-background="/img/gallery/how-applybg.png">
     <div class="container">
@@ -192,7 +194,11 @@
                 <section class="price__item">
                     <p class="price-item__type" style="margin-bottom: 0">Premium</p>
                     <p class="price-item__price">$3.99</p>
-                    <a asp-page="/Payment/PaymentCheckout" class="btn price-item__btn"> Purchase Now </a>
+                    <a asp-page="/Payment/PaymentCheckout"
+                       class="btn price-item__btn"
+                       style="@(subcriptionType == SubscriptionType.Premium.ToString() ? "opacity:0.6;pointer-events:none" : "")">
+                        Purchase Now
+                    </a>
                     <ul class="price-item__list">
                         <li class="price-item__item">Interview Simulator</li>
                         <li class="price-item__item">Interview Preparation</li>
@@ -208,7 +214,6 @@
     </div>
 </div>
 <!-- Premium Plan End -->
-
 <!-- Featured_job_start -->
 <section class="featured-job-area feature-padding">
     <div class="container">
@@ -308,7 +313,6 @@
     </div>
 </section>
 <!-- Featured_job_end -->
-
 <!-- How  Apply Process Start-->
 <div class="apply-process-area apply-bg pt-150 pb-150" data-background="/img/gallery/how-applybg.png">
     <div class="container">
@@ -360,7 +364,6 @@
     </div>
 </div>
 <!-- How  Apply Process End-->
-
 <!-- Testimonial Start -->
 <div class="testimonial-area testimonial-padding">
     <div class="container">
@@ -425,7 +428,6 @@
     </div>
 </div>
 <!-- Testimonial End -->
-
 <!-- Online CV Area Start -->
 <div class="online-cv cv-bg section-overly pt-90 pb-120" data-background="/img/gallery/cv_bg.jpg">
     <div class="container">
@@ -441,7 +443,6 @@
     </div>
 </div>
 <!-- Online CV Area End-->
-
 <!-- Support Company Start-->
 <div class="support-company-area support-padding fix" style="margin: 190px 0;">
     <div class="container">
@@ -473,3 +474,43 @@
     </div>
 </div>
 <!-- Support Company End-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function showToast(message, type = "info") {
+            if (typeof toast === "function") {
+                toast({
+                    title: type === "success" ? "Success" : "Error",
+                    message: message,
+                    type: type,
+                    duration: 3000,
+                });
+            } else {
+                console.error("Toast function is not available.");
+            }
+        }
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const paymentStatus = getQueryParam("PaymentStatus");
+        const paymentMessage = getQueryParam("PaymentMessage") || "Payment status not provided.";
+
+        if (paymentStatus) {
+            if (paymentStatus === "00") {
+                showToast("Payment successful!", "success");
+            } else if (paymentStatus === "10") {
+                showToast(paymentMessage || "Payment failed.", "danger");
+            } else {
+                showToast("Unknown payment status.", "warning");
+            }
+
+            const url = new URL(window.location.href);
+            url.searchParams.delete("PaymentStatus");
+            url.searchParams.delete("PaymentMessage");
+            window.history.replaceState({}, document.title, url.pathname);
+        }
+    });
+</script>

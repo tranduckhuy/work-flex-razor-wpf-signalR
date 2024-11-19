@@ -5,9 +5,7 @@
     ViewData["Title"] = "Payment";
 }
 
-@{
-    var userId = ViewContext.HttpContext.Session.GetString("Id");
-}
+<div id="toast"></div>
 
 <!-- Hero Area Start-->
 <div class="slider-area ">
@@ -101,7 +99,7 @@
         </div>
     </div>
 </section>
-
+<!-- ================ Payment checkout section end ================= -->
 
 <script>
     function showToast(message) {
@@ -137,7 +135,7 @@
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
         const paymentMethodElement = document.querySelector('input[name="paymentMethod"]:checked');
-        const userId = "2AF1BD7B-1923-4C3D-B560-9F9051DCEDCD";
+        const userId = '@ViewContext.HttpContext.Session.GetString("Id")';
 
         if (!validateInfo(name, phone, email, userId, paymentMethodElement)) {
             return;
@@ -164,6 +162,3 @@
     }
 </script>
 
-
-
-<!-- ================ Payment checkout section end ================= -->
