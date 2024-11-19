@@ -152,6 +152,7 @@ namespace WorkFlex.Web.Pages.Authen
             HttpContext.Session.SetString(AppConstants.NAME, user.FirstName + " " + user.LastName);
             HttpContext.Session.SetString(AppConstants.AVATAR, user.Avatar);
             HttpContext.Session.SetString(AppConstants.LOCATION, _addressHelper.ExtractCityProvince(user.Location));
+            HttpContext.Session.SetString(AppConstants.SUBSCRIPTION, user.SubscriptionType.ToString());
             byte[] roleIdBytes = BitConverter.GetBytes(user.RoleId);
             HttpContext.Session.Set(AppConstants.ROLE, roleIdBytes);
         }

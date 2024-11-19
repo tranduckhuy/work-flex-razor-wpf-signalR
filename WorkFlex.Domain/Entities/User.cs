@@ -40,6 +40,9 @@ namespace WorkFlex.Domain.Entities
 
         [Required]
         public int RoleId { get; set; }
+
+        public SubscriptionType SubscriptionType { get; set; } = SubscriptionType.Basic;    
+
         public bool IsLock { get; set; }
         public bool IsActive { get; set; }
         public bool IsRecruiterRequestPending { get; set; }
@@ -53,5 +56,6 @@ namespace WorkFlex.Domain.Entities
         public virtual ICollection<Conversation> ConversationsAsUserTwo { get; set; } = [];
         public virtual ICollection<ConversationReply> ConversationReplies { get; set; } = [];
         public virtual ICollection<JobApplication> JobApplications { get; set; } = [];
+        public virtual ICollection<Payment> Payments { get; set; } = [];
     }
 }

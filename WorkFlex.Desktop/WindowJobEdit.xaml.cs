@@ -50,7 +50,7 @@ namespace WorkFlex.Desktop
                 JobPostDto.JobTypeId = (int)comboBoxJobType.SelectedValue;
                 JobPostDto.IndustryId = (int)comboBoxIndustry.SelectedValue;
                 JobPostDto.JobLocation = txtBoxLocation.Text;
-                JobPostDto.ExpiredAt = datePickerExpiredAt.SelectedDate.Value;
+                JobPostDto.ExpiredAt = datePickerExpiredAt.SelectedDate!.Value;
 
                 string[] parts = txtBoxSalaryRange.Text.Split('-');
                 if (parts.Length == 2 &&
