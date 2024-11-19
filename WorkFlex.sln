@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.SignalR", "WorkFle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlex.Services", "WorkFlex.Services\WorkFlex.Services.csproj", "{B4766C6F-BDDB-4628-B5DC-35A78B27A282}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlex.Payment", "Payment\WorkFlex.Payment.csproj", "{C8514B22-8AF2-4FDF-AEE6-AF9EC09BDA31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4766C6F-BDDB-4628-B5DC-35A78B27A282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8514B22-8AF2-4FDF-AEE6-AF9EC09BDA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8514B22-8AF2-4FDF-AEE6-AF9EC09BDA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8514B22-8AF2-4FDF-AEE6-AF9EC09BDA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8514B22-8AF2-4FDF-AEE6-AF9EC09BDA31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

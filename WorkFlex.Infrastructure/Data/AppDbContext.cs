@@ -12,6 +12,7 @@ namespace WorkFlex.Infrastructure.Data
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<ConversationReply> ConversationReplies { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -39,6 +40,17 @@ namespace WorkFlex.Infrastructure.Data
                 .HasOne(u => u.Profile)
                 .WithOne(p => p.User)
                 .HasForeignKey<Profile>(p => p.UserId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Payments)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.RequiredAmount)
+                .HasColumnType("decimal(19, 2)");
+
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.JobPosts)

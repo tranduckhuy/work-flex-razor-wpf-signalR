@@ -101,70 +101,70 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2529),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8812),
                             IndustryName = "Software Development",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2533),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8816),
                             IndustryName = "Artificial Intelligence",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2534),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8818),
                             IndustryName = "Healthcare",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2535),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8819),
                             IndustryName = "Finance",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2536),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8820),
                             IndustryName = "Transportation",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2537),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8822),
                             IndustryName = "Agriculture",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2538),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8823),
                             IndustryName = "Customer Service",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2540),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8824),
                             IndustryName = "Marketing",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2541),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8825),
                             IndustryName = "Education",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2542),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8826),
                             IndustryName = "Logistics",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -208,13 +208,13 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("887d9ab6-b7b0-4e27-8b7c-938102c30db3"),
-                            ApplicationDate = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2730),
+                            Id = new Guid("9f0f3a3a-205b-4ae5-9cc1-d4a4303a962e"),
+                            ApplicationDate = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(9102),
                             CvFile = "path/to/cv.pdf",
                             Description = "",
-                            JobPostId = new Guid("aaf5c5d4-808a-4e9e-a528-fdbf7bf5fae4"),
+                            JobPostId = new Guid("bb1a3759-0d99-4014-a7a6-7bee94d53d4d"),
                             Status = 2,
-                            UserId = new Guid("01cdf2af-31d4-4185-8157-9390cf4a7e6f")
+                            UserId = new Guid("2af1bd7b-1923-4c3d-b560-9f9051dcedcd")
                         });
                 });
 
@@ -277,303 +277,303 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("aaf5c5d4-808a-4e9e-a528-fdbf7bf5fae4"),
+                            Id = new Guid("bb1a3759-0d99-4014-a7a6-7bee94d53d4d"),
                             CreatedAt = new DateTime(2024, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2590),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8874),
                             IndustryId = 4,
                             JobDescription = "Tổng quan vị trí:\n- Tìm kiếm và phát triển khách hàng mới cho tạp hóa.\n- Đạt được mục tiêu doanh số hàng tháng của cửa hàng.\n- Hỗ trợ khách hàng trong quá trình mua sắm tại tạp hóa.\n\nYêu cầu ứng viên:\n- Có kinh nghiệm trong lĩnh vực bán hàng hoặc tạp hóa.\n- Kỹ năng giao tiếp tốt và thân thiện với khách hàng.\n- Có khả năng làm việc theo nhóm và độc lập.",
                             JobLocation = "Tạp Hóa Anh Ba, Đường Lê Lợi, Phường Trần Phú, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2589),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8873),
                             SalaryRange = "100 - 150",
                             Status = 0,
                             Title = "Nhân Viên Bán Hàng Tạp Hóa Anh Ba",
-                            UserId = new Guid("964a1deb-d00f-4801-83c7-0917f7d5db0b")
+                            UserId = new Guid("6ba8ae20-95b9-4bfb-b8dd-73cc81146ae3")
                         },
                         new
                         {
-                            Id = new Guid("356eb53c-430d-4e15-8dd8-03ddb471dc38"),
+                            Id = new Guid("42d960d1-9f78-49e4-97c6-98ed62d52d70"),
                             CreatedAt = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2603),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8894),
                             IndustryId = 1,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ kỹ thuật cho các sản phẩm công nghệ.\n- Giải quyết các sự cố kỹ thuật của khách hàng.\n- Tham gia vào các dự án nhỏ theo yêu cầu.\n\nYêu cầu ứng viên:\n- Có kiến thức về công nghệ thông tin.\n- Kỹ năng giải quyết vấn đề tốt.\n- Có khả năng làm việc độc lập.",
                             JobLocation = "Tòa nhà B, Đường Trần Hưng Đạo, Phường Hải Cảng, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2602),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8893),
                             SalaryRange = "700 - 1000",
                             Status = 0,
                             Title = "Nhân Viên Kỹ Thuật Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("f031be96-bdad-4a6e-bf79-26f259cc8762"),
+                            Id = new Guid("008e0aac-7601-4036-9a9a-94833ca0d9ca"),
                             CreatedAt = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2608),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8900),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ lập kế hoạch và thực hiện các chiến dịch marketing.\n- Nghiên cứu thị trường và phân tích dữ liệu khách hàng.\n- Theo dõi và báo cáo kết quả chiến dịch.\n\nYêu cầu ứng viên:\n- Sinh viên năm cuối hoặc mới tốt nghiệp chuyên ngành marketing.\n- Kỹ năng giao tiếp tốt.\n- Có khả năng làm việc nhóm.",
                             JobLocation = "Tòa nhà C, Đường Nguyễn Huệ, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 3,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2607),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8900),
                             SalaryRange = "400 - 600",
                             Status = 0,
                             Title = "Thực Tập Sinh Marketing",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("4d8b3af8-045a-4b2e-9ea2-e10306ce4505"),
+                            Id = new Guid("8899a774-96f7-4286-baeb-284be3ab29af"),
                             CreatedAt = new DateTime(2024, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2614),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8906),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ khách hàng qua điện thoại và email.\n- Giải quyết các vấn đề của khách hàng.\n- Cung cấp thông tin về sản phẩm và dịch vụ.\n\nYêu cầu ứng viên:\n- Kỹ năng giao tiếp và lắng nghe tốt.\n- Có khả năng làm việc dưới áp lực.\n- Chịu khó và cầu tiến.",
                             JobLocation = "Tòa nhà D, Đường Phạm Ngũ Lão, Phường Trần Phú, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2614),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8905),
                             SalaryRange = "500 - 800",
                             Status = 0,
                             Title = "Nhân Viên Hỗ Trợ Khách Hàng Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("3a157b16-6a70-420d-883c-57a0d86c7aa6"),
+                            Id = new Guid("9c66ad77-530d-47e0-bde5-e0da3f0b1b7a"),
                             CreatedAt = new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2619),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8911),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Tìm kiếm khách hàng và giới thiệu sản phẩm.\n- Đạt được chỉ tiêu doanh số tháng.\n- Duy trì mối quan hệ với khách hàng hiện tại.\n\nYêu cầu ứng viên:\n- Có kinh nghiệm trong lĩnh vực kinh doanh.\n- Kỹ năng giao tiếp tốt.\n- Có khả năng làm việc độc lập và theo nhóm.",
                             JobLocation = "Tòa nhà E, Đường Nguyễn Công Trứ, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2618),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8910),
                             SalaryRange = "600 - 900",
                             Status = 0,
                             Title = "Nhân Viên Kinh Doanh Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("22a6be54-599e-42b6-91f4-76cd86f11d95"),
+                            Id = new Guid("702ecc2f-9294-4d79-a56e-dcc71bde5d46"),
                             CreatedAt = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2623),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8922),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ lập kế hoạch và thực hiện các chiến dịch marketing.\n- Phân tích dữ liệu và báo cáo kết quả.\n- Tham gia các hoạt động quảng bá sản phẩm.\n\nYêu cầu ứng viên:\n- Có kiến thức về marketing.\n- Kỹ năng phân tích và giao tiếp tốt.\n- Chịu khó và ham học hỏi.",
                             JobLocation = "Tòa nhà F, Đường Lý Thường Kiệt, Phường Xuân Diệu, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2623),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8921),
                             SalaryRange = "500 - 800",
                             Status = 0,
                             Title = "Nhân Viên Marketing Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("3ec378b9-58af-46f1-8b4f-0b1b6ae07c8b"),
+                            Id = new Guid("c4a24c83-c62e-4753-95a9-509564bd9e20"),
                             CreatedAt = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2628),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8927),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Tư vấn sản phẩm cho khách hàng.\n- Hỗ trợ giải quyết thắc mắc của khách hàng.\n- Cập nhật thông tin về sản phẩm mới.\n\nYêu cầu ứng viên:\n- Kỹ năng giao tiếp tốt.\n- Có khả năng làm việc nhóm.\n- Chịu khó và nhiệt tình.",
                             JobLocation = "Tòa nhà G, Đường Đống Đa, Phường Bình Định, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2627),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8927),
                             SalaryRange = "600 - 900",
                             Status = 0,
                             Title = "Nhân Viên Tư Vấn Khách Hàng Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("10658d31-007c-41e1-8832-ad87dd432b04"),
+                            Id = new Guid("51a2536c-15f8-4741-b7aa-19bceb896c6b"),
                             CreatedAt = new DateTime(2024, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2632),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8934),
                             IndustryId = 1,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ kỹ thuật cho các sản phẩm công nghệ.\n- Giải quyết các sự cố kỹ thuật.\n- Tham gia vào các dự án nhỏ theo yêu cầu.\n\nYêu cầu ứng viên:\n- Có kiến thức về kỹ thuật.\n- Kỹ năng giải quyết vấn đề tốt.\n- Có khả năng làm việc độc lập.",
                             JobLocation = "Tòa nhà H, Đường Phạm Văn Đồng, Phường Trần Phú, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2632),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8933),
                             SalaryRange = "700 - 1000",
                             Status = 0,
                             Title = "Nhân Viên Kỹ Thuật Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("5963b1b4-cf17-46d7-8698-87efc80c69fd"),
+                            Id = new Guid("d7d2553b-fb84-4c69-9fbf-309618219440"),
                             CreatedAt = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2636),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8940),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ lập kế hoạch và thực hiện các chiến dịch marketing.\n- Phân tích và báo cáo kết quả chiến dịch.\n- Tham gia vào các hoạt động quảng bá sản phẩm.\n\nYêu cầu ứng viên:\n- Có kiến thức về marketing.\n- Kỹ năng phân tích và giao tiếp tốt.\n- Chịu khó và ham học hỏi.",
                             JobLocation = "Tòa nhà I, Đường Nguyễn Thái Học, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2636),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8939),
                             SalaryRange = "600 - 900",
                             Status = 0,
                             Title = "Nhân Viên Hỗ Trợ Marketing Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("d3273a66-e8a0-4f42-a803-3d315b3cffd6"),
+                            Id = new Guid("4a8232f3-39be-4096-8319-5fe7ae4ac394"),
                             CreatedAt = new DateTime(2024, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2641),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8948),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ thực hiện các kế hoạch kinh doanh.\n- Nghiên cứu thị trường và phân tích dữ liệu khách hàng.\n- Theo dõi và báo cáo kết quả.\n\nYêu cầu ứng viên:\n- Sinh viên năm cuối hoặc mới tốt nghiệp chuyên ngành kinh doanh.\n- Kỹ năng giao tiếp tốt.\n- Có khả năng làm việc nhóm.",
                             JobLocation = "Tòa nhà J, Đường Nguyễn Công Trứ, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 3,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2640),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8947),
                             SalaryRange = "400 - 600",
                             Status = 0,
                             Title = "Thực Tập Sinh Kinh Doanh",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("d07d179a-f1c0-42a0-9559-eecf049e6d0b"),
+                            Id = new Guid("b2d85e01-cf15-4ee9-817d-a07b21c9732c"),
                             CreatedAt = new DateTime(2024, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2645),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8954),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ lập kế hoạch và thực hiện các chiến dịch marketing số.\n- Theo dõi và phân tích dữ liệu trên các kênh truyền thông.\n- Cập nhật thông tin về sản phẩm và dịch vụ.\n\nYêu cầu ứng viên:\n- Sinh viên năm cuối hoặc mới tốt nghiệp chuyên ngành marketing.\n- Kỹ năng phân tích và giao tiếp tốt.\n- Chịu khó và nhiệt tình.",
                             JobLocation = "Tòa nhà K, Đường Trần Phú, Phường Trần Phú, Quy Nhơn, Bình Định",
                             JobTypeId = 3,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2645),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8953),
                             SalaryRange = "400 - 600",
                             Status = 0,
                             Title = "Thực Tập Sinh Digital Marketing",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("e337350f-c8bd-4a3a-82e6-57f37193472b"),
+                            Id = new Guid("756c1518-8353-4a12-b69b-a29363226958"),
                             CreatedAt = new DateTime(2024, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2652),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8959),
                             IndustryId = 1,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ kỹ thuật trong các dự án IT.\n- Học hỏi và phát triển kỹ năng chuyên môn.\n- Tham gia vào các công việc hàng ngày của nhóm kỹ thuật.\n\nYêu cầu ứng viên:\n- Sinh viên năm cuối hoặc mới tốt nghiệp chuyên ngành IT.\n- Có kiến thức cơ bản về lập trình.\n- Nhiệt tình và ham học hỏi.",
                             JobLocation = "Tòa nhà L, Đường Lý Thường Kiệt, Phường Xuân Diệu, Quy Nhơn, Bình Định",
                             JobTypeId = 3,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2651),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8958),
                             SalaryRange = "400 - 600",
                             Status = 0,
                             Title = "Thực Tập Sinh Kỹ Thuật IT",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("d4775525-620f-4e4a-9613-825f914c7c3d"),
+                            Id = new Guid("c7919cd3-c973-4771-bdae-b7d965dfebe6"),
                             CreatedAt = new DateTime(2024, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2656),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8964),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Lập kế hoạch và thực hiện các chiến dịch marketing.\n- Quản lý ngân sách marketing và báo cáo kết quả.\n- Phân tích xu hướng thị trường và nhu cầu khách hàng.\n\nYêu cầu ứng viên:\n- Tối thiểu 3 năm kinh nghiệm trong lĩnh vực marketing.\n- Kỹ năng lãnh đạo và giao tiếp tốt.\n- Tốt nghiệp chuyên ngành marketing hoặc tương đương.",
                             JobLocation = "Tòa nhà M, Đường Phạm Ngũ Lão, Phường Trần Phú, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2656),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8963),
                             SalaryRange = "2500 - 3500",
                             Status = 0,
                             Title = "Quản Lý Marketing",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("8d59d61c-722c-4e74-8e05-e12e21defecb"),
+                            Id = new Guid("ed4afb35-486d-4aad-85f0-fe129d9b1c74"),
                             CreatedAt = new DateTime(2024, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2660),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8969),
                             IndustryId = 1,
                             JobDescription = "Tổng quan vị trí:\n- Phân tích dữ liệu để đưa ra quyết định chiến lược.\n- Tạo báo cáo và trình bày kết quả phân tích.\n- Hỗ trợ các bộ phận khác trong việc sử dụng dữ liệu.\n\nYêu cầu ứng viên:\n- Kinh nghiệm trong phân tích dữ liệu.\n- Kỹ năng sử dụng các công cụ phân tích và báo cáo.\n- Tốt nghiệp chuyên ngành thống kê, kinh tế hoặc tương đương.",
                             JobLocation = "Tòa nhà N, Đường Trần Hưng Đạo, Phường Hải Cảng, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2660),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8969),
                             SalaryRange = "2000 - 3000",
                             Status = 0,
                             Title = "Chuyên Viên Phân Tích Dữ Liệu",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("d2337c0f-d8c5-4166-ab7f-9a5323700ccf"),
+                            Id = new Guid("0bdd0906-19a8-4352-99c8-df1df481183c"),
                             CreatedAt = new DateTime(2024, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2665),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8974),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Phát triển và duy trì mối quan hệ với khách hàng.\n- Đạt được mục tiêu doanh số hàng tháng.\n- Phân tích nhu cầu của khách hàng để đề xuất các giải pháp phù hợp.\n\nYêu cầu ứng viên:\n- Kinh nghiệm trong lĩnh vực kinh doanh.\n- Kỹ năng giao tiếp và thuyết phục tốt.\n- Tốt nghiệp chuyên ngành kinh tế hoặc tương đương.",
                             JobLocation = "Tòa nhà O, Đường Đống Đa, Phường Bình Định, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2664),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8974),
                             SalaryRange = "2500 - 3500",
                             Status = 0,
                             Title = "Chuyên Viên Kinh Doanh",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("85a581a2-fa8e-4b21-91d8-70fdc9679ae9"),
+                            Id = new Guid("796aec43-40b5-4a02-a2bd-728587183aa3"),
                             CreatedAt = new DateTime(2024, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2669),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8980),
                             IndustryId = 1,
                             JobDescription = "Tổng quan vị trí:\n- Phát triển và duy trì các ứng dụng phần mềm.\n- Làm việc với các nhóm để phát triển sản phẩm.\n- Thực hiện kiểm thử và sửa lỗi phần mềm.\n\nYêu cầu ứng viên:\n- Có ít nhất 2 năm kinh nghiệm lập trình.\n- Thành thạo một hoặc nhiều ngôn ngữ lập trình.\n- Kỹ năng làm việc nhóm và giải quyết vấn đề tốt.",
                             JobLocation = "Tòa nhà P, Đường Nguyễn Thái Học, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2668),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8979),
                             SalaryRange = "3000 - 4000",
                             Status = 0,
                             Title = "Kỹ Sư Phần Mềm",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("565c219c-1f27-466a-92a9-7d202f425a0c"),
+                            Id = new Guid("93734c3e-8f85-4986-9612-19af729a3604"),
                             CreatedAt = new DateTime(2024, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2673),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8985),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Lập kế hoạch và giám sát tiến độ dự án.\n- Quản lý nguồn lực và ngân sách dự án.\n- Đảm bảo các mục tiêu dự án được thực hiện đúng hạn.\n\nYêu cầu ứng viên:\n- Tối thiểu 5 năm kinh nghiệm trong quản lý dự án.\n- Kỹ năng lãnh đạo và quản lý tốt.\n- Tốt nghiệp chuyên ngành quản trị kinh doanh hoặc tương đương.",
                             JobLocation = "Tòa nhà Q, Đường Nguyễn Công Trứ, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2672),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8984),
                             SalaryRange = "4000 - 5000",
                             Status = 0,
                             Title = "Giám Đốc Dự Án",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("b3c7934b-86ff-424a-8e90-8c00bd0c24dd"),
+                            Id = new Guid("4f9715a8-682b-4f4a-a9a5-1e2c9735dad7"),
                             CreatedAt = new DateTime(2024, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2677),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8993),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Tư vấn và quản lý các dịch vụ tài chính cho khách hàng.\n- Phân tích và đánh giá tình hình tài chính của khách hàng.\n- Xây dựng các kế hoạch tài chính phù hợp.\n\nYêu cầu ứng viên:\n- Kinh nghiệm trong lĩnh vực tài chính hoặc ngân hàng.\n- Kỹ năng giao tiếp và thuyết phục tốt.\n- Tốt nghiệp chuyên ngành tài chính hoặc tương đương.",
                             JobLocation = "Tòa nhà R, Đường Trần Nhân Tông, Phường Trần Phú, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2676),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8992),
                             SalaryRange = "3500 - 4500",
                             Status = 0,
                             Title = "Chuyên Viên Tư Vấn Tài Chính",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("2a487838-7992-42e9-b267-789e0b8e00f2"),
+                            Id = new Guid("f7948a58-cbd7-4482-987b-3d2ed01a3eee"),
                             CreatedAt = new DateTime(2024, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2681),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8998),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Hỗ trợ tổ chức và quản lý các sự kiện.\n- Liên lạc với các nhà cung cấp và khách hàng.\n- Đảm bảo mọi thứ diễn ra suôn sẻ trong sự kiện.\n\nYêu cầu ứng viên:\n- Kỹ năng tổ chức và giao tiếp tốt.\n- Có khả năng làm việc dưới áp lực cao.\n- Nhiệt tình và sáng tạo.",
                             JobLocation = "Tòa nhà S, Đường Nguyễn Thái Học, Phường Lê Lợi, Quy Nhơn, Bình Định",
                             JobTypeId = 2,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2681),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8997),
                             SalaryRange = "500 - 800",
                             Status = 0,
                             Title = "Nhân Viên Tổ Chức Sự Kiện Part-time",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("e503b792-4d03-4c9b-b876-1394d68de444"),
+                            Id = new Guid("f0dc8acf-3170-402a-8cf0-65f50ab545f9"),
                             CreatedAt = new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpiredAt = new DateTime(2024, 12, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2688),
+                            ExpiredAt = new DateTime(2024, 12, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(9003),
                             IndustryId = 2,
                             JobDescription = "Tổng quan vị trí:\n- Nghiên cứu và phân tích thị trường để phát triển chiến lược.\n- Phát triển mối quan hệ với khách hàng và đối tác.\n- Tạo báo cáo và đề xuất các giải pháp kinh doanh.\n\nYêu cầu ứng viên:\n- Tối thiểu 2 năm kinh nghiệm trong phát triển thị trường.\n- Kỹ năng phân tích và giao tiếp tốt.\n- Tốt nghiệp chuyên ngành kinh tế, marketing hoặc tương đương.",
                             JobLocation = "Tòa nhà T, Đường Trần Hưng Đạo, Phường Hải Cảng, Quy Nhơn, Bình Định",
                             JobTypeId = 1,
-                            ModifiedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2687),
+                            ModifiedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(9002),
                             SalaryRange = "3.000 - 7.000",
                             Status = 0,
                             Title = "Chuyên Viên Phát Triển Thị Trường",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         });
                 });
 
@@ -604,24 +604,86 @@ namespace WorkFlex.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2501),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8778),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Full Time"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2504),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8781),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Part Time"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2506),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8783),
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TypeName = "Internship"
                         });
+                });
+
+            modelBuilder.Entity("WorkFlex.Domain.Entities.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MerchantId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PaymentContent")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PaymentCurrency")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentDestinationId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PaymentLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentRefId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("RequiredAmount")
+                        .HasColumnType("decimal(19, 2)");
+
+                    b.Property<string>("Signature")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("WorkFlex.Domain.Entities.Profile", b =>
@@ -662,111 +724,111 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1cbb3f5c-dfbf-4467-81c9-781b42eec1a0"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2438),
+                            Id = new Guid("c7c661e0-a312-4f82-abbe-a168c47fa2aa"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8691),
                             Headline = "Admin Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("fa776e48-1466-4041-83a0-2143fc0adc94")
+                            UserId = new Guid("3b290f2f-3519-4074-bdc7-a5c121acb182")
                         },
                         new
                         {
-                            Id = new Guid("03a304f1-b9af-4002-9fef-19201051f874"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2443),
+                            Id = new Guid("c1ccbaed-34bf-48f3-bd8e-7a2347f032f9"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8697),
                             Headline = "Recruiter Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c")
+                            UserId = new Guid("b92b642d-5cf8-4794-836f-b21863e41123")
                         },
                         new
                         {
-                            Id = new Guid("b4cfe6c2-863d-48b0-abbe-993e3fca59fc"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2446),
+                            Id = new Guid("be152c6d-8e5a-4779-a386-1f9f674a4556"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8700),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("01cdf2af-31d4-4185-8157-9390cf4a7e6f")
+                            UserId = new Guid("2af1bd7b-1923-4c3d-b560-9f9051dcedcd")
                         },
                         new
                         {
-                            Id = new Guid("dbc67560-c207-4f57-aa71-59cfb53eb488"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2447),
+                            Id = new Guid("98955670-3c38-4624-a918-c8f7229acc01"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8702),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("cc94c6fa-0125-4535-8652-639be0b1b212")
+                            UserId = new Guid("5dfc717c-7ff1-4676-b361-d27bfa27ca77")
                         },
                         new
                         {
-                            Id = new Guid("581bca43-ac62-4b2e-bb85-5b913d6495db"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2449),
+                            Id = new Guid("5e4a2967-f372-4f37-99bd-4f1239797543"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8714),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("964a1deb-d00f-4801-83c7-0917f7d5db0b")
+                            UserId = new Guid("6ba8ae20-95b9-4bfb-b8dd-73cc81146ae3")
                         },
                         new
                         {
-                            Id = new Guid("23d5eb2c-07bd-4adc-b95e-4e5d2e6501af"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2451),
+                            Id = new Guid("0e451c29-23ad-44ef-b47f-e7e3ca9d549b"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8717),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("f637051d-4306-4da5-a1c2-10e209c39ab5")
+                            UserId = new Guid("45ea1d94-7c7f-4850-8d82-86800c9669cc")
                         },
                         new
                         {
-                            Id = new Guid("a27a6be8-6694-4b93-a8c9-579955e1859a"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2452),
+                            Id = new Guid("c29343cd-93ba-4e75-b7cc-b250bcace30e"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8722),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("c6f4cbf0-7d2a-4ab1-bdca-9e9f9240ba3a")
+                            UserId = new Guid("45ca245c-118a-4c3f-bb13-a95a52dc7f9d")
                         },
                         new
                         {
-                            Id = new Guid("f9d479fa-1719-44f5-8cee-8d423d3b03dc"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2454),
+                            Id = new Guid("57bbd3d5-3cd0-4d17-805c-44d71e6733ef"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8725),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("d3228aa1-8206-4194-9c7e-4f324e65c7ce")
+                            UserId = new Guid("9ce8e394-a24a-4b53-9087-7b783e4e8fce")
                         },
                         new
                         {
-                            Id = new Guid("e11d9d2c-936f-4451-931e-138d7088756f"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2458),
+                            Id = new Guid("e509f5d8-0204-41cb-9501-cd48e16250bf"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8727),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("b4c84a3c-a6ad-420e-9538-a0b8cd4e664d")
+                            UserId = new Guid("68f4e66a-c7b2-4f7d-907f-e6ae76552237")
                         },
                         new
                         {
-                            Id = new Guid("960eda56-6839-4e13-8e4f-70866fdf8926"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2459),
+                            Id = new Guid("598391c4-7fe0-467d-a9ce-3dbcbd7c3923"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8729),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("6704a4a2-4999-4c0a-9f22-61bab66af137")
+                            UserId = new Guid("a6993297-a828-46fe-a5fc-40a9fc05b9c9")
                         },
                         new
                         {
-                            Id = new Guid("c4bc178b-e98a-41b1-ab51-d9696a79b8ac"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2461),
+                            Id = new Guid("8d3776f8-af14-4d94-a662-ef536f6e2c77"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8731),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("0782341c-98a2-434b-a835-23c606d16c38")
+                            UserId = new Guid("f41618b5-2788-4cec-ad25-1935614e94f5")
                         },
                         new
                         {
-                            Id = new Guid("0b0df004-b1cc-46b5-ac02-0459169451f5"),
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2462),
+                            Id = new Guid("6ea15326-61eb-4cf1-bfc0-2f177b3d8696"),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8733),
                             Headline = "Job Seeker Profile",
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Summary = "",
-                            UserId = new Guid("28518318-b6a1-452b-bc06-803528f08bbd")
+                            UserId = new Guid("b7084356-1618-46ef-81b2-c33cc554e99f")
                         });
                 });
 
@@ -870,6 +932,9 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SubscriptionType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -884,10 +949,10 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fa776e48-1466-4041-83a0-2143fc0adc94"),
+                            Id = new Guid("3b290f2f-3519-4074-bdc7-a5c121acb182"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Ftjw6hg_1730428353803_table-img1.png?alt=media&token=fa6ddab5-418a-4cfb-ab75-2aa0d578c164",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
-                            CreatedAt = new DateTime(2024, 11, 1, 3, 16, 55, 842, DateTimeKind.Utc).AddTicks(2333),
+                            CreatedAt = new DateTime(2024, 11, 7, 2, 10, 33, 85, DateTimeKind.Utc).AddTicks(8560),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@example.com",
                             FirstName = "Admin",
@@ -900,11 +965,12 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$Qj8ov7RydnsbdkZfYAToaumQQIYDCeWcPyUTMeIW4sdhBoFujJHfm",
                             Phone = "",
                             RoleId = 1,
+                            SubscriptionType = 2,
                             Username = "admin"
                         },
                         new
                         {
-                            Id = new Guid("59e0116b-80b0-4d51-8f39-17b95746386c"),
+                            Id = new Guid("b92b642d-5cf8-4794-836f-b21863e41123"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2F2q2joa_1730428345764_vendor-14.png?alt=media&token=75952a9b-a099-4ec3-acc5-3240f0839dd2",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -920,11 +986,12 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$RbvswLANBzRWrHEvwHJajem0x0uEv10NHZ7rFfdRG1Dn4oSulmavm",
                             Phone = "",
                             RoleId = 2,
+                            SubscriptionType = 2,
                             Username = "recruiter"
                         },
                         new
                         {
-                            Id = new Guid("01cdf2af-31d4-4185-8157-9390cf4a7e6f"),
+                            Id = new Guid("2af1bd7b-1923-4c3d-b560-9f9051dcedcd"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2F17mshd_1730428341488_vendor-13.png?alt=media&token=33092b37-f077-4863-9329-63fa6e5964f7",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -940,11 +1007,12 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$L90P0yqjOYUyP8iuS5YkCe669W9DQnIRqqkzGVw24cJwVTVBhmc3i",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 2,
                             Username = "jobseeker"
                         },
                         new
                         {
-                            Id = new Guid("cc94c6fa-0125-4535-8652-639be0b1b212"),
+                            Id = new Guid("5dfc717c-7ff1-4676-b361-d27bfa27ca77"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fwobtrg_1730428336088_vendor-11.png?alt=media&token=306e81e3-dee1-4e09-bd09-0ea22d9bcd66",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -960,16 +1028,17 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$zWTkYvKaD2nrl/FIEzZvAus4fK1zT5kIk9U.IrzNxHZOzLxYzIYNe",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 1,
                             Username = "johnweek"
                         },
                         new
                         {
-                            Id = new Guid("964a1deb-d00f-4801-83c7-0917f7d5db0b"),
+                            Id = new Guid("6ba8ae20-95b9-4bfb-b8dd-73cc81146ae3"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Frijtlx_1730428289939_vendor-1.png?alt=media&token=529439ae-4bc1-4c9a-ad2a-6d97f0c5ae25",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fmau-cua-hang-tap-hoa-12-aeros.webp?alt=media&token=55cb771a-c564-4d29-b0fa-f6cccea186e2",
                             CreatedAt = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "huy@example.com",
+                            Email = "huytdqe170235@fpt.edu.vn",
                             FirstName = "Tran Duck",
                             IsActive = true,
                             IsLock = false,
@@ -979,17 +1048,18 @@ namespace WorkFlex.Infrastructure.Migrations
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "$2a$12$MNV7kUVAks5PkB4cMD8cNuLvONZlKt/ej7.hCdRTGyj4F/csD8oKK",
                             Phone = "",
-                            RoleId = 2,
+                            RoleId = 3,
+                            SubscriptionType = 0,
                             Username = "tranduckhuy"
                         },
                         new
                         {
-                            Id = new Guid("f637051d-4306-4da5-a1c2-10e209c39ab5"),
+                            Id = new Guid("45ea1d94-7c7f-4850-8d82-86800c9669cc"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2F9xi15_1730428296376_vendor-2.png?alt=media&token=e850aa0f-9798-45da-851a-1b4a7bc6726d",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "sang@example.com",
+                            Email = "sangtnqe170193@fpt.edu.vn",
                             FirstName = "Tran Ngoc",
                             IsActive = true,
                             IsLock = false,
@@ -999,17 +1069,18 @@ namespace WorkFlex.Infrastructure.Migrations
                             ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "$2a$12$CwxlScy8xNpcrGL/2sg7V.vDUC1zh.QOjZD1qefQgxmq3vn0Q7R9.",
                             Phone = "",
-                            RoleId = 2,
+                            RoleId = 3,
+                            SubscriptionType = 2,
                             Username = "sang"
                         },
                         new
                         {
-                            Id = new Guid("c6f4cbf0-7d2a-4ab1-bdca-9e9f9240ba3a"),
+                            Id = new Guid("45ca245c-118a-4c3f-bb13-a95a52dc7f9d"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fvn1m3b_1730428306808_vendor-4.png?alt=media&token=f1e61339-1c7f-4065-acbf-d49a012dc604",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "quy@example.com",
+                            Email = "quynxqe170239@fpt.edu.vn",
                             FirstName = "Nguyen Xuan",
                             IsActive = true,
                             IsLock = false,
@@ -1020,16 +1091,17 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$O/urkLFsFi/GN9s0asTeZ.3YnvDozIBPXS5vpDbl6Kvz4RsxZYRIS",
                             Phone = "",
                             RoleId = 2,
+                            SubscriptionType = 2,
                             Username = "quy"
                         },
                         new
                         {
-                            Id = new Guid("d3228aa1-8206-4194-9c7e-4f324e65c7ce"),
+                            Id = new Guid("9ce8e394-a24a-4b53-9087-7b783e4e8fce"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Faq8ir_1730428301407_vendor-3.png?alt=media&token=295216c1-4ea0-4a0c-8a61-3c66200f41bb",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "hao@example.com",
+                            Email = "haonnqe170204@fpt.edu.vn",
                             FirstName = "Nguyen Nhat",
                             IsActive = true,
                             IsLock = false,
@@ -1040,16 +1112,17 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$KcwDWaYdePFeLgKTwoJd7OQl6YCi9ZvCzdPDdt7lROYp2paxwpyGC",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 2,
                             Username = "hao"
                         },
                         new
                         {
-                            Id = new Guid("b4c84a3c-a6ad-420e-9538-a0b8cd4e664d"),
+                            Id = new Guid("68f4e66a-c7b2-4f7d-907f-e6ae76552237"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Ftvujfq_1730428311602_vendor-5.png?alt=media&token=65db1056-55f6-4620-990b-c3641807507f",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "thuan@example.com",
+                            Email = "thuanndmqe170240@fpt.edu.vn",
                             FirstName = "Nguyen Dao",
                             IsActive = true,
                             IsLock = false,
@@ -1060,16 +1133,17 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$3hGHatEPOSTNLlvBEUMw.uxZMLNxLz74/Ls47cvbccwwlJlhFELqS",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 2,
                             Username = "thuan"
                         },
                         new
                         {
-                            Id = new Guid("6704a4a2-4999-4c0a-9f22-61bab66af137"),
+                            Id = new Guid("a6993297-a828-46fe-a5fc-40a9fc05b9c9"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fkxakd5_1730428320184_vendor-7.png?alt=media&token=9a4cabc8-8372-45d8-9d3e-364766154550",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "hoang@example.com",
+                            Email = "hoangngqe170225@fpt.edu.vn",
                             FirstName = "Ngo Gia",
                             IsActive = true,
                             IsLock = false,
@@ -1080,16 +1154,17 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$aYH6ji8QMczfCJxRGoBUqeTA7Ttk1JnanbTXBiafDDrrOQcy6hK7O",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 2,
                             Username = "hoang"
                         },
                         new
                         {
-                            Id = new Guid("0782341c-98a2-434b-a835-23c606d16c38"),
+                            Id = new Guid("f41618b5-2788-4cec-ad25-1935614e94f5"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Ffc2hi5_1730428324559_vendor-9.png?alt=media&token=fa4632f1-2584-4496-9927-d0a645413638",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "thinh@example.com",
+                            Email = "thinhhqgqs170196@fpt.edu.vn",
                             FirstName = "Gia",
                             IsActive = true,
                             IsLock = false,
@@ -1100,11 +1175,12 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$kzs6W6lPdNmhq9mAxWfov.FJAHD2YDQJgQ/oiDeeMo78LKzDExz2O",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 2,
                             Username = "thinh"
                         },
                         new
                         {
-                            Id = new Guid("28518318-b6a1-452b-bc06-803528f08bbd"),
+                            Id = new Guid("b7084356-1618-46ef-81b2-c33cc554e99f"),
                             Avatar = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/avatar%2Fmrcf7_1730428331026_vendor-10.png?alt=media&token=9e787b31-eea6-4f38-a2c2-fa3c8a2140e1",
                             BackgroundImg = "https://firebasestorage.googleapis.com/v0/b/gdupa-2fa82.appspot.com/o/supplier-background%2Fprofile-cover.jpg?alt=media&token=cf51dca2-8021-40ee-bd58-66000ab49c10",
                             CreatedAt = new DateTime(2024, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1120,6 +1196,7 @@ namespace WorkFlex.Infrastructure.Migrations
                             Password = "$2a$12$zD2J2lknJ27rADmUbwJM9eSS0sX16W/FUw/xVx7XauSjOuxauzeZa",
                             Phone = "",
                             RoleId = 3,
+                            SubscriptionType = 0,
                             Username = "nghia"
                         });
                 });
@@ -1208,6 +1285,17 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WorkFlex.Domain.Entities.Payment", b =>
+                {
+                    b.HasOne("WorkFlex.Domain.Entities.User", "User")
+                        .WithMany("Payments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("WorkFlex.Domain.Entities.Profile", b =>
                 {
                     b.HasOne("WorkFlex.Domain.Entities.User", "User")
@@ -1266,6 +1354,8 @@ namespace WorkFlex.Infrastructure.Migrations
                     b.Navigation("JobApplications");
 
                     b.Navigation("JobPosts");
+
+                    b.Navigation("Payments");
 
                     b.Navigation("Profile")
                         .IsRequired();
